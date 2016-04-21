@@ -1,4 +1,5 @@
-PixelArt site
+PixelEsp.com
 ====================
 
-// jojojo
+__PixelArt Community site in spanish__
+
