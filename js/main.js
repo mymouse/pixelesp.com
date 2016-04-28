@@ -2,7 +2,7 @@
  * Main AngularJS Web Application
  */
 var app = angular.module('pixelespWebApp', [
-  'ngRoute'
+  'ngRoute','ngDialog'
 ]);
 
 /**
@@ -11,16 +11,30 @@ var app = angular.module('pixelespWebApp', [
 app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
     // Home
-    .when("/", {templateUrl: "partials/home.html", controller: "PageCtrl"})
+    .when("/", {
+      templateUrl: "partials/home.html",
+      controller: "PageCtrl" })
     // Pages
-    .when("/comunidad", {templateUrl: "partials/comunidad.html", controller: "PageCtrl"})
-    .when("/galeria", {templateUrl: "partials/galeria.html", controller: "PageCtrl"})
-    .when("/contacto", {templateUrl: "partials/contacto.html", controller: "PageCtrl"})
+    .when("/comunidad", {
+      templateUrl: "partials/comunidad.html",
+      controller: "PageCtrl" })
+    .when("/galeria", {
+      templateUrl: "partials/galeria.html",
+      controller: "PageCtrl" })
+    .when("/contacto", {
+      templateUrl: "partials/contacto.html",
+      controller: "PageCtrl" })
     // Blog
-    .when("/foro", {templateUrl: "partials/foro.html", controller: "BlogCtrl"})
-    .when("/thread", {templateUrl: "partials/thread.html", controller: "BlogCtrl"})
+    .when("/foro", {
+      templateUrl: "partials/foro.html",
+      controller: "BlogCtrl" })
+    .when("/thread", {
+      templateUrl: "partials/thread.html",
+      controller: "BlogCtrl" })
     // else 404
-    .otherwise("/404", {templateUrl: "partials/404.html", controller: "PageCtrl"});
+    .otherwise("/404", {
+      templateUrl: "partials/404.html",
+      controller: "PageCtrl" });
 }]);
 
 /**
@@ -57,15 +71,15 @@ app.controller('selectItem', function($scope) {
 
 /**
  * Controls the Blog
- */
-app.controller('BlogCtrl', function (/* $scope, $location, $http */) {
+ 
+app.controller('BlogCtrl', function (/* $scope, $location, $http ) {
   console.log("Blog Controller reporting for duty.");
 });
 
 /**
  * Controls all other Pages
- */
-app.controller('PageCtrl', function (/* $scope, $location, $http */) {
+ 
+app.controller('PageCtrl', function (/* $scope, $location, $http ) {
   console.log("Page Controller reporting for duty.");
 
   // Activates the Carousel
@@ -77,4 +91,19 @@ app.controller('PageCtrl', function (/* $scope, $location, $http */) {
   $('.tooltip-social').tooltip({
     selector: "a[data-toggle=tooltip]"
   })
+});*/
+
+app.controller('MainCtrl', function ($scope, $rootScope, ngDialog, $timeout) {
+
+  $scope.openTemplate = function () {
+      $scope.value = true;
+
+      ngDialog.open({
+          template: 'partials/login.html',
+          className: 'ngdialog-theme-plain',
+          scope: $scope
+      });
+  };
+
+  
 });

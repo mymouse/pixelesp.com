@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="MainCtrl">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -18,7 +18,7 @@
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#!" data-toggle="modal" data-target="#ingresar">Inicia sesión</a></li>
+				<li><a href="" ng-click="openTemplate()">Inicia sesión</a></li>
 				<li class="active"><a href="registro.php">Registrate</a></li>
 			</ul>
 		</div>
