@@ -1,17 +1,16 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="MainCtrl">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
+
 			<a class="navbar-brand" href="#/"><img src="img/logo.PNG"></a>
 		</div>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav navbar-left">
 				<li><a href="#!" data-toggle="modal" data-target="#crearpost"> <i class="fa fa-pencil"></i> Crear post</a></li>
@@ -22,16 +21,6 @@
 				<li class="active"><a href="registro.php">Registrate</a></li>
 			</ul>
 		</div>
-		<!-- /.navbar-collapse -->
-		<ul class="nav nav-tabs" ng-controller="selectItem">
-			<li ng-repeat="item in items" ng-click="select($index)" ng-class="{active: $index == selected}">
-				<a href="{{item.href}}">
-					{{item.title}}
-				</a>
-			</li>
-		</ul>
 
 	</div>
-
-	<!-- /.container -->
 </nav>
