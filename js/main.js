@@ -1,9 +1,26 @@
 /**
  * Main AngularJS Web Application
  */
+
 var app = angular.module('pixelespWebApp', [
-  'ngRoute','ngDialog'
+  'ngRoute', 'ngDialog', 'angularMoment'
 ]);
+
+/**
+ * Login Popup
+ */
+app.controller('MainCtrl', function ($scope, $rootScope, ngDialog, $timeout) {
+
+  $scope.openTemplate = function () {
+    $scope.value = true;
+
+    ngDialog.open({
+      template: 'partials/login.html',
+      className: 'ngdialog-theme-plain',
+      scope: $scope
+    });
+  }
+});
 
 /**
  * Configure the Routes
@@ -28,7 +45,7 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when("/foro", {
       templateUrl: "partials/foro.html",
       controller: "BlogCtrl" })
-    .when("/thread", {
+    .when("/thread:postid", {
       templateUrl: "partials/thread.html",
       controller: "BlogCtrl" })
     // else 404
@@ -77,15 +94,15 @@ app.controller('selectItem', function($scope) {
 
 /**
  * Controls the Blog
- 
-app.controller('BlogCtrl', function (/* $scope, $location, $http ) {
+ */
+app.controller('BlogCtrl', function ( $scope, $location, $http ) {
   console.log("Blog Controller reporting for duty.");
 });
 
 /**
  * Controls all other Pages
- 
-app.controller('PageCtrl', function (/* $scope, $location, $http ) {
+ */
+app.controller('PageCtrl', function ( $scope, $location, $http ) {
   console.log("Page Controller reporting for duty.");
 
   // Activates the Carousel
@@ -93,23 +110,21 @@ app.controller('PageCtrl', function (/* $scope, $location, $http ) {
     interval: 5000
   });
 
-  // Activates Tooltips for Social Links
-  $('.tooltip-social').tooltip({
-    selector: "a[data-toggle=tooltip]"
-  })
-});*/
-
-app.controller('MainCtrl', function ($scope, $rootScope, ngDialog, $timeout) {
-
-  $scope.openTemplate = function () {
-      $scope.value = true;
-
-      ngDialog.open({
-          template: 'partials/login.html',
-          className: 'ngdialog-theme-plain',
-          scope: $scope
-      });
-  };
-
   
+});
+
+/**
+ * Get Noticias
+ */
+app.controller('NoticiaslistsCtrl', function($rootScope, $scope, $http, $location) {
+    
+  $scope.noticias = [];
+  $http.get('http://pixelesp-api.herokuapp.com/noticias').then(function(resp) {
+    $scope.noticias = resp.data.data;
+    //console.log('Succes', resp.data.data);
+  }, function(err) {
+    console.error('ERR', err);
+    // err.status will contain the status code
+  });
+
 });

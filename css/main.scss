@@ -1,0 +1,215 @@
+	/**
+*
+* Stylesheet pixelesp
+*
+ */
+
+//colores
+$gris: #222;
+$verde: #AFD702;
+$naranja: #ff9800;
+
+@mixin transition($porp: all, $time: .5s, $wave: ease-in-out ) {
+  -webkit-transition: $porp $time $wave;
+     -moz-transition: $porp $time $wave;
+      -ms-transition: $porp $time $wave;
+          transition: $porp $time $wave;
+}
+
+//import other css
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css');
+@import url('./ngDialog.min.css');
+
+//reset 
+body {
+	//padding-top: 100px;
+	color: #AEAEAE;
+}
+
+//navbar 
+.navbar {
+	border: none;
+	background-color: $gris;
+	padding: 0 10px;
+
+	a.navbar-brand {
+		@include transition(width, .3s);
+
+		display: block;
+		overflow: hidden;
+		padding: 10px 0;
+		width: 230px;
+	}
+	.navbar-nav li{
+		& a:hover, & a:focus, &.active a:hover, &.active a:focus, &.active a {
+			background-color: transparent;
+			color: $verde; 
+		}
+	}
+}
+
+.main-sidebar, .left-side {
+	@include transition(width, .3s);
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 810;
+	padding-top: 50px;
+	min-height: 100%;
+	width: 230px;
+	background: #1A2226;
+
+	.user-panel {
+		position: relative;
+		overflow: hidden;
+		padding: 10px;
+		width: 100%;
+
+		img {
+			max-width: 45px;
+			width: 100%;
+			height: auto;
+		}
+		.info {
+			position: absolute;
+			left: 55px;
+			padding: 5px 5px 5px 15px;
+			color: white;
+			line-height: 1;
+
+			p {
+				margin-bottom: 9px;
+				font-weight: 600;
+			}
+			a {
+				margin-top: 3px;
+				padding-right: 5px;			
+				color: white;
+				text-decoration: none;
+				font-size: 11px;
+			}
+		}
+	}
+	.sidebar-menu {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		li {
+		position: relative;
+		margin: 0;
+		padding: 0;
+		background: #1a2226;
+		color: #4b646f;
+
+			a {
+				position: relative;
+				display: block;
+				padding: 12px 5px 12px 15px;
+				border-left: 3px solid transparent;
+				color: #b8c7ce;
+			}
+			&.active a,& a:hover {
+				border-left-color: $verde;
+				background: #1e282c;
+				color: #fff;
+				text-decoration: none;
+			}
+			&.header {
+				padding: 10px 25px 10px 15px;
+				font-size: 11px;
+			}
+		}
+	}
+}
+
+.content-wrapper {	
+  margin-left: 230px;
+  padding: 50px 0 0 0;
+  min-height: 100vh;
+	max-width: calc(100% - 230px);  
+	background-color: #262626;
+
+	.content {
+		position: relative;
+
+		&-header {
+			position: relative;
+			padding:20px 15px 15px;
+
+			h1 {
+		    margin: 0;
+		    font-size: 24px;
+			}
+		}
+	}
+	.breadcrumb {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    float: right;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 7px 5px;
+    border-radius: 2px;
+    background: transparent;
+    font-size: 12px;
+  }
+}
+
+.card {
+  position: relative;
+  border-radius: 3px;
+  background: #ffffff;
+  border: none;
+  margin-bottom: 20px;
+  //width: 100%;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+
+  &-noticia {
+    border: none;
+    position: relative;
+	}
+
+	&-header {
+    color: #444;
+    display: block;
+    padding: 10px;
+    position: relative;
+
+  	img {
+	    width: 20px;
+	    height: 20px;
+	    float: left;
+		}
+		.username {
+			font-size: 12px;
+			font-weight: 600;
+			margin-left: 5px;
+		}
+		.date {
+	    color: #999;
+	    font-size: 12px;
+		}
+
+		.box-tools {
+	    position: absolute;
+	    right: 10px;
+	    top: 5px;
+	    button {
+		    padding: 5px;
+		    font-size: 12px;
+		    background: transparent;
+		    color: #97a0b3;
+	    }
+		}
+	}
+
+	&-title {
+    margin: 0 0 .75rem;
+	}
+
+
+}
