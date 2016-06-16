@@ -7,6 +7,7 @@
 //colores
 $gris: #222;
 $verde: #AFD702;
+$verdelink: #97b125;
 $naranja: #ff9800;
 
 @mixin transition($porp: all, $time: .5s, $wave: ease-in-out ) {
@@ -20,11 +21,42 @@ $naranja: #ff9800;
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css');
 @import url('./ngDialog.min.css');
+@import url('./animations.min.css');
+
 
 //reset 
 body {
 	//padding-top: 100px;
 	color: #AEAEAE;
+}
+
+*:focus {
+    outline: none!important;
+}
+
+a {
+	color: $verdelink;
+}
+
+.disabled {
+    cursor: default!important;
+}
+
+.breadcrumb .active {
+    color: white;
+}
+
+.nav-center {  
+  text-align: center;
+  ul.nav {
+    display: inline-block;
+    li {
+      display: inline
+      a {
+        float: left
+      }
+    }
+  }
 }
 
 //navbar 
@@ -125,6 +157,7 @@ body {
 	}
 }
 
+//content
 .content-wrapper {	
   margin-left: 230px;
   padding: 50px 0 0 0;
@@ -159,6 +192,7 @@ body {
   }
 }
 
+//cards
 .card {
   position: relative;
   border-radius: 3px;

@@ -6,8 +6,29 @@
 @import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css");
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css");
 @import url("./ngDialog.min.css");
+@import url("./animations.min.css");
 body {
   color: #AEAEAE; }
+
+*:focus {
+  outline: none !important; }
+
+a {
+  color: #97b125; }
+
+.disabled {
+  cursor: default !important; }
+
+.breadcrumb .active {
+  color: white; }
+
+.nav-center {
+  text-align: center; }
+  .nav-center ul.nav {
+    display: inline-block; }
+    .nav-center ul.nav li {
+      display: inline a;
+        display-float: left; }
 
 .navbar {
   border: none;

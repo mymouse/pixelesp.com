@@ -1,0 +1,87 @@
+<div class="content">
+    <header>
+        <img src="./img/logo.PNG">
+    </header>
+
+    <div class="nav-center">
+    <ul id="modalTabs" class="nav nav-tabs" role="tablist">
+
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#login" target="_self" role="tab">Inicia sesión</a>
+      </li>
+      <li class="nav-item">
+         <a class="nav-link disabled" href=""><small>ó</small></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#singup" target="_self" role="tab">Registrate</a>
+      </li>
+
+    </ul>
+    </div>  
+
+    <div class="tab-content">
+
+        <!-- Login -->
+        <div class="tab-pane fade in active" id="login" role="tabpanel">
+            <form class="form fancy" ng-submit="doLogin()">
+                <span class="input">
+                    <input type="text" tabindex="1" name="username" ng-model="usuario.username" required>
+                    <label for="username">
+                        <span class="label-content">nick</span>
+                    </label>
+                </span>
+
+                <span class="input">
+                    <input type="password" tabindex="3" name="password"  ng-model="usuario.password" required>
+                    <label for="password">
+                        <span class="label-content">Contraseña</span>
+                    </label>
+                </span>
+
+                <a class="forgot-pw" tabindex="3" href=""><span>¿Olvidaste tu contraseña?</span></a>
+
+                <button tabindex="4" class="email-btn primary-btn" type="submit">Iniciar Sesión</button>
+                
+            </form>
+        </div>
+
+        <!-- Singup -->
+        <div class="tab-pane fade" id="singup" role="tabpanel">
+
+            <form class="form fancy" ng-submit="doRegister()">
+                <!-- <span class="input">
+                    <input type="text" tabindex="1" name="name" ng-model="usuario.name" required>
+                    <label for="name">
+                        <span class="label-content">Tu Nombre</span>
+                    </label>
+                </span> -->
+
+                <span class="input">
+                    <input type="text" tabindex="2" name="username" ng-model="usuario.username" required>
+                    <label for="username">
+                        <span class="label-content">Nick</span>
+                    </label>
+                </span>
+
+                <span class="input">
+                    <input type="email" tabindex="3" name="email" ng-model="usuario.email" required>
+                    <label for="email">
+                        <span class="label-content">Email</span>
+                    </label>
+                </span>
+
+                <span class="input">
+                    <input type="password" tabindex="4" name="password" ng-model="usuario.password" required>
+                    <label for="password">
+                        <span class="label-content">Contraseña</span>
+                    </label>
+                </span>
+
+                <button tabindex="5" class="email-btn primary-btn" type="submit">Registrate</button>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>

@@ -1,7 +1,4 @@
 /**
-*
-* controller.js
-*
-**/
-
-
+ *
+ * controller.js
+ */
