@@ -23,7 +23,7 @@
 
         <!-- Login -->
         <div class="tab-pane fade in active" id="login" role="tabpanel">
-            <form class="form fancy" ng-submit="doLogin()">
+            <form class="form fancy" ng-submit="doLogin(usuario)" novalidate>
                 <span class="input">
                     <input type="text" tabindex="1" name="username" ng-model="usuario.username" required>
                     <label for="username">

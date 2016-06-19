@@ -8,7 +8,8 @@
 @import url("./ngDialog.min.css");
 @import url("./animations.min.css");
 body {
-  color: #AEAEAE; }
+  color: #AEAEAE;
+  background-color: #262626; }
 
 *:focus {
   outline: none !important; }
