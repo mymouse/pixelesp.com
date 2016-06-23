@@ -11,10 +11,10 @@ $verdelink: #97b125;
 $naranja: #ff9800;
 
 @mixin transition($porp: all, $time: .5s, $wave: ease-in-out ) {
-  -webkit-transition: $porp $time $wave;
-     -moz-transition: $porp $time $wave;
-      -ms-transition: $porp $time $wave;
-          transition: $porp $time $wave;
+	-webkit-transition: $porp $time $wave;
+		 -moz-transition: $porp $time $wave;
+			-ms-transition: $porp $time $wave;
+					transition: $porp $time $wave;
 }
 
 //import other css
@@ -32,7 +32,7 @@ body {
 }
 
 *:focus {
-    outline: none!important;
+	outline: none!important;
 }
 
 a {
@@ -40,24 +40,24 @@ a {
 }
 
 .disabled {
-    cursor: default!important;
+	cursor: default!important;
 }
 
 .breadcrumb .active {
-    color: white;
+	color: white;
 }
 
 .nav-center {  
-  text-align: center;
-  ul.nav {
-    display: inline-block;
-    li {
-      display: inline
-      a {
-        float: left
-      }
-    }
-  }
+	text-align: center;
+	ul.nav {
+	display: inline-block;
+	li {
+		display: inline
+		a {
+		float: left
+		}
+	}
+	}
 }
 
 //navbar 
@@ -118,7 +118,7 @@ a {
 			}
 			a {
 				margin-top: 3px;
-				padding-right: 5px;			
+				padding-right: 5px;         
 				color: white;
 				text-decoration: none;
 				font-size: 11px;
@@ -159,10 +159,10 @@ a {
 }
 
 //content
-.content-wrapper {	
-  margin-left: 230px;
-  padding: 50px 0 0 0;
-  min-height: 100vh;
+.content-wrapper {  
+	margin-left: 230px;
+	padding: 50px 0 0 0;
+	min-height: 100vh;
 	max-width: calc(100% - 230px);  
 	background-color: #262626;
 
@@ -174,50 +174,79 @@ a {
 			padding:20px 15px 15px;
 
 			h1 {
-		    margin: 0;
-		    font-size: 24px;
+			margin: 0;
+			font-size: 24px;
 			}
 		}
 	}
 	.breadcrumb {
-    position: absolute;
-    top: 15px;
-    right: 10px;
-    float: right;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 7px 5px;
-    border-radius: 2px;
-    background: transparent;
-    font-size: 12px;
-  }
+	position: absolute;
+	top: 15px;
+	right: 10px;
+	float: right;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding: 7px 5px;
+	border-radius: 2px;
+	background: transparent;
+	font-size: 12px;
+	}
+
+	//perfil
+	.box.box-primary {
+			border-top-color: #3c8dbc;
+	}
+
+	.box {
+		position: relative;
+		border-radius: 3px;
+		background: #ffffff;
+		border-top: 3px solid #d2d6de;
+		margin-bottom: 20px;
+		width: 100%;
+		box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+		.box-body {
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 3px;
+			border-bottom-left-radius: 3px;
+			padding: 10px;
+		}
+
+		.profile-user-img {
+		    margin: 0 auto;
+		    width: 100px;
+		    padding: 3px;
+		    border: 3px solid #d2d6de;
+		}
+	}
 }
 
 //cards
 .card {
-  position: relative;
-  border-radius: 3px;
-  background: #ffffff;
-  border: none;
-  margin-bottom: 20px;
-  //width: 100%;
-  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+	position: relative;
+	border-radius: 3px;
+	background: #ffffff;
+	border: none;
+	margin-bottom: 20px;
+	//width: 100%;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.1);
 
-  &-noticia {
-    border: none;
-    position: relative;
+	&-noticia {
+	border: none;
+	position: relative;
 	}
 
 	&-header {
-    color: #444;
-    display: block;
-    padding: 10px;
-    position: relative;
+	color: #444;
+	display: block;
+	padding: 10px;
+	position: relative;
 
-  	img {
-	    width: 20px;
-	    height: 20px;
-	    float: left;
+	img {
+		width: 20px;
+		height: 20px;
+		float: left;
 		}
 		.username {
 			font-size: 12px;
@@ -225,26 +254,24 @@ a {
 			margin-left: 5px;
 		}
 		.date {
-	    color: #999;
-	    font-size: 12px;
+		color: #999;
+		font-size: 12px;
 		}
 
 		.box-tools {
-	    position: absolute;
-	    right: 10px;
-	    top: 5px;
-	    button {
-		    padding: 5px;
-		    font-size: 12px;
-		    background: transparent;
-		    color: #97a0b3;
-	    }
+		position: absolute;
+		right: 10px;
+		top: 5px;
+		button {
+			padding: 5px;
+			font-size: 12px;
+			background: transparent;
+			color: #97a0b3;
+		}
 		}
 	}
 
 	&-title {
-    margin: 0 0 .75rem;
+	margin: 0 0 .75rem;
 	}
-
-
 }

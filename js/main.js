@@ -2,107 +2,97 @@
  * Main AngularJS Web Application
  */
 
-var app = angular.module('pixelespWebApp', ['ngRoute', 'ngDialog', 'angularMoment']);
+var app = angular.module('pixelespWebApp', ['ngRoute', 'ngDialog', 'angularMoment', 'angularFileUpload']);
 
 app.constant('AUTH_EVENTS', {
-  loginSuccess: 'auth-login-success',
-  loginFailed: 'auth-login-failed',
-  logoutSuccess: 'auth-logout-success',
-  sessionTimeout: 'auth-session-timeout',
-  notAuthenticated: 'auth-not-authenticated',
-  notAuthorized: 'auth-not-authorized'
+	loginSuccess: 'auth-login-success',
+	loginFailed: 'auth-login-failed',
+	logoutSuccess: 'auth-logout-success',
+	sessionTimeout: 'auth-session-timeout',
+	notAuthenticated: 'auth-not-authenticated',
+	notAuthorized: 'auth-not-authorized'
 })
 
 app.constant('USER_ROLES', {
   all: '*',
-  admin: 'admin',
-  editor: 'editor',
-  guest: 'guest'
+  admin: 1,
+  editor: 2,
+  guest: 3
 })
 
 app.service('Session', function () {
-  this.create = function (sessionId/*, userId, userRole*/) {
-    this.id = sessionId;/*
-    this.userId = userId;
-    this.userRole = userRole;*/
 
-    window.localStorage.setItem("session", this.id);
-    console.log('sesion creada con exito');
-  };
-  this.destroy = function () {
-    this.id = null;/*
-    this.userId = null;
-    this.userRole = null;*/
+	if (window.localStorage.getItem('session') != null) {
+		this.id = window.localStorage.getItem('session');
 
-    window.localStorage.clear();
-    console.log('sesion clear');
-  };
+		userdata = JSON.parse(window.localStorage.getItem('userdata'));
+		this.userRole = userdata.userlevel;
+	}
+
+	this.create = function (sessionId, userRole) {
+		window.localStorage.setItem('session', sessionId);
+    this.id = window.localStorage.getItem('session');
+		this.userRole = userRole;
+	};
+
+	this.destroy = function () {
+		this.id = null;
+		this.userRole = null;
+		window.localStorage.clear();
+	};
 })
 
 app.factory('AuthService', function ($http, Session) {
-  var authService = {};
+	var authService = {};
  
-  authService.doLogin = function (usuario) {
-    return $http
-      .post('http://pixelesp-api.herokuapp.com/login', usuario)
-      .then(function (resp) {
+	authService.doLogin = function (usuario) {
+		return $http
+			.post('http://pixelesp-api.herokuapp.com/login', usuario)
+			.then(function (resp) {
+				Session.create(resp.data.token, null);			 
+				return resp.data;
+			});
+	};
+ 
+	authService.isAuthenticated = function () {
+		console.log('session: '+!!Session.id);
+		return !!Session.id;
 
-		Session.create(resp.data.token/*, resp.data.id, resp.data.userlevel*/);
-       
-        return resp.data;
-      });
-  };
+	};
  
-  authService.isAuthenticated = function () {
-    console.log('session id: '+!!Session.id);
-    return !!Session.id;
-
-  };
+	authService.isAuthorized = function (authorizedRoles) {
+		if (!angular.isArray(authorizedRoles)) {
+			authorizedRoles = [authorizedRoles];
+		}
+		return (authService.isAuthenticated() &&
+			authorizedRoles.indexOf(Session.userRole) !== -1);
+	};
  
-  authService.isAuthorized = function (authorizedRoles) {
-    if (!angular.isArray(authorizedRoles)) {
-      authorizedRoles = [authorizedRoles];
-    }
-    return (authService.isAuthenticated() &&
-      authorizedRoles.indexOf(Session.userlevel) !== -1);
-  };
- 
-  return authService;
+	return authService;
 })
 
-/*app.factory('AuthResolver', function ($q, $rootScope, $state) {
-  return {
-    resolve: function () {
-      var deferred = $q.defer();
-      var unwatch = $rootScope.$watch('currentUser', function (currentUser) {
-        if (angular.isDefined(currentUser)) {
-          if (currentUser) {
-            deferred.resolve(currentUser);
-          } else {
-            deferred.reject();
-            $state.go('user-login');
-          }
-          unwatch();
-        }
-      });
-      return deferred.promise;
-    }
-  };
-})
-*/
 app.controller('ApplicationController', function ($scope, USER_ROLES, AuthService) {
 
-  $scope.currentUser = null;
-  $scope.userRoles = USER_ROLES;
-  $scope.isAuthorized = AuthService.isAuthorized;
+	if (window.localStorage.getItem('session') != null) {
+
+		userdata = JSON.parse(window.localStorage.getItem('userdata'));
+		$scope.currentUser = {};
+		$scope.currentUser = userdata;
+
+		$scope.userRoles = USER_ROLES;
+		$scope.isAuthorized = AuthService.isAuthorized;
+
+	}
  
-  $scope.setCurrentUser = function (user) {
-    $scope.currentUser = {};
-   	$scope.currentUser.username = user.username;
-  };
+	$scope.setCurrentUser = function (user) {
+
+		window.localStorage.setItem('userdata', JSON.stringify(user));
+		$scope.currentUser = {};
+		$scope.currentUser = user;
+
+	}
+
 })
-
-
 
 app.controller('SignupLogin', function($scope, $http, $rootScope, $location, $window, ngDialog, Session, AUTH_EVENTS, AuthService ) {
 
@@ -124,8 +114,6 @@ app.controller('SignupLogin', function($scope, $http, $rootScope, $location, $wi
 		});
 	};
 
-	//$rootScope.userToken = ''; 
-
 	$scope.doLogin = function(usuario) {
 
 		AuthService.doLogin(usuario).then(function (user) {
@@ -133,31 +121,22 @@ app.controller('SignupLogin', function($scope, $http, $rootScope, $location, $wi
 			$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 
 			$token = Session.id;
-			console.log('asdsadas '+$token);
-
 			$scope.user = {};
 			$http.get('http://pixelesp-api.herokuapp.com/me', {headers: {'auth-token': $token}}).then(function(resp) {
-				$scope.user = resp.data.data;
 
-				//Session.create($token, resp.data.data.id, resp.data.data.userlevel);
-				$scope.setCurrentUser($scope.user);
+				$scope.user = resp.data.data;
+				$scope.setCurrentUser($scope.user, $scope.user.userlevel);
 
 			}, function(err) {
 				console.error('ERR', err);
 				// err.status will contain the status code
 			});
-
-			
-
 			ngDialog.closeAll();
 
-			console.log('creo que se logeo.');
 		}, function () {
 			$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
 
-			console.log('no se logeo ni bosta.');
 		});
-
 
 	};
 })
@@ -172,6 +151,9 @@ app.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: "partials/home.html",
 			controller: "PageCtrl" })
 		// Pages
+    .when("/mi-perfil", {
+        templateUrl: "partials/profile.html",
+        controller: "PageCtrl" })		
 		.when("/comunidad", {
 			templateUrl: "partials/comunidad.html",
 			controller: "PageCtrl" })
@@ -193,14 +175,27 @@ app.config(['$routeProvider', function ($routeProvider) {
 		.otherwise("/404", {
 			templateUrl: "partials/404.html",
 			controller: "PageCtrl" });
-}]);
+}])
+
+app.run( function($rootScope, $location, AuthService) {
+	// register listener to watch route changes
+	$rootScope.$on( "$routeChangeStart", function(event, next, current) {
+
+		if ( AuthService.isAuthenticated() == false ) {
+			if ( next.templateUrl == "partials/profile.html" ) {
+				$location.path("/");
+			}
+		}   
+
+	});
+}) 
 
 /**
  * Controls the Blog
  */
 app.controller('BlogCtrl', function ( $scope, $location, $http ) {
 	//console.log("Blog Controller reporting for duty.");
-});
+})
 
 /**
  * Controls all other Pages
@@ -213,12 +208,12 @@ app.controller('PageCtrl', function ( $scope, $location, $http ) {
 		interval: 5000
 	}); 
 
-});
+})
 
 /**
  * Navbar
  */
-app.controller('NavCtrl', function ($scope, Session, ngDialog) {
+app.controller('NavCtrl', function ($scope, Session, $window, ngDialog) {
 
 	$scope.openLogin = function () {
 		$scope.value = true;
@@ -232,13 +227,24 @@ app.controller('NavCtrl', function ($scope, Session, ngDialog) {
 		});
 	};
 
-	$scope.doLogout = function() {
-		Session.destroy;
-		console.log('Estas fuera!');        
-		
-		//$location.path('#/profile');
+	$scope.openCreatePost = function () {
+		$scope.value = true;
+
+		ngDialog.open({
+			template: 'partials/createpost.html',
+			controller: 'UploadController',
+			className: 'ngdialog-theme-plain',
+			width: '800px',
+			cache: false,
+			scope: $scope
+		});
 	};
-});
+
+	$scope.doLogout = function() {
+			Session.destroy();
+			$window.location.reload();
+	};
+})
 
 /**
 * Sidebar Controller
@@ -276,36 +282,6 @@ app.controller('sideBar', function($scope) {
 	$scope.select= function(index) {
 		$scope.selected = index; 
 	};
-});
-
-/**
- * Login & Registro
- */
-
-app.controller('getUserInfo', function($scope, $rootScope, $http) {
-
-	if (window.localStorage.getItem("session") != null) {
-
-		$rootScope.isUserLogged = true;
-		//Dirige a la pantalla principal ya logueada.
-		console.log('ke once, estas en tu session');
-
-		//get user data
-		$token = window.localStorage.getItem("session");
-		$scope.user = {};
-		$http.get('http://pixelesp-api.herokuapp.com/me', {headers: {'auth-token': $token}}).then(function(resp) {
-			$scope.user = resp.data.data;
-
-		}, function(err) {
-			console.error('ERR', err);
-			// err.status will contain the status code
-		});
-
-	} else {
-		$rootScope.isUserLogged = false;
-		console.log('you are the real g, but your not into the session');
-	}
-
 })
 
 /**
@@ -322,20 +298,27 @@ app.controller('NoticiaslistsCtrl', function($scope, $http) {
 		// err.status will contain the status code
 	});
 
-});
+})
 
 /**
  * Show Noticias
  */
 app.controller('NoticiaCtrl', function($scope, $routeParams, $http) {
 
-  $scope.noticia = {};
-  $http.get('http://pixelesp-api.herokuapp.com/noticias/'+ $routeParams.NoticiaId).then(function(resp) {
+	$scope.noticia = {};
+	$http.get('http://pixelesp-api.herokuapp.com/noticias/'+ $routeParams.NoticiaId).then(function(resp) {
 	$scope.noticia = resp.data.data;
 	console.log('vevo');
 
-  }, function(err) {
+	}, function(err) {
 	console.error('ERR', err);
 	// err.status will contain the status code
-  });
+	});
 })
+
+/*
+ * File Upload
+ */
+app.controller('UploadController', function($scope, FileUploader) {
+	$scope.uploader = new FileUploader();
+});

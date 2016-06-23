@@ -6,15 +6,7 @@
 			<li class="active"><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 		</ol>
 
-		<hr>
-
-		<div ng-if="currentUser">Welcome, {{ currentUser.username }}</div>
-		<div ng-if="isAuthorized(userRoles.admin)">You're admin.</div>
-		<div ng-switch on="currentUser.role">
-		  <div ng-switch-when="userRoles.admin">You're admin.</div>
-		  <div ng-switch-when="userRoles.editor">You're editor.</div>
-		  <div ng-switch-default>You're something else.</div>
-		</div>
+		
 	</section>
 
 	<section class="content" ng-controller="NoticiaslistsCtrl">
