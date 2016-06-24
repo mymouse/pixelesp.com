@@ -1,52 +1,62 @@
+<div class="content">
+  <header>          
+    <h4 class="text-center">Subir Pixelart</h4>
+  </header>
 
-    <div class="modal-content">
-      <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title text-center" id="myModalLabel">Subir Pixelart <i class="fa fa-paperclip"></i></h4>
-      </div>
+  <section class="tab-content">
 
-      <div class="modal-body">
-
-        <div class="row">
+    <form id="subirpixelart" class="form fancy">
 
 
-          <form id="subirpixelart" class="col-lg-8 col-centered" action="" method="post" enctype="multipart/form-data">
+      <div class="form-group">
 
-            <div id="image_preview">
-              <img id="previewing" src="noimage.png" />
-            </div>
+        <div ng-controller="UploadController">
 
-            <hr>
+          <span class="input">
+            <input type="text" tabindex="1" name="imagetitle" >
+            <label for="imagetitle">
+                <span class="label-content">Título</span>
+            </label>
+          </span>
 
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Título de tu obra" name="pixelart_name" required>
-            </div>
+          <label for="file">
+            <span class="label-content">Subir pixelart</span>
+          </label>
+          <label class="file">            
+            <input type="file" name="file" nv-file-select uploader="uploader">
+            <span class="file-custom"></span>            
+          </label>
+
+            <section ng-repeat="item in uploader.queue">
+
+              <div class="cropArea">
+                <img-crop image="item.image" result-image="item.croppedImage"></img-crop>
+              </div>
+              <div>Cropped Image:</div>
+              <div><img ng-src="{{item.croppedImage}}" /></div>
 
 
-            <div class="form-group">
-              
-              <div ng-controller="UploadController">
-                <input type="file" nv-file-select uploader="uploader"/><br/>
-                <ul>
-                    <li ng-repeat="item in uploader.queue">
-                        Name: <span ng-bind="item.file.name"></span><br/>
-                        <button ng-click="item.upload()">upload</button>
-                    </li>
-                </ul>
+              <span class="text-center" ng-bind="item.file.name"></span>
+
+              <div ng-show="uploader.isHTML5">
+                  <div class="progress" >
+                      <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }" style="width: 0%;"></div>
+                  </div>
               </div>
 
-            </div>
-    
-            <div class="form-group right">
-              <input type="submit" value="Upload" class="btn btn-default" />
-            </div>
+              <button type="button" class="btn-primary btn-full" ng-click="item.upload()">Subir</button>
+              <a href="" class="cancelaction" ng-click="item.remove()"> <i class="fa fa-trash"></i> Cancelar </a>
 
-            <div id="message"></div>
-          </form>
+            </section>
 
-
+            
         </div>
-
       </div>
 
-    </div>
+      <div id="message"></div>
+
+    </form>
+
+  </section>
+
+</div>

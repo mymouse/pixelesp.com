@@ -38,10 +38,10 @@
 	}
 }
 .ngdialog {
-	box-sizing: border-box;
+	z-index: 10000;
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
-	z-index: 10000
+	box-sizing: border-box
 }
 .ngdialog *, .ngdialog:after, .ngdialog:before {
 	box-sizing: inherit
@@ -52,105 +52,113 @@
 }
 .ngdialog-overlay {
 	background: rgba(0, 0, 0, .4);
-	-webkit-backface-visibility: hidden;
 	-webkit-animation: ngdialog-fadein .5s;
-	animation: ngdialog-fadein .5s
+	animation: ngdialog-fadein .5s;
+	-webkit-backface-visibility: hidden
 }
 .ngdialog-no-overlay {
 	pointer-events: none
 }
 .ngdialog.ngdialog-closing .ngdialog-overlay {
-	-webkit-backface-visibility: hidden;
 	-webkit-animation: ngdialog-fadeout .5s;
-	animation: ngdialog-fadeout .5s
+	animation: ngdialog-fadeout .5s;
+	-webkit-backface-visibility: hidden
 }
 .ngdialog-content {
 	background: #fff;
-	-webkit-backface-visibility: hidden;
 	-webkit-animation: ngdialog-fadein .5s;
 	animation: ngdialog-fadein .5s;
-	pointer-events: all
+	pointer-events: all;
+	-webkit-backface-visibility: hidden
 }
 .ngdialog.ngdialog-closing .ngdialog-content {
-	-webkit-backface-visibility: hidden;
 	-webkit-animation: ngdialog-fadeout .5s;
-	animation: ngdialog-fadeout .5s
+	animation: ngdialog-fadeout .5s;
+	-webkit-backface-visibility: hidden
 }
 .ngdialog-close:before {
-	font-family: Helvetica, Arial, sans-serif;
 	content: '\00D7';
+	font-family: Helvetica, Arial, sans-serif;
 	cursor: pointer
 }
 body.ngdialog-open, html.ngdialog-open {
 	overflow: hidden
 }
 .ngdialog.ngdialog-theme-plain {
-	padding-bottom: 160px;
+	margin-bottom: 1em;
 	padding-top: 160px;
-	margin-bottom: 1em
+	padding-bottom: 160px
 }
 .ngdialog.ngdialog-theme-plain .ngdialog-content {
+	position: relative;
+	margin: 0 auto;
+	padding: 0;
+	max-width: 100%;
+	width: 320px;
 	background: #fff;
 	color: #444;
-	font-family: Helvetica Neue, sans-serif;
 	font-size: 1.1em;
-	line-height: 1.5em;
-	margin: 0 auto;
-	max-width: 100%;
-	padding: 0;
-	position: relative;
-	width: 320px
+	font-family: Helvetica Neue, sans-serif;
+	line-height: 1.5em
 }
 .ngdialog.ngdialog-theme-plain .ngdialog-content header {
-	background: #222;
+	position: relative;
 	margin-bottom: 20px;
 	padding: 10px 0;
+	background: #222;
 	text-align: center;
-	position: relative;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale
 }
+
+.ngdialog.ngdialog-theme-plain .ngdialog-content header h4 {
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1em;
+}
+
 .ngdialog.ngdialog-theme-plain .ngdialog-close {
-	cursor: pointer;
 	position: absolute;
+	top: 4px;
 	right: 0;
-	top: 4px
+	cursor: pointer
 }
 .ngdialog.ngdialog-theme-plain .ngdialog-close:before {
+	position: absolute;
+	top: 3px;
+	right: 3px;
+	width: 30px;
+	height: 30px;
 	background: 0 0;
 	color: #bbb;
 	content: "\00D7";
-	font-size: 26px;
-	font-weight: 400;
-	height: 30px;
-	line-height: 26px;
-	position: absolute;
-	right: 3px;
 	text-align: center;
-	top: 3px;
-	width: 30px
+	font-weight: 400;
+	font-size: 26px;
+	line-height: 26px
 }
 .ngdialog.ngdialog-theme-plain .ngdialog-close:active:before, .ngdialog.ngdialog-theme-plain .ngdialog-close:hover:before {
 	color: #777
 }
 .ngdialog.ngdialog-theme-plain .ngdialog-content p {
-	padding: 0 20px 10px;
-	color: #9d9eaa;
-	font-size: 14px;
-	line-height: 18px;
-	text-align: center;
 	margin: 0 auto;
+	padding: 0 20px 10px;
 	width: 100%;
-	border-bottom: 1px solid #e6e6eb
+	border-bottom: 1px solid #e6e6eb;
+	color: #9d9eaa;
+	text-align: center;
+	font-size: 14px;
+	line-height: 18px
 }
 form * {
-	z-index: 1;
-	position: relative
+	position: relative;
+	z-index: 1
 }
 form.fancy {
-	padding: 20px;
-	z-index: 0;
 	position: relative;
+	z-index: 0;
+	padding: 20px;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .02)), to(transparent));
 	background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, .02), transparent);
 	background-image: linear-gradient(top, rgba(0, 0, 0, .02), transparent);
@@ -158,13 +166,13 @@ form.fancy {
 	-ms-filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorStr=rgba(0, 0, 0, 0), endColorStr=transparent)
 }
 form.fancy input {
+	outline: 0;
 	border: none;
-	background: 0 0;
-	outline: 0
+	background: 0 0
 }
 form.fancy .input {
-	display: inline-block;
 	position: relative;
+	display: inline-block;
 	margin: 0 0 1em;
 	width: 100%
 }
@@ -173,39 +181,40 @@ input[type=email], input[type=password], input[type=text], input[type=url], text
 	padding: .4em;
 	width: 100%;
 	color: #4c4d57;
-	font-size-adjust: .52;
 	font-style: normal;
+	font-size-adjust: .52;
 	font-size: 16px
 }
 label {
 	display: block;
 	padding: 10px 5px 5px 2px;
-	font-size: .7em;
+	width: 100%;
+	color: #9d9eaa;
 	text-transform: uppercase;
 	letter-spacing: 1px;
-	cursor: pointer;
-	color: #9d9eaa
+	font-size: .7em;
+	cursor: pointer
 }
 form.fancy .input label {
 	position: absolute;
 	bottom: 0;
 	left: 0;
+	overflow: hidden;
 	padding: 0;
 	width: 100%;
 	height: 100%;
 	text-align: left;
-	pointer-events: none;
-	overflow: hidden
+	pointer-events: none
 }
 form.fancy .input label:after, form.fancy .input label:before {
-	content: '';
 	position: absolute;
 	top: 0;
 	left: 0;
+	overflow: hidden;
 	width: 100%;
 	height: 100%;
 	border-bottom: 1px solid #c8c9d0;
-	overflow: hidden
+	content: ''
 }
 form.fancy .input label .label-content {
 	position: absolute
@@ -213,32 +222,36 @@ form.fancy .input label .label-content {
 form.fancy .input label:after {
 	margin-top: 0;
 	border-bottom: 1px solid #0a92b2;
-	-webkit-transform: translate3d(-100%, 0, 0);
-	transform: translate3d(-100%, 0, 0);
 	-webkit-transition: -webkit-transform .3s;
-	transition: transform .3s
+	transition: transform .3s;
+	-webkit-transform: translate3d(-100%, 0, 0);
+	transform: translate3d(-100%, 0, 0)
 }
-a.forgot-pw span {
-	text-align: right;
-	margin-top: -15px;
-	display: block;
-	font-size: .8em;
-	color: #afafb9
+a.forgot-pw span, a.cancelaction {
+    float: right;
+    color: #afafb9;
+    font-size: .8em;
 }
-.email-btn {
-	margin: 20px auto 0;
-	max-width: 280px;
-	width: 100%
+.btn-full {
+	margin: 15px auto 0;
+    max-width: 320px;
+    width: 100%;
 }
-a.btn.primary-btn, button.primary-btn, input[type=submit].primary-btn {
-	background: #ff9c42;
-	border-color: #ff8f29;
-	box-shadow: 0 1px 0 0 #ff8f29;
-	color: #FFF
+a.btn.btn-primary, button.btn-primary, input[type=submit].btn-primary {
+    padding: 2.5px;
+    border: none;
+    border-radius: 2px;
+    background: #ff9c42;
+    box-shadow: none;
+    color: #FFF;
 }
 
 .ngdialog.ngdialog-thread .ngdialog-content {
-    width: 60%;
-    right: 0;
     position: absolute;
+    right: 0;
+    width: 60%;
+}
+
+.ngdialog.ngdialog-theme-plain.custom-width .ngdialog-content {
+    width: 350px;
 }

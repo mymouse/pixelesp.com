@@ -2,7 +2,7 @@
  * Main AngularJS Web Application
  */
 
-var app = angular.module('pixelespWebApp', ['ngRoute', 'ngDialog', 'angularMoment', 'angularFileUpload']);
+var app = angular.module('pixelespWebApp', ['ngRoute', 'ngDialog', 'angularMoment', 'angularFileUpload', 'ngImgCrop']);
 
 app.constant('AUTH_EVENTS', {
 	loginSuccess: 'auth-login-success',
@@ -14,10 +14,10 @@ app.constant('AUTH_EVENTS', {
 })
 
 app.constant('USER_ROLES', {
-  all: '*',
-  admin: 1,
-  editor: 2,
-  guest: 3
+	all: '*',
+	admin: 1,
+	editor: 2,
+	guest: 3
 })
 
 app.service('Session', function () {
@@ -31,7 +31,7 @@ app.service('Session', function () {
 
 	this.create = function (sessionId, userRole) {
 		window.localStorage.setItem('session', sessionId);
-    this.id = window.localStorage.getItem('session');
+	this.id = window.localStorage.getItem('session');
 		this.userRole = userRole;
 	};
 
@@ -49,7 +49,7 @@ app.factory('AuthService', function ($http, Session) {
 		return $http
 			.post('http://pixelesp-api.herokuapp.com/login', usuario)
 			.then(function (resp) {
-				Session.create(resp.data.token, null);			 
+				Session.create(resp.data.token, null);       
 				return resp.data;
 			});
 	};
@@ -151,9 +151,9 @@ app.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: "partials/home.html",
 			controller: "PageCtrl" })
 		// Pages
-    .when("/mi-perfil", {
-        templateUrl: "partials/profile.html",
-        controller: "PageCtrl" })		
+	.when("/mi-perfil", {
+		templateUrl: "partials/profile.html",
+		controller: "PageCtrl" })   
 		.when("/comunidad", {
 			templateUrl: "partials/comunidad.html",
 			controller: "PageCtrl" })
@@ -233,8 +233,7 @@ app.controller('NavCtrl', function ($scope, Session, $window, ngDialog) {
 		ngDialog.open({
 			template: 'partials/createpost.html',
 			controller: 'UploadController',
-			className: 'ngdialog-theme-plain',
-			width: '800px',
+			className: 'ngdialog-theme-plain custom-width',
 			cache: false,
 			scope: $scope
 		});
@@ -307,12 +306,12 @@ app.controller('NoticiaCtrl', function($scope, $routeParams, $http) {
 
 	$scope.noticia = {};
 	$http.get('http://pixelesp-api.herokuapp.com/noticias/'+ $routeParams.NoticiaId).then(function(resp) {
-	$scope.noticia = resp.data.data;
-	console.log('vevo');
+		$scope.noticia = resp.data.data;
+		console.log('vevo');
 
 	}, function(err) {
-	console.error('ERR', err);
-	// err.status will contain the status code
+		console.error('ERR', err);
+		// err.status will contain the status code
 	});
 })
 
@@ -320,5 +319,120 @@ app.controller('NoticiaCtrl', function($scope, $routeParams, $http) {
  * File Upload
  */
 app.controller('UploadController', function($scope, FileUploader) {
-	$scope.uploader = new FileUploader();
+	var uploader = $scope.uploader = new FileUploader({
+		url: 'uploads/upload.php'
+	});
+
+	// FILTERS
+	uploader.filters.push({
+		name: 'imageFilter',
+		fn: function(item /*{File|FileLikeObject}*/, options) {
+			var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+			return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+		}
+	});
+
+	// CALLBACKS
+
+	/**
+	 * Show preview with cropping
+	 */
+	uploader.onAfterAddingFile = function(item) {
+		// $scope.croppedImage = '';
+		item.croppedImage = '';
+		var reader = new FileReader();
+		reader.onload = function(event) {
+		$scope.$apply(function(){
+			item.image = event.target.result;
+		});
+		};
+		reader.readAsDataURL(item._file);
+	};
+
+	/**
+	 * Upload Blob (cropped image) instead of file.
+	 * @see
+	 *   https://developer.mozilla.org/en-US/docs/Web/API/FormData
+	 *   https://github.com/nervgh/angular-file-upload/issues/208
+	 */
+	uploader.onBeforeUploadItem = function(item) {
+		//uno a la vez
+		if(uploader.queue.length > 1){
+      uploader.queue.splice(0, uploader.queue.splice.length -1);
+    }
+
+    //subir recorte    
+		var blob = dataURItoBlob(item.croppedImage);
+		//item._file = blob;
+		uploader.addToQueue(blob, null, null);
+	};
+
+	/**
+	 * Converts data uri to Blob. Necessary for uploading.
+	 * @see
+	 *   http://stackoverflow.com/questions/4998908/convert-data-uri-to-file-then-append-to-formdata
+	 * @param  {String} dataURI
+	 * @return {Blob}
+	 */
+	var dataURItoBlob = function(dataURI) {
+		var binary = atob(dataURI.split(',')[1]);
+		var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+		var array = [];
+		for(var i = 0; i < binary.length; i++) {
+		array.push(binary.charCodeAt(i));
+		}
+		return new Blob([new Uint8Array(array)], {type: mimeString});
+	};
+
+	/* end controller */
 });
+
+/**
+* The ng-thumb directive
+* @author: nerv
+* @version: 0.1.2, 2014-01-09
+*/
+app.directive('ngThumb', ['$window', function($window) {
+	var helper = {
+		support: !!($window.FileReader && $window.CanvasRenderingContext2D),
+		isFile: function(item) {
+			return angular.isObject(item) && item instanceof $window.File;
+		},
+		isImage: function(file) {
+			var type =  '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
+			return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+		}
+	};
+
+	return {
+		restrict: 'A',
+		template: '<canvas/>',
+		link: function(scope, element, attributes) {
+			if (!helper.support) return;
+
+			var params = scope.$eval(attributes.ngThumb);
+
+			if (!helper.isFile(params.file)) return;
+			if (!helper.isImage(params.file)) return;
+
+			var canvas = element.find('canvas');
+			var reader = new FileReader();
+
+			reader.onload = onLoadFile;
+			reader.readAsDataURL(params.file);
+
+			function onLoadFile(event) {
+				var img = new Image();
+				img.onload = onLoadImage;
+				img.src = event.target.result;
+			}
+
+			function onLoadImage() {
+				var width = params.width || this.width / this.height * params.height;
+				var height = params.height || this.height / this.width * params.width;
+				canvas.attr({ width: width, height: height });
+				canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
+			}
+		}
+	};
+}])

@@ -23,7 +23,6 @@ $naranja: #ff9800;
 @import url('./ngDialog.min.css');
 @import url('./animations.min.css');
 
-
 //reset 
 body {
 	//padding-top: 100px;
@@ -59,6 +58,42 @@ a {
 	}
 	}
 }
+
+//uploads
+.file-custom::before {
+	content: "buscar";
+}
+.file-custom::after {
+    content: "...";
+}
+
+#subirpixelart canvas {
+	margin: 5px auto;
+    display: block;
+}
+
+    .cropArea {
+        background: #E4E4E4;
+        overflow: hidden;
+        width:400px;
+        height:400px;
+    }
+
+    img-crop {
+        display: block;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+    }
+
+    img-crop canvas {
+        display: block;
+        left: 50%;
+        outline: 0 none;
+        position: absolute;
+        top: 50%;
+    }
 
 //navbar 
 .navbar {
