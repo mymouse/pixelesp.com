@@ -29,12 +29,9 @@
 
             <section ng-repeat="item in uploader.queue">
 
-              <div class="cropArea">
-                <img-crop image="item.image" result-image="item.croppedImage"></img-crop>
+              <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 120 }">
+                <canvas></canvas>
               </div>
-              <div>Cropped Image:</div>
-              <div><img ng-src="{{item.croppedImage}}" /></div>
-
 
               <span class="text-center" ng-bind="item.file.name"></span>
 

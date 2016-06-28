@@ -2,7 +2,7 @@
  * Main AngularJS Web Application
  */
 
-var app = angular.module('pixelespWebApp', ['ngRoute', 'ngDialog', 'angularMoment', 'angularFileUpload', 'ngImgCrop']);
+var app = angular.module('pixelespWebApp', ['ngRoute', 'ngDialog', 'angularMoment', 'angularFileUpload', 'ngFormFixes']);
 
 app.constant('AUTH_EVENTS', {
 	loginSuccess: 'auth-login-success',
@@ -71,7 +71,7 @@ app.factory('AuthService', function ($http, Session) {
 	return authService;
 })
 
-app.controller('ApplicationController', function ($scope, USER_ROLES, AuthService) {
+app.controller('ApplicationController', function ($scope, USER_ROLES, AuthService, $location) {
 
 	if (window.localStorage.getItem('session') != null) {
 
@@ -91,6 +91,10 @@ app.controller('ApplicationController', function ($scope, USER_ROLES, AuthServic
 		$scope.currentUser = user;
 
 	}
+
+	$scope.go = function ( path ) {
+	  $location.path( path );
+	};
 
 })
 
@@ -168,9 +172,9 @@ app.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: "partials/foro.html",
 			controller: "BlogCtrl" })
 
-		.when("/thread/:NoticiaId", {
+		/*.when("/thread/:NoticiaId", {
 			templateUrl: "partials/thread.html",
-			controller: "NoticiaCtrl" })
+			controller: "NoticiaCtrl" })*/
 		// else 404
 		.otherwise("/404", {
 			templateUrl: "partials/404.html",
@@ -200,13 +204,7 @@ app.controller('BlogCtrl', function ( $scope, $location, $http ) {
 /**
  * Controls all other Pages
  */
-app.controller('PageCtrl', function ( $scope, $location, $http ) {
-	//console.log("Page Controller reporting for duty.");
-
-	// Activates the Carousel
-	$('.carousel').carousel({
-		interval: 5000
-	}); 
+app.controller('PageCtrl', function ( $scope, ngDialog ) {
 
 })
 
@@ -233,11 +231,28 @@ app.controller('NavCtrl', function ($scope, Session, $window, ngDialog) {
 		ngDialog.open({
 			template: 'partials/createpost.html',
 			controller: 'UploadController',
-			className: 'ngdialog-theme-plain custom-width',
+			className: 'ngdialog-theme-plain width-post',
 			cache: false,
 			scope: $scope
+
 		});
 	};
+
+	$scope.openCreateNews = function () {
+		$scope.value = true;
+
+		ngDialog.open({
+			template: 'partials/createnews.html',
+			controller: 'NoticiaNuevaCtrl',
+			className: 'ngdialog-theme-plain width-noticia',
+			cache: false,
+			scope: $scope,
+			width: 800
+			
+		});
+	};
+
+
 
 	$scope.doLogout = function() {
 			Session.destroy();
@@ -286,33 +301,64 @@ app.controller('sideBar', function($scope) {
 /**
  * Get Noticias
  */
-app.controller('NoticiaslistsCtrl', function($scope, $http) {
+app.controller('NoticiaslistsCtrl', function($scope, $http, ngDialog) {
 		
 	$scope.noticias = [];
 	$http.get('http://pixelesp-api.herokuapp.com/noticias').then(function(resp) {
 		$scope.noticias = resp.data.data;
 		//console.log('Succes', resp.data.data);
+
+		$scope.comentarios = [];
+		angular.forEach($scope.noticias, function(noticia) {
+			angular.forEach(noticia.comentarios, function(comentario) {
+				$scope.comentarios.push(comentario)
+			})
+		})
+
+		$scope.openPost = function (_noticia) {
+
+			var modalInstance = ngDialog.open({
+				controller: "ModalNoticia",
+				templateUrl: 'partials/thread.html',
+				className: 'ngdialog-theme-tread',
+				resolve: {
+					noticia: function() {
+						return _noticia;
+					}
+				}
+			});
+		};
+
 	}, function(err) {
 		console.error('ERR', err);
 		// err.status will contain the status code
-	});
-
+	});	
 })
 
-/**
- * Show Noticias
- */
-app.controller('NoticiaCtrl', function($scope, $routeParams, $http) {
+app.controller('ModalNoticia', function ($scope, noticia, $http, Session, ngDialog) {
+	$scope.noticia = noticia;
 
-	$scope.noticia = {};
-	$http.get('http://pixelesp-api.herokuapp.com/noticias/'+ $routeParams.NoticiaId).then(function(resp) {
-		$scope.noticia = resp.data.data;
-		console.log('vevo');
+	$scope.guardarComentario = function(comment) {
 
-	}, function(err) {
-		console.error('ERR', err);
-		// err.status will contain the status code
-	});
+		if (Session.id != null) {
+
+			userdata = JSON.parse(window.localStorage.getItem('userdata'));
+			$scope.comment = {};
+			$scope.comment.text = comment.text;
+			$scope.comment.idusuario = userdata.id;
+			$scope.comment.id_noticia = $scope.noticia.id;
+			$scope.comment.username = userdata.username;
+
+			$http.post('http://pixelesp-api.herokuapp.com/newscomments', $scope.comment).then(function(resp) {
+				console.log(resp.data);
+				ngDialog.setForceBodyReload(true);					
+
+			}, function(err) {
+				console.error('ERR', err);
+				// err.status will contain the status code
+			});
+		}
+	}
 })
 
 /*
@@ -332,66 +378,16 @@ app.controller('UploadController', function($scope, FileUploader) {
 		}
 	});
 
-	// CALLBACKS
-
-	/**
-	 * Show preview with cropping
-	 */
-	uploader.onAfterAddingFile = function(item) {
-		// $scope.croppedImage = '';
-		item.croppedImage = '';
-		var reader = new FileReader();
-		reader.onload = function(event) {
-		$scope.$apply(function(){
-			item.image = event.target.result;
-		});
-		};
-		reader.readAsDataURL(item._file);
-	};
-
-	/**
-	 * Upload Blob (cropped image) instead of file.
-	 * @see
-	 *   https://developer.mozilla.org/en-US/docs/Web/API/FormData
-	 *   https://github.com/nervgh/angular-file-upload/issues/208
-	 */
-	uploader.onBeforeUploadItem = function(item) {
+	uploader.onAfterAddingFile  = function(item) {
 		//uno a la vez
 		if(uploader.queue.length > 1){
-      uploader.queue.splice(0, uploader.queue.splice.length -1);
-    }
-
-    //subir recorte    
-		var blob = dataURItoBlob(item.croppedImage);
-		//item._file = blob;
-		uploader.addToQueue(blob, null, null);
-	};
-
-	/**
-	 * Converts data uri to Blob. Necessary for uploading.
-	 * @see
-	 *   http://stackoverflow.com/questions/4998908/convert-data-uri-to-file-then-append-to-formdata
-	 * @param  {String} dataURI
-	 * @return {Blob}
-	 */
-	var dataURItoBlob = function(dataURI) {
-		var binary = atob(dataURI.split(',')[1]);
-		var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-		var array = [];
-		for(var i = 0; i < binary.length; i++) {
-		array.push(binary.charCodeAt(i));
+			uploader.queue.splice(0, uploader.queue.splice.length -1);
 		}
-		return new Blob([new Uint8Array(array)], {type: mimeString});
 	};
 
 	/* end controller */
 });
 
-/**
-* The ng-thumb directive
-* @author: nerv
-* @version: 0.1.2, 2014-01-09
-*/
 app.directive('ngThumb', ['$window', function($window) {
 	var helper = {
 		support: !!($window.FileReader && $window.CanvasRenderingContext2D),
@@ -436,3 +432,36 @@ app.directive('ngThumb', ['$window', function($window) {
 		}
 	};
 }])
+
+/**
+ * Upload Noticias
+ */
+app.controller('NoticiaNuevaCtrl', function($scope, $http, Session, ngDialog, $location) {
+
+	$scope.noticia={};
+	$scope.noticia.Titulo='';
+	$scope.noticia.Descripcion='';
+	$scope.noticia.id ='';
+
+	if (Session.id != null) {
+
+		$scope.newPost = function() {
+
+			userdata = JSON.parse(window.localStorage.getItem('userdata'));
+			$scope.noticia.username = userdata.username; 
+			$scope.noticia.idusuario = userdata.id;
+
+			$http.post('http://pixelesp-api.herokuapp.com/noticias',$scope.noticia).then(function(resp) {
+				//console.log(resp.data);
+				//console.log('noticia publicada');
+
+				ngDialog.closeAll();
+				$location.path("/thread/"+resp.data.data.id);
+
+			}, function(err) {
+				console.error('ERR', err);
+				// err.status will contain the status code
+			});
+		};
+	}
+})

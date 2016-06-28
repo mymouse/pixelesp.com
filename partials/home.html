@@ -13,22 +13,53 @@
 		<div class="col-lg-10">
 			<div class="card-columns">
 
-				<article class="card" ng-repeat="item in noticias">					
+				<article class="card" ng-repeat="noticia in noticias">					
 					<div class="card-header">
-						<h4 class="card-title"><a href="#/thread/{{item.id}}"> {{item.Titulo}} </a></h4>
+						<!-- <h4 class="card-title"><a href="#/thread/{{noticia.id}}"> {{noticia.Titulo}} </a></h4> -->
+						<h4 class="card-title"><a href="" ng-click="openPost(noticia)"> {{noticia.Titulo}} </a></h4>
+
 						<img class="img-circle" src="./uploads/img/profile/profile.png" alt="User Image">
-						<span class="username text-muted"><a href="#">nicogaldo</a></span> <time title="{{ item.created_at | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ item.created_at | amCalendar }}</time>
+						<span class="username text-muted"><a href="{{noticia.IdUsuario}}"> {{noticia.username}} </a></span> <time title="{{ noticia.created_at | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ noticia.created_at | amCalendar }}</time>
 						<div class="box-tools">
 					      <button type="button" class="btn btn-box-tool"><i class="fa fa-chevron-down"></i></button>
 					    </div>
 				  	</div>
 					<!-- <img class="img-fluid" src="img/post/vspodio.jpg" alt="Card image cap" style="width:100%"> -->
 					<div class="card-block">						
-						<p class="card-text"> {{item.Descripcion}} </p>
+						<p class="card-text"> {{noticia.Descripcion}} </p>
+						<button type="button" class="btn btn-default "><i class="fa fa-caret-up"></i> up</button>
+					    <button type="button" class="btn btn-default pull-right text-muted" ng-click="openPost(noticia)"><i class="fa fa-comment" aria-hidden="true"></i> {{noticia.comentarios.length}} Comentarios</button>
 					</div>
 					<div class="card-footer">
-					    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-caret-up"></i> up</button>
-					    <button type="button" class="btn btn-default btn-xs pull-right text-muted">3 comments</button>
+					    
+					    <div class="box-comments">
+			              <div class="box-comment" ng-repeat="c in noticia.comentarios | orderBy:'-created_at' | limitTo:2 ">
+			                <!-- User image -->
+			                <img class="img-circle img-sm" src="./uploads/img/profile/profile.png" alt="{{c.username}}">
+
+			                <div class="comment-text">
+								<span class="username">
+									{{c.username}}
+									<time title="{{ c.created_at | amDateFormat: 'LLLL' }}" class="text-muted pull-right">{{ c.created_at | amCalendar }}</time>
+								</span><!-- /.username -->
+			                  	{{c.text}}
+			                </div>
+			                <!-- /.comment-text -->
+			              </div>
+			              <!-- /.box-comment -->
+			              
+			            </div>
+
+			            <div class="box-footer" ng-click="openPost(noticia)">
+			              <form class="fancy">
+			                <img class="img-responsive img-circle img-sm" src="./uploads/img/profile/profile.png" alt="{{noticia.username}}">
+			                <!-- .img-push is used to add margin to elements next to floating images -->
+			                <div class="img-push">
+			                  <input type="text" placeholder="Haz click para dejar un comentario" disabled>
+			                </div>
+			              </form>
+			            </div>
+					    
 					</div>
 				</article>
 				

@@ -21,7 +21,6 @@ $naranja: #ff9800;
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css');
 @import url('./ngDialog.min.css');
-@import url('./animations.min.css');
 
 //reset 
 body {
@@ -36,6 +35,12 @@ body {
 
 a {
 	color: $verdelink;
+}
+
+.img-sm {
+    width: 30px !important;
+    height: 30px !important;
+    float: left;
 }
 
 .disabled {
@@ -59,6 +64,11 @@ a {
 	}
 }
 
+//modals 
+.ngdialog-content .tab-content {
+	padding: 20px 20px 10px;
+}
+
 //uploads
 .file-custom::before {
 	content: "buscar";
@@ -72,34 +82,21 @@ a {
     display: block;
 }
 
-    .cropArea {
-        background: #E4E4E4;
-        overflow: hidden;
-        width:400px;
-        height:400px;
-    }
-
-    img-crop {
-        display: block;
-        height: 100%;
-        overflow: hidden;
-        position: relative;
-        width: 100%;
-    }
-
-    img-crop canvas {
-        display: block;
-        left: 50%;
-        outline: 0 none;
-        position: absolute;
-        top: 50%;
-    }
+//buttons
+.btn-default {
+	min-width: 40px;
+    font-size: 14px;
+    text-transform: none;
+    position: relative;
+    text-align: center;
+}
 
 //navbar 
 .navbar {
 	border: none;
 	background-color: $gris;
 	padding: 0 10px;
+	z-index: 10300;
 
 	a.navbar-brand {
 		@include transition(width, .3s);
@@ -297,16 +294,202 @@ a {
 		position: absolute;
 		right: 10px;
 		top: 5px;
-		button {
-			padding: 5px;
-			font-size: 12px;
-			background: transparent;
-			color: #97a0b3;
-		}
+
+			button {
+				padding: 5px;
+				font-size: 12px;
+				background: transparent;
+				color: #97a0b3;
+			}
 		}
 	}
 
 	&-title {
-	margin: 0 0 .75rem;
+		margin: 0 0 .75rem;
+
+		a {
+		    text-transform: uppercase;
+		    font-weight: 700;
+		}
+	}
+
+	&-footer {
+
+		padding:0;
+
+		.box-comment {
+		    padding: 10px;
+		    border-bottom: 1px solid #eee;
+
+
+			.img-push, .comment-text {
+			    margin-left: 40px;
+			}
+
+			img {
+				width: 30px;
+				height: 30px;
+				float: left;
+			}
+
+			.username {
+			    color: #444;
+			    display: block;
+			    font-weight: 600;
+			}
+
+			.text-muted {
+			    font-weight: 400;
+			    font-size: 12px;
+			}
+
+			.comment-text {
+			    margin-left: 40px;
+			    color: #555;
+			}
+		}
+
+		.box-footer {
+		    border-top-left-radius: 0;
+		    border-top-right-radius: 0;
+		    border-bottom-right-radius: 3px;
+		    border-bottom-left-radius: 3px;
+		    border-top: 1px solid #f4f4f4;
+		    padding: 10px;
+		    background-color: #fff;
+
+		    .img-sm+.img-push {
+			    margin-left: 40px;
+			}
+		}
+	}
+}
+
+//form
+form {
+	position: relative;
+	z-index: 1;
+
+	&.fancy {
+		position: relative;
+		z-index: 0;
+
+		.input {
+			position: relative;
+			display: inline-block;
+			margin: 0 0 1em;
+			width: 100%;
+
+			label {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				overflow: hidden;
+				padding: 0;
+				width: 100%;
+				height: 100%;
+				text-align: left;
+				pointer-events: none;
+			}
+		}
+
+		input {
+			outline: 0;
+			border: none;
+			background: 0 0;
+		}
+
+		input[type=email], input[type=password], input[type=text], input[type=url], textarea {
+			margin-top: 1em;
+			padding: .4em;
+    		padding-bottom: 0;
+			width: 100%;
+			color: #4c4d57;
+			font-style: normal;
+			font-size-adjust: .52;
+			font-size: 16px;
+			border: none;
+			border-bottom: 1px solid #c8c9d0;
+		}
+
+		.box-footer & input {
+		    margin: 0;
+		    font-size: 14px;
+		}
+
+		label {
+			display: block;
+			padding: 10px 5px 5px 2px;
+			width: 100%;
+			color: #9d9eaa;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			font-size: .7em;
+			cursor: pointer;
+		}
+
+
+		a.forgot-pw span, a.cancelaction {
+		    float: right;
+		    color: #afafb9;
+		    font-size: .8em;
+		}
+
+		.btn-full {
+			margin: 15px auto 0;
+		    width: 100%;
+		}
+
+		a.btn.btn-primary, button.btn-primary, input[type=submit].btn-primary {
+		    padding: 2.5px;
+		    border: none;
+		    border-radius: 2px;
+		    background: #ff9c42;
+		    box-shadow: none;
+		    color: #FFF;
+		}
+	}
+}
+
+.ngdialog {
+
+	&.ngdialog-theme-tread {
+   		padding: 50px 0 0 0;
+
+   		.ngdialog-overlay {
+		    margin-top: 50px;
+		}
+
+		.ngdialog-content {
+		    width: 1020px;
+   			max-width: 70%;
+		    float: right;
+		    padding: 0;
+		    top: 0;
+		}
+
+		.card {
+			width: 100%;
+
+			&-header {
+				padding: 20px 10% 15px;
+			}
+			&-block {
+				padding: 10px 10%;
+			}
+			&-footer {
+				padding: 0 15% 15px;
+			}
+		}
+   	}
+
+   	&.ngdialog-theme-plain {
+   		&.width-noticia .ngdialog-content {
+			width: 500px;
+		}
+
+		&.width-post .ngdialog-content {
+		    width: 350px;
+		}
 	}
 }

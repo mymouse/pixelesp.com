@@ -6,7 +6,6 @@
 @import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css");
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css");
 @import url("./ngDialog.min.css");
-@import url("./animations.min.css");
 body {
   color: #AEAEAE;
   background-color: #262626; }
@@ -16,6 +15,11 @@ body {
 
 a {
   color: #97b125; }
+
+.img-sm {
+  width: 30px !important;
+  height: 30px !important;
+  float: left; }
 
 .disabled {
   cursor: default !important; }
@@ -31,6 +35,9 @@ a {
       display: inline a;
         display-float: left; }
 
+.ngdialog-content .tab-content {
+  padding: 20px 20px 10px; }
+
 .file-custom::before {
   content: "buscar"; }
 
@@ -41,30 +48,18 @@ a {
   margin: 5px auto;
   display: block; }
 
-.cropArea {
-  background: #E4E4E4;
-  overflow: hidden;
-  width: 400px;
-  height: 400px; }
-
-img-crop {
-  display: block;
-  height: 100%;
-  overflow: hidden;
+.btn-default {
+  min-width: 40px;
+  font-size: 14px;
+  text-transform: none;
   position: relative;
-  width: 100%; }
-
-img-crop canvas {
-  display: block;
-  left: 50%;
-  outline: 0 none;
-  position: absolute;
-  top: 50%; }
+  text-align: center; }
 
 .navbar {
   border: none;
   background-color: #222;
-  padding: 0 10px; }
+  padding: 0 10px;
+  z-index: 10300; }
   .navbar a.navbar-brand {
     -webkit-transition: width 0.3s ease-in-out;
     -moz-transition: width 0.3s ease-in-out;
@@ -224,5 +219,125 @@ img-crop canvas {
         color: #97a0b3; }
   .card-title {
     margin: 0 0 .75rem; }
+    .card-title a {
+      text-transform: uppercase;
+      font-weight: 700; }
+  .card-footer {
+    padding: 0; }
+    .card-footer .box-comment {
+      padding: 10px;
+      border-bottom: 1px solid #eee; }
+      .card-footer .box-comment .img-push, .card-footer .box-comment .comment-text {
+        margin-left: 40px; }
+      .card-footer .box-comment img {
+        width: 30px;
+        height: 30px;
+        float: left; }
+      .card-footer .box-comment .username {
+        color: #444;
+        display: block;
+        font-weight: 600; }
+      .card-footer .box-comment .text-muted {
+        font-weight: 400;
+        font-size: 12px; }
+      .card-footer .box-comment .comment-text {
+        margin-left: 40px;
+        color: #555; }
+    .card-footer .box-footer {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 3px;
+      border-bottom-left-radius: 3px;
+      border-top: 1px solid #f4f4f4;
+      padding: 10px;
+      background-color: #fff; }
+      .card-footer .box-footer .img-sm + .img-push {
+        margin-left: 40px; }
+
+form {
+  position: relative;
+  z-index: 1; }
+  form.fancy {
+    position: relative;
+    z-index: 0; }
+    form.fancy .input {
+      position: relative;
+      display: inline-block;
+      margin: 0 0 1em;
+      width: 100%; }
+      form.fancy .input label {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        overflow: hidden;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        text-align: left;
+        pointer-events: none; }
+    form.fancy input {
+      outline: 0;
+      border: none;
+      background: 0 0; }
+    form.fancy input[type=email], form.fancy input[type=password], form.fancy input[type=text], form.fancy input[type=url], form.fancy textarea {
+      margin-top: 1em;
+      padding: .4em;
+      padding-bottom: 0;
+      width: 100%;
+      color: #4c4d57;
+      font-style: normal;
+      font-size-adjust: .52;
+      font-size: 16px;
+      border: none;
+      border-bottom: 1px solid #c8c9d0; }
+    .box-footer form.fancy input {
+      margin: 0;
+      font-size: 14px; }
+    form.fancy label {
+      display: block;
+      padding: 10px 5px 5px 2px;
+      width: 100%;
+      color: #9d9eaa;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: .7em;
+      cursor: pointer; }
+    form.fancy a.forgot-pw span, form.fancy a.cancelaction {
+      float: right;
+      color: #afafb9;
+      font-size: .8em; }
+    form.fancy .btn-full {
+      margin: 15px auto 0;
+      width: 100%; }
+    form.fancy a.btn.btn-primary, form.fancy button.btn-primary, form.fancy input[type=submit].btn-primary {
+      padding: 2.5px;
+      border: none;
+      border-radius: 2px;
+      background: #ff9c42;
+      box-shadow: none;
+      color: #FFF; }
+
+.ngdialog.ngdialog-theme-tread {
+  padding: 50px 0 0 0; }
+  .ngdialog.ngdialog-theme-tread .ngdialog-overlay {
+    margin-top: 50px; }
+  .ngdialog.ngdialog-theme-tread .ngdialog-content {
+    width: 1020px;
+    max-width: 70%;
+    float: right;
+    padding: 0;
+    top: 0; }
+  .ngdialog.ngdialog-theme-tread .card {
+    width: 100%; }
+    .ngdialog.ngdialog-theme-tread .card-header {
+      padding: 20px 10% 15px; }
+    .ngdialog.ngdialog-theme-tread .card-block {
+      padding: 10px 10%; }
+    .ngdialog.ngdialog-theme-tread .card-footer {
+      padding: 0 15% 15px; }
+.ngdialog.ngdialog-theme-plain.width-noticia .ngdialog-content {
+  width: 500px; }
+.ngdialog.ngdialog-theme-plain.width-post .ngdialog-content {
+  width: 350px; }
 
 /*# sourceMappingURL=main.css.map */
