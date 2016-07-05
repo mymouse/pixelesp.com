@@ -319,22 +319,23 @@ form {
 
 .ngdialog.ngdialog-theme-tread {
   padding: 50px 0 0 0; }
-  .ngdialog.ngdialog-theme-tread .ngdialog-overlay {
-    margin-top: 50px; }
-  .ngdialog.ngdialog-theme-tread .ngdialog-content {
-    width: 1020px;
-    max-width: 70%;
-    float: right;
-    padding: 0;
-    top: 0; }
-  .ngdialog.ngdialog-theme-tread .card {
-    width: 100%; }
-    .ngdialog.ngdialog-theme-tread .card-header {
-      padding: 20px 10% 15px; }
-    .ngdialog.ngdialog-theme-tread .card-block {
-      padding: 10px 10%; }
-    .ngdialog.ngdialog-theme-tread .card-footer {
-      padding: 0 15% 15px; }
+.ngdialog.ngdialog-theme-tread .ngdialog-overlay {
+  margin-top: 50px; }
+.ngdialog.ngdialog-theme-tread .ngdialog-content {
+  width: 70%;
+  /*max-width: 70%;*/
+  /*float: right;*/
+  margin: 0 auto;
+  padding: 0;
+  top: 0; }
+.ngdialog.ngdialog-theme-tread .card {
+  width: 100%; }
+.ngdialog.ngdialog-theme-tread .card-header {
+    padding: 20px 10% 15px; }
+.ngdialog.ngdialog-theme-tread .card-block {
+    padding: 10px 10%; }
+.ngdialog.ngdialog-theme-tread .card-footer {
+    padding: 0 15% 15px; }
 .ngdialog.ngdialog-theme-plain.width-noticia .ngdialog-content {
   width: 500px; }
 .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content {
