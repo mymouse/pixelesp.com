@@ -15,6 +15,7 @@ app.controller('NoticiaNuevaCtrl', function($scope, $http, Session, ngDialog, $l
 			userdata = JSON.parse(window.localStorage.getItem('userdata'));
 			$scope.noticia.username = userdata.username; 
 			$scope.noticia.idusuario = userdata.id;
+			$scope.noticia.imagen = userdata.imagen;
 
 			$http.post('http://pixelesp-api.herokuapp.com/noticias',$scope.noticia).then(function(resp) {
 				//console.log(resp.data);

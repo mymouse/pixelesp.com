@@ -12,6 +12,7 @@ app.controller('ModalNoticia', function ($scope, noticia, $http, Session, ngDial
 			$scope.comment.idusuario = userdata.id;
 			$scope.comment.id_noticia = $scope.noticia.id;
 			$scope.comment.username = userdata.username;
+				$scope.comment.imagen = userdata.imagen;
 
 			$http.post('http://pixelesp-api.herokuapp.com/newscomments', $scope.comment).then(function(resp) {
 				console.log(resp.data);
