@@ -3,7 +3,11 @@
         <article class="card">                 
             <div class="card-header">
                 <h4 class="card-title"><a href="#/thread/{{noticia.id}}"> {{noticia.Titulo}} </a></h4>
-                <img class="img-circle" src="./uploads/img/profile/profile.png" alt="User Image">
+<<<<<<< HEAD
+                <img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{ noticia.imagen }}" alt="User Image">
+=======
+                <img class="img-circle" src="./uploads/img/avatar/{{noticia.imagen}}" alt="User Image">
+>>>>>>> origin/master
                 <span class="username text-muted"><a href="{{noticia.IdUsuario}}"> {{noticia.username}} </a></span> <time title="{{ noticia.created_at | amDateFormat: 'LLLL' }}" class="date text-muted"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ noticia.created_at | amCalendar }}</time>
                 <div class="box-tools">
                   <button type="button" class="btn btn-box-tool"><i class="fa fa-chevron-down"></i></button>
@@ -16,10 +20,33 @@
             </div>
 
             <div class="card-footer">
+
+                <div class="box-footer">
+                    <h4><i class="fa fa-comment" aria-hidden="true"></i> {{noticia.comentarios.length}} Comentarios</h4>
+
+                    <form class="fancy" ng-submit="guardarComentario(comment)">
+                        <img ng-if="currentUser" class="img-responsive img-circle img-sm" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{ currentUser.imagen }}" alt="Alt Text">
+                        <img ng-if="!currentUser" class="img-responsive img-circle img-sm" src="./uploads/img/avatar/paintprogram.png" alt="Alt Text">
+                        <!-- .img-push is used to add margin to elements next to floating images -->
+                        <div class="img-push">
+                          <input type="text" class="form-control input-sm comment" ng-model="comment.text" 
+                          ng-attr-placeholder="{{ currentUser === true ? 'Comenta algo...' : 'Inicia sesión para comentar!' }}"
+                          ng-disabled="!currentUser">                          
+                          <button class="btn-primary btn-comment" type="submit" ng-disabled="!currentUser">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+
                 <div class="box-comments">
+<<<<<<< HEAD
+                    
+                    <div class="box-comment" ng-repeat="c in noticia.comentarios | orderBy:'-created_at'" ng-init="initFirst()">
+                        <img class="img-circle img-sm" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{c.imagen}}" alt="{{c.username}}">
+=======
                     <h4><i class="fa fa-comment" aria-hidden="true"></i> {{noticia.comentarios.length}} Comentarios </h4>
                     <div class="box-comment" ng-repeat="c in noticia.comentarios | orderBy:'-created_at'">
-                        <img class="img-circle img-sm" src="./uploads/img/profile/profile.png" alt="{{c.username}}">
+                        <img class="img-circle img-sm" src="./uploads/img/avatar/{{c.imagen}}" alt="{{c.username}}">
+>>>>>>> origin/master
 
                         <div class="comment-text">
                             <span class="username">
@@ -29,16 +56,6 @@
                             {{c.text}}
                         </div>                        
                     </div>                  
-                </div>
-
-                <div class="box-footer">
-                    <form ng-submit="guardarComentario(comment)">
-                        <img class="img-responsive img-circle img-sm" src="./uploads/img/profile/profile.png" alt="Alt Text">
-                        <!-- .img-push is used to add margin to elements next to floating images -->
-                        <div class="img-push">
-                          <input type="text" class="form-control input-sm" placeholder="Press enter to post comment" ng-model="comment.text">
-                        </div>
-                    </form>
                 </div>
                 
             </div>

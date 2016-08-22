@@ -6,6 +6,29 @@ app.controller('sideBar', function($scope) {
 		{
 			title: 'Inicio',
 			icon: 'home',
+<<<<<<< HEAD
+			state: 'home'
+		}, { 
+			title: 'Galería',
+			icon: 'picture-o',
+			state: 'galeria'
+		}, { 
+			title: 'Trabajo',
+			icon: 'briefcase',
+			state: 'trabajo'
+		}, { 
+			title: 'Foro',
+			icon: 'comments-o',
+			state: 'foro'
+		}, { 
+			title: 'Comunidad',
+			icon: 'users',
+			state: 'comunidad'
+		}, { 
+			title: 'Contacto',
+			icon: 'envelope-o',
+			state: 'contacto'
+=======
 			href: '#/'
 		}, { 
 			title: 'Galería',
@@ -27,6 +50,7 @@ app.controller('sideBar', function($scope) {
 			title: 'Contacto',
 			icon: 'envelope-o',
 			href: '#/contacto'
+>>>>>>> origin/master
 		}
 	];
 	$scope.selected = 0;

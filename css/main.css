@@ -6,6 +6,18 @@
 @import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css");
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css");
 @import url("./ngDialog.min.css");
+main {
+  /* start 'enter' transition */
+  /* end 'enter' transition */ }
+  main.ng-enter {
+    /* transition on enter for .5s */
+    transition: .5s;
+    /* start with opacity 0 (invisible) */
+    opacity: 0; }
+  main.ng-enter-active {
+    /* end with opacity 1 (fade in) */
+    opacity: 1; }
+
 body {
   color: #AEAEAE;
   background-color: #262626; }
@@ -47,13 +59,6 @@ a {
 #subirpixelart canvas {
   margin: 5px auto;
   display: block; }
-
-.btn-default {
-  min-width: 40px;
-  font-size: 14px;
-  text-transform: none;
-  position: relative;
-  text-align: center; }
 
 .navbar {
   border: none;
@@ -279,6 +284,13 @@ form {
       outline: 0;
       border: none;
       background: 0 0; }
+      form.fancy input.comment {
+        width: calc(100% - 95px) !important;
+        float: left;
+        border-radius: 2px 0 0 2px; }
+        form.fancy input.comment[disabled] {
+          border: none;
+          box-shadow: none; }
     form.fancy input[type=email], form.fancy input[type=password], form.fancy input[type=text], form.fancy input[type=url], form.fancy textarea {
       margin-top: 1em;
       padding: .4em;
@@ -292,7 +304,8 @@ form {
       border-bottom: 1px solid #c8c9d0; }
     .box-footer form.fancy input {
       margin: 0;
-      font-size: 14px; }
+      font-size: 14px;
+      box-shadow: none; }
     form.fancy label {
       display: block;
       padding: 10px 5px 5px 2px;
@@ -306,6 +319,17 @@ form {
       float: right;
       color: #afafb9;
       font-size: .8em; }
+    form.fancy .btn-default {
+      min-width: 40px;
+      font-size: 14px;
+      text-transform: none;
+      position: relative;
+      text-align: center; }
+    form.fancy .btn-comment {
+      height: 30px;
+      max-width: 95px;
+      width: 100%;
+      border-radius: 0 2px 2px 0 !important; }
     form.fancy .btn-full {
       margin: 15px auto 0;
       width: 100%; }

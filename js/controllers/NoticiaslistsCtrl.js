@@ -2,12 +2,23 @@
  * Get Noticias
  */
 app.controller('NoticiaslistsCtrl', function($scope, $http, ngDialog) {
+<<<<<<< HEAD
+
+=======
 		
+>>>>>>> origin/master
 	$scope.noticias = [];
 	$http.get('http://pixelesp-api.herokuapp.com/noticias').then(function(resp) {
 		$scope.noticias = resp.data.data;
 		//console.log('Succes', resp.data.data);
 
+<<<<<<< HEAD
+	}, function(err) {
+		console.error('ERR', err);
+		// err.status will contain the status code
+	});
+})
+=======
 		$scope.comentarios = [];
 		angular.forEach($scope.noticias, function(noticia) {
 			angular.forEach(noticia.comentarios, function(comentario) {
@@ -34,3 +45,4 @@ app.controller('NoticiaslistsCtrl', function($scope, $http, ngDialog) {
 		// err.status will contain the status code
 	});	
 })
+>>>>>>> origin/master

@@ -8,7 +8,10 @@ app.controller('ApplicationController', function ($scope, USER_ROLES, AuthServic
 
 		$scope.userRoles = USER_ROLES;
 		$scope.isAuthorized = AuthService.isAuthorized;
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/master
 	}
  
 	$scope.setCurrentUser = function (user) {
@@ -16,7 +19,10 @@ app.controller('ApplicationController', function ($scope, USER_ROLES, AuthServic
 		window.localStorage.setItem('userdata', JSON.stringify(user));
 		$scope.currentUser = {};
 		$scope.currentUser = user;
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/master
 	}
 
 	$scope.go = function ( path ) {

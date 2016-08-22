@@ -1,9 +1,13 @@
 <div class="content-wrapper">
 
 	<section class="content-header">
-		<h1>Home <small>pixelesp.com</small> </h1>
+		<h1>Noticias</h1>
 		<ol class="breadcrumb">
+<<<<<<< HEAD
+			<li class="active"><a ui-sref="home"><i class="fa fa-dashboard"></i> Home</a></li>
+=======
 			<li class="active"><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+>>>>>>> origin/master
 		</ol>	
 	</section>
 
@@ -12,10 +16,8 @@
 			<div class="card-columns">
 				<article class="card" ng-repeat="noticia in noticias">					
 					<div class="card-header">
-						<!-- <h4 class="card-title"><a href="#/thread/{{noticia.id}}"> {{noticia.Titulo}} </a></h4> -->
-						<h4 class="card-title"><a href="" ng-click="openPost(noticia)"> {{noticia.Titulo}} </a></h4>
-
-						<img class="img-circle" src="./uploads/img/profile/profile.png" alt="User Image">
+						<h4 class="card-title"><a ui-sref="home.thread({ NoticiaId: {{noticia.id}} })"> {{noticia.Titulo}} </a></h4>
+						<img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{noticia.imagen}}" alt="User Image">
 						<span class="username text-muted"><a href="{{noticia.IdUsuario}}"> {{noticia.username}} </a></span> <time title="{{ noticia.created_at | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ noticia.created_at | amCalendar }}</time>
 						<div class="box-tools">
 					      <button type="button" class="btn btn-box-tool"><i class="fa fa-chevron-down"></i></button>
@@ -25,14 +27,18 @@
 					<div class="card-block">						
 						<p class="card-text"> {{noticia.Descripcion}} </p>
 						<button type="button" class="btn btn-default "><i class="fa fa-caret-up"></i> up</button>
-					    <button type="button" class="btn btn-default pull-right text-muted" ng-click="openPost(noticia)"><i class="fa fa-comment" aria-hidden="true"></i> {{noticia.comentarios.length}} Comentarios</button>
+					    <button type="button" class="btn btn-default pull-right text-muted" ui-sref="home.thread({ NoticiaId: {{noticia.id}} })"><i class="fa fa-comment" aria-hidden="true"></i> {{noticia.comentarios.length}} Comentarios</button>
 					</div>
 					<div class="card-footer">
 					    
 					    <div class="box-comments">
 			              <div class="box-comment" ng-repeat="c in noticia.comentarios | orderBy:'-created_at' | limitTo:2 ">
 			                <!-- User image -->
-			                <img class="img-circle img-sm" src="./uploads/img/profile/profile.png" alt="{{c.username}}">
+<<<<<<< HEAD
+			                <img class="img-circle img-sm" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{c.imagen}}" alt="{{c.username}}">
+=======
+			                <img class="img-circle img-sm" src="./uploads/img/avatar/{{c.imagen}}" alt="{{c.username}}">
+>>>>>>> origin/master
 
 			                <div class="comment-text">
 								<span class="username">
@@ -47,9 +53,14 @@
 			              
 			            </div>
 
-			            <div class="box-footer" ng-click="openPost(noticia)">
+			            <div class="box-footer" ui-sref="home.thread({ NoticiaId: {{noticia.id}} })">
 			              <form class="fancy">
-			                <img class="img-responsive img-circle img-sm" src="./uploads/img/profile/profile.png" alt="{{noticia.username}}">
+<<<<<<< HEAD
+			                <img ng-if="currentUser" class="img-responsive img-circle img-sm" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{currentUser.imagen}}" alt="{{noticia.username}}">
+                       		<img ng-if="!currentUser" class="img-responsive img-circle img-sm" src="./uploads/img/avatar/paintprogram.png" alt="Alt Text">
+=======
+			                <img class="img-responsive img-circle img-sm" src="./uploads/img/avatar/{{currentUser.imagen}}" alt="{{noticia.username}}">
+>>>>>>> origin/master
 			                <!-- .img-push is used to add margin to elements next to floating images -->
 			                <div class="img-push">
 			                  <input type="text" placeholder="Haz click para dejar un comentario" disabled>
