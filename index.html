@@ -41,30 +41,55 @@
 <!-- Our Website Content Goes Here -->
 <div ng-include='"templates/header.html"'></div>
 <div ng-include='"templates/sidebar.html"'></div>
-<div ng-view></div>
+<main ui-view></main>
 <div ng-include='"templates/footer.html"'></div>
 
 <!-- Javascripts -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-route.min.js"></script>
-<script src="js/ngFormFixes.directive.js"></script>
+<!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-route.min.js"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
+
+<script src="js/libs/ngFormFixes.directive.js"></script>
 
 <!-- Bootstrap -->
 <script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="js/libs/bootstrap.min.js"></script>
 
 <!-- Our Website Javascripts -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
-<script src="js/ngDialog.min.js"></script>
-<script src="js/momtent_lang_es.js"></script>
-<script src="js/angular-file-upload.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
+
+<script src="js/libs/momtent_lang_es.js"></script>
+<script src="js/libs/ngDialog.min.js"></script>
+<script src="js/libs/angular-file-upload.min.js"></script>
 
 <!-- App js -->
 <script src="js/scripts.js"></script>
 <script src="js/main.js"></script>
-<script src="js/controller.js"></script>
+
+<!-- Controllers -->
+<script src="js/controllers/ApplicationController.js"></script>
+<script src="js/controllers/SignupLogin.js"></script>
+<script src="js/controllers/BlogCtrl.js"></script>
+<script src="js/controllers/PageCtrl.js"></script>
+<script src="js/controllers/NavCtrl.js"></script>
+<script src="js/controllers/sideBar.js"></script>
+<script src="js/controllers/NoticiaslistsCtrl.js"></script>
+<script src="js/controllers/ModalNoticia.js"></script>
+<script src="js/controllers/UploadController.js"></script>
+<script src="js/controllers/NoticiaNuevaCtrl.js"></script>
+
+<!-- Services -->
+<script src="js/services/Session.js"></script>
+<script src="js/services/AuthService.js"></script>
+
+<!-- Directives -->
+<script src="js/directives/ngThumb.js"></script>
 
 </body>
 </html>

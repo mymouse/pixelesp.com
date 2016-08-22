@@ -48,7 +48,7 @@
         <!-- Singup -->
         <div class="tab-pane fade" id="singup" role="tabpanel">
 
-            <form class="form fancy" ng-submit="doRegister()">
+            <form name="formRegister" class="form fancy" ng-submit="doRegister()" novalidate>
                 <!-- <span class="input">
                     <input type="text" tabindex="1" name="name" ng-model="usuario.name" required>
                     <label for="name">
@@ -62,6 +62,10 @@
                         <span class="label-content">Nick</span>
                     </label>
                 </span>
+
+                <div class="help-block" ng-messages="formRegister.username.$error" ng-if="formRegister.username.$touched">
+                    <p ng-message="required">Your name is required.</p>
+                </div>
 
                 <span class="input">
                     <input type="email" tabindex="3" name="email" ng-model="usuario.email" required>

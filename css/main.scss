@@ -22,6 +22,24 @@ $naranja: #ff9800;
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css');
 @import url('./ngDialog.min.css');
 
+//animate css
+main {
+    /* start 'enter' transition */
+    &.ng-enter {
+        /* transition on enter for .5s */
+        transition: .5s;
+ 
+        /* start with opacity 0 (invisible) */
+        opacity: 0;
+    }
+ 
+    /* end 'enter' transition */
+    &.ng-enter-active {
+        /* end with opacity 1 (fade in) */
+        opacity: 1;
+    }
+}
+
 //reset 
 body {
 	//padding-top: 100px;
@@ -80,15 +98,6 @@ a {
 #subirpixelart canvas {
 	margin: 5px auto;
     display: block;
-}
-
-//buttons
-.btn-default {
-	min-width: 40px;
-    font-size: 14px;
-    text-transform: none;
-    position: relative;
-    text-align: center;
 }
 
 //navbar 
@@ -397,6 +406,16 @@ form {
 			outline: 0;
 			border: none;
 			background: 0 0;
+			&.comment {
+				width: calc(100% - 95px)!important;
+				float: left;
+				border-radius: 2px 0 0 2px;
+				&[disabled] {
+					border: none;
+					box-shadow: none;
+				}
+			}
+
 		}
 
 		input[type=email], input[type=password], input[type=text], input[type=url], textarea {
@@ -415,6 +434,7 @@ form {
 		.box-footer & input {
 		    margin: 0;
 		    font-size: 14px;
+		    box-shadow: none;
 		}
 
 		label {
@@ -433,6 +453,22 @@ form {
 		    float: right;
 		    color: #afafb9;
 		    font-size: .8em;
+		}
+
+		//buttons
+		.btn-default {
+			min-width: 40px;
+		    font-size: 14px;
+		    text-transform: none;
+		    position: relative;
+		    text-align: center;
+		}
+
+		.btn-comment {
+		    height: 30px;
+		    max-width: 95px;
+		    width: 100%;
+		    border-radius: 0 2px 2px 0!important;
 		}
 
 		.btn-full {
