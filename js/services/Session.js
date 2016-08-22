@@ -9,7 +9,11 @@ app.service('Session', function () {
 
 	this.create = function (sessionId, userRole) {
 		window.localStorage.setItem('session', sessionId);
+<<<<<<< HEAD
 		this.id = window.localStorage.getItem('session');
+=======
+	this.id = window.localStorage.getItem('session');
+>>>>>>> origin/master
 		this.userRole = userRole;
 	};
 

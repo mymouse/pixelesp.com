@@ -30,12 +30,19 @@ app.controller('SignupLogin', function($scope, $http, $rootScope, $location, $wi
 
 				$scope.user = resp.data.data;
 				$scope.setCurrentUser($scope.user, $scope.user.userlevel);
+<<<<<<< HEAD
 				ngDialog.close(login.id);
+=======
+>>>>>>> origin/master
 
 			}, function(err) {
 				console.error('ERR', err);
 				// err.status will contain the status code
 			});
+<<<<<<< HEAD
+=======
+			ngDialog.closeAll();
+>>>>>>> origin/master
 
 		}, function () {
 			$rootScope.$broadcast(AUTH_EVENTS.loginFailed);

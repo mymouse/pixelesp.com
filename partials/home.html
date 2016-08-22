@@ -3,7 +3,11 @@
 	<section class="content-header">
 		<h1>Noticias</h1>
 		<ol class="breadcrumb">
+<<<<<<< HEAD
 			<li class="active"><a ui-sref="home"><i class="fa fa-dashboard"></i> Home</a></li>
+=======
+			<li class="active"><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+>>>>>>> origin/master
 		</ol>	
 	</section>
 
@@ -30,7 +34,11 @@
 					    <div class="box-comments">
 			              <div class="box-comment" ng-repeat="c in noticia.comentarios | orderBy:'-created_at' | limitTo:2 ">
 			                <!-- User image -->
+<<<<<<< HEAD
 			                <img class="img-circle img-sm" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{c.imagen}}" alt="{{c.username}}">
+=======
+			                <img class="img-circle img-sm" src="./uploads/img/avatar/{{c.imagen}}" alt="{{c.username}}">
+>>>>>>> origin/master
 
 			                <div class="comment-text">
 								<span class="username">
@@ -47,8 +55,12 @@
 
 			            <div class="box-footer" ui-sref="home.thread({ NoticiaId: {{noticia.id}} })">
 			              <form class="fancy">
+<<<<<<< HEAD
 			                <img ng-if="currentUser" class="img-responsive img-circle img-sm" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{currentUser.imagen}}" alt="{{noticia.username}}">
                        		<img ng-if="!currentUser" class="img-responsive img-circle img-sm" src="./uploads/img/avatar/paintprogram.png" alt="Alt Text">
+=======
+			                <img class="img-responsive img-circle img-sm" src="./uploads/img/avatar/{{currentUser.imagen}}" alt="{{noticia.username}}">
+>>>>>>> origin/master
 			                <!-- .img-push is used to add margin to elements next to floating images -->
 			                <div class="img-push">
 			                  <input type="text" placeholder="Haz click para dejar un comentario" disabled>

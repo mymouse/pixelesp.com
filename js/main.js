@@ -20,6 +20,7 @@ app.constant('USER_ROLES', {
 	guest: 3
 })
 
+<<<<<<< HEAD
 app.config(function($stateProvider, $urlRouterProvider) {
 
 	$urlRouterProvider.when('', '/');
@@ -95,6 +96,8 @@ app.run( function($rootScope, $location, AuthService) {
 
 /**/
 
+=======
+>>>>>>> origin/master
 /**
  * Configure the Routes
  
@@ -124,7 +127,11 @@ app.config(['$routeProvider', function ($routeProvider) {
 
 	/*.when("/thread/:NoticiaId", {
 		templateUrl: "partials/thread.html",
+<<<<<<< HEAD
 		controller: "NoticiaCtrl" })
+=======
+		controller: "NoticiaCtrl" })*/
+>>>>>>> origin/master
 	// else 404
 	.otherwise("/404", {
 		templateUrl: "partials/404.html",
@@ -144,6 +151,10 @@ app.run( function($rootScope, $location, AuthService) {
 	});
 }) 
 
+<<<<<<< HEAD
 */
+=======
+
+>>>>>>> origin/master
 
 
