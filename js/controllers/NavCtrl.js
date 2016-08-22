@@ -42,8 +42,6 @@ app.controller('NavCtrl', function ($scope, Session, $window, ngDialog) {
 		});
 	};
 
-
-
 	$scope.doLogout = function() {
 			Session.destroy();
 			$window.location.reload();

@@ -20,7 +20,6 @@ app.constant('USER_ROLES', {
 	guest: 3
 })
 
-<<<<<<< HEAD
 app.config(function($stateProvider, $urlRouterProvider) {
 
 	$urlRouterProvider.when('', '/');
@@ -92,69 +91,4 @@ app.run( function($rootScope, $location, AuthService) {
 			}
 		}
 	});
-}) 
-
-/**/
-
-=======
->>>>>>> origin/master
-/**
- * Configure the Routes
- 
-app.config(['$routeProvider', function ($routeProvider) {
-	$routeProvider
-	// Home
-	.when("/", {
-		templateUrl: "partials/home.html",
-		controller: "PageCtrl" })
-	// Pages
-	.when("/mi-perfil", {
-		templateUrl: "partials/profile.html",
-		controller: "PageCtrl" })   
-	.when("/comunidad", {
-		templateUrl: "partials/comunidad.html",
-		controller: "PageCtrl" })
-	.when("/galeria", {
-		templateUrl: "partials/galeria.html",
-		controller: "PageCtrl" })
-	.when("/contacto", {
-		templateUrl: "partials/contacto.html",
-		controller: "PageCtrl" })
-	// Blog
-	.when("/foro", {
-		templateUrl: "partials/foro.html",
-		controller: "BlogCtrl" })
-
-	/*.when("/thread/:NoticiaId", {
-		templateUrl: "partials/thread.html",
-<<<<<<< HEAD
-		controller: "NoticiaCtrl" })
-=======
-		controller: "NoticiaCtrl" })*/
->>>>>>> origin/master
-	// else 404
-	.otherwise("/404", {
-		templateUrl: "partials/404.html",
-		controller: "PageCtrl" });
-}])
-
-app.run( function($rootScope, $location, AuthService) {
-	// register listener to watch route changes
-	$rootScope.$on( "$routeChangeStart", function(event, next, current) {
-
-		if ( AuthService.isAuthenticated() == false ) {
-			if ( next.templateUrl == "partials/profile.html" ) {
-				$location.path("/");
-			}
-		}   
-
-	});
-}) 
-
-<<<<<<< HEAD
-*/
-=======
-
->>>>>>> origin/master
-
-
+})

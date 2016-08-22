@@ -3,11 +3,7 @@
         <article class="card">                 
             <div class="card-header">
                 <h4 class="card-title"><a href="#/thread/{{noticia.id}}"> {{noticia.Titulo}} </a></h4>
-<<<<<<< HEAD
                 <img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{ noticia.imagen }}" alt="User Image">
-=======
-                <img class="img-circle" src="./uploads/img/avatar/{{noticia.imagen}}" alt="User Image">
->>>>>>> origin/master
                 <span class="username text-muted"><a href="{{noticia.IdUsuario}}"> {{noticia.username}} </a></span> <time title="{{ noticia.created_at | amDateFormat: 'LLLL' }}" class="date text-muted"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ noticia.created_at | amCalendar }}</time>
                 <div class="box-tools">
                   <button type="button" class="btn btn-box-tool"><i class="fa fa-chevron-down"></i></button>
@@ -37,17 +33,9 @@
                     </form>
                 </div>
 
-                <div class="box-comments">
-<<<<<<< HEAD
-                    
+                <div class="box-comments">                    
                     <div class="box-comment" ng-repeat="c in noticia.comentarios | orderBy:'-created_at'" ng-init="initFirst()">
                         <img class="img-circle img-sm" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{c.imagen}}" alt="{{c.username}}">
-=======
-                    <h4><i class="fa fa-comment" aria-hidden="true"></i> {{noticia.comentarios.length}} Comentarios </h4>
-                    <div class="box-comment" ng-repeat="c in noticia.comentarios | orderBy:'-created_at'">
-                        <img class="img-circle img-sm" src="./uploads/img/avatar/{{c.imagen}}" alt="{{c.username}}">
->>>>>>> origin/master
-
                         <div class="comment-text">
                             <span class="username">
                                 {{c.username}}
