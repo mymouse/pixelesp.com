@@ -1,3 +1,19 @@
+/**
+ * Get Posts Aprobados
+ */
+app.controller('getPosts', function($scope, $http, ngDialog) {
+
+  $scope.imagenes = [];
+  $http.get('http://pixelesp-api.herokuapp.com/imagenes').then(function(resp) {
+    $scope.imagenes = resp.data.data;
+    //console.log('Succes', resp.data.data);
+
+  }, function(err) {
+    console.error('ERR', err);
+    // err.status will contain the status code
+  });
+})
+
 /*
  * Upload pixelArt
  */
@@ -72,7 +88,7 @@ app.controller('newPost', function ($scope, $http, Upload, Session, $timeout, Cl
             $scope.errorMsg = response.status + ': ' + response.data;
         }, function (evt) {
           // Math.min is to fix IE which reports 200% sometimes
-          file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+          $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
         });
       }
     }

@@ -3,7 +3,7 @@
  */
 /*colores*/
 /*import other css*/
-@import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css");
+@import "https://fonts.googleapis.com/css?family=Roboto:400,700,900";
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css");
 @import url("./ngDialog.min.css");
 @import url("./ng-img-crop.css");
@@ -7875,7 +7875,8 @@
 body {
   background-color: #262626;
   /*padding-top: 100px;*/
-  color: #AEAEAE; }
+  color: #AEAEAE;
+  font-family: 'Roboto', sans-serif; }
 
 *:focus {
   outline: none !important; }
@@ -7883,24 +7884,20 @@ body {
 a {
   color: #97b125; }
 
-.img-sm {
-  float: left;
-  width: 30px !important;
-  height: 30px !important; }
-
 .disabled {
   cursor: default !important; }
 
 .breadcrumb .active {
   color: white; }
 
+/* Form login */
 .nav-center {
   text-align: center; }
   .nav-center ul.nav {
     display: inline-block; }
     .nav-center ul.nav li {
-      display: inline a;
-        display-float: left; }
+      margin-bottom: -2px;
+      font-size: .9em; }
 
 /*modals */
 .ngdialog-content .tab-content {
@@ -7965,8 +7962,15 @@ a {
     transition: width 0.3s ease-in-out;
     display: block;
     overflow: hidden;
-    padding: 10px 0;
-    width: 230px; }
+    padding: 8px 0;
+    width: 205px; }
+  .navbar ul.nav {
+    display: block;
+    margin: 0 15px;
+    height: 50px;
+    line-height: 50px; }
+  .navbar .navbar-nav li a {
+    color: #9d9d9d; }
   .navbar .navbar-nav li a:hover, .navbar .navbar-nav li a:focus, .navbar .navbar-nav li.active a:hover, .navbar .navbar-nav li.active a:focus, .navbar .navbar-nav li.active a {
     background-color: transparent;
     color: #AFD702; }
@@ -8184,47 +8188,19 @@ a {
   -moz-backface-visibility: hidden;
   -ms-backface-visibility: hidden;
   -o-backface-visibility: hidden;
-  backface-visibility: hidden;
-  position: relative;
-  margin-bottom: 20px;
-  border: none;
-  border-radius: 0 3px 3px 3px;
-  background: #ffffff;
-  /*width: 100%;*/
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); }
-  .card-noticia {
-    position: relative;
-    border: none; }
-  .card-header {
-    position: relative;
-    display: block;
-    padding: 10px;
-    color: #444; }
-    .card-header img {
-      float: left;
-      width: 20px;
-      height: 20px; }
-    .card-header .username {
-      margin-left: 5px;
-      font-weight: 600;
-      font-size: 12px; }
-    .card-header .date {
-      color: #999;
-      font-size: 12px; }
-    .card-header .box-tools {
-      position: absolute;
-      top: 5px;
-      right: 10px; }
-      .card-header .box-tools button {
-        padding: 5px;
-        background: transparent;
-        color: #97a0b3;
-        font-size: 12px; }
-  .card-title {
-    margin: 0 0 .75rem; }
-    .card-title a {
+  backface-visibility: hidden; }
+  .card .card-block {
+    padding-bottom: .5rem;
+    border-bottom: 1px solid #F4F4F6; }
+    .card .card-block .card-title {
       text-transform: uppercase;
-      font-weight: 700; }
+      font-weight: 600; }
+    .card .card-block .card-subtitle {
+      font-size: .9rem; }
+      .card .card-block .card-subtitle img {
+        margin-right: 5px;
+        width: 20px;
+        height: 20px; }
   .card-footer {
     padding: 0; }
     .card-footer .box-comment {
@@ -8293,8 +8269,12 @@ a {
       background: #fff;
       box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
       font-size: 16px; }
-      .card-footer .box-footer .img-sm + .img-push {
+      .card-footer .box-footer .avatar + .img-push {
         margin-left: 40px; }
+    .card-footer img.avatar {
+      float: left;
+      width: 30px !important;
+      height: 30px !important; }
 
 /*form*/
 form {
@@ -8344,7 +8324,8 @@ form {
     .box-footer form.fancy input {
       margin: 0;
       box-shadow: none;
-      font-size: 14px; }
+      font-size: 14px;
+      height: 30px; }
     form.fancy label {
       display: block;
       padding: 10px 5px 5px 2px;
@@ -8389,7 +8370,8 @@ form {
         font-size: 0.8em; }
     form.fancy span.progress {
       border-radius: 0; }
-      form.fancy span.progress .ng-binding {
+      form.fancy span.progress div {
+        display: list-item;
         background: #8BC34A;
         transition: width .2s ease; }
     form.fancy .btn-default {
@@ -8416,29 +8398,113 @@ form {
       form.fancy a.btn.btn-primary[disabled], form.fancy button.btn-primary[disabled], form.fancy input[type=submit].btn-primary[disabled] {
         background: rgba(255, 156, 66, 0.5); }
 
-.ngdialog.ngdialog-theme-tread {
-  margin-bottom: 0;
-  padding: 50px 0 0 0; }
-  .ngdialog.ngdialog-theme-tread .ngdialog-overlay {
-    margin-top: 50px; }
-  .ngdialog.ngdialog-theme-tread .ngdialog-content {
-    top: 0;
-    float: right;
-    padding: 0;
-    max-width: 70%;
-    width: 1020px;
-    background-color: #f5f5f5; }
-  .ngdialog.ngdialog-theme-tread .card {
+.ngdialog {
+  /* post noticias*/
+  /* modal crear noticias/post y login*/ }
+  .ngdialog.ngdialog-theme-tread {
     margin-bottom: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: #f5f5f5; }
-    .ngdialog.ngdialog-theme-tread .card-header {
-      -webkit-animation-name: fadeInUp;
-      -moz-animation-name: fadeInUp;
-      -ms-animation-name: fadeInUp;
-      -o-animation-name: fadeInUp;
-      animation-name: fadeInUp;
+    padding: 50px 0 0 0; }
+    .ngdialog.ngdialog-theme-tread .ngdialog-overlay {
+      margin-top: 50px; }
+    .ngdialog.ngdialog-theme-tread .ngdialog-content {
+      top: 0;
+      float: right;
+      padding: 0;
+      max-width: 70%;
+      width: 1020px;
+      background-color: #f5f5f5; }
+    .ngdialog.ngdialog-theme-tread .card {
+      margin-bottom: 0;
+      width: 100%;
+      height: 100vh;
+      border-radius: 0;
+      background-color: #f5f5f5; }
+      .ngdialog.ngdialog-theme-tread .card-block {
+        -webkit-animation-name: fadeInUp;
+        -moz-animation-name: fadeInUp;
+        -ms-animation-name: fadeInUp;
+        -o-animation-name: fadeInUp;
+        animation-name: fadeInUp;
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-delay: 0.5s;
+        -moz-animation-delay: 0.5s;
+        -ms-animation-delay: 0.5s;
+        -o-animation-delay: 0.5s;
+        animation-delay: 0.5s;
+        -webkit-animation-timing-function: ease;
+        -moz-animation-timing-function: ease;
+        -ms-animation-timing-function: ease;
+        -o-animation-timing-function: ease;
+        animation-timing-function: ease;
+        -webkit-animation-fill-mode: both;
+        -moz-animation-fill-mode: both;
+        -ms-animation-fill-mode: both;
+        -o-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+        -o-backface-visibility: hidden;
+        backface-visibility: hidden;
+        padding: 1.25rem 10%;
+        background-color: #fff; }
+      .ngdialog.ngdialog-theme-tread .card-footer {
+        -webkit-animation-name: fadeInUp;
+        -moz-animation-name: fadeInUp;
+        -ms-animation-name: fadeInUp;
+        -o-animation-name: fadeInUp;
+        animation-name: fadeInUp;
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-delay: 0.5s;
+        -moz-animation-delay: 0.5s;
+        -ms-animation-delay: 0.5s;
+        -o-animation-delay: 0.5s;
+        animation-delay: 0.5s;
+        -webkit-animation-timing-function: ease;
+        -moz-animation-timing-function: ease;
+        -ms-animation-timing-function: ease;
+        -o-animation-timing-function: ease;
+        animation-timing-function: ease;
+        -webkit-animation-fill-mode: both;
+        -moz-animation-fill-mode: both;
+        -ms-animation-fill-mode: both;
+        -o-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+        -o-backface-visibility: hidden;
+        backface-visibility: hidden;
+        padding: 15px 15%; }
+        .ngdialog.ngdialog-theme-tread .card-footer .comicon i {
+          display: block;
+          padding: 15px;
+          color: #9c9c9c;
+          text-align: center; }
+    .ngdialog.ngdialog-theme-tread .wrapper {
+      -webkit-animation-name: fadeInRight;
+      -moz-animation-name: fadeInRight;
+      -ms-animation-name: fadeInRight;
+      -o-animation-name: fadeInRight;
+      animation-name: fadeInRight;
       -webkit-animation-iteration-count: 1;
       -moz-animation-iteration-count: 1;
       -ms-animation-iteration-count: 1;
@@ -8449,11 +8515,47 @@ form {
       -ms-animation-duration: 1s;
       -o-animation-duration: 1s;
       animation-duration: 1s;
-      -webkit-animation-delay: 0.5s;
-      -moz-animation-delay: 0.5s;
-      -ms-animation-delay: 0.5s;
-      -o-animation-delay: 0.5s;
-      animation-delay: 0.5s;
+      -webkit-animation-delay: 0s;
+      -moz-animation-delay: 0s;
+      -ms-animation-delay: 0s;
+      -o-animation-delay: 0s;
+      animation-delay: 0s;
+      -webkit-animation-timing-function: ease;
+      -moz-animation-timing-function: ease;
+      -ms-animation-timing-function: ease;
+      -o-animation-timing-function: ease;
+      animation-timing-function: ease;
+      -webkit-animation-fill-mode: both;
+      -moz-animation-fill-mode: both;
+      -ms-animation-fill-mode: both;
+      -o-animation-fill-mode: both;
+      animation-fill-mode: both;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      -o-backface-visibility: hidden;
+      backface-visibility: hidden; }
+    .ngdialog.ngdialog-theme-tread .ngdialog-close::before {
+      -webkit-animation-name: fadeInLeftBig;
+      -moz-animation-name: fadeInLeftBig;
+      -ms-animation-name: fadeInLeftBig;
+      -o-animation-name: fadeInLeftBig;
+      animation-name: fadeInLeftBig;
+      -webkit-animation-iteration-count: 1;
+      -moz-animation-iteration-count: 1;
+      -ms-animation-iteration-count: 1;
+      -o-animation-iteration-count: 1;
+      animation-iteration-count: 1;
+      -webkit-animation-duration: 1s;
+      -moz-animation-duration: 1s;
+      -ms-animation-duration: 1s;
+      -o-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-delay: 0s;
+      -moz-animation-delay: 0s;
+      -ms-animation-delay: 0s;
+      -o-animation-delay: 0s;
+      animation-delay: 0s;
       -webkit-animation-timing-function: ease;
       -moz-animation-timing-function: ease;
       -ms-animation-timing-function: ease;
@@ -8469,172 +8571,64 @@ form {
       -ms-backface-visibility: hidden;
       -o-backface-visibility: hidden;
       backface-visibility: hidden;
-      padding: 20px 10% 15px; }
-    .ngdialog.ngdialog-theme-tread .card-block {
-      -webkit-animation-name: fadeInUp;
-      -moz-animation-name: fadeInUp;
-      -ms-animation-name: fadeInUp;
-      -o-animation-name: fadeInUp;
-      animation-name: fadeInUp;
-      -webkit-animation-iteration-count: 1;
-      -moz-animation-iteration-count: 1;
-      -ms-animation-iteration-count: 1;
-      -o-animation-iteration-count: 1;
-      animation-iteration-count: 1;
-      -webkit-animation-duration: 1s;
-      -moz-animation-duration: 1s;
-      -ms-animation-duration: 1s;
-      -o-animation-duration: 1s;
-      animation-duration: 1s;
-      -webkit-animation-delay: 0.5s;
-      -moz-animation-delay: 0.5s;
-      -ms-animation-delay: 0.5s;
-      -o-animation-delay: 0.5s;
-      animation-delay: 0.5s;
-      -webkit-animation-timing-function: ease;
-      -moz-animation-timing-function: ease;
-      -ms-animation-timing-function: ease;
-      -o-animation-timing-function: ease;
-      animation-timing-function: ease;
-      -webkit-animation-fill-mode: both;
-      -moz-animation-fill-mode: both;
-      -ms-animation-fill-mode: both;
-      -o-animation-fill-mode: both;
-      animation-fill-mode: both;
-      -webkit-backface-visibility: hidden;
-      -moz-backface-visibility: hidden;
-      -ms-backface-visibility: hidden;
-      -o-backface-visibility: hidden;
-      backface-visibility: hidden;
-      padding: 10px 10%;
-      background-color: #fff; }
-    .ngdialog.ngdialog-theme-tread .card-footer {
-      -webkit-animation-name: fadeInUp;
-      -moz-animation-name: fadeInUp;
-      -ms-animation-name: fadeInUp;
-      -o-animation-name: fadeInUp;
-      animation-name: fadeInUp;
-      -webkit-animation-iteration-count: 1;
-      -moz-animation-iteration-count: 1;
-      -ms-animation-iteration-count: 1;
-      -o-animation-iteration-count: 1;
-      animation-iteration-count: 1;
-      -webkit-animation-duration: 1s;
-      -moz-animation-duration: 1s;
-      -ms-animation-duration: 1s;
-      -o-animation-duration: 1s;
-      animation-duration: 1s;
-      -webkit-animation-delay: 0.5s;
-      -moz-animation-delay: 0.5s;
-      -ms-animation-delay: 0.5s;
-      -o-animation-delay: 0.5s;
-      animation-delay: 0.5s;
-      -webkit-animation-timing-function: ease;
-      -moz-animation-timing-function: ease;
-      -ms-animation-timing-function: ease;
-      -o-animation-timing-function: ease;
-      animation-timing-function: ease;
-      -webkit-animation-fill-mode: both;
-      -moz-animation-fill-mode: both;
-      -ms-animation-fill-mode: both;
-      -o-animation-fill-mode: both;
-      animation-fill-mode: both;
-      -webkit-backface-visibility: hidden;
-      -moz-backface-visibility: hidden;
-      -ms-backface-visibility: hidden;
-      -o-backface-visibility: hidden;
-      backface-visibility: hidden;
-      padding: 0 15% 15px; }
-      .ngdialog.ngdialog-theme-tread .card-footer .comicon i {
-        display: block;
-        padding: 15px;
-        color: #9c9c9c;
-        text-align: center; }
-  .ngdialog.ngdialog-theme-tread .wrapper {
-    -webkit-animation-name: fadeInRight;
-    -moz-animation-name: fadeInRight;
-    -ms-animation-name: fadeInRight;
-    -o-animation-name: fadeInRight;
-    animation-name: fadeInRight;
-    -webkit-animation-iteration-count: 1;
-    -moz-animation-iteration-count: 1;
-    -ms-animation-iteration-count: 1;
-    -o-animation-iteration-count: 1;
-    animation-iteration-count: 1;
-    -webkit-animation-duration: 1s;
-    -moz-animation-duration: 1s;
-    -ms-animation-duration: 1s;
-    -o-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-delay: 0s;
-    -moz-animation-delay: 0s;
-    -ms-animation-delay: 0s;
-    -o-animation-delay: 0s;
-    animation-delay: 0s;
-    -webkit-animation-timing-function: ease;
-    -moz-animation-timing-function: ease;
-    -ms-animation-timing-function: ease;
-    -o-animation-timing-function: ease;
-    animation-timing-function: ease;
-    -webkit-animation-fill-mode: both;
-    -moz-animation-fill-mode: both;
-    -ms-animation-fill-mode: both;
-    -o-animation-fill-mode: both;
-    animation-fill-mode: both;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -ms-backface-visibility: hidden;
-    -o-backface-visibility: hidden;
-    backface-visibility: hidden; }
-  .ngdialog.ngdialog-theme-tread .ngdialog-close::before {
-    -webkit-animation-name: fadeInLeftBig;
-    -moz-animation-name: fadeInLeftBig;
-    -ms-animation-name: fadeInLeftBig;
-    -o-animation-name: fadeInLeftBig;
-    animation-name: fadeInLeftBig;
-    -webkit-animation-iteration-count: 1;
-    -moz-animation-iteration-count: 1;
-    -ms-animation-iteration-count: 1;
-    -o-animation-iteration-count: 1;
-    animation-iteration-count: 1;
-    -webkit-animation-duration: 1s;
-    -moz-animation-duration: 1s;
-    -ms-animation-duration: 1s;
-    -o-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-delay: 0s;
-    -moz-animation-delay: 0s;
-    -ms-animation-delay: 0s;
-    -o-animation-delay: 0s;
-    animation-delay: 0s;
-    -webkit-animation-timing-function: ease;
-    -moz-animation-timing-function: ease;
-    -ms-animation-timing-function: ease;
-    -o-animation-timing-function: ease;
-    animation-timing-function: ease;
-    -webkit-animation-fill-mode: both;
-    -moz-animation-fill-mode: both;
-    -ms-animation-fill-mode: both;
-    -o-animation-fill-mode: both;
-    animation-fill-mode: both;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -ms-backface-visibility: hidden;
-    -o-backface-visibility: hidden;
-    backface-visibility: hidden;
+      position: absolute;
+      top: 50px;
+      display: block;
+      margin-left: -50px;
+      padding: 15px;
+      width: 50px;
+      height: 50px;
+      border-radius: 0 0 0 2px;
+      background: white;
+      text-align: center; }
+  .ngdialog.ngdialog-theme-plain.width-noticia .ngdialog-content {
+    width: 500px; }
+  .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content {
+    width: 350px; }
+
+/**
+ * Galeria
+ */
+article.post {
+  position: relative;
+  float: left;
+  margin: 15px;
+  width: 100px;
+  height: 100px;
+  transition: all .5s ease center; }
+  article.post:hover {
+    outline: 10px solid white; }
+  article.post .card-title {
     position: absolute;
-    top: 50px;
-    display: block;
-    margin-left: -50px;
-    padding: 15px;
-    width: 50px;
-    height: 50px;
-    border-radius: 0 0 0 2px;
-    background: white;
-    text-align: center; }
-.ngdialog.ngdialog-theme-plain.width-noticia .ngdialog-content {
-  width: 500px; }
-.ngdialog.ngdialog-theme-plain.width-post .ngdialog-content {
-  width: 350px; }
+    top: 20px;
+    left: -10px;
+    z-index: 2;
+    opacity: 0;
+    margin: 0;
+    padding: 5px;
+    width: 120px;
+    border-radius: 3px 3px 0 0;
+    text-align: center;
+    font-size: 1em;
+    transition: all .5s ease; }
+  article.post:hover .card-title {
+    top: -27px;
+    opacity: 1;
+    background: white; }
+  article.post .card-footer {
+    position: relative;
+    bottom: 25px;
+    left: -10px;
+    opacity: 0;
+    width: 120px;
+    border: none;
+    text-align: center;
+    transition: all .5s ease; }
+    article.post .card-footer img {
+      height: 20px;
+      width: 20px; }
+  article.post:hover .card-footer {
+    bottom: 0px;
+    opacity: 1; }
 
 /*# sourceMappingURL=main.css.map */

@@ -13,7 +13,7 @@ $naranja: #ff9800;
 }
 
 /*import other css*/
-@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
+@import 'https://fonts.googleapis.com/css?family=Roboto:400,700,900';
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css');
 @import url('./ngDialog.min.css');
 @import url('./ng-img-crop.css');
@@ -32,6 +32,7 @@ body {
 	background-color: #262626;
 	/*padding-top: 100px;*/
 	color: #AEAEAE;
+	font-family: 'Roboto', sans-serif;
 }
 
 *:focus {
@@ -42,12 +43,6 @@ a {
 	color: $verdelink;
 }
 
-.img-sm {
-	float: left;
-	width: 30px !important;
-	height: 30px !important;
-}
-
 .disabled {
 	cursor: default!important;
 }
@@ -56,17 +51,16 @@ a {
 	color: white;
 }
 
+/* Form login */
 .nav-center {  
 	text-align: center;
 
 	ul.nav {
 		display: inline-block;
 
-		li {
-			display: inline
-			a {
-				float: left
-			}
+		li {			
+			margin-bottom: -2px;
+			font-size: .9em;			
 		}
 	}
 }
@@ -107,10 +101,19 @@ a {
 
 		display: block;
 		overflow: hidden;
-		padding: 10px 0;
-		width: 230px;
+		padding: 8px 0;
+		width: 205px;
 	}
-	.navbar-nav li{
+	ul.nav {
+	    display: block;
+    	margin: 0 15px;
+	    height: 50px;
+	    line-height: 50px;
+	}
+	.navbar-nav li {
+		& a {
+			color: #9d9d9d;
+		}
 		& a:hover, & a:focus, &.active a:hover, &.active a:focus, &.active a {
 			background-color: transparent;
 			color: $verde; 
@@ -197,7 +200,7 @@ a {
 /*content*/
 .content-wrapper {
 	@include fadeInUp();
-  
+
 	margin-left: 230px;
 	padding: 50px 0 0 0;
 	min-height: 100vh;
@@ -262,57 +265,22 @@ a {
 .card {
 	@include fadeInUp();
 
-	position: relative;
-	margin-bottom: 20px;
-	border: none;
-	border-radius: 0 3px 3px 3px;
-	background: #ffffff;
-	/*width: 100%;*/
-	box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+	.card-block {
+	    padding-bottom: .5rem;
+	    border-bottom: 1px solid #F4F4F6;
 
-	&-noticia {
-	position: relative;
-	border: none;
-	}
-	&-header {
-	position: relative;
-	display: block;
-	padding: 10px;
-	color: #444;
+	    .card-title {
+		    text-transform: uppercase;
+		    font-weight: 600;
+		}
+		.card-subtitle {
+		    font-size: .9rem;
 
-	img {
-		float: left;
-		width: 20px;
-		height: 20px;
-		}
-		.username {
-			margin-left: 5px;
-			font-weight: 600;
-			font-size: 12px;
-		}
-		.date {
-		color: #999;
-		font-size: 12px;
-		}
-		.box-tools {
-		position: absolute;
-		top: 5px;
-		right: 10px;
-
-			button {
-				padding: 5px;
-				background: transparent;
-				color: #97a0b3;
-				font-size: 12px;
+		    img {
+			    margin-right: 5px;
+			    width: 20px;
+			    height: 20px;
 			}
-		}
-	}
-	&-title {
-		margin: 0 0 .75rem;
-
-		a {
-			text-transform: uppercase;
-			font-weight: 700;
 		}
 	}
 	&-footer {
@@ -359,9 +327,14 @@ a {
 			box-shadow: 0 2px 0 0 rgba(0,0,0,.1);
 			font-size: 16px;
 
-			.img-sm+.img-push {
+			.avatar+.img-push {
 				margin-left: 40px;
 			}
+		}
+		img.avatar {
+			float: left;
+			width: 30px !important;
+			height: 30px !important;
 		}
 	}
 }
@@ -426,6 +399,7 @@ form {
 			margin: 0;
 			box-shadow: none;
 			font-size: 14px;
+			height: 30px;
 		}
 		label {
 			display: block;
@@ -474,15 +448,15 @@ form {
 				font-size: 0.8em;
 			}
 		}
-
 		span.progress {
 		    border-radius: 0;
-		    .ng-binding {
+
+		    div {
+    			display: list-item;
 		    	background: #8BC34A;
 		    	transition: width .2s ease;
 			}
 		}
-
 		/*buttons*/
 		.btn-default {
 			position: relative;
@@ -517,10 +491,11 @@ form {
 }
 
 .ngdialog {
+	/* post noticias*/
 	&.ngdialog-theme-tread {
 		margin-bottom: 0;
 		padding: 50px 0 0 0;
- 
+
 		.ngdialog-overlay {
 			margin-top: 50px;
 		}
@@ -536,23 +511,19 @@ form {
 			margin-bottom: 0;
 			width: 100%;
 			height: 100vh;
+			border-radius: 0;
 			background-color: #f5f5f5;
 
-			&-header {
-				@include fadeInUp($delay: .5s);
-
-				padding: 20px 10% 15px;
-			}
 			&-block {
 				@include fadeInUp($delay: .5s);
 
-				padding: 10px 10%;
+				padding: 1.25rem 10%;
 				background-color: #fff;
 			}
 			&-footer {
 				@include fadeInUp($delay: .5s);
 
-				padding: 0 15% 15px;
+				padding: 15px 15%;
 
 				.comicon i {
 					display: block;
@@ -580,6 +551,7 @@ form {
 			text-align: center;
 		}
 	}
+	/* modal crear noticias/post y login*/
 	&.ngdialog-theme-plain {
 		&.width-noticia .ngdialog-content {
 			width: 500px;
@@ -588,6 +560,59 @@ form {
 			width: 350px;
 		}
 	}
+}
 
+/**
+ * Galeria
+ */
 
+article.post {
+    position: relative;
+    float: left;
+    margin: 15px;
+    width: 100px;
+    height: 100px;
+	transition: all .5s ease center;
+
+    &:hover {
+	    outline: 10px solid white;
+	}
+	.card-title {
+	    position: absolute;
+	    top: 20px;
+	    left: -10px;
+	    z-index: 2;
+	    opacity: 0;
+	    margin: 0;
+	    padding: 5px;
+	    width: 120px;
+	    border-radius: 3px 3px 0 0;
+	    text-align: center;
+	    font-size: 1em;
+	    transition: all .5s ease;
+	}
+    &:hover .card-title {
+	    top: -27px;
+	    opacity: 1;
+	    background: white;
+	}
+	.card-footer {
+	    position: relative;
+	    bottom: 25px;
+	    left: -10px;
+	    opacity: 0;
+	    width: 120px;
+	    border: none;
+	    text-align: center;
+	    transition: all .5s ease;
+
+	    img {
+	    	height: 20px;
+	    	width: 20px;
+	    }
+	}
+	&:hover .card-footer {
+	    bottom: 0px;
+	    opacity: 1;
+	}
 }
