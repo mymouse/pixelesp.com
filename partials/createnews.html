@@ -5,35 +5,28 @@
 
   <section class="tab-content">
 
-    <form id="subirpixelart" class="form fancy" ng-submit="newPost()">
-
+    <form id="subirpixelart" class="form fancy" ng-submit="newNoticia()">
 
       <div class="form-group">
+        <span class="input">
+          <input type="text" tabindex="1" name="newstitle" ng-model="noticia.Titulo">
+          <label for="newstitle">
+              <span class="label-content">Título</span>
+          </label>
+        </span>
 
-        <div ng-controller="UploadController">
+        <span class="input">
+          <textarea tabindex="2" name="textarea" ng-model="noticia.Descripcion"></textarea>
+          <label for="textarea">
+            <span class="label-content">Escribe aquí</span>
+        </span>
 
-          <span class="input">
-            <input type="text" tabindex="1" name="imagetitle" ng-model="noticia.Titulo">
-            <label for="imagetitle">
-                <span class="label-content">Título</span>
-            </label>
-          </span>
-
-          <span class="input">
-            <textarea tabindex="2" name="textarea" ng-model="noticia.Descripcion"></textarea>
-            <label for="textarea">
-              <span class="label-content">Escribe aquí</span>
-          </span>
-
-          <button tabindex="3" class="btn-full btn-primary" type="submit">Crear noticia</button>
-          <a href="" class="cancelaction" ng-click="closeThisDialog()"> <i class="fa fa-trash"></i> Cancelar </a>
-        </div>
+        <button tabindex="3" class="btn-full btn-primary" type="submit">Crear noticia</button>
+        <a href="" class="cancelaction" ng-click="closeThisDialog()"> <i class="fa fa-trash"></i> Cancelar </a>        
       </div>
 
       <div id="message"></div>
 
     </form>
-
   </section>
-
 </div>

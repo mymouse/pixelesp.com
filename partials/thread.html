@@ -12,29 +12,28 @@
             <!-- <img class="img-fluid" src="img/post/vspodio.jpg" alt="Card image cap" style="width:100%"> -->
             <div class="card-block">
                 <p class="card-text"> {{noticia.Descripcion}} </p>
-                <button type="button" class="btn btn-default"><i class="fa fa-caret-up"></i> up</button>                
+                <button type="button" class="btn btn-default"><i class="fa fa-caret-up"></i> up</button>
             </div>
 
             <div class="card-footer">
+                <h4><i class="fa fa-comment" aria-hidden="true"></i> {{noticia.comentarios.length}} Comentarios</h4>
 
                 <div class="box-footer">
-                    <h4><i class="fa fa-comment" aria-hidden="true"></i> {{noticia.comentarios.length}} Comentarios</h4>
-
                     <form class="fancy" ng-submit="guardarComentario(comment)">
                         <img ng-if="currentUser" class="img-responsive img-circle img-sm" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{ currentUser.imagen }}" alt="Alt Text">
                         <img ng-if="!currentUser" class="img-responsive img-circle img-sm" src="./uploads/img/avatar/paintprogram.png" alt="Alt Text">
                         <!-- .img-push is used to add margin to elements next to floating images -->
                         <div class="img-push">
-                          <input type="text" class="form-control input-sm comment" ng-model="comment.text" 
-                          ng-attr-placeholder="{{ currentUser === true ? 'Comenta algo...' : 'Inicia sesión para comentar!' }}"
-                          ng-disabled="!currentUser">                          
+                          <input id="commentinput" type="text" class="form-control input-sm comment" ng-model="comment.text" 
+                          ng-attr-placeholder="{{ currentUser ? 'Comenta algo...' : 'Inicia sesión para comentar!' }}"
+                          ng-disabled="!currentUser">
                           <button class="btn-primary btn-comment" type="submit" ng-disabled="!currentUser">Enviar</button>
                         </div>
                     </form>
                 </div>
 
-                <div class="box-comments">                    
-                    <div class="box-comment" ng-repeat="c in noticia.comentarios | orderBy:'-created_at'" ng-init="initFirst()">
+                <div class="box-comments">
+                    <div class="animate box-comment" ng-repeat="c in noticia.comentarios | orderBy:'-created_at'" ng-init="initFirst()">
                         <img class="img-circle img-sm" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{c.imagen}}" alt="{{c.username}}">
                         <div class="comment-text">
                             <span class="username">
@@ -42,10 +41,13 @@
                                 <time title="{{ c.created_at | amDateFormat: 'LLLL' }}" class="text-muted pull-right">{{ c.created_at | amCalendar }}</time>
                             </span>
                             {{c.text}}
-                        </div>                        
-                    </div>                  
+                        </div>
+                    </div>
                 </div>
-                
+
+                <div class="comicon">
+                    <i class="fa fa-comments" aria-hidden="true"></i>
+                </div>
             </div>
         </article>
     </div>

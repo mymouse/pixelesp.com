@@ -1,50 +1,37 @@
-	/**
-*
-* Stylesheet pixelesp
-*
+/**
+ * Stylesheet pixelesp
  */
 
-//colores
+/*colores*/
 $gris: #222;
 $verde: #AFD702;
 $verdelink: #97b125;
 $naranja: #ff9800;
 
 @mixin transition($porp: all, $time: .5s, $wave: ease-in-out ) {
-	-webkit-transition: $porp $time $wave;
-		 -moz-transition: $porp $time $wave;
-			-ms-transition: $porp $time $wave;
-					transition: $porp $time $wave;
+	transition: $porp $time $wave;
 }
 
-//import other css
+/*import other css*/
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css');
 @import url('./ngDialog.min.css');
+@import url('./ng-img-crop.css');
+@import './animate-scss/animate.scss';
 
-//animate css
-main {
-    /* start 'enter' transition */
-    &.ng-enter {
-        /* transition on enter for .5s */
-        transition: .5s;
- 
-        /* start with opacity 0 (invisible) */
-        opacity: 0;
-    }
- 
-    /* end 'enter' transition */
-    &.ng-enter-active {
-        /* end with opacity 1 (fade in) */
-        opacity: 1;
-    }
+.ng-enter {
+	@include fadeIn();
 }
 
-//reset 
+.ng-leave {
+	@include fadeInDown();
+}
+
+/*reset */
 body {
-	//padding-top: 100px;
-	color: #AEAEAE;
 	background-color: #262626;
+	/*padding-top: 100px;*/
+	color: #AEAEAE;
 }
 
 *:focus {
@@ -56,9 +43,9 @@ a {
 }
 
 .img-sm {
-    width: 30px !important;
-    height: 30px !important;
-    float: left;
+	float: left;
+	width: 30px !important;
+	height: 30px !important;
 }
 
 .disabled {
@@ -71,41 +58,49 @@ a {
 
 .nav-center {  
 	text-align: center;
+
 	ul.nav {
-	display: inline-block;
-	li {
-		display: inline
-		a {
-		float: left
+		display: inline-block;
+
+		li {
+			display: inline
+			a {
+				float: left
+			}
 		}
-	}
 	}
 }
 
-//modals 
+/*modals */
 .ngdialog-content .tab-content {
 	padding: 20px 20px 10px;
 }
 
-//uploads
+/* .ngdialog-theme-tread .ngdialog-content {
+	@include fadeInUpBig();
+} */
+
+/*uploads*/
 .file-custom::before {
 	content: "buscar";
 }
 .file-custom::after {
-    content: "...";
+	content: "...";
 }
 
 #subirpixelart canvas {
+	display: block;
 	margin: 5px auto;
-    display: block;
 }
 
-//navbar 
+/*navbar */
 .navbar {
+	@include fadeInDown();
+
+	z-index: 10300;
+	padding: 0 10px;
 	border: none;
 	background-color: $gris;
-	padding: 0 10px;
-	z-index: 10300;
 
 	a.navbar-brand {
 		@include transition(width, .3s);
@@ -124,7 +119,7 @@ a {
 }
 
 .main-sidebar, .left-side {
-	@include transition(width, .3s);
+	@include fadeInLeft();
 
 	position: fixed;
 	top: 0;
@@ -199,8 +194,10 @@ a {
 	}
 }
 
-//content
-.content-wrapper {  
+/*content*/
+.content-wrapper {
+	@include fadeInUp();
+  
 	margin-left: 230px;
 	padding: 50px 0 0 0;
 	min-height: 100vh;
@@ -232,149 +229,144 @@ a {
 	background: transparent;
 	font-size: 12px;
 	}
-
-	//perfil
+	/*perfil*/
 	.box.box-primary {
 			border-top-color: #3c8dbc;
 	}
-
 	.box {
 		position: relative;
-		border-radius: 3px;
-		background: #ffffff;
-		border-top: 3px solid #d2d6de;
 		margin-bottom: 20px;
 		width: 100%;
+		border-top: 3px solid #d2d6de;
+		border-radius: 3px;
+		background: #ffffff;
 		box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+
 		.box-body {
+			padding: 10px;
 			border-top-left-radius: 0;
 			border-top-right-radius: 0;
 			border-bottom-right-radius: 3px;
 			border-bottom-left-radius: 3px;
-			padding: 10px;
 		}
-
 		.profile-user-img {
-		    margin: 0 auto;
-		    width: 100px;
-		    padding: 3px;
-		    border: 3px solid #d2d6de;
+			margin: 0 auto;
+			padding: 3px;
+			width: 100px;
+			border: 3px solid #d2d6de;
 		}
 	}
 }
 
-//cards
+/*cards*/
 .card {
+	@include fadeInUp();
+
 	position: relative;
-	border-radius: 3px;
-	background: #ffffff;
-	border: none;
 	margin-bottom: 20px;
-	//width: 100%;
+	border: none;
+	border-radius: 0 3px 3px 3px;
+	background: #ffffff;
+	/*width: 100%;*/
 	box-shadow: 0 1px 1px rgba(0,0,0,0.1);
 
 	&-noticia {
-	border: none;
 	position: relative;
+	border: none;
 	}
-
 	&-header {
-	color: #444;
+	position: relative;
 	display: block;
 	padding: 10px;
-	position: relative;
+	color: #444;
 
 	img {
+		float: left;
 		width: 20px;
 		height: 20px;
-		float: left;
 		}
 		.username {
-			font-size: 12px;
-			font-weight: 600;
 			margin-left: 5px;
+			font-weight: 600;
+			font-size: 12px;
 		}
 		.date {
 		color: #999;
 		font-size: 12px;
 		}
-
 		.box-tools {
 		position: absolute;
-		right: 10px;
 		top: 5px;
+		right: 10px;
 
 			button {
 				padding: 5px;
-				font-size: 12px;
 				background: transparent;
 				color: #97a0b3;
+				font-size: 12px;
 			}
 		}
 	}
-
 	&-title {
 		margin: 0 0 .75rem;
 
 		a {
-		    text-transform: uppercase;
-		    font-weight: 700;
+			text-transform: uppercase;
+			font-weight: 700;
 		}
 	}
-
 	&-footer {
-
 		padding:0;
 
 		.box-comment {
-		    padding: 10px;
-		    border-bottom: 1px solid #eee;
+			@include flipInX();
 
+			padding: 10px;
+			border-bottom: 1px solid #eee;
 
 			.img-push, .comment-text {
-			    margin-left: 40px;
+				margin-left: 40px;
 			}
-
 			img {
+				float: left;
 				width: 30px;
 				height: 30px;
-				float: left;
 			}
-
 			.username {
-			    color: #444;
-			    display: block;
-			    font-weight: 600;
+				display: block;
+				color: #444;
+				font-weight: 600;
 			}
-
 			.text-muted {
-			    font-weight: 400;
-			    font-size: 12px;
+				font-weight: 400;
+				font-size: 12px;
 			}
-
 			.comment-text {
-			    margin-left: 40px;
-			    color: #555;
+				margin-left: 40px;
+				color: #555;
 			}
 		}
-
 		.box-footer {
-		    border-top-left-radius: 0;
-		    border-top-right-radius: 0;
-		    border-bottom-right-radius: 3px;
-		    border-bottom-left-radius: 3px;
-		    border-top: 1px solid #f4f4f4;
-		    padding: 10px;
-		    background-color: #fff;
+			position: relative;
+			display: inline-block;
+			clear: both;
+			margin: 0 0 10px;
+			padding: 15px;
+			width: 100%;
+			border: 1px solid #e6e6eb;
+			border-radius: 3px;
+			background: #fff;
+			box-shadow: 0 2px 0 0 rgba(0,0,0,.1);
+			font-size: 16px;
 
-		    .img-sm+.img-push {
-			    margin-left: 40px;
+			.img-sm+.img-push {
+				margin-left: 40px;
 			}
 		}
 	}
 }
 
-//form
+/*form*/
 form {
 	position: relative;
 	z-index: 1;
@@ -401,15 +393,16 @@ form {
 				pointer-events: none;
 			}
 		}
-
 		input {
 			outline: 0;
 			border: none;
 			background: 0 0;
+
 			&.comment {
-				width: calc(100% - 95px)!important;
 				float: left;
+				width: calc(100% - 95px)!important;
 				border-radius: 2px 0 0 2px;
+
 				&[disabled] {
 					border: none;
 					box-shadow: none;
@@ -417,26 +410,23 @@ form {
 			}
 
 		}
-
 		input[type=email], input[type=password], input[type=text], input[type=url], textarea {
 			margin-top: 1em;
 			padding: .4em;
-    		padding-bottom: 0;
+			padding-bottom: 0;
 			width: 100%;
+			border: none;
+			border-bottom: 1px solid #c8c9d0;
 			color: #4c4d57;
 			font-style: normal;
 			font-size-adjust: .52;
 			font-size: 16px;
-			border: none;
-			border-bottom: 1px solid #c8c9d0;
 		}
-
 		.box-footer & input {
-		    margin: 0;
-		    font-size: 14px;
-		    box-shadow: none;
+			margin: 0;
+			box-shadow: none;
+			font-size: 14px;
 		}
-
 		label {
 			display: block;
 			padding: 10px 5px 5px 2px;
@@ -447,85 +437,157 @@ form {
 			font-size: .7em;
 			cursor: pointer;
 		}
-
-
 		a.forgot-pw span, a.cancelaction {
-		    float: right;
-		    color: #afafb9;
-		    font-size: .8em;
+			float: right;
+			color: #afafb9;
+			font-size: .8em;
+		}
+		.alert-warning {
+			position: relative;
+			top: -15px;
+			padding: 0 15px;
+			border-bottom: 2px solid #8D6E63;
+
+			p { margin:0; font-size: 0.9em; }
+		}
+		.alert-danger {
+			position: relative;
+			top: -15px;
+			padding: 0 15px;
+			border-bottom: 2px solid #a94442;
+
+			p { margin:0; font-size: 0.9em; }
+		}
+		.drop-box {
+			position: relative;
+			display: block;
+			height: 150px;
+			border: 3px dashed #ff9c42;
+			background-color: rgba(255, 156, 66, 0.2);
+			color: #9d9eaa;
+			text-align: center;
+			line-height: 150px;
+			transition: all .4s ease;
+
+			&.dragover {
+				border-style: solid!important;
+				font-size: 0.8em;
+			}
 		}
 
-		//buttons
+		span.progress {
+		    border-radius: 0;
+		    .ng-binding {
+		    	background: #8BC34A;
+		    	transition: width .2s ease;
+			}
+		}
+
+		/*buttons*/
 		.btn-default {
+			position: relative;
 			min-width: 40px;
-		    font-size: 14px;
-		    text-transform: none;
-		    position: relative;
-		    text-align: center;
+			text-align: center;
+			text-transform: none;
+			font-size: 14px;
 		}
-
 		.btn-comment {
-		    height: 30px;
-		    max-width: 95px;
-		    width: 100%;
-		    border-radius: 0 2px 2px 0!important;
+			max-width: 95px;
+			width: 100%;
+			height: 30px;
+			border-radius: 0 2px 2px 0!important;
 		}
-
 		.btn-full {
 			margin: 15px auto 0;
-		    width: 100%;
+			width: 100%;
 		}
-
 		a.btn.btn-primary, button.btn-primary, input[type=submit].btn-primary {
-		    padding: 2.5px;
-		    border: none;
-		    border-radius: 2px;
-		    background: #ff9c42;
-		    box-shadow: none;
-		    color: #FFF;
+			padding: 2.5px;
+			border: none;
+			border-radius: 2px;
+			background: #ff9c42;
+			box-shadow: none;
+			color: #FFF;
+
+			&[disabled] {
+			    background: rgba(255,156,66,0.5);
+			}
 		}
 	}
 }
 
 .ngdialog {
-
 	&.ngdialog-theme-tread {
-   		padding: 50px 0 0 0;
-
-   		.ngdialog-overlay {
-		    margin-top: 50px;
+		margin-bottom: 0;
+		padding: 50px 0 0 0;
+ 
+		.ngdialog-overlay {
+			margin-top: 50px;
 		}
-
 		.ngdialog-content {
-		    width: 1020px;
-   			max-width: 70%;
-		    float: right;
-		    padding: 0;
-		    top: 0;
+			top: 0;
+			float: right;
+			padding: 0;
+			max-width: 70%;
+			width: 1020px;
+			background-color: #f5f5f5;
 		}
-
 		.card {
+			margin-bottom: 0;
 			width: 100%;
+			height: 100vh;
+			background-color: #f5f5f5;
 
 			&-header {
+				@include fadeInUp($delay: .5s);
+
 				padding: 20px 10% 15px;
 			}
 			&-block {
+				@include fadeInUp($delay: .5s);
+
 				padding: 10px 10%;
+				background-color: #fff;
 			}
 			&-footer {
+				@include fadeInUp($delay: .5s);
+
 				padding: 0 15% 15px;
+
+				.comicon i {
+					display: block;
+					padding: 15px;
+					color: hsl(0, 0%, 61%);
+					text-align: center;
+				}
 			}
 		}
-   	}
-
-   	&.ngdialog-theme-plain {
-   		&.width-noticia .ngdialog-content {
-			width: 500px;
+		.wrapper {
+			@include fadeInRight();
 		}
+		.ngdialog-close::before {
+			@include fadeInLeftBig();
 
-		&.width-post .ngdialog-content {
-		    width: 350px;
+			position: absolute;
+			top: 50px;
+			display: block;
+			margin-left: -50px;
+			padding: 15px;
+			width: 50px;
+			height: 50px;
+			border-radius: 0 0 0 2px;
+			background: white;
+			text-align: center;
 		}
 	}
+	&.ngdialog-theme-plain {
+		&.width-noticia .ngdialog-content {
+			width: 500px;
+		}
+		&.width-post .ngdialog-content {
+			width: 350px;
+		}
+	}
+
+
 }

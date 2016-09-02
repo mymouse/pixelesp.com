@@ -1,0 +1,53 @@
+{
+  "name": "animate-scss",
+  "version": "3.2.1",
+  "description": "A SASS port of Dan Eden's Animate.css",
+  "main": "animate.scss",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geoffgraham/animate.scss.git"
+  },
+  "author": {
+    "name": "geoffgraham",
+    "email": "@geoffreygraham"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/geoffgraham/animate.scss/issues"
+  },
+  "homepage": "https://github.com/geoffgraham/animate.scss#readme",
+  "keywords": [
+    "animate.scss",
+    "animate.css",
+    "animate"
+  ],
+  "gitHead": "4e59b638a75cb06e2a4c73526b9f0436595aca3b",
+  "_id": "animate-scss@3.2.1",
+  "_shasum": "1bb32331ea1233407f22007c8815011d2e342b03",
+  "_from": "animate-scss@latest",
+  "_npmVersion": "3.9.3",
+  "_nodeVersion": "0.12.5",
+  "_npmUser": {
+    "name": "drmartin",
+    "email": "drmartinkf@gmail.com"
+  },
+  "dist": {
+    "shasum": "1bb32331ea1233407f22007c8815011d2e342b03",
+    "tarball": "https://registry.npmjs.org/animate-scss/-/animate-scss-3.2.1.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "drmartin",
+      "email": "drmartinkf@gmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/animate-scss-3.2.1.tgz_1469400166130_0.3180660658981651"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/animate-scss/-/animate-scss-3.2.1.tgz"
+}

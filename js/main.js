@@ -2,7 +2,7 @@
  * Main AngularJS Web Application
  */
 
-var app = angular.module('pixelespWebApp', ['ui.router', 'ngAnimate', 'ngDialog', 'ngMessages', 'angularMoment', 'angularFileUpload', 'ngFormFixes']);
+var app = angular.module('pixelespWebApp', ['ui.router', 'ngDialog', 'ngMessages', 'angularMoment', 'cloudinary', 'ngFileUpload', 'ngImgCrop']);
 
 app.constant('AUTH_EVENTS', {
 	loginSuccess: 'auth-login-success',
@@ -20,6 +20,14 @@ app.constant('USER_ROLES', {
 	guest: 3
 })
 
+function configure(CloudinaryProvider) {
+	CloudinaryProvider.configure({
+		cloud_name: 'hyktxhgfc', // your Cloud name
+		api_key: '584471834239559' // your API Key
+	});
+}
+app.config(['CloudinaryProvider', configure]);
+
 app.config(function($stateProvider, $urlRouterProvider) {
 
 	$urlRouterProvider.when('', '/');
@@ -30,38 +38,38 @@ app.config(function($stateProvider, $urlRouterProvider) {
         .state("home", {
         	url: '/',
 			templateUrl: "partials/home.html",
-			controller: "PageCtrl" })
+			controller: "" })
 		// Pages
 		.state("mi-perfil", {
 			url: '/mi-perfil',
 			templateUrl: "partials/profile.html",
-			controller: "PageCtrl" })
+			controller: "" })
 		.state("comunidad", {
 			url: '/comunidad',
 			templateUrl: "partials/comunidad.html",
-			controller: "PageCtrl" })
+			controller: "" })
 		.state("galeria", {
 			url: '/galeria',
 			templateUrl: "partials/galeria.html",
-			controller: "PageCtrl" })
+			controller: "" })
 		.state("contacto", {
 			url: '/contacto',
 			templateUrl: "partials/contacto.html",
-			controller: "PageCtrl" })
+			controller: "" })
 
 		// Posts
 		.state("home.thread", {
 
 			url: 'thread/:NoticiaId',
 			/*templateUrl: 'partials/thread.html',
-			controller: 'NoticiaCtrl'*/
+			controller: 'noticiaCtrl'*/
 
 			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
 
 		        ngDialog.open({
-					controller: "NoticiaCtrl",
+					controller: 'noticiaCtrl',
 					templateUrl: 'partials/thread.html',
-					className: 'ngdialog-theme-tread'
+					className: 'ngdialog-theme-tread animated fadeIn'
 
 		        }).closePromise.finally(function() {
 		            $state.go('^');
@@ -73,12 +81,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		.state("foro", {
 			url: '/foro',
 			templateUrl: "partials/foro.html",
-			controller: "BlogCtrl" })
+			controller: "" })
 		// 404
 		.state("404", {
 			url: '/404',
 			templateUrl: "partials/404.html",
-			controller: "BlogCtrl" })
+			controller: "" })
 });
 
 app.run( function($rootScope, $location, AuthService) {
@@ -91,4 +99,4 @@ app.run( function($rootScope, $location, AuthService) {
 			}
 		}
 	});
-})
+});
