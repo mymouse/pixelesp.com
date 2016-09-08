@@ -5,61 +5,109 @@
 
   <section class="tab-content">
 
-    <form id="subirpixelart" name="newPostForm" class="form fancy" ng-submit="uploadPic(postFile, croppedDataUrl)">
+    <form id="subirpixelart" name="newPostForm" class="form fancy" ng-submit="uploadPic(postFile, croppedDataUrl, postPrevia)">
 
-      <div class="form-group">
+      <div class="row">
 
-          <span class="input">
+        <div class="col-lg-8" style="position:relative">
+
+          <!-- <label for="file">
+            <span class="label-content">Subir pixelart</span>
+          </label> -->
+
+           <div ngf-drop ng-model="postFile" name="file" class="drop-box cropArea" ngf-drag-over-class="'dragover'" ngf-pattern="image/*" ngf-max-size="2MB" >
+            <img-crop image="postFile | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''" area-type="square" area-min-size="100" result-image-size="100"></img-crop>            
+          </div>
+          
+          <div class="postFileThumb" ng-hide="!postFile || showme == 1">
+            <span class="vericalhelper"></span>
+            <img ng-show="newPostForm.file.$valid" ngf-thumbnail="postFile">
+          </div>
+
+          <i ng-show="newPostForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+
+        </div>
+
+        <div class="col-lg-4">
+
+          <div class="form-group">
             <input type="text" tabindex="1" name="imagetitle" ng-model="imagen.Titulo" ng-minlength="3" required>
             <label for="imagetitle">
                 <span class="label-content">Título</span>
-            </label>            
-          </span>
-          <div class="alert-warning" role="alert" ng-messages="newPostForm.imagetitle.$error" ng-if="newPostForm.imagetitle.$dirty" >
+            </label>
+            <div class="alert-warning" role="alert" ng-messages="newPostForm.imagetitle.$error" ng-if="newPostForm.imagetitle.$dirty" >
               <p ng-message="required">No te olvides del titulo!</p>
-              <p ng-message="minlength">Usa más de 3 carácteres.</p>                    
+              <p ng-message="minlength">Usa más de 3 carácteres.</p>
+            </div>
           </div>
 
-          <span class="input">
+          <div class="form-group textarea">
             <textarea tabindex="2" name="imagedesc" ng-model="imagen.Descripcion" ng-minlength="5" required></textarea>
             <label for="imagedesc">
                 <span class="label-content">Descripción</span>
             </label>
-          </span>
-          <div class="alert-warning" role="alert" ng-messages="newPostForm.imagedesc.$error" ng-if="newPostForm.imagedesc.$dirty" >
+            <div class="alert-warning" role="alert" ng-messages="newPostForm.imagedesc.$error" ng-if="newPostForm.imagedesc.$dirty" >
+              <p ng-message="required">No te olvides de la descripcion!</p>
+              <p ng-message="minlength">Usa más de 5 carácteres.</p>
+            </div>
+          </div>
+
+          <div class="form-group tagsbox">
+            <input type="text" tabindex="3" id="tags" name="tags" placeholder="separado, por, comas" ng-model="imagen.Tags">
+            <label for="tags">
+                <span class="label-content">Etiquetas</span>
+            </label>
+            <!-- <div class="alert-warning" role="alert" ng-messages="newPostForm.tags.$error" ng-if="newPostForm.tags.$dirty" >
               <p ng-message="required">No te olvides del titulo!</p>
-              <p ng-message="minlength">Usa más de 5 carácteres.</p>                    
+              <p ng-message="minlength">Usa más de 3 carácteres.</p>
+            </div> -->
           </div>
 
-          <label for="file">
-            <span class="label-content">Subir pixelart</span>
-          </label>
 
-          <div ngf-drop name="file" class="drop-box cropArea" ng-model="postFile" ngf-pattern="image/*" ngf-drag-over-class="'dragover'" ngf-max-size="2MB">
-            Suelta tu arte aquí
-            <img-crop image="postFile | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''"></img-crop>
-          </div>
-          <div>
+          <div class="form-group text-xs-center preview" >
+            <label for="file">
+              <span class="label-content">Vista previa</span>
+            </label>
+
+            <div ng-hide="showme" style="padding-top: 2em;">
+              <button type="button" ng-click="showme=2" class="btn btn-secondary btn-sm d-block m-x-auto" ng-disabled="!postFile">Subir imagen previa</button>
+              <small>ó</small>
+              <button type="button" ng-click="showme=1" class="btn btn-primary btn-sm d-block m-x-auto" ng-disabled="!postFile">Recortar imagen</button>
+            </div>
+
+            <div ng-show="showme == 1" style="padding-top: 2em;">
               <img ng-src="{{croppedDataUrl}}" />
+              <a href=""ng-click="showme=2" class="cancelaction">mejor subir desde mi PC</a>
+            </div>
+
+            <div ng-show="showme == 2" style="padding-top: 2em;">
+              <label for="filePrevia" class="btn btn-secondary btn-sm file-upload" ng-show="!postPrevia">
+                  <i class="fa fa-cloud-upload"></i> Subir previa
+              </label>
+              <input type="file" ngf-select ng-model="postPrevia" name="filePrevia" id="filePrevia" accept="image/*" ngf-max-size="1MB" ngf-dimensions="$width === 100 || $height === 100" ng-required="showme == 2">
+              <button ng-click="postPrevia = null" ng-show="postPrevia" class="closePrevia"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+              <img ng-show="newPostForm.filePrevia.$valid" ngf-thumbnail="postPrevia" class="thumb">              
+              <div class="alert-warning" role="alert" ng-messages="newPostForm.filePrevia.$error" ng-if="newPostForm.filePrevia.$dirty" >
+                <div ng-message="dimensions"><p>La previa debe ser de 100x100px.</p></div>
+                <div ng-message="maxSize"><p>La imagen no debe pesar más de 1mb</p></div>
+              </div>
+              <a href="" ng-click="showme=1;postPrevia = null" class="cancelaction">mejor quiero recortar la original</a>
+            </div>
+
           </div>
 
-          
-
-          <i ng-show="newPostForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
-
-          <span class="progress" ng-show="progress >= 0">
+          <!-- <span class="progress" ng-show="progress >= 0">
             <div style="width:{{progress}}%"></div>
           </span>
           <span ng-show="result">Upload Successful</span>
-          <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+          <span class="err" ng-show="errorMsg">{{errorMsg}}</span> -->
 
           <button type="submit" class="btn-primary btn-full" ng-disabled="!newPostForm.$valid" >Subir PixelArt</button>
           <a href="" class="cancelaction" ng-click="closeThisDialog()"> <i class="fa fa-trash"></i> Cancelar </a>
 
-        
         </div>
-
-     
+        
+      </div>
 
     </form>
   </section>

@@ -21,29 +21,33 @@
 
         <!-- Login -->
         <div class="tab-pane fade in active" id="login" role="tabpanel">
-            <form class="form fancy" ng-submit="doLogin(usuario)" novalidate>
+            <form name="formLogin" class="form fancy" ng-submit="doLogin(usuario)" novalidate>
 
-                <div ng-show="error" class="alert-danger" role="alert">
-                    <p> {{ error }} </p>
+                <div ng-show="thisloginerror" ng-hide="successRegister" class="alert-danger" role="alert">
+                    <p> {{ thisloginerror }} </p>
                 </div>
+
+                <div ng-show="successRegister" ng-hide="thisloginerror" class="alert-success" role="alert">
+                    <p> {{ successRegister }} </p>
+                </div>                
                 
-                <span class="input">
+                <div class="form-group">
                     <input type="text" tabindex="1" name="username" ng-model="usuario.username" required>
                     <label for="username">
                         <span class="label-content">nick</span>
                     </label>
-                </span>
+                </div>
 
-                <span class="input" style="margin-bottom:0">
+                <div class="form-group" style="margin-bottom:0">
                     <input type="password" tabindex="3" name="password" ng-model="usuario.password" required>
                     <label for="password">
                         <span class="label-content">Contraseña</span>
                     </label>
-                </span>
+                </div>
 
                 <a class="forgot-pw" tabindex="3" href=""><span>¿Olvidaste tu contraseña?</span></a>
 
-                <button tabindex="4" class="btn-full btn-primary" type="submit">Iniciar Sesión</button>
+                <button tabindex="4" class="btn-full btn-primary" type="submit" ng-disabled="!formLogin.$valid">Iniciar Sesión</button>
                 
             </form>
         </div>
@@ -52,55 +56,53 @@
         <div class="tab-pane fade" id="singup" role="tabpanel">
 
             <form name="formRegister" class="form fancy" ng-submit="doRegister()" novalidate>
-                <!-- <span class="input">
+                <!-- <div class="form-group">
                     <input type="text" tabindex="1" name="name" ng-model="usuario.name" required>
                     <label for="name">
                         <span class="label-content">Tu Nombre</span>
                     </label>
-                </span> -->
-
+                </div> -->
                 
                 <div ng-show="error" class="alert-danger" role="alert">
-                    <p> {{ error }} </p>
+                    <p> {{ singuperror }} </p>
                 </div>
 
-                <span class="input">
-                    <input type="text" tabindex="2" name="username" ng-model="usuario.username" ng-minlength="3" required>
+                <div class="form-group">
+                    <input type="text" tabindex="2" name="username" ng-model="usuario.username" ng-minlength="3" ng-pattern="/^[a-zA-Z0-9]*$/" required>
                     <label for="username">
                         <span class="label-content">Nick</span>
                     </label>
-                </span>
-
-                <div class="alert-warning" role="alert" ng-messages="formRegister.username.$error" ng-if="formRegister.username.$dirty" >
-                    <p ng-message="required">Usa tu nick.</p>
-                    <p ng-message="minlength">Usa más de 3 carácteres.</p>                    
+                     <div class="alert-warning" role="alert" ng-messages="formRegister.username.$error" ng-if="formRegister.username.$dirty" >
+                        <p ng-message="required">Usa tu nick.</p>
+                        <p ng-message="minlength">Usa más de 3 carácteres.</p>
+                        <p ng-message="pattern">Usa solo letras y números.</p>
+                    </div>
                 </div>
 
-                <span class="input">
+                <div class="form-group">
                     <input type="email" tabindex="3" name="email" ng-model="usuario.email" required>
                     <label for="email">
                         <span class="label-content">Email</span>
                     </label>
-                </span>
+                    <div class="alert-warning" role="alert" ng-messages="formRegister.email.$error" ng-if="formRegister.email.$dirty" >
+                        <p ng-message="required">Usa tu email.</p>
+                        <p ng-message="email">Eso no tiene forma de email.</p>
+                    </div>
+                </div>                
 
-                <div class="alert-warning" role="alert" ng-messages="formRegister.email.$error" ng-if="formRegister.email.$dirty" >
-                    <p ng-message="required">Usa tu email.</p>
-                    <p ng-message="email">Eso no tiene forma de email.</p>
-                </div>
-
-                <span class="input">
-                    <input type="password" tabindex="4" name="password" ng-model="usuario.password" required>
+                <div class="form-group">
+                    <input type="password" tabindex="4" name="password" ng-model="usuario.password" ng-pattern="/^[a-zA-Z0-9]*$/" required>
                     <label for="password">
                         <span class="label-content">Contraseña</span>
                     </label>
-                </span>
-
-                <div class="alert-warning" role="alert" ng-messages="formRegister.password.$error" ng-if="formRegister.password.$dirty" >
-                    <p ng-message="required">Usa una contraseña.</p>
-                    <p ng-message="minlength">Usa más de 8 carácteres.</p>
+                    <div class="alert-warning" role="alert" ng-messages="formRegister.password.$error" ng-if="formRegister.password.$dirty" >
+                        <p ng-message="required">Usa una contraseña.</p>
+                        <p ng-message="minlength">Usa más de 8 carácteres.</p>
+                        <p ng-message="pattern">Usa letras y números.</p>
+                    </div>
                 </div>
 
-                <button tabindex="5" class="btn-full btn-primary" type="submit">Registrate</button>
+                <button tabindex="5" class="btn-full btn-primary" type="submit" ng-disabled="!formRegister.$valid">Registrate</button>
 
             </form>
 

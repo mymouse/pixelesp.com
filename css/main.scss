@@ -2,32 +2,20 @@
  * Stylesheet pixelesp
  */
 
-/*colores*/
-$gris: #222;
-$verde: #AFD702;
-$verdelink: #97b125;
-$naranja: #ff9800;
-
 @mixin transition($porp: all, $time: .5s, $wave: ease-in-out ) {
 	transition: $porp $time $wave;
 }
 
-/*import other css*/
+/* importar demas estilos*/
 @import 'https://fonts.googleapis.com/css?family=Roboto:400,700,900';
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css');
 @import url('./ngDialog.min.css');
 @import url('./ng-img-crop.css');
 @import './animate-scss/animate.scss';
 
-.ng-enter {
-	@include fadeIn();
-}
-
-.ng-leave {
-	@include fadeInDown();
-}
-
-/*reset */
+/*
+ * Reset CSS
+ */
 body {
 	background-color: #262626;
 	/*padding-top: 100px;*/
@@ -35,80 +23,40 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 
-*:focus {
-	outline: none!important;
-}
+/* colores*/
+$gris: #222;
+$verde: #AFD702;
+$verdelink: #97b125;
+$naranja: #ff9800;
 
-a {
-	color: $verdelink;
-}
+/* estados*/
+*:focus {outline: none!important; }
+.disabled {cursor: default!important; }
 
-.disabled {
-	cursor: default!important;
-}
+/* links*/
+a {color: $verdelink; }
 
-.breadcrumb .active {
-	color: white;
-}
-
-/* Form login */
-.nav-center {  
-	text-align: center;
-
-	ul.nav {
-		display: inline-block;
-
-		li {			
-			margin-bottom: -2px;
-			font-size: .9em;			
-		}
-	}
-}
-
-/*modals */
-.ngdialog-content .tab-content {
-	padding: 20px 20px 10px;
-}
-
-/* .ngdialog-theme-tread .ngdialog-content {
-	@include fadeInUpBig();
-} */
-
-/*uploads*/
-.file-custom::before {
-	content: "buscar";
-}
-.file-custom::after {
-	content: "...";
-}
-
-#subirpixelart canvas {
-	display: block;
-	margin: 5px auto;
-}
-
-/*navbar */
+/*
+ * NavBar
+ */
 .navbar {
 	@include fadeInDown();
 
 	z-index: 10300;
 	padding: 0 10px;
-	border: none;
 	background-color: $gris;
 
 	a.navbar-brand {
-		@include transition(width, .3s);
-
-		display: block;
-		overflow: hidden;
 		padding: 8px 0;
 		width: 205px;
 	}
 	ul.nav {
-	    display: block;
     	margin: 0 15px;
-	    height: 50px;
 	    line-height: 50px;
+
+	    &:last-child {
+		    margin-right: 0;
+		}
 	}
 	.navbar-nav li {
 		& a {
@@ -121,7 +69,10 @@ a {
 	}
 }
 
-.main-sidebar, .left-side {
+/*
+ * SideBar
+ */
+.main-sidebar {
 	@include fadeInLeft();
 
 	position: fixed;
@@ -197,71 +148,29 @@ a {
 	}
 }
 
-/*content*/
+/*
+ * Content
+ */
 .content-wrapper {
 	@include fadeInUp();
 
 	margin-left: 230px;
-	padding: 50px 0 0 0;
+	padding: 60px 0 0 0;
 	min-height: 100vh;
-	max-width: calc(100% - 230px);  
+	max-width: calc(100% - 230px);
 	background-color: #262626;
-
-	.content {
-		position: relative;
-
-		&-header {
-			position: relative;
-			padding:20px 15px 15px;
-
-			h1 {
-			margin: 0;
-			font-size: 24px;
-			}
-		}
-	}
-	.breadcrumb {
-	position: absolute;
-	top: 15px;
-	right: 10px;
-	float: right;
-	margin-top: 0;
-	margin-bottom: 0;
-	padding: 7px 5px;
-	border-radius: 2px;
-	background: transparent;
-	font-size: 12px;
-	}
-	/*perfil*/
-	.box.box-primary {
-			border-top-color: #3c8dbc;
-	}
-	.box {
-		position: relative;
-		margin-bottom: 20px;
-		width: 100%;
-		border-top: 3px solid #d2d6de;
-		border-radius: 3px;
-		background: #ffffff;
-		box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-
-		.box-body {
-			padding: 10px;
-			border-top-left-radius: 0;
-			border-top-right-radius: 0;
-			border-bottom-right-radius: 3px;
-			border-bottom-left-radius: 3px;
-		}
-		.profile-user-img {
-			margin: 0 auto;
-			padding: 3px;
-			width: 100px;
-			border: 3px solid #d2d6de;
-		}
-	}
 }
 
-/*cards*/
+/*
+ * Card Reset
+ */
+@media (min-width: 34em) {
+    .card-columns {
+        -moz-column-count: 2;
+        column-count: 2;
+    }
+}
+
 .card {
 	@include fadeInUp();
 
@@ -283,214 +192,31 @@ a {
 			}
 		}
 	}
-	&-footer {
-		padding:0;
-
-		.box-comment {
-			@include flipInX();
-
-			padding: 10px;
-			border-bottom: 1px solid #eee;
-
-			.img-push, .comment-text {
-				margin-left: 40px;
-			}
-			img {
-				float: left;
-				width: 30px;
-				height: 30px;
-			}
-			.username {
-				display: block;
-				color: #444;
-				font-weight: 600;
-			}
-			.text-muted {
-				font-weight: 400;
-				font-size: 12px;
-			}
-			.comment-text {
-				margin-left: 40px;
-				color: #555;
-			}
-		}
-		.box-footer {
-			position: relative;
-			display: inline-block;
-			clear: both;
-			margin: 0 0 10px;
-			padding: 15px;
-			width: 100%;
-			border: 1px solid #e6e6eb;
-			border-radius: 3px;
-			background: #fff;
-			box-shadow: 0 2px 0 0 rgba(0,0,0,.1);
-			font-size: 16px;
-
-			.avatar+.img-push {
-				margin-left: 40px;
-			}
-		}
-		img.avatar {
-			float: left;
-			width: 30px !important;
-			height: 30px !important;
-		}
-	}
 }
 
-/*form*/
-form {
-	position: relative;
-	z-index: 1;
-
-	&.fancy {
-		position: relative;
-		z-index: 0;
-
-		.input {
-			position: relative;
-			display: inline-block;
-			margin: 0 0 1em;
-			width: 100%;
-
-			label {
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				overflow: hidden;
-				padding: 0;
-				width: 100%;
-				height: 100%;
-				text-align: left;
-				pointer-events: none;
-			}
-		}
-		input {
-			outline: 0;
-			border: none;
-			background: 0 0;
-
-			&.comment {
-				float: left;
-				width: calc(100% - 95px)!important;
-				border-radius: 2px 0 0 2px;
-
-				&[disabled] {
-					border: none;
-					box-shadow: none;
-				}
-			}
-
-		}
-		input[type=email], input[type=password], input[type=text], input[type=url], textarea {
-			margin-top: 1em;
-			padding: .4em;
-			padding-bottom: 0;
-			width: 100%;
-			border: none;
-			border-bottom: 1px solid #c8c9d0;
-			color: #4c4d57;
-			font-style: normal;
-			font-size-adjust: .52;
-			font-size: 16px;
-		}
-		.box-footer & input {
-			margin: 0;
-			box-shadow: none;
-			font-size: 14px;
-			height: 30px;
-		}
-		label {
-			display: block;
-			padding: 10px 5px 5px 2px;
-			width: 100%;
-			color: #9d9eaa;
-			text-transform: uppercase;
-			letter-spacing: 1px;
-			font-size: .7em;
-			cursor: pointer;
-		}
-		a.forgot-pw span, a.cancelaction {
-			float: right;
-			color: #afafb9;
-			font-size: .8em;
-		}
-		.alert-warning {
-			position: relative;
-			top: -15px;
-			padding: 0 15px;
-			border-bottom: 2px solid #8D6E63;
-
-			p { margin:0; font-size: 0.9em; }
-		}
-		.alert-danger {
-			position: relative;
-			top: -15px;
-			padding: 0 15px;
-			border-bottom: 2px solid #a94442;
-
-			p { margin:0; font-size: 0.9em; }
-		}
-		.drop-box {
-			position: relative;
-			display: block;
-			height: 150px;
-			border: 3px dashed #ff9c42;
-			background-color: rgba(255, 156, 66, 0.2);
-			color: #9d9eaa;
-			text-align: center;
-			line-height: 150px;
-			transition: all .4s ease;
-
-			&.dragover {
-				border-style: solid!important;
-				font-size: 0.8em;
-			}
-		}
-		span.progress {
-		    border-radius: 0;
-
-		    div {
-    			display: list-item;
-		    	background: #8BC34A;
-		    	transition: width .2s ease;
-			}
-		}
-		/*buttons*/
-		.btn-default {
-			position: relative;
-			min-width: 40px;
-			text-align: center;
-			text-transform: none;
-			font-size: 14px;
-		}
-		.btn-comment {
-			max-width: 95px;
-			width: 100%;
-			height: 30px;
-			border-radius: 0 2px 2px 0!important;
-		}
-		.btn-full {
-			margin: 15px auto 0;
-			width: 100%;
-		}
-		a.btn.btn-primary, button.btn-primary, input[type=submit].btn-primary {
-			padding: 2.5px;
-			border: none;
-			border-radius: 2px;
-			background: #ff9c42;
-			box-shadow: none;
-			color: #FFF;
-
-			&[disabled] {
-			    background: rgba(255,156,66,0.5);
-			}
-		}
-	}
-}
+/*
+ * Modal - ngDialog
+ */
 
 .ngdialog {
+	/* reset*/
+	.ngdialog-content {
+		h4 { margin-bottom: 0}
+		/* login - register*/
+		.nav-center {  
+			text-align: center;
+
+			ul.nav {
+				display: inline-block;
+
+				li {			
+					margin-bottom: -2px;
+					font-size: .9em;			
+				}
+			}
+		}
+		.tab-content {padding: 20px 20px 10px; }
+	}
 	/* post noticias*/
 	&.ngdialog-theme-tread {
 		margin-bottom: 0;
@@ -525,6 +251,60 @@ form {
 
 				padding: 15px 15%;
 
+				.box-comment {
+					@include flipInX();
+
+					padding: 10px;
+					border-bottom: 1px solid #eee;
+
+					.img-push, .comment-text {
+						margin-left: 40px;
+					}
+					img {
+						float: left;
+						width: 30px;
+						height: 30px;
+					}
+					.username {
+						display: block;
+						color: #444;
+						font-weight: 600;
+					}
+					.text-muted {
+						font-weight: 400;
+						font-size: 12px;
+					}
+					.comment-text {
+						margin-left: 40px;
+						color: #555;
+					}
+				}
+				.box-footer {
+					position: relative;
+					display: inline-block;
+					clear: both;
+					margin: 0 0 10px;
+					padding: 15px;
+					width: 100%;
+					border: 1px solid #e6e6eb;
+					border-radius: 3px;
+					background: #fff;
+					box-shadow: 0 2px 0 0 rgba(0,0,0,.1);
+					font-size: 16px;
+
+					.avatar+.img-push {
+					    display: block;
+					    margin: 0 0 0 40px;
+					    width: 95%;
+
+					    input { margin: 0; }
+					}
+				}
+				img.avatar {
+					float: left;
+					width: 30px !important;
+					height: 30px !important;
+				}
 				.comicon i {
 					display: block;
 					padding: 15px;
@@ -551,13 +331,221 @@ form {
 			text-align: center;
 		}
 	}
-	/* modal crear noticias/post y login*/
+	/* crear post pixelart*/
 	&.ngdialog-theme-plain {
 		&.width-noticia .ngdialog-content {
 			width: 500px;
 		}
 		&.width-post .ngdialog-content {
-			width: 350px;
+			max-width: 60%;
+			width: 900px;
+
+			.postFileThumb {
+			    position: absolute;
+			    top: 0px;
+			    width: 95%;
+			    height: 440px;
+			    background: white;
+			    text-align: center;
+			    white-space: nowrap;
+
+			    .vericalhelper {
+				    display: inline-block;
+				    height: 100%;
+				    vertical-align: middle;
+				}
+				img {max-width: 100%; vertical-align: middle }
+			}
+			.preview {
+				display: block;
+				height: 135px;
+
+			    img {
+				    display: block;
+				    margin: 0 auto;
+				}
+				button.closePrevia {
+				    position: absolute;
+				    top: 20px;
+				    left: calc(100% / 2 + 35px);
+				    width: 30px;
+				    border: none;
+		    	    background: none;
+				    color: #D32F2F;
+				    text-shadow: 1px 1px 2px #BDBDBD;
+				}
+			}
+		}
+	}
+}
+
+
+/*
+ * Formularios
+ */
+form {
+	position: relative;
+	z-index: 1;
+
+	&.fancy {
+		position: relative;
+		z-index: 0;
+
+		.form-group {
+			position: relative;
+			display: inline-block;
+			margin: 0 0 1em;
+			width: 100%;
+
+			label:not(.file-upload) {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				display: block;
+				overflow: hidden;
+			    margin-bottom: 0;
+				padding: 0;
+				width: 100%;
+				height: 100%;
+				color: #9d9eaa;
+				text-align: left;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				font-size: .7em;
+				cursor: pointer;
+				pointer-events: none;
+			}
+			.alert-warning {
+				position: relative;
+				top: -2px;
+				padding: 0 15px;
+	    		border-top: 1px solid #c8c9d0;
+				border-bottom: 2px solid #8D6E63;
+
+				&.ng-inactive {
+				    border-top: 2px solid #8BC34A!important;
+				    border-bottom: none!important;
+				}
+				p { margin:0; font-size: 0.9em; }
+			}
+			&.textarea .alert-warning {top: -8px; }
+			&.preview .alert-warning {border: none!important; }
+			input[type="file"] {display: none; }
+			input {
+			outline: 0;
+			border: none;
+			background: 0 0;
+
+				&.comment {
+					float: left;
+					width: calc(100% - 95px)!important;
+					border-radius: 2px 0 0 2px;
+
+					&[disabled] {
+						border: none;
+						background: #F5F5F5;
+						box-shadow: none;
+					}
+				}
+
+			}
+			input[type=email], input[type=password], input[type=text], input[type=url], textarea {
+				margin-top: 1.1em;
+				padding: .4em;
+				padding-bottom: 0;
+				width: 100%;
+				border: none;
+				border-bottom: 1px solid #c8c9d0;
+				color: #4c4d57;
+				font-style: normal;
+				font-size-adjust: .52;
+				font-size: 16px;
+			}
+		}
+		.box-footer & input {
+		    float: left;
+			margin: 0;
+		    width: calc(100% - 95px) !important;
+			height: 30px;
+		    border-radius: 2px 0 0 2px;
+			box-shadow: none;
+			font-size: 14px;
+		}
+		a.forgot-pw span, a.cancelaction {
+			display: block;
+			color: #afafb9;
+			text-align: right;
+			font-size: .8em;
+		}
+		.alert-danger, .alert-success {
+    		margin: 5px 0;
+			padding: 0 15px;
+			border-radius: 3px;
+			text-align: center;
+
+			p { margin:0; font-size: 0.9em; }
+		}
+		/* upload pixelart*/
+		.drop-box {
+			position: relative;
+			display: block;
+			height: 440px;
+			border: 3px dashed #ff9c42;
+			background-color: rgba(255, 156, 66, 0.2);
+			color: #9d9eaa;
+			text-align: center;
+			line-height: 150px;
+			transition: all .4s ease;
+
+			&.dragover {
+				border-style: solid!important;
+				font-size: 0.8em;
+			}
+			&.ng-dirty {
+			    border: none!important;
+			    background-color: white!important;
+			}
+			&:after {
+			    position: absolute;
+			    top: calc(50% - 25px);
+			    left: calc(50% - 75px);
+			    display: block;
+			    margin: 0 auto;
+			    width: 150px;
+			    height: 50px;
+			    content: "Suelta tu arte aqui";
+			    text-align: center;
+			    text-decoration: inherit;
+			    line-height: 50px;
+			}
+		}
+		/* botones*/
+		.btn-default {
+			position: relative;
+			min-width: 40px;
+			text-align: center;
+			text-transform: none;
+			font-size: 14px;
+		}
+		.btn-comment {
+			max-width: 95px;
+			width: 100%;
+			height: 30px;
+			border-radius: 0 2px 2px 0!important;
+		}
+		.btn-full {
+			margin: 15px auto 0;
+			width: 100%;
+		}
+		a.btn.btn-primary, button.btn-primary, input[type=submit].btn-primary {
+			border: none;
+			background: #ff9c42;
+			box-shadow: none;
+			color: #FFF;
+
+			&[disabled] {
+			    background: rgba(255,156,66,0.5);
+			}
 		}
 	}
 }
@@ -565,7 +553,6 @@ form {
 /**
  * Galeria
  */
-
 article.post {
     position: relative;
     float: left;
@@ -582,37 +569,39 @@ article.post {
 	    top: 20px;
 	    left: -10px;
 	    z-index: 2;
-	    opacity: 0;
 	    margin: 0;
 	    padding: 5px;
 	    width: 120px;
 	    border-radius: 3px 3px 0 0;
 	    text-align: center;
 	    font-size: 1em;
+	    opacity: 0;
 	    transition: all .5s ease;
 	}
     &:hover .card-title {
 	    top: -27px;
-	    opacity: 1;
 	    background: white;
+	    opacity: 1;
 	}
 	.card-footer {
 	    position: relative;
 	    bottom: 25px;
 	    left: -10px;
-	    opacity: 0;
+	    padding: 2.5px;
 	    width: 120px;
 	    border: none;
 	    text-align: center;
+	    opacity: 0;
 	    transition: all .5s ease;
 
 	    img {
-	    	height: 20px;
 	    	width: 20px;
+	    	height: 20px;
 	    }
 	}
 	&:hover .card-footer {
 	    bottom: 0px;
+	    z-index: 99;
 	    opacity: 1;
 	}
 }

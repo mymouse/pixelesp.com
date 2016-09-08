@@ -1,13 +1,16 @@
-app.controller('auth', function($scope, $http, $rootScope, $location, $window, ngDialog, Session, AUTH_EVENTS, AuthService ) {
+app.controller('auth', ['$scope', '$http', '$rootScope', '$location', '$window', 'ngDialog', 'Session', 'AUTH_EVENTS', 'AuthService', function($scope, $http, $rootScope, $location, $window, ngDialog, Session, AUTH_EVENTS, AuthService ) {
 
-	$scope.usuario={};
+	$scope.usuario = {};
 	$scope.usuario.id ='';
-	$scope.usuario.email='';
-	$scope.usuario.username='';
-	$scope.usuario.password='';
+	$scope.usuario.email = '';
+	$scope.usuario.username = '';
+	$scope.usuario.password = '';
 	
 	$scope.doRegister = function() {
-		$http.post('http://pixelesp-api.herokuapp.com/usuarios',$scope.usuario ).then(function(resp) {
+
+
+
+		$http.post('http://pixelesp-api.herokuapp.com/usuarios', $scope.usuario).then(function(resp) {
 			//console.log(resp.data);
 			//console.log('registrado wachin');
 
@@ -17,10 +20,12 @@ app.controller('auth', function($scope, $http, $rootScope, $location, $window, n
 			$('#modalTabs li a:last').removeClass('active');
 			$('.tab-content #singup').removeClass('active in');
 
+			$scope.successRegister = 'Muy bien! ahora puedes ingresar.';
+
 
 		}, function(err) {
 			//console.error('ERR', err);
-			$scope.error = err.data.msg;
+			$scope.singuperror = err.data.msg;
 		});
 	};
 
@@ -42,7 +47,8 @@ app.controller('auth', function($scope, $http, $rootScope, $location, $window, n
 
 			}, function(err) {
 				//console.error('ERR', err);
-				$scope.error = err.data.msg;
+				$scope.thisloginerror = $scope.loginerror;
+				console.log( "$scope.loginerror "+$scope.thisloginerror);
 			});
 
 		}, function () {
@@ -51,4 +57,4 @@ app.controller('auth', function($scope, $http, $rootScope, $location, $window, n
 		});
 
 	};
-})
+}])

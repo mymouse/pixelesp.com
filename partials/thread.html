@@ -3,7 +3,7 @@
 
         <article class="card">
             <div class="card-block">
-                <h5 class="card-title"><a ui-sref="home.thread({ NoticiaId: {{noticia.id}} })"> {{noticia.Titulo}} </a></h5>
+                <h5 class="card-title"><a ui-sref="home.thread( NoticiaId: noticia.id )"> {{noticia.Titulo}} </a></h5>
                 <h6 class="card-subtitle text-muted"><img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{noticia.imagen}}" alt="{{noticia.username}}">
                 <span class="username text-muted"><a href="{{noticia.IdUsuario}}"> {{noticia.username}} </a></span> <time title="{{ noticia.created_at | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ noticia.created_at | amCalendar }}</time></h6>
             </div>
@@ -21,7 +21,7 @@
                         <img ng-if="currentUser" class="img-responsive img-circle avatar" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{ currentUser.imagen }}" alt="Alt Text">
                         <img ng-if="!currentUser" class="img-responsive img-circle avatar" src="./uploads/img/avatar/paintprogram.png" alt="Alt Text">
                         <!-- .img-push is used to add margin to elements next to floating images -->
-                        <div class="img-push">
+                        <div class="img-push form-group">
                           <input id="commentinput" type="text" class="form-control input-sm comment" ng-model="comment.text" 
                           ng-attr-placeholder="{{ currentUser ? 'Comenta algo...' : 'Inicia sesión para comentar!' }}"
                           ng-disabled="!currentUser">

@@ -39,6 +39,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         	url: '/',
 			templateUrl: "partials/home.html",
 			controller: "" })
+
 		// Pages
 		.state("mi-perfil", {
 			url: '/mi-perfil',
@@ -57,7 +58,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			templateUrl: "partials/contacto.html",
 			controller: "" })
 
-		// Posts
+		// Noticias
 		.state("home.thread", {
 
 			url: 'thread/:NoticiaId',
@@ -74,7 +75,43 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		        }).closePromise.finally(function() {
 		            $state.go('^');
 		        });
-		    }]			
+		    }]
+		})
+
+		// Crear Post
+		.state("home.createpost", {
+
+			url: 'crearpost',
+			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
+
+				ngDialog.open({
+					template: 'partials/createpost.html',
+					controller: 'newPost',
+					className: 'ngdialog-theme-plain width-post',
+					cache: false
+
+				}).closePromise.finally(function() {
+		            $state.go('^');
+		        });
+		    }]
+		})		
+
+		// posts
+		.state("home.createnews", {
+
+			url: 'crear-noticia',
+			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
+
+		        ngDialog.open({
+					template: 'partials/createnews.html',
+					controller: 'noticiaNueva',
+					className: 'ngdialog-theme-plain width-noticia',
+					cache: false
+
+				}).closePromise.finally(function() {
+		            $state.go('^');
+		        });
+		    }]
 		})
 
 		// Blog

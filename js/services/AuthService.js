@@ -1,12 +1,17 @@
-app.factory('AuthService', function ($http, Session) {
+app.factory('AuthService', function ($rootScope, $http, Session) {
 	var authService = {};
  
 	authService.doLogin = function (usuario) {
 		return $http
 			.post('http://pixelesp-api.herokuapp.com/login', usuario)
 			.then(function (resp) {
-				Session.create(resp.data.token, null);       
+				console.log(resp.data);
+				Session.create(resp.data.token, resp.data.userlevel);       
 				return resp.data;
+
+			}, function(err) {
+				console.error('ERR', err);
+				$rootScope.loginerror = err.data.msg;
 			});
 	};
  
