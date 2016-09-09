@@ -8079,7 +8079,7 @@ a {
   /* crear post pixelart*/ }
   .ngdialog .ngdialog-content {
     /* login - register*/ }
-    .ngdialog .ngdialog-content h4 {
+    .ngdialog .ngdialog-content header h4 {
       margin-bottom: 0; }
     .ngdialog .ngdialog-content .nav-center {
       text-align: center; }
@@ -8093,6 +8093,88 @@ a {
   .ngdialog.ngdialog-theme-tread {
     margin-bottom: 0;
     padding: 50px 0 0 0; }
+    .ngdialog.ngdialog-theme-tread .wrapper {
+      -webkit-animation-name: fadeInRight;
+      -moz-animation-name: fadeInRight;
+      -ms-animation-name: fadeInRight;
+      -o-animation-name: fadeInRight;
+      animation-name: fadeInRight;
+      -webkit-animation-iteration-count: 1;
+      -moz-animation-iteration-count: 1;
+      -ms-animation-iteration-count: 1;
+      -o-animation-iteration-count: 1;
+      animation-iteration-count: 1;
+      -webkit-animation-duration: 1s;
+      -moz-animation-duration: 1s;
+      -ms-animation-duration: 1s;
+      -o-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-delay: 0s;
+      -moz-animation-delay: 0s;
+      -ms-animation-delay: 0s;
+      -o-animation-delay: 0s;
+      animation-delay: 0s;
+      -webkit-animation-timing-function: ease;
+      -moz-animation-timing-function: ease;
+      -ms-animation-timing-function: ease;
+      -o-animation-timing-function: ease;
+      animation-timing-function: ease;
+      -webkit-animation-fill-mode: both;
+      -moz-animation-fill-mode: both;
+      -ms-animation-fill-mode: both;
+      -o-animation-fill-mode: both;
+      animation-fill-mode: both;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      -o-backface-visibility: hidden;
+      backface-visibility: hidden; }
+    .ngdialog.ngdialog-theme-tread .ngdialog-close::before {
+      -webkit-animation-name: fadeInLeftBig;
+      -moz-animation-name: fadeInLeftBig;
+      -ms-animation-name: fadeInLeftBig;
+      -o-animation-name: fadeInLeftBig;
+      animation-name: fadeInLeftBig;
+      -webkit-animation-iteration-count: 1;
+      -moz-animation-iteration-count: 1;
+      -ms-animation-iteration-count: 1;
+      -o-animation-iteration-count: 1;
+      animation-iteration-count: 1;
+      -webkit-animation-duration: 1s;
+      -moz-animation-duration: 1s;
+      -ms-animation-duration: 1s;
+      -o-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-delay: 0s;
+      -moz-animation-delay: 0s;
+      -ms-animation-delay: 0s;
+      -o-animation-delay: 0s;
+      animation-delay: 0s;
+      -webkit-animation-timing-function: ease;
+      -moz-animation-timing-function: ease;
+      -ms-animation-timing-function: ease;
+      -o-animation-timing-function: ease;
+      animation-timing-function: ease;
+      -webkit-animation-fill-mode: both;
+      -moz-animation-fill-mode: both;
+      -ms-animation-fill-mode: both;
+      -o-animation-fill-mode: both;
+      animation-fill-mode: both;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      -o-backface-visibility: hidden;
+      backface-visibility: hidden;
+      position: absolute;
+      top: 50px;
+      display: block;
+      margin-left: -50px;
+      padding: 15px;
+      width: 50px;
+      height: 50px;
+      border-radius: 0 0 0 2px;
+      background: white;
+      text-align: center; }
     .ngdialog.ngdialog-theme-tread .ngdialog-overlay {
       margin-top: 50px; }
     .ngdialog.ngdialog-theme-tread .ngdialog-content {
@@ -8264,88 +8346,10 @@ a {
           padding: 15px;
           color: #9c9c9c;
           text-align: center; }
-    .ngdialog.ngdialog-theme-tread .wrapper {
-      -webkit-animation-name: fadeInRight;
-      -moz-animation-name: fadeInRight;
-      -ms-animation-name: fadeInRight;
-      -o-animation-name: fadeInRight;
-      animation-name: fadeInRight;
-      -webkit-animation-iteration-count: 1;
-      -moz-animation-iteration-count: 1;
-      -ms-animation-iteration-count: 1;
-      -o-animation-iteration-count: 1;
-      animation-iteration-count: 1;
-      -webkit-animation-duration: 1s;
-      -moz-animation-duration: 1s;
-      -ms-animation-duration: 1s;
-      -o-animation-duration: 1s;
-      animation-duration: 1s;
-      -webkit-animation-delay: 0s;
-      -moz-animation-delay: 0s;
-      -ms-animation-delay: 0s;
-      -o-animation-delay: 0s;
-      animation-delay: 0s;
-      -webkit-animation-timing-function: ease;
-      -moz-animation-timing-function: ease;
-      -ms-animation-timing-function: ease;
-      -o-animation-timing-function: ease;
-      animation-timing-function: ease;
-      -webkit-animation-fill-mode: both;
-      -moz-animation-fill-mode: both;
-      -ms-animation-fill-mode: both;
-      -o-animation-fill-mode: both;
-      animation-fill-mode: both;
-      -webkit-backface-visibility: hidden;
-      -moz-backface-visibility: hidden;
-      -ms-backface-visibility: hidden;
-      -o-backface-visibility: hidden;
-      backface-visibility: hidden; }
-    .ngdialog.ngdialog-theme-tread .ngdialog-close::before {
-      -webkit-animation-name: fadeInLeftBig;
-      -moz-animation-name: fadeInLeftBig;
-      -ms-animation-name: fadeInLeftBig;
-      -o-animation-name: fadeInLeftBig;
-      animation-name: fadeInLeftBig;
-      -webkit-animation-iteration-count: 1;
-      -moz-animation-iteration-count: 1;
-      -ms-animation-iteration-count: 1;
-      -o-animation-iteration-count: 1;
-      animation-iteration-count: 1;
-      -webkit-animation-duration: 1s;
-      -moz-animation-duration: 1s;
-      -ms-animation-duration: 1s;
-      -o-animation-duration: 1s;
-      animation-duration: 1s;
-      -webkit-animation-delay: 0s;
-      -moz-animation-delay: 0s;
-      -ms-animation-delay: 0s;
-      -o-animation-delay: 0s;
-      animation-delay: 0s;
-      -webkit-animation-timing-function: ease;
-      -moz-animation-timing-function: ease;
-      -ms-animation-timing-function: ease;
-      -o-animation-timing-function: ease;
-      animation-timing-function: ease;
-      -webkit-animation-fill-mode: both;
-      -moz-animation-fill-mode: both;
-      -ms-animation-fill-mode: both;
-      -o-animation-fill-mode: both;
-      animation-fill-mode: both;
-      -webkit-backface-visibility: hidden;
-      -moz-backface-visibility: hidden;
-      -ms-backface-visibility: hidden;
-      -o-backface-visibility: hidden;
-      backface-visibility: hidden;
-      position: absolute;
-      top: 50px;
+    .ngdialog.ngdialog-theme-tread img.pixelart {
+      margin: 15px auto;
       display: block;
-      margin-left: -50px;
-      padding: 15px;
-      width: 50px;
-      height: 50px;
-      border-radius: 0 0 0 2px;
-      background: white;
-      text-align: center; }
+      max-height: 500px; }
   .ngdialog.ngdialog-theme-plain.width-noticia .ngdialog-content {
     width: 500px; }
   .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content {
@@ -8493,7 +8497,7 @@ form {
       form.fancy .drop-box.ng-dirty {
         border: none !important;
         background-color: white !important; }
-      form.fancy .drop-box:after {
+      form.fancy .drop-box:before {
         position: absolute;
         top: calc(50% - 25px);
         left: calc(50% - 75px);
@@ -8528,7 +8532,7 @@ form {
         background: rgba(255, 156, 66, 0.5); }
 
 /**
- * Galeria
+ * Galeria preview
  */
 article.post {
   position: relative;

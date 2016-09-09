@@ -201,7 +201,7 @@ a {color: $verdelink; }
 .ngdialog {
 	/* reset*/
 	.ngdialog-content {
-		h4 { margin-bottom: 0}
+		header h4 { margin-bottom: 0}
 		/* login - register*/
 		.nav-center {  
 			text-align: center;
@@ -222,6 +222,23 @@ a {color: $verdelink; }
 		margin-bottom: 0;
 		padding: 50px 0 0 0;
 
+		.wrapper {
+			@include fadeInRight();
+		}
+		.ngdialog-close::before {
+			@include fadeInLeftBig();
+
+			position: absolute;
+			top: 50px;
+			display: block;
+			margin-left: -50px;
+			padding: 15px;
+			width: 50px;
+			height: 50px;
+			border-radius: 0 0 0 2px;
+			background: white;
+			text-align: center;
+		}
 		.ngdialog-overlay {
 			margin-top: 50px;
 		}
@@ -313,22 +330,12 @@ a {color: $verdelink; }
 				}
 			}
 		}
-		.wrapper {
-			@include fadeInRight();
-		}
-		.ngdialog-close::before {
-			@include fadeInLeftBig();
 
-			position: absolute;
-			top: 50px;
-			display: block;
-			margin-left: -50px;
-			padding: 15px;
-			width: 50px;
-			height: 50px;
-			border-radius: 0 0 0 2px;
-			background: white;
-			text-align: center;
+		// vista pixelart
+		img.pixelart {			
+		    margin: 15px auto;
+		    display: block;
+		    max-height: 500px;
 		}
 	}
 	/* crear post pixelart*/
@@ -505,7 +512,7 @@ form {
 			    border: none!important;
 			    background-color: white!important;
 			}
-			&:after {
+			&:before {
 			    position: absolute;
 			    top: calc(50% - 25px);
 			    left: calc(50% - 75px);
@@ -551,7 +558,7 @@ form {
 }
 
 /**
- * Galeria
+ * Galeria preview
  */
 article.post {
     position: relative;

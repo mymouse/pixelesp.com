@@ -69,7 +69,7 @@ app.controller('noticiaCtrl', function($scope, $state, $stateParams, $http, ngDi
 /**
  * Create/Upload Noticias
  */
-app.controller('noticiaNueva', function($scope, $http, Session, ngDialog, $location) {
+app.controller('noticiaNueva', function($scope, $http, Session, ngDialog, $location, $timeout) {
 
 	$scope.noticia={};
 	$scope.noticia.Titulo='';
@@ -90,7 +90,10 @@ app.controller('noticiaNueva', function($scope, $http, Session, ngDialog, $locat
 				//console.log('noticia publicada');
 
 				ngDialog.closeAll();
-				$location.path("/thread/"+resp.data.data.id);
+
+	            $timeout(function() {
+            		$location.path("/thread/"+resp.data.data.id);
+	            }, 1500);
 
 			}, function(err) {
 				console.error('ERR', err);

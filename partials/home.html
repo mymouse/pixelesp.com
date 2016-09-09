@@ -20,12 +20,14 @@
 	<section class="col-lg-7 content" ng-controller="getPosts">
 		<h3>Ultimos PixelArts</h3>
 		<article class="post" ng-repeat="pixelart in imagenes">
-            <h4 class="card-title"><a ui-sref="home.thread({ pixelartId: {{pixelart.id}} })"> {{pixelart.Titulo}} </a></h4>
+			<a ui-sref="home.pixelart({ pixelartId: {{pixelart.id}} })">
+            <h4 class="card-title"> {{pixelart.Titulo}} </h4>
             <img class="img-fluid" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.Previa}}" alt="{{pixelart.Titulo}}" >
             <div class="card-footer">
                 <img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.imagen}}" alt="{{pixelart.username}}">
                 <span class="username text-muted"><a href="{{pixelart.IdUsuario}}"> {{pixelart.username}} </a></span>
             </div>
+           	</a>
         </article>
 	</section>
 

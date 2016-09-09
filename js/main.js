@@ -31,12 +31,12 @@ app.config(['CloudinaryProvider', configure]);
 app.config(function($stateProvider, $urlRouterProvider) {
 
 	$urlRouterProvider.when('', '/');
-    
-    $urlRouterProvider.otherwise('/404');
-    
-    $stateProvider
-        .state("home", {
-        	url: '/',
+	
+	$urlRouterProvider.otherwise('/404');
+	
+	$stateProvider
+		.state("home", {
+			url: '/',
 			templateUrl: "partials/home.html",
 			controller: "" })
 
@@ -58,6 +58,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			templateUrl: "partials/contacto.html",
 			controller: "" })
 
+		.state("encola", {
+			url: '/en-cola',
+			templateUrl: "partials/encola.html",
+			controller: "getPostsToApprobal" })
+
 		// Noticias
 		.state("home.thread", {
 
@@ -67,15 +72,49 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
 
-		        ngDialog.open({
+				ngDialog.open({
 					controller: 'noticiaCtrl',
 					templateUrl: 'partials/thread.html',
 					className: 'ngdialog-theme-tread animated fadeIn'
 
-		        }).closePromise.finally(function() {
-		            $state.go('^');
-		        });
-		    }]
+				}).closePromise.finally(function() {
+					$state.go('^');
+				});
+			}]
+		})
+
+		// Pixelarts
+		.state("home.pixelart", {
+
+			url: 'pixelart/:pixelartId',
+			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
+
+				ngDialog.open({
+					controller: 'pixelartCtrl',
+					templateUrl: 'partials/pixelart.html',
+					className: 'ngdialog-theme-tread animated fadeIn'
+
+				}).closePromise.finally(function() {
+					$state.go('^');
+				});
+			}]
+		})
+
+		// Pixelarts en cola
+		.state("encola.pixelart-to-approbal", {
+
+			url: '/:pixelartId',
+			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
+
+				ngDialog.open({
+					controller: 'pixelartCtrl',
+					templateUrl: 'partials/pixelart-en-cola.html',
+					className: 'ngdialog-theme-plain width-noticia animated fadeIn'
+
+				}).closePromise.finally(function() {
+					$state.go('^');
+				});
+			}]
 		})
 
 		// Crear Post
@@ -88,12 +127,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
 					template: 'partials/createpost.html',
 					controller: 'newPost',
 					className: 'ngdialog-theme-plain width-post',
-					cache: false
+					cache: false,
+					closeByEscape: false
 
 				}).closePromise.finally(function() {
-		            $state.go('^');
-		        });
-		    }]
+					$state.go('^');
+				});
+			}]
 		})		
 
 		// posts
@@ -102,16 +142,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			url: 'crear-noticia',
 			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
 
-		        ngDialog.open({
+				ngDialog.open({
 					template: 'partials/createnews.html',
 					controller: 'noticiaNueva',
 					className: 'ngdialog-theme-plain width-noticia',
-					cache: false
+					cache: false,
+					closeByEscape: false
 
 				}).closePromise.finally(function() {
-		            $state.go('^');
-		        });
-		    }]
+					$state.go('^');
+				});
+			}]
 		})
 
 		// Blog

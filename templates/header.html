@@ -6,7 +6,8 @@
   <div class="collapse navbar-toggleable-xs" id="collapesenavbar">
   	<ul ng-if="currentUser" class="nav navbar-nav pull-xs-left">
 		<li class="nav-item"><a href="" ui-sref="home.createpost"><i class="fa fa-pencil"></i> Crear post</a></li>
-		<li class="nav-item"><a href="" ui-sref="home.createnews""><i class="fa fa-newspaper-o"></i> Crear noticia</a></li>		
+		<li class="nav-item"><a href="" ui-sref="home.createnews""><i class="fa fa-newspaper-o"></i> Crear noticia</a></li>
+		<li class="nav-item" ng-if="isAuthorized(userRoles.admin)"><a href="" ui-sref="encola""><i class="fa fa-list-ul" aria-hidden="true"></i> Post para aprobar</a></li>
 	</ul>
 
 	<ul class="nav navbar-nav pull-xs-right">

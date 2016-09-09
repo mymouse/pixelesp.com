@@ -1,4 +1,20 @@
 /**
+ * Get Posts NO Aprobados
+ */
+app.controller('getPostsToApprobal', function($scope, $http, ngDialog) {
+
+  $scope.imagenes = [];
+  $http.get('http://pixelesp-api.herokuapp.com/imagenessinaprobar').then(function(resp) {
+    $scope.imagenes = resp.data.data;
+    //console.log('Succes', resp.data.data);
+
+  }, function(err) {
+    console.error('ERR', err);
+    // err.status will contain the status code
+  });
+})
+
+/**
  * Get Posts Aprobados
  */
 app.controller('getPosts', function($scope, $http, ngDialog) {
@@ -17,10 +33,11 @@ app.controller('getPosts', function($scope, $http, ngDialog) {
 /*
  * Upload pixelArt
  */
-app.controller('newPost', function ($scope, $http, Upload, Session, $timeout, Cloudinary) {
+app.controller('newPost', function ($scope, $http, $location, Upload, Session, $timeout, Cloudinary, ngDialog) {
 
   $scope.imagen = {};
   $scope.imagen.id = '';
+  $scope.imagen.Aprobada = '1';
   $scope.imagen.Titulo = '';
   $scope.imagen.Descripcion = '';
   $scope.imagen.Tags = '';
@@ -100,11 +117,16 @@ app.controller('newPost', function ($scope, $http, Upload, Session, $timeout, Cl
           $http.post('http://pixelesp-api.herokuapp.com/imagenes', $scope.imagen).then(function(resp) {
             console.log(resp.data);
             console.log('imagen subida a la api !');
-           
-            //$location.path('/app/galeria');
+            
+            ngDialog.close();
+            $timeout(function() {
+                $location.path("/pixelart/"+resp.data.data.id);
+              }, 1500);
                   
           }, function(err) {
             console.error('ERR', err);
+            $scope.pixelarterror = err.data.msg;
+
           }); //end http post
 
         });
@@ -117,4 +139,94 @@ app.controller('newPost', function ($scope, $http, Upload, Session, $timeout, Cl
       });
     }
   }
+})
+
+/**
+ * Get/Show individual pixelarts and Comments
+ */
+app.controller('pixelartCtrl', function($scope, $state, $stateParams, $http, Session, ngDialog) {
+
+  $scope.pixelart = {};
+  $http.get('http://pixelesp-api.herokuapp.com/imagenes/'+ $stateParams.pixelartId).then(function(resp) {
+    $scope.pixelart = resp.data.data;
+
+  /* ===== 
+    ===== 
+      ===== */
+
+  userdata = JSON.parse(window.localStorage.getItem('userdata'));
+  $scope.currentUser = userdata;
+
+    $scope.guardarComentario = function(comment, ngDialogProvider) {
+
+    if (Session.id != null) {
+
+      $scope.comment = {};
+      $scope.comment.text = comment.text;
+      $scope.comment.idusuario = userdata.id;
+      $scope.comment.id_noticia = $scope.pixelart.id;
+      $scope.comment.username = userdata.username;
+      $scope.comment.imagen = userdata.imagen;
+
+      $http.post('http://pixelesp-api.herokuapp.com/newscomments', $scope.comment).then(function(resp) {
+        console.log(resp);
+
+        $('#commentinput').val('');
+        $scope.pixelart.comentarios.push(resp.data.data);
+
+
+      }, function(err) {
+        console.error('ERR', err);
+        // err.status will contain the status code
+      });
+    }
+  }
+  
+  /*    ===== 
+    ===== 
+    ===== */
+
+  }, function(err) {
+    console.error('ERR', err);
+    // err.status will contain the status code
+  });
+
+  $scope.imagen = {};
+  // aprobar o eliminar pixelart
+  $scope.doApprobal = function() {
+
+    $scope.imagen.Titulo = $scope.pixelart.Titulo;
+    $scope.imagen.Descripcion = $scope.pixelart.Descripcion;
+    $scope.imagen.Aprobada = 1;
+
+    $http.put('http://pixelesp-api.herokuapp.com/imagenes/'+ $stateParams.pixelartId, $scope.imagen).then(function(resp) {
+      console.log(resp.data);  
+      //$location.path('/app/imagenes');
+
+      ngDialog.close();
+
+    }, function(err) {
+      console.error('ERR', err);
+      // err.status will contain the status code
+    });
+  };
+
+  $scope.doDelete = function() {
+    $http.delete('http://pixelesp-api.herokuapp.com/imagenes/'+ $stateParams.pixelartId, $scope.imagen).then(function(resp) {
+      console.log(resp.data);
+      //$location.path('/app/imagenes');
+
+      ngDialog.close();
+      /*ngDialog.open({
+        templateUrl: 'partials/messages.html',
+        className: 'ngdialog-theme-plain width-noticia animated fadeIn'
+      });*/
+
+    }, function(err) {
+      console.error('ERR', err);
+      // err.status will contain the status code
+    });
+  };
+
+
 })

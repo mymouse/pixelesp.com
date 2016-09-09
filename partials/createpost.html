@@ -29,6 +29,10 @@
         </div>
 
         <div class="col-lg-4">
+        
+          <div ng-show="thisloginerror" ng-hide="successRegister" class="alert-danger" role="alert">
+              <p> {{ pixelarterror }} </p>
+          </div>
 
           <div class="form-group">
             <input type="text" tabindex="1" name="imagetitle" ng-model="imagen.Titulo" ng-minlength="3" required>
