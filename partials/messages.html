@@ -1,0 +1,21 @@
+<div class="{{ngDialogData.class}} text-xs-center" close-dialog="{{ngDialogData.time}}">
+	<div class="card-block">
+
+		<blockquote class="card-blockquote">
+			<p>{{ngDialogData.text}}</p>
+			<footer>{{ngDialogData.footertext}}</footer>
+		</blockquote>
+
+	</div>
+
+	<div class="card-footer" ng-if="ngDialogData.actions">
+		<button ng-click="" type="button" class="btn btn-danger pull-xs-left">
+			<i class="fa fa-times" aria-hidden="true"></i> {{ngDialogData.nottext}}
+		</button>
+
+		<button ng-click="" type="button" class="btn btn-success pull-xs-right">
+			<i class="fa fa-check" aria-hidden="true"></i> {{ngDialogData.oktext}}
+		</button>
+	</div>
+
+</div>

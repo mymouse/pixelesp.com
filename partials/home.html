@@ -1,76 +1,34 @@
 <div class="content-wrapper">
 
-	<section class="content-header">
-		<h1>Noticias</h1>
-		<ol class="breadcrumb">
-<<<<<<< HEAD
-			<li class="active"><a ui-sref="home"><i class="fa fa-dashboard"></i> Home</a></li>
-=======
-			<li class="active"><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
->>>>>>> origin/master
-		</ol>	
+	<section class="col-lg-5 content" ng-controller="getNoticias">
+		<h3>Ultimos Posts</h3>
+		<article class="card" ng-repeat="noticia in noticias">
+			<div class="card-block">
+				<h5 class="card-title"><a ui-sref="home.thread({ NoticiaId: {{noticia.id}} })"> {{noticia.Titulo}} </a></h5>
+				<h6 class="card-subtitle text-muted"><img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{noticia.imagen}}" alt="{{noticia.username}}">
+				<span class="username text-muted"><a href="{{noticia.IdUsuario}}"> {{noticia.username}} </a></span> <time title="{{ noticia.created_at | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ noticia.created_at | amCalendar }}</time></h6>
+			</div>
+			<!--  <img src="..." alt="Card image"> -->
+			<div class="card-block">
+				<p class="card-text"> {{noticia.Descripcion}} </p>
+				<!-- <a href="#" class="card-link">Card link</a> -->
+				<a href="#" class="card-link text-xs-right" ui-sref="home.thread({ NoticiaId: {{noticia.id}} })"><i class="fa fa-comment" aria-hidden="true"></i> {{noticia.comentarios.length}} Comentarios</a>
+			</div>
+		</article>
 	</section>
 
-	<section class="content" ng-controller="NoticiaslistsCtrl">
-		<div class="col-lg-12">
-			<div class="card-columns">
-				<article class="card" ng-repeat="noticia in noticias">					
-					<div class="card-header">
-						<h4 class="card-title"><a ui-sref="home.thread({ NoticiaId: {{noticia.id}} })"> {{noticia.Titulo}} </a></h4>
-						<img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{noticia.imagen}}" alt="User Image">
-						<span class="username text-muted"><a href="{{noticia.IdUsuario}}"> {{noticia.username}} </a></span> <time title="{{ noticia.created_at | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ noticia.created_at | amCalendar }}</time>
-						<div class="box-tools">
-					      <button type="button" class="btn btn-box-tool"><i class="fa fa-chevron-down"></i></button>
-					    </div>
-				  	</div>
-					<!-- <img class="img-fluid" src="img/post/vspodio.jpg" alt="Card image cap" style="width:100%"> -->
-					<div class="card-block">						
-						<p class="card-text"> {{noticia.Descripcion}} </p>
-						<button type="button" class="btn btn-default "><i class="fa fa-caret-up"></i> up</button>
-					    <button type="button" class="btn btn-default pull-right text-muted" ui-sref="home.thread({ NoticiaId: {{noticia.id}} })"><i class="fa fa-comment" aria-hidden="true"></i> {{noticia.comentarios.length}} Comentarios</button>
-					</div>
-					<div class="card-footer">
-					    
-					    <div class="box-comments">
-			              <div class="box-comment" ng-repeat="c in noticia.comentarios | orderBy:'-created_at' | limitTo:2 ">
-			                <!-- User image -->
-<<<<<<< HEAD
-			                <img class="img-circle img-sm" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{c.imagen}}" alt="{{c.username}}">
-=======
-			                <img class="img-circle img-sm" src="./uploads/img/avatar/{{c.imagen}}" alt="{{c.username}}">
->>>>>>> origin/master
-
-			                <div class="comment-text">
-								<span class="username">
-									{{c.username}}
-									<time title="{{ c.created_at | amDateFormat: 'LLLL' }}" class="text-muted pull-right">{{ c.created_at | amCalendar }}</time>
-								</span><!-- /.username -->
-			                  	{{c.text}}
-			                </div>
-			                <!-- /.comment-text -->
-			              </div>
-			              <!-- /.box-comment -->
-			              
-			            </div>
-
-			            <div class="box-footer" ui-sref="home.thread({ NoticiaId: {{noticia.id}} })">
-			              <form class="fancy">
-<<<<<<< HEAD
-			                <img ng-if="currentUser" class="img-responsive img-circle img-sm" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{currentUser.imagen}}" alt="{{noticia.username}}">
-                       		<img ng-if="!currentUser" class="img-responsive img-circle img-sm" src="./uploads/img/avatar/paintprogram.png" alt="Alt Text">
-=======
-			                <img class="img-responsive img-circle img-sm" src="./uploads/img/avatar/{{currentUser.imagen}}" alt="{{noticia.username}}">
->>>>>>> origin/master
-			                <!-- .img-push is used to add margin to elements next to floating images -->
-			                <div class="img-push">
-			                  <input type="text" placeholder="Haz click para dejar un comentario" disabled>
-			                </div>
-			              </form>
-			            </div> 
-					</div>
-				</article>
-			</div>
-		</div>		
+	<section class="col-lg-7 content" ng-controller="getPosts">
+		<h3>Ultimos PixelArts</h3>
+		<article class="post" ng-repeat="pixelart in imagenes">
+			<a ui-sref="home.pixelart({ pixelartId: {{pixelart.id}} })">
+            <h4 class="card-title"> {{pixelart.Titulo}} </h4>
+            <img class="img-fluid" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.Previa}}" alt="{{pixelart.Titulo}}" >
+            <div class="card-footer">
+                <img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.imagen}}" alt="{{pixelart.username}}">
+                <span class="username text-muted"><a href="{{pixelart.IdUsuario}}"> {{pixelart.username}} </a></span>
+            </div>
+           	</a>
+        </article>
 	</section>
 
 </div>

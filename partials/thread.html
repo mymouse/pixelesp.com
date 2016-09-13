@@ -1,64 +1,69 @@
 <section class="wrapper">
     <div class="content-post">
-        <article class="card">                 
-            <div class="card-header">
-                <h4 class="card-title"><a href="#/thread/{{noticia.id}}"> {{noticia.Titulo}} </a></h4>
-<<<<<<< HEAD
-                <img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{ noticia.imagen }}" alt="User Image">
-=======
-                <img class="img-circle" src="./uploads/img/avatar/{{noticia.imagen}}" alt="User Image">
->>>>>>> origin/master
-                <span class="username text-muted"><a href="{{noticia.IdUsuario}}"> {{noticia.username}} </a></span> <time title="{{ noticia.created_at | amDateFormat: 'LLLL' }}" class="date text-muted"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ noticia.created_at | amCalendar }}</time>
-                <div class="box-tools">
-                  <button type="button" class="btn btn-box-tool"><i class="fa fa-chevron-down"></i></button>
+
+        <article class="card">
+            <header class="card-block">
+                <div class="col-xs-10">
+                    <h5 class="card-title"><a ui-sref="home.thread( NoticiaId: noticia.id )"> {{noticia.Titulo}} </a></h5>
+                    <h6 class="card-subtitle text-muted"><img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{noticia.imagen}}" alt="{{noticia.username}}"> <span class="username text-muted"><a href="{{noticia.IdUsuario}}"> {{noticia.username}} </a></span> <time title="{{ noticia.created_at | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ noticia.created_at | amCalendar }}</time></h6>
                 </div>
-            </div>
-            <!-- <img class="img-fluid" src="img/post/vspodio.jpg" alt="Card image cap" style="width:100%"> -->
+                <div class="col-xs-2">
+                    <div class="btn-group pull-xs-right">
+                        <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#"><i class="fa fa-flag" aria-hidden="true"></i> Reportar</a>
+                            <div ng-if="noticia.IdUsuario == currentUser.id || currentUser.userlevel == 1">
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>
+                                <a class="dropdown-item text-danger" href="" ng-click="doDelete()"><i class="fa fa-trash-o" aria-hidden="true"></i> Eliminar</a>
+                            </div>
+                        </div>
+                      </div>
+                </div>
+            </header>
+            <!--  <img src="..." alt="Card image"> -->
             <div class="card-block">
                 <p class="card-text"> {{noticia.Descripcion}} </p>
-                <button type="button" class="btn btn-default"><i class="fa fa-caret-up"></i> up</button>                
+                <!-- <a href="#" class="card-link">Card link</a> -->
             </div>
 
             <div class="card-footer">
+                <h4><i class="fa fa-comment" aria-hidden="true"></i> {{noticia.comentarios.length}} Comentarios</h4>
 
                 <div class="box-footer">
-                    <h4><i class="fa fa-comment" aria-hidden="true"></i> {{noticia.comentarios.length}} Comentarios</h4>
-
                     <form class="fancy" ng-submit="guardarComentario(comment)">
-                        <img ng-if="currentUser" class="img-responsive img-circle img-sm" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{ currentUser.imagen }}" alt="Alt Text">
-                        <img ng-if="!currentUser" class="img-responsive img-circle img-sm" src="./uploads/img/avatar/paintprogram.png" alt="Alt Text">
+                        <img ng-if="currentUser" class="img-responsive img-circle avatar" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{ currentUser.imagen }}" alt="Alt Text">
+                        <img ng-if="!currentUser" class="img-responsive img-circle avatar" src="./uploads/img/avatar/paintprogram.png" alt="Alt Text">
                         <!-- .img-push is used to add margin to elements next to floating images -->
-                        <div class="img-push">
-                          <input type="text" class="form-control input-sm comment" ng-model="comment.text" 
-                          ng-attr-placeholder="{{ currentUser === true ? 'Comenta algo...' : 'Inicia sesión para comentar!' }}"
-                          ng-disabled="!currentUser">                          
+                        <div class="img-push form-group">
+                          <input id="commentinput" type="text" class="form-control input-sm comment" ng-model="comment.text" 
+                          ng-attr-placeholder="{{ currentUser ? 'Comenta algo...' : 'Inicia sesión para comentar!' }}"
+                          ng-disabled="!currentUser">
                           <button class="btn-primary btn-comment" type="submit" ng-disabled="!currentUser">Enviar</button>
                         </div>
                     </form>
                 </div>
 
                 <div class="box-comments">
-<<<<<<< HEAD
-                    
-                    <div class="box-comment" ng-repeat="c in noticia.comentarios | orderBy:'-created_at'" ng-init="initFirst()">
-                        <img class="img-circle img-sm" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{c.imagen}}" alt="{{c.username}}">
-=======
-                    <h4><i class="fa fa-comment" aria-hidden="true"></i> {{noticia.comentarios.length}} Comentarios </h4>
-                    <div class="box-comment" ng-repeat="c in noticia.comentarios | orderBy:'-created_at'">
-                        <img class="img-circle img-sm" src="./uploads/img/avatar/{{c.imagen}}" alt="{{c.username}}">
->>>>>>> origin/master
-
+                    <div class="animate box-comment" ng-repeat="c in noticia.comentarios | orderBy:'-created_at'" ng-init="initFirst()">
+                        <img class="img-circle avatar" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{c.imagen}}" alt="{{c.username}}">
                         <div class="comment-text">
                             <span class="username">
                                 {{c.username}}
                                 <time title="{{ c.created_at | amDateFormat: 'LLLL' }}" class="text-muted pull-right">{{ c.created_at | amCalendar }}</time>
                             </span>
                             {{c.text}}
-                        </div>                        
-                    </div>                  
+                        </div>
+                    </div>
                 </div>
-                
+
+                <div class="comicon">
+                    <i class="fa fa-comments" aria-hidden="true"></i>
+                </div>
             </div>
+
         </article>
     </div>
 </section>

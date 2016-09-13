@@ -2,7 +2,7 @@
  * Main AngularJS Web Application
  */
 
-var app = angular.module('pixelespWebApp', ['ui.router', 'ngAnimate', 'ngDialog', 'ngMessages', 'angularMoment', 'angularFileUpload', 'ngFormFixes']);
+var app = angular.module('pixelespWebApp', ['ui.router', 'ngDialog', 'ngMessages', 'angularMoment', 'cloudinary', 'ngFileUpload', 'ngImgCrop']);
 
 app.constant('AUTH_EVENTS', {
 	loginSuccess: 'auth-login-success',
@@ -20,141 +20,191 @@ app.constant('USER_ROLES', {
 	guest: 3
 })
 
-<<<<<<< HEAD
+function configure(CloudinaryProvider) {
+	CloudinaryProvider.configure({
+		cloud_name: 'hyktxhgfc', // your Cloud name
+		api_key: '584471834239559' // your API Key
+	});
+}
+app.config(['CloudinaryProvider', configure]);
+
 app.config(function($stateProvider, $urlRouterProvider) {
 
 	$urlRouterProvider.when('', '/');
-    
-    $urlRouterProvider.otherwise('/404');
-    
-    $stateProvider
-        .state("home", {
-        	url: '/',
+	
+	$urlRouterProvider.otherwise('/404');
+	
+	$stateProvider
+		.state("home", {
+			url: '/',
 			templateUrl: "partials/home.html",
-			controller: "PageCtrl" })
+			controller: "" })
+
 		// Pages
 		.state("mi-perfil", {
 			url: '/mi-perfil',
 			templateUrl: "partials/profile.html",
-			controller: "PageCtrl" })
+			controller: "" })
 		.state("comunidad", {
 			url: '/comunidad',
 			templateUrl: "partials/comunidad.html",
-			controller: "PageCtrl" })
+			controller: "" })
 		.state("galeria", {
 			url: '/galeria',
 			templateUrl: "partials/galeria.html",
-			controller: "PageCtrl" })
+			controller: "" })
 		.state("contacto", {
 			url: '/contacto',
 			templateUrl: "partials/contacto.html",
-			controller: "PageCtrl" })
+			controller: "" })
 
-		// Posts
+		.state("encola", {
+			url: '/en-cola',
+			templateUrl: "partials/encola.html",
+			controller: "getPostsToApprobal" })
+
+		// Noticias
 		.state("home.thread", {
 
 			url: 'thread/:NoticiaId',
 			/*templateUrl: 'partials/thread.html',
-			controller: 'NoticiaCtrl'*/
+			controller: 'noticiaCtrl'*/
 
 			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
 
-		        ngDialog.open({
-					controller: "NoticiaCtrl",
+				ngDialog.open({
+					controller: 'noticiaCtrl',
 					templateUrl: 'partials/thread.html',
-					className: 'ngdialog-theme-tread'
+					className: 'ngdialog-theme-thread animated fadeIn'
 
-		        }).closePromise.finally(function() {
-		            $state.go('^');
-		        });
-		    }]			
+				}).closePromise.finally(function() {
+					$state.go('^');
+				});
+			}]
+		})
+
+		// Pixelarts en galeria
+		.state("galeria.pixelart", {
+
+			url: '/pixelart/:pixelartId',
+			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
+
+				ngDialog.open({
+					controller: 'pixelartCtrl',
+					templateUrl: 'partials/pixelart.html',
+					className: 'ngdialog-theme-thread animated fadeIn'
+
+				}).closePromise.finally(function() {
+					$state.go('^');
+				});
+			}]
+		})
+
+		// Pixelarts en Home
+		.state("home.pixelart", {
+
+			url: 'pixelart/:pixelartId',
+			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
+
+				ngDialog.open({
+					controller: 'pixelartCtrl',
+					templateUrl: 'partials/pixelart.html',
+					className: 'ngdialog-theme-thread animated fadeIn'
+
+				}).closePromise.finally(function() {
+					$state.go('^');
+				});
+			}]
+		})
+
+		// Pixelarts en cola
+		.state("encola.pixelart-to-approbal", {
+
+			url: '/:pixelartId',
+			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
+
+				ngDialog.open({
+					controller: 'pixelartCtrl',
+					templateUrl: 'partials/pixelart-en-cola.html',
+					className: 'ngdialog-theme-plain width-noticia animated fadeIn'
+
+				}).closePromise.finally(function() {
+					$state.go('^');
+				});
+			}]
+		})
+
+		// Crear Post
+		.state("home.createpost", {
+
+			url: 'crearpost',
+			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
+
+				ngDialog.close();
+				ngDialog.open({
+					template: 'partials/createpost.html',
+					controller: 'newPost',
+					className: 'ngdialog-theme-plain width-post',
+					cache: false,
+					closeByEscape: false
+
+				}).closePromise.finally(function() {
+					$state.go('^');
+				});
+			}]
+		})		
+
+		// posts
+		.state("home.createnews", {
+
+			url: 'crear-noticia',
+			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
+
+				ngDialog.close();
+				ngDialog.open({
+					template: 'partials/createnews.html',
+					controller: 'noticiaNueva',
+					className: 'ngdialog-theme-plain width-noticia',
+					cache: false,
+					closeByEscape: false
+
+				}).closePromise.finally(function() {
+					$state.go('^');
+				});
+			}]
 		})
 
 		// Blog
 		.state("foro", {
 			url: '/foro',
 			templateUrl: "partials/foro.html",
-			controller: "BlogCtrl" })
+			controller: "" })
 		// 404
 		.state("404", {
 			url: '/404',
 			templateUrl: "partials/404.html",
-			controller: "BlogCtrl" })
+			controller: "" })
 });
 
-app.run( function($rootScope, $location, AuthService) {
+app.run( function($rootScope, $location, AuthService, Session) {
 	// register listener to watch route changes
 	$rootScope.$on( "$stateChangeStart", function(event, next, current) {
 
+		// si no esta logeado
 		if ( AuthService.isAuthenticated() == false ) {
+			// si quiere entrar a /mi-perfil
 			if ( next.templateUrl == "partials/profile.html" ) {
 				$location.path("/");
 			}
 		}
-	});
-}) 
 
-/**/
-
-=======
->>>>>>> origin/master
-/**
- * Configure the Routes
- 
-app.config(['$routeProvider', function ($routeProvider) {
-	$routeProvider
-	// Home
-	.when("/", {
-		templateUrl: "partials/home.html",
-		controller: "PageCtrl" })
-	// Pages
-	.when("/mi-perfil", {
-		templateUrl: "partials/profile.html",
-		controller: "PageCtrl" })   
-	.when("/comunidad", {
-		templateUrl: "partials/comunidad.html",
-		controller: "PageCtrl" })
-	.when("/galeria", {
-		templateUrl: "partials/galeria.html",
-		controller: "PageCtrl" })
-	.when("/contacto", {
-		templateUrl: "partials/contacto.html",
-		controller: "PageCtrl" })
-	// Blog
-	.when("/foro", {
-		templateUrl: "partials/foro.html",
-		controller: "BlogCtrl" })
-
-	/*.when("/thread/:NoticiaId", {
-		templateUrl: "partials/thread.html",
-<<<<<<< HEAD
-		controller: "NoticiaCtrl" })
-=======
-		controller: "NoticiaCtrl" })*/
->>>>>>> origin/master
-	// else 404
-	.otherwise("/404", {
-		templateUrl: "partials/404.html",
-		controller: "PageCtrl" });
-}])
-
-app.run( function($rootScope, $location, AuthService) {
-	// register listener to watch route changes
-	$rootScope.$on( "$routeChangeStart", function(event, next, current) {
-
-		if ( AuthService.isAuthenticated() == false ) {
-			if ( next.templateUrl == "partials/profile.html" ) {
+		// si no esta logeado o si no es admin
+		if ( AuthService.isAuthenticated() == false || AuthService.isAuthorized() == false ) {
+			// si quiere entrar a /en-cola
+			if ( next.templateUrl == "partials/encola.html" ) {
 				$location.path("/");
 			}
-		}   
+		}
 
 	});
-}) 
-
-<<<<<<< HEAD
-*/
-=======
-
->>>>>>> origin/master
-
-
+});
