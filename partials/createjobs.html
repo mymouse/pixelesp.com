@@ -1,0 +1,31 @@
+<div class="content">
+  <header>          
+    <h4 class="text-center">Crear trabajo</h4>
+  </header>
+
+  <section class="tab-content">
+
+    <form id="subirtrabajo" class="form fancy" ng-submit="doRegister()">
+
+      <div class="form-group">
+        <input type="text" tabindex="1" name="newstitle" ng-model="trabajo.Titulo">
+        <label for="newstitle">
+            <span class="label-content">Título</span>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <textarea tabindex="2" name="textarea" ng-model="trabajo.Descripcion"></textarea>
+        <label for="textarea">
+          <span class="label-content">Escribe aquí</span>
+        </label>
+      </div>
+
+      <button tabindex="3" class="btn-full btn-primary" type="submit">Crear trabajo</button>
+      <a href="" class="cancelaction" ng-click="closeThisDialog()"> <i class="fa fa-trash"></i> Cancelar </a>
+
+      <div id="message"></div>
+
+    </form>
+  </section>
+</div>

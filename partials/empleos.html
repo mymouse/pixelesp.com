@@ -1,18 +1,18 @@
 <div class="content-wrapper">
 
-	<section class="col-lg-5 content" ng-controller="getNoticias">
-		<h3>Ultimas Noticias</h3>
-		<article class="card" ng-repeat="noticia in noticias">
+	<section class="col-lg-5 content" ng-controller="getTrabajos">
+		<h3>Ultimos Empleos</h3>
+		<article class="card" ng-repeat="trabajo in trabajos">
 			<div class="card-block">
-				<h5 class="card-title"><a ui-sref="home.thread({ NoticiaId: {{noticia.id}} })"> {{noticia.Titulo}} </a></h5>
-				<h6 class="card-subtitle text-muted"><img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{noticia.imagen}}" alt="{{noticia.username}}">
-				<span class="username text-muted"><a href="{{noticia.IdUsuario}}"> {{noticia.username}} </a></span> <time title="{{ noticia.created_at | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ noticia.created_at | amCalendar }}</time></h6>
+				<h5 class="card-title"><a ui-sref="home.thread({ NoticiaId: {{trabajo.id}} })"> {{trabajo.Titulo}} </a></h5>
+				<h6 class="card-subtitle text-muted"><img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{trabajo.imagen}}" alt="{{trabajo.username}}">
+				<span class="username text-muted"><a href="{{trabajo.IdUsuario}}"> {{trabajo.username}} </a></span> <time title="{{ trabajo.created_at | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ trabajo.created_at | amCalendar }}</time></h6>
 			</div>
 			<!--  <img src="..." alt="Card image"> -->
 			<div class="card-block">
-				<p class="card-text"> {{noticia.Descripcion}} </p>
+				<p class="card-text"> {{trabajo.Descripcion}} </p>
 				<!-- <a href="#" class="card-link">Card link</a> -->
-				<a href="#" class="card-link text-xs-right" ui-sref="home.thread({ NoticiaId: {{noticia.id}} })"><i class="fa fa-comment" aria-hidden="true"></i> {{noticia.comentarios.length}} Comentarios</a>
+				<a href="#" class="card-link text-xs-right" ui-sref="home.thread({ NoticiaId: {{trabajo.id}} })"><i class="fa fa-comment" aria-hidden="true"></i> {{trabajo.comentarios.length}} Comentarios</a>
 			</div>
 		</article>
 	</section>

@@ -5,13 +5,14 @@
   </button>
   <div class="collapse navbar-toggleable-xs" id="collapesenavbar">
   	<ul ng-if="currentUser" class="nav navbar-nav pull-xs-left">
-		<li class="nav-item"><a href="" ui-sref="home.createpost"><i class="fa fa-pencil"></i> Subir PixelArt</a></li>
-		<li class="nav-item"><a href="" ui-sref="home.createnews""><i class="fa fa-newspaper-o"></i> Crear Post</a></li>
-		<li class="nav-item" ng-if="isAuthorized(userRoles.admin)"><a href="" ui-sref="encola""><i class="fa fa-list-ul" aria-hidden="true"></i> Post para aprobar</a></li>
+		<li class="nav-item"><a href="" ui-sref="home.createpost"><i class="fa fa-pencil"></i> Subir Pixel Art</a></li>
+		<li class="nav-item"><a href="" ui-sref="home.createnews""><i class="fa fa-newspaper-o"></i> Crear Noticia</a></li>
+		<li class="nav-item"><a href="" ui-sref="home.createjobs""><i class="fa fa-newspaper-o"></i> Crear Empleo</a></li>
+		<li class="nav-item" ng-if="isAuthorized(userRoles.admin)"><a href="" ui-sref="encola""><i class="fa fa-list-ul" aria-hidden="true"></i> Moderar</a></li>
 	</ul>
 
 	<ul class="nav navbar-nav pull-xs-right">
-		<li class="nav-item" ng-if="isAuthorized(userRoles.admin)"><a href="" >You're the real mdfk G.</a></li>
+		<li class="nav-item" ng-if="isAuthorized(userRoles.admin)"><a href="" >Administrador</a></li>
 		<li class="nav-item active"><a href="" ng-if="!currentUser" ng-click="openLogin()">Ingresar</a></li>
 		<li class="nav-item"><a href="" ng-if="currentUser" ng-click="doLogout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Salir</a></li>
 	</ul>
