@@ -45,6 +45,7 @@ app.controller('noticiaCtrl', function($scope, $state, $stateParams, $http, ngDi
 				//console.log(resp);
 
 				$('#commentinput').val('');
+				$scope.comment.text = '' ;
 				$scope.noticia.comentarios.push(resp.data.data);
 
 
