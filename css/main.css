@@ -1,8 +1,9 @@
+@charset "UTF-8";
 /**
  * Stylesheet pixelesp
  */
 /* importar demas estilos*/
-@import "https://fonts.googleapis.com/css?family=Roboto:400,700,900";
+@import "https://fonts.googleapis.com/css?family=Roboto:100,400,700,900";
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css");
 @import url("./ngDialog.min.css");
 @import url("./ng-img-crop.css");
@@ -7796,6 +7797,52 @@
     -ms-transform-origin: center bottom;
     -o-transform-origin: center bottom;
     transform-origin: center bottom; } }
+.alert-animated {
+  -webkit-animation-name: fadeIn;
+  -moz-animation-name: fadeIn;
+  -ms-animation-name: fadeIn;
+  -o-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-iteration-count: 1;
+  -moz-animation-iteration-count: 1;
+  -ms-animation-iteration-count: 1;
+  -o-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -ms-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-delay: 0.5s;
+  -moz-animation-delay: 0.5s;
+  -ms-animation-delay: 0.5s;
+  -o-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+  -webkit-animation-timing-function: ease;
+  -moz-animation-timing-function: ease;
+  -ms-animation-timing-function: ease;
+  -o-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -ms-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden; }
+
+.alert-top {
+  position: relative;
+  top: 0px;
+  margin: 0;
+  padding: 0 1rem;
+  line-height: 50px;
+  height: 50px;
+  border-radius: 0; }
+
 /*
  * Reset CSS
  */
@@ -7816,6 +7863,20 @@ body {
 /* links*/
 a {
   color: #97b125; }
+
+/* reset dropdown */
+.dropdown-toggle {
+  border: none;
+  padding: 5px; }
+  .dropdown-toggle:after {
+    content: '\f078';
+    font-family: 'FontAwesome';
+    font-style: normal;
+    border: none;
+    margin: 0;
+    text-align: center;
+    width: 17px;
+    height: 17px; }
 
 /*
  * NavBar
@@ -8015,378 +8076,6 @@ a {
   background-color: #262626; }
 
 /*
- * Card Reset
- */
-@media (min-width: 34em) {
-  .card-columns {
-    -moz-column-count: 2;
-    column-count: 2; } }
-.card {
-  -webkit-animation-name: fadeInUp;
-  -moz-animation-name: fadeInUp;
-  -ms-animation-name: fadeInUp;
-  -o-animation-name: fadeInUp;
-  animation-name: fadeInUp;
-  -webkit-animation-iteration-count: 1;
-  -moz-animation-iteration-count: 1;
-  -ms-animation-iteration-count: 1;
-  -o-animation-iteration-count: 1;
-  animation-iteration-count: 1;
-  -webkit-animation-duration: 1s;
-  -moz-animation-duration: 1s;
-  -ms-animation-duration: 1s;
-  -o-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-delay: 0s;
-  -moz-animation-delay: 0s;
-  -ms-animation-delay: 0s;
-  -o-animation-delay: 0s;
-  animation-delay: 0s;
-  -webkit-animation-timing-function: ease;
-  -moz-animation-timing-function: ease;
-  -ms-animation-timing-function: ease;
-  -o-animation-timing-function: ease;
-  animation-timing-function: ease;
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -ms-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden; }
-  .card .card-block {
-    padding-bottom: .5rem;
-    border-bottom: 1px solid #F4F4F6; }
-    .card .card-block .card-title {
-      text-transform: uppercase;
-      font-weight: 600; }
-    .card .card-block .card-subtitle {
-      font-size: .9rem; }
-      .card .card-block .card-subtitle img {
-        margin-right: 5px;
-        width: 20px;
-        height: 20px; }
-
-/*
- * Modal - ngDialog
- */
-.ngdialog {
-  /* reset*/
-  /* post noticias*/
-  /* crear post pixelart*/ }
-  .ngdialog .ngdialog-content {
-    /* login - register*/ }
-    .ngdialog .ngdialog-content header h4 {
-      margin-bottom: 0; }
-    .ngdialog .ngdialog-content .nav-center {
-      text-align: center; }
-      .ngdialog .ngdialog-content .nav-center ul.nav {
-        display: inline-block; }
-        .ngdialog .ngdialog-content .nav-center ul.nav li {
-          margin-bottom: -2px;
-          font-size: .9em; }
-    .ngdialog .ngdialog-content .tab-content {
-      padding: 20px 20px 10px; }
-  .ngdialog.ngdialog-theme-tread {
-    margin-bottom: 0;
-    padding: 50px 0 0 0; }
-    .ngdialog.ngdialog-theme-tread .wrapper {
-      -webkit-animation-name: fadeInRight;
-      -moz-animation-name: fadeInRight;
-      -ms-animation-name: fadeInRight;
-      -o-animation-name: fadeInRight;
-      animation-name: fadeInRight;
-      -webkit-animation-iteration-count: 1;
-      -moz-animation-iteration-count: 1;
-      -ms-animation-iteration-count: 1;
-      -o-animation-iteration-count: 1;
-      animation-iteration-count: 1;
-      -webkit-animation-duration: 1s;
-      -moz-animation-duration: 1s;
-      -ms-animation-duration: 1s;
-      -o-animation-duration: 1s;
-      animation-duration: 1s;
-      -webkit-animation-delay: 0s;
-      -moz-animation-delay: 0s;
-      -ms-animation-delay: 0s;
-      -o-animation-delay: 0s;
-      animation-delay: 0s;
-      -webkit-animation-timing-function: ease;
-      -moz-animation-timing-function: ease;
-      -ms-animation-timing-function: ease;
-      -o-animation-timing-function: ease;
-      animation-timing-function: ease;
-      -webkit-animation-fill-mode: both;
-      -moz-animation-fill-mode: both;
-      -ms-animation-fill-mode: both;
-      -o-animation-fill-mode: both;
-      animation-fill-mode: both;
-      -webkit-backface-visibility: hidden;
-      -moz-backface-visibility: hidden;
-      -ms-backface-visibility: hidden;
-      -o-backface-visibility: hidden;
-      backface-visibility: hidden; }
-    .ngdialog.ngdialog-theme-tread .ngdialog-close::before {
-      -webkit-animation-name: fadeInLeftBig;
-      -moz-animation-name: fadeInLeftBig;
-      -ms-animation-name: fadeInLeftBig;
-      -o-animation-name: fadeInLeftBig;
-      animation-name: fadeInLeftBig;
-      -webkit-animation-iteration-count: 1;
-      -moz-animation-iteration-count: 1;
-      -ms-animation-iteration-count: 1;
-      -o-animation-iteration-count: 1;
-      animation-iteration-count: 1;
-      -webkit-animation-duration: 1s;
-      -moz-animation-duration: 1s;
-      -ms-animation-duration: 1s;
-      -o-animation-duration: 1s;
-      animation-duration: 1s;
-      -webkit-animation-delay: 0s;
-      -moz-animation-delay: 0s;
-      -ms-animation-delay: 0s;
-      -o-animation-delay: 0s;
-      animation-delay: 0s;
-      -webkit-animation-timing-function: ease;
-      -moz-animation-timing-function: ease;
-      -ms-animation-timing-function: ease;
-      -o-animation-timing-function: ease;
-      animation-timing-function: ease;
-      -webkit-animation-fill-mode: both;
-      -moz-animation-fill-mode: both;
-      -ms-animation-fill-mode: both;
-      -o-animation-fill-mode: both;
-      animation-fill-mode: both;
-      -webkit-backface-visibility: hidden;
-      -moz-backface-visibility: hidden;
-      -ms-backface-visibility: hidden;
-      -o-backface-visibility: hidden;
-      backface-visibility: hidden;
-      position: absolute;
-      top: 50px;
-      display: block;
-      margin-left: -50px;
-      padding: 15px;
-      width: 50px;
-      height: 50px;
-      border-radius: 0 0 0 2px;
-      background: white;
-      text-align: center; }
-    .ngdialog.ngdialog-theme-tread .ngdialog-overlay {
-      margin-top: 50px; }
-    .ngdialog.ngdialog-theme-tread .ngdialog-content {
-      top: 0;
-      float: right;
-      padding: 0;
-      max-width: 70%;
-      width: 1020px;
-      background-color: #f5f5f5; }
-    .ngdialog.ngdialog-theme-tread .card {
-      margin-bottom: 0;
-      width: 100%;
-      height: 100vh;
-      border-radius: 0;
-      background-color: #f5f5f5; }
-      .ngdialog.ngdialog-theme-tread .card-block {
-        -webkit-animation-name: fadeInUp;
-        -moz-animation-name: fadeInUp;
-        -ms-animation-name: fadeInUp;
-        -o-animation-name: fadeInUp;
-        animation-name: fadeInUp;
-        -webkit-animation-iteration-count: 1;
-        -moz-animation-iteration-count: 1;
-        -ms-animation-iteration-count: 1;
-        -o-animation-iteration-count: 1;
-        animation-iteration-count: 1;
-        -webkit-animation-duration: 1s;
-        -moz-animation-duration: 1s;
-        -ms-animation-duration: 1s;
-        -o-animation-duration: 1s;
-        animation-duration: 1s;
-        -webkit-animation-delay: 0.5s;
-        -moz-animation-delay: 0.5s;
-        -ms-animation-delay: 0.5s;
-        -o-animation-delay: 0.5s;
-        animation-delay: 0.5s;
-        -webkit-animation-timing-function: ease;
-        -moz-animation-timing-function: ease;
-        -ms-animation-timing-function: ease;
-        -o-animation-timing-function: ease;
-        animation-timing-function: ease;
-        -webkit-animation-fill-mode: both;
-        -moz-animation-fill-mode: both;
-        -ms-animation-fill-mode: both;
-        -o-animation-fill-mode: both;
-        animation-fill-mode: both;
-        -webkit-backface-visibility: hidden;
-        -moz-backface-visibility: hidden;
-        -ms-backface-visibility: hidden;
-        -o-backface-visibility: hidden;
-        backface-visibility: hidden;
-        padding: 1.25rem 10%;
-        background-color: #fff; }
-      .ngdialog.ngdialog-theme-tread .card-footer {
-        -webkit-animation-name: fadeInUp;
-        -moz-animation-name: fadeInUp;
-        -ms-animation-name: fadeInUp;
-        -o-animation-name: fadeInUp;
-        animation-name: fadeInUp;
-        -webkit-animation-iteration-count: 1;
-        -moz-animation-iteration-count: 1;
-        -ms-animation-iteration-count: 1;
-        -o-animation-iteration-count: 1;
-        animation-iteration-count: 1;
-        -webkit-animation-duration: 1s;
-        -moz-animation-duration: 1s;
-        -ms-animation-duration: 1s;
-        -o-animation-duration: 1s;
-        animation-duration: 1s;
-        -webkit-animation-delay: 0.5s;
-        -moz-animation-delay: 0.5s;
-        -ms-animation-delay: 0.5s;
-        -o-animation-delay: 0.5s;
-        animation-delay: 0.5s;
-        -webkit-animation-timing-function: ease;
-        -moz-animation-timing-function: ease;
-        -ms-animation-timing-function: ease;
-        -o-animation-timing-function: ease;
-        animation-timing-function: ease;
-        -webkit-animation-fill-mode: both;
-        -moz-animation-fill-mode: both;
-        -ms-animation-fill-mode: both;
-        -o-animation-fill-mode: both;
-        animation-fill-mode: both;
-        -webkit-backface-visibility: hidden;
-        -moz-backface-visibility: hidden;
-        -ms-backface-visibility: hidden;
-        -o-backface-visibility: hidden;
-        backface-visibility: hidden;
-        padding: 15px 15%; }
-        .ngdialog.ngdialog-theme-tread .card-footer .box-comment {
-          -webkit-animation-name: flipInX;
-          -moz-animation-name: flipInX;
-          -ms-animation-name: flipInX;
-          -o-animation-name: flipInX;
-          animation-name: flipInX;
-          -webkit-animation-iteration-count: 1;
-          -moz-animation-iteration-count: 1;
-          -ms-animation-iteration-count: 1;
-          -o-animation-iteration-count: 1;
-          animation-iteration-count: 1;
-          -webkit-animation-duration: 1s;
-          -moz-animation-duration: 1s;
-          -ms-animation-duration: 1s;
-          -o-animation-duration: 1s;
-          animation-duration: 1s;
-          -webkit-animation-delay: 0s;
-          -moz-animation-delay: 0s;
-          -ms-animation-delay: 0s;
-          -o-animation-delay: 0s;
-          animation-delay: 0s;
-          -webkit-animation-timing-function: ease;
-          -moz-animation-timing-function: ease;
-          -ms-animation-timing-function: ease;
-          -o-animation-timing-function: ease;
-          animation-timing-function: ease;
-          -webkit-animation-fill-mode: both;
-          -moz-animation-fill-mode: both;
-          -ms-animation-fill-mode: both;
-          -o-animation-fill-mode: both;
-          animation-fill-mode: both;
-          -webkit-backface-visibility: hidden;
-          -moz-backface-visibility: hidden;
-          -ms-backface-visibility: hidden;
-          -o-backface-visibility: hidden;
-          backface-visibility: hidden;
-          padding: 10px;
-          border-bottom: 1px solid #eee; }
-          .ngdialog.ngdialog-theme-tread .card-footer .box-comment .img-push, .ngdialog.ngdialog-theme-tread .card-footer .box-comment .comment-text {
-            margin-left: 40px; }
-          .ngdialog.ngdialog-theme-tread .card-footer .box-comment img {
-            float: left;
-            width: 30px;
-            height: 30px; }
-          .ngdialog.ngdialog-theme-tread .card-footer .box-comment .username {
-            display: block;
-            color: #444;
-            font-weight: 600; }
-          .ngdialog.ngdialog-theme-tread .card-footer .box-comment .text-muted {
-            font-weight: 400;
-            font-size: 12px; }
-          .ngdialog.ngdialog-theme-tread .card-footer .box-comment .comment-text {
-            margin-left: 40px;
-            color: #555; }
-        .ngdialog.ngdialog-theme-tread .card-footer .box-footer {
-          position: relative;
-          display: inline-block;
-          clear: both;
-          margin: 0 0 10px;
-          padding: 15px;
-          width: 100%;
-          border: 1px solid #e6e6eb;
-          border-radius: 3px;
-          background: #fff;
-          box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
-          font-size: 16px; }
-          .ngdialog.ngdialog-theme-tread .card-footer .box-footer .avatar + .img-push {
-            display: block;
-            margin: 0 0 0 40px;
-            width: 95%; }
-            .ngdialog.ngdialog-theme-tread .card-footer .box-footer .avatar + .img-push input {
-              margin: 0; }
-        .ngdialog.ngdialog-theme-tread .card-footer img.avatar {
-          float: left;
-          width: 30px !important;
-          height: 30px !important; }
-        .ngdialog.ngdialog-theme-tread .card-footer .comicon i {
-          display: block;
-          padding: 15px;
-          color: #9c9c9c;
-          text-align: center; }
-    .ngdialog.ngdialog-theme-tread img.pixelart {
-      margin: 15px auto;
-      display: block;
-      max-height: 500px; }
-  .ngdialog.ngdialog-theme-plain.width-noticia .ngdialog-content {
-    width: 500px; }
-  .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content {
-    max-width: 60%;
-    width: 900px; }
-    .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .postFileThumb {
-      position: absolute;
-      top: 0px;
-      width: 95%;
-      height: 440px;
-      background: white;
-      text-align: center;
-      white-space: nowrap; }
-      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .postFileThumb .vericalhelper {
-        display: inline-block;
-        height: 100%;
-        vertical-align: middle; }
-      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .postFileThumb img {
-        max-width: 100%;
-        vertical-align: middle; }
-    .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .preview {
-      display: block;
-      height: 135px; }
-      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .preview img {
-        display: block;
-        margin: 0 auto; }
-      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .preview button.closePrevia {
-        position: absolute;
-        top: 20px;
-        left: calc(100% / 2 + 35px);
-        width: 30px;
-        border: none;
-        background: none;
-        color: #D32F2F;
-        text-shadow: 1px 1px 2px #BDBDBD; }
-
-/*
  * Formularios
  */
 form {
@@ -8430,7 +8119,9 @@ form {
           border-bottom: none !important; }
         form.fancy .form-group .alert-warning p {
           margin: 0;
-          font-size: 0.9em; }
+          font-size: 0.7em;
+          text-transform: uppercase;
+          font-weight: 600; }
       form.fancy .form-group.textarea .alert-warning {
         top: -8px; }
       form.fancy .form-group.preview .alert-warning {
@@ -8480,7 +8171,27 @@ form {
       text-align: center; }
       form.fancy .alert-danger p, form.fancy .alert-success p {
         margin: 0;
-        font-size: 0.9em; }
+        font-size: 0.7em;
+        text-transform: uppercase;
+        font-weight: 600; }
+    form.fancy .alert-danger p:before {
+      content: "";
+      font-family: 'FontAwesome';
+      font-style: normal;
+      font-size: 1em;
+      margin-right: 5px; }
+    form.fancy .alert-success p:before {
+      content: "";
+      font-family: 'FontAwesome';
+      font-style: normal;
+      font-size: 1em;
+      margin-right: 5px; }
+    form.fancy .alert-warning p:before {
+      content: "";
+      font-family: 'FontAwesome';
+      font-style: normal;
+      font-size: 1em;
+      margin-right: 5px; }
     form.fancy .drop-box {
       position: relative;
       display: block;
@@ -8531,6 +8242,298 @@ form {
       form.fancy a.btn.btn-primary[disabled], form.fancy button.btn-primary[disabled], form.fancy input[type=submit].btn-primary[disabled] {
         background: rgba(255, 156, 66, 0.5); }
 
+/*
+ * Card Reset
+ */
+@media (min-width: 34em) {
+  .card-columns {
+    -moz-column-count: 2;
+    column-count: 2; } }
+.card {
+  transition: all 0.5s ease-in-out; }
+  .card .card-block {
+    padding-bottom: .5rem;
+    border-bottom: 1px solid #F4F4F6; }
+    .card .card-block .card-title {
+      text-transform: uppercase;
+      font-weight: 600; }
+    .card .card-block .card-subtitle {
+      font-size: .9rem; }
+      .card .card-block .card-subtitle img {
+        margin-right: 5px;
+        width: 20px;
+        height: 20px; }
+
+/*
+ * Modal - ngDialog
+ */
+.ngdialog {
+  /* reset*/
+  /* post noticias*/
+  /* crear post pixelart*/ }
+  .ngdialog .ngdialog-content {
+    /* login - register*/ }
+    .ngdialog .ngdialog-content header h4 {
+      margin-bottom: 0; }
+    .ngdialog .ngdialog-content .nav-center {
+      text-align: center; }
+      .ngdialog .ngdialog-content .nav-center ul.nav {
+        display: inline-block; }
+        .ngdialog .ngdialog-content .nav-center ul.nav li {
+          margin-bottom: -2px;
+          font-size: .9em; }
+    .ngdialog .ngdialog-content .tab-content {
+      padding: 20px 20px 10px; }
+  .ngdialog.ngdialog-theme-thread {
+    margin-bottom: 0;
+    padding: 50px 0 0 0; }
+    .ngdialog.ngdialog-theme-thread .wrapper {
+      -webkit-animation-name: fadeInRight;
+      -moz-animation-name: fadeInRight;
+      -ms-animation-name: fadeInRight;
+      -o-animation-name: fadeInRight;
+      animation-name: fadeInRight;
+      -webkit-animation-iteration-count: 1;
+      -moz-animation-iteration-count: 1;
+      -ms-animation-iteration-count: 1;
+      -o-animation-iteration-count: 1;
+      animation-iteration-count: 1;
+      -webkit-animation-duration: 1s;
+      -moz-animation-duration: 1s;
+      -ms-animation-duration: 1s;
+      -o-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-delay: 0s;
+      -moz-animation-delay: 0s;
+      -ms-animation-delay: 0s;
+      -o-animation-delay: 0s;
+      animation-delay: 0s;
+      -webkit-animation-timing-function: ease;
+      -moz-animation-timing-function: ease;
+      -ms-animation-timing-function: ease;
+      -o-animation-timing-function: ease;
+      animation-timing-function: ease;
+      -webkit-animation-fill-mode: both;
+      -moz-animation-fill-mode: both;
+      -ms-animation-fill-mode: both;
+      -o-animation-fill-mode: both;
+      animation-fill-mode: both;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      -o-backface-visibility: hidden;
+      backface-visibility: hidden; }
+    .ngdialog.ngdialog-theme-thread .ngdialog-close::before {
+      -webkit-animation-name: fadeInLeftBig;
+      -moz-animation-name: fadeInLeftBig;
+      -ms-animation-name: fadeInLeftBig;
+      -o-animation-name: fadeInLeftBig;
+      animation-name: fadeInLeftBig;
+      -webkit-animation-iteration-count: 1;
+      -moz-animation-iteration-count: 1;
+      -ms-animation-iteration-count: 1;
+      -o-animation-iteration-count: 1;
+      animation-iteration-count: 1;
+      -webkit-animation-duration: 1s;
+      -moz-animation-duration: 1s;
+      -ms-animation-duration: 1s;
+      -o-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-delay: 0s;
+      -moz-animation-delay: 0s;
+      -ms-animation-delay: 0s;
+      -o-animation-delay: 0s;
+      animation-delay: 0s;
+      -webkit-animation-timing-function: ease;
+      -moz-animation-timing-function: ease;
+      -ms-animation-timing-function: ease;
+      -o-animation-timing-function: ease;
+      animation-timing-function: ease;
+      -webkit-animation-fill-mode: both;
+      -moz-animation-fill-mode: both;
+      -ms-animation-fill-mode: both;
+      -o-animation-fill-mode: both;
+      animation-fill-mode: both;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      -o-backface-visibility: hidden;
+      backface-visibility: hidden;
+      position: absolute;
+      top: 50px;
+      display: block;
+      margin-left: -50px;
+      padding: 15px;
+      width: 50px;
+      height: 50px;
+      border-radius: 0 0 0 2px;
+      background: white;
+      text-align: center; }
+    .ngdialog.ngdialog-theme-thread .ngdialog-overlay {
+      margin-top: 50px; }
+    .ngdialog.ngdialog-theme-thread .ngdialog-content {
+      top: 0;
+      float: right;
+      padding: 0;
+      max-width: 70%;
+      width: 1020px;
+      background-color: #f5f5f5; }
+    .ngdialog.ngdialog-theme-thread .card {
+      margin-bottom: 0;
+      width: 100%;
+      height: 100vh;
+      border-radius: 0;
+      background-color: #f5f5f5; }
+      .ngdialog.ngdialog-theme-thread .card-block {
+        padding: 1.25rem 10%;
+        background-color: #fff; }
+      .ngdialog.ngdialog-theme-thread .card-footer {
+        padding: 15px 15%; }
+        .ngdialog.ngdialog-theme-thread .card-footer .box-comment {
+          -webkit-animation-name: flipInX;
+          -moz-animation-name: flipInX;
+          -ms-animation-name: flipInX;
+          -o-animation-name: flipInX;
+          animation-name: flipInX;
+          -webkit-animation-iteration-count: 1;
+          -moz-animation-iteration-count: 1;
+          -ms-animation-iteration-count: 1;
+          -o-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+          -webkit-animation-duration: 1s;
+          -moz-animation-duration: 1s;
+          -ms-animation-duration: 1s;
+          -o-animation-duration: 1s;
+          animation-duration: 1s;
+          -webkit-animation-delay: 0s;
+          -moz-animation-delay: 0s;
+          -ms-animation-delay: 0s;
+          -o-animation-delay: 0s;
+          animation-delay: 0s;
+          -webkit-animation-timing-function: ease;
+          -moz-animation-timing-function: ease;
+          -ms-animation-timing-function: ease;
+          -o-animation-timing-function: ease;
+          animation-timing-function: ease;
+          -webkit-animation-fill-mode: both;
+          -moz-animation-fill-mode: both;
+          -ms-animation-fill-mode: both;
+          -o-animation-fill-mode: both;
+          animation-fill-mode: both;
+          -webkit-backface-visibility: hidden;
+          -moz-backface-visibility: hidden;
+          -ms-backface-visibility: hidden;
+          -o-backface-visibility: hidden;
+          backface-visibility: hidden;
+          padding: 10px;
+          border-bottom: 1px solid #eee; }
+          .ngdialog.ngdialog-theme-thread .card-footer .box-comment .img-push, .ngdialog.ngdialog-theme-thread .card-footer .box-comment .comment-text {
+            margin-left: 40px; }
+          .ngdialog.ngdialog-theme-thread .card-footer .box-comment img {
+            float: left;
+            width: 30px;
+            height: 30px; }
+          .ngdialog.ngdialog-theme-thread .card-footer .box-comment .username {
+            display: block;
+            color: #444;
+            font-weight: 600; }
+          .ngdialog.ngdialog-theme-thread .card-footer .box-comment .text-muted {
+            font-weight: 400;
+            font-size: 12px; }
+          .ngdialog.ngdialog-theme-thread .card-footer .box-comment .comment-text {
+            margin-left: 40px;
+            color: #555; }
+        .ngdialog.ngdialog-theme-thread .card-footer .box-footer {
+          position: relative;
+          display: inline-block;
+          clear: both;
+          margin: 0 0 10px;
+          padding: 15px;
+          width: 100%;
+          border: 1px solid #e6e6eb;
+          border-radius: 3px;
+          background: #fff;
+          box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
+          font-size: 16px; }
+          .ngdialog.ngdialog-theme-thread .card-footer .box-footer .avatar + .img-push {
+            display: block;
+            margin: 0 0 0 40px;
+            width: 95%; }
+            .ngdialog.ngdialog-theme-thread .card-footer .box-footer .avatar + .img-push input {
+              margin: 0; }
+        .ngdialog.ngdialog-theme-thread .card-footer img.avatar {
+          float: left;
+          width: 30px !important;
+          height: 30px !important; }
+        .ngdialog.ngdialog-theme-thread .card-footer .comicon i {
+          display: block;
+          padding: 15px;
+          color: #9c9c9c;
+          text-align: center; }
+    .ngdialog.ngdialog-theme-thread img.pixelart {
+      margin: 15px auto;
+      display: block;
+      max-height: 500px; }
+  .ngdialog.ngdialog-theme-plain.width-noticia .ngdialog-content {
+    width: 500px; }
+  .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content {
+    max-width: 60%;
+    width: 900px; }
+    .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .postFileThumb {
+      position: absolute;
+      top: 0px;
+      width: 95%;
+      height: 440px;
+      background: white;
+      text-align: center;
+      white-space: nowrap; }
+      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .postFileThumb .vericalhelper {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle; }
+      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .postFileThumb img {
+        max-width: 100%;
+        vertical-align: middle; }
+    .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .preview {
+      display: block;
+      height: 135px; }
+      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .preview img {
+        display: block;
+        margin: 0 auto; }
+      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .preview button.closePrevia {
+        position: absolute;
+        top: 20px;
+        left: calc(100% / 2 + 35px);
+        width: 30px;
+        border: none;
+        background: none;
+        color: #D32F2F;
+        text-shadow: 1px 1px 2px #BDBDBD; }
+  .ngdialog.card-message .card-block:before {
+    font-family: 'FontAwesome';
+    font-style: normal;
+    font-size: 5em;
+    margin-right: 5px;
+    position: absolute;
+    opacity: .2;
+    color: white;
+    left: 20px;
+    top: 40px; }
+  .ngdialog.card-message .card-blockquote p {
+    text-transform: uppercase;
+    font-weight: 100;
+    font-size: 0.9em; }
+  .ngdialog.card-message footer {
+    font-style: italic;
+    text-align: right;
+    font-size: 0.9em; }
+  .ngdialog.card-message .card-danger .card-block:before {
+    content: '\f057'; }
+  .ngdialog.card-message .card-success .card-block:before {
+    content: '\f058'; }
+  .ngdialog.card-message .card-warning .card-block:before {
+    content: '\f06a'; }
+
 /**
  * Galeria preview
  */
@@ -8577,5 +8580,34 @@ article.post {
     bottom: 0px;
     z-index: 99;
     opacity: 1; }
+
+/*
+ * My Profile Page
+ */
+.nav-tabs:not(#modalTabs) {
+  border-bottom: none; }
+  .nav-tabs:not(#modalTabs) li.nav-item {
+    width: calc(100% / 4);
+    margin: 0 auto;
+    text-align: center; }
+    .nav-tabs:not(#modalTabs) li.nav-item .nav-link {
+      border: none;
+      border-bottom: 2px solid #aeaeae;
+      color: #9E9E9E; }
+      .nav-tabs:not(#modalTabs) li.nav-item .nav-link.active, .nav-tabs:not(#modalTabs) li.nav-item .nav-link:hover {
+        border-bottom: 2px solid #97b125 !important;
+        position: relative;
+        color: #97b125; }
+        .nav-tabs:not(#modalTabs) li.nav-item .nav-link.active:after, .nav-tabs:not(#modalTabs) li.nav-item .nav-link:hover:after {
+          position: absolute;
+          content: '';
+          width: 0;
+          height: 0;
+          border-left: 5px solid transparent;
+          border-right: 5px solid transparent;
+          border-top: 5px solid #97b125;
+          left: 50%;
+          bottom: -7px;
+          margin-left: -2px; }
 
 /*# sourceMappingURL=main.css.map */

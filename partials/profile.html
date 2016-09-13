@@ -1,3 +1,84 @@
 <div class="content-wrapper">
-<i class="fa fa-code fa-5x" aria-hidden="true" style="text-align: center; display: block; margin-top: 75px; "></i>
+
+	<div class="container-fluid profile-page">
+		<div class="row">
+
+			<section class="col-xs-3">
+				<div class="card profile">
+				  <img class="img-circle d-block m-x-auto m-t-1" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{currentUser.imagen}}" alt="{{currentUser.username}}">
+				  <div class="card-block text-xs-center">
+				    <h5 ng-if="currentUser.name" class="card-title">{{currentUser.name}}</h5>
+				    <h6>@{{currentUser.username}}</h6>
+				    <span if="currentUser.userlevel == 1" class="tag tag-warning" style="position: absolute;top: 5px;right: 5px;">Admin</span>
+				    <p nf-if="currentUser.biografia" class="card-text">{{currentUser.biografia}}</p>
+				  </div>
+				  <ul class="list-group list-group-flush">
+				    <li class="list-group-item">Favoritos</li>
+				    <li class="list-group-item">PixelArts</li>
+				    <li class="list-group-item">Comentarios</li>
+				  </ul>
+				</div>		
+			</section>
+
+			<section class="col-xs-9">
+				
+					<ul id="profileTabs" class="nav nav-tabs card" role="tablist">
+					  <li class="nav-item">
+					    <a class="nav-link active" data-toggle="tab" href="#myPixelarts" role="tab">PixelArts</a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Favoritos</a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" data-toggle="tab" href="#messages" role="tab">Posts</a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Configuracion</a>
+					  </li>
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content m-y-1 p-a-1">
+						<div class="tab-pane fade in active" id="myPixelarts" role="tabpanel">
+
+							<article class="post" ng-repeat="pixelart in currentUser.pixelarts">
+							    <a ui-sref="galeria.pixelart({ pixelartId: {{pixelart.id}} })" target="_blank">
+							    <h4 class="card-title">{{pixelart.Titulo}}</h4>
+							    <img class="img-fluid" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.Previa}}" alt="{{pixelart.Titulo}}" >
+							    <!-- <div class="card-footer">
+							        <img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.imagen}}" alt="{{pixelart.username}}">
+							        <span class="username text-muted"><a href="{{pixelart.IdUsuario}}"> {{pixelart.username}} </a></span>
+							    </div> -->
+							    </a>
+							</article>
+
+						</div>
+						<div class="tab-pane fade" id="profile" role="tabpanel">
+
+							<article class="post" ng-repeat="favorito in currentUser.favorites">
+							    <a ui-sref="galeria.pixelart({ pixelartId: {{favorito.id}} })" target="_blank">
+							    <h4 class="card-title">{{favorito.Titulo}}</h4>
+							    <img class="img-fluid" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{favorito.Previa}}" alt="{{favorito.Titulo}}" >
+							    <!-- <div class="card-footer">
+							        <img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{favorito.imagen}}" alt="{{favorito.username}}">
+							        <span class="username text-muted"><a href="{{favorito.IdUsuario}}"> {{favorito.username}} </a></span>
+							    </div> -->
+							    </a>
+							</article>
+						</div>
+						<div class="tab-pane fade" id="messages" role="tabpanel">...</div>
+						<div class="tab-pane fade" id="settings" role="tabpanel">...</div>
+					</div>
+
+			</section>
+
+			<script type="text/javascript">
+				$('#profileTabs a').click(function (e) {
+				  e.preventDefault()
+				  $(this).tab('show')
+				})
+			</script>
+
+		</div>
+	</div>
 </div>

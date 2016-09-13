@@ -1,7 +1,7 @@
 <div class="content-wrapper">
 
 	<section class="col-lg-5 content" ng-controller="getNoticias">
-		<h3>Ultimas Noticias</h3>
+		<h3>Ultimos Posts</h3>
 		<article class="card" ng-repeat="noticia in noticias">
 			<div class="card-block">
 				<h5 class="card-title"><a ui-sref="home.thread({ NoticiaId: {{noticia.id}} })"> {{noticia.Titulo}} </a></h5>

@@ -63,13 +63,54 @@ app.controller('noticiaCtrl', function($scope, $state, $stateParams, $http, ngDi
     console.error('ERR', err);
     // err.status will contain the status code
   });
+
+  // editar o eliminar post
+	$scope.doSave = function() {
+		$http.put('http://pixelesp-api.herokuapp.com/noticias/'+ $stateParams.NoticiaId, $scope.noticia).then(function(resp) {
+			console.log(resp.data);  
+			$location.path('/app/noticias');
+
+		}, function(err) {
+			console.error('ERR', err);
+			// err.status will contain the status code
+		});
+	};
+
+  $scope.doDelete = function() {
+
+	  	$http.delete('http://pixelesp-api.herokuapp.com/noticias/'+ $stateParams.NoticiaId, $scope.noticia).then(function(resp) {
+	      console.log(resp.data);
+
+	     
+
+	      ngDialog.close();
+				ngDialog.open({
+					templateUrl: 'partials/messages.html',
+					className: 'ngdialog-theme-plain card-message',
+					showClose: false,
+					data: {
+						class: 'card-inverse card-success',
+						text: 'Post Eliminado',
+						footertext: 'podés crear otro!',
+						time: 3
+					},
+					preCloseCallback: function(){  $state.go('home', {}, { reload: true }); } 
+
+				});
+
+	    }, function(err) {
+	      console.error('ERR', err);
+	      // err.status will contain the status code
+	    });
+
+  };
   
 })
 
 /**
  * Create/Upload Noticias
  */
-app.controller('noticiaNueva', function($scope, $http, Session, ngDialog, $location, $timeout) {
+app.controller('noticiaNueva', function($scope, $http, Session, ngDialog, $state) {
 
 	$scope.noticia={};
 	$scope.noticia.Titulo='';
@@ -91,9 +132,22 @@ app.controller('noticiaNueva', function($scope, $http, Session, ngDialog, $locat
 
 				ngDialog.closeAll();
 
-	            $timeout(function() {
-            		$location.path("/thread/"+resp.data.data.id);
-	            }, 1500);
+				ngDialog.open({
+          templateUrl: 'partials/messages.html',
+          className: 'ngdialog-theme-plain card-message',
+          cache: false,
+          showClose: false,
+          data: {
+            class: 'card-inverse card-success',
+            text: 'Noticia creada',
+            footertext: 'Muchas gracias!',
+            time: 2
+          },
+					preCloseCallback: function(){
+						$state.go('home.thread', { 'NoticiaId': resp.data.data.id }, { reload: true });
+					}
+
+        })
 
 			}, function(err) {
 				console.error('ERR', err);

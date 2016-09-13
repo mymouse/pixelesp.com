@@ -5,7 +5,7 @@ app.controller('NavCtrl', function ($scope, Session, $window, ngDialog) {
 
 	$scope.openLogin = function () {
 		$scope.value = true;
-
+		
 		ngDialog.open({
 			template: 'partials/singup.html',
 			controller: 'auth',

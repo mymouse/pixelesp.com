@@ -33,7 +33,7 @@ app.controller('getPosts', function($scope, $http, ngDialog) {
 /*
  * Upload pixelArt
  */
-app.controller('newPost', function ($scope, $http, $location, Upload, Session, $timeout, Cloudinary, ngDialog) {
+app.controller('newPost', function ($scope, $http, $state, Upload, Session, $timeout, Cloudinary, ngDialog) {
 
   $scope.imagen = {};
   $scope.imagen.id = '';
@@ -115,14 +115,25 @@ app.controller('newPost', function ($scope, $http, $location, Upload, Session, $
           $scope.imagen.Imagen = url.substr(url.lastIndexOf('d/') + 2);
 
           $http.post('http://pixelesp-api.herokuapp.com/imagenes', $scope.imagen).then(function(resp) {
-            console.log(resp.data);
-            console.log('imagen subida a la api !');
             
             ngDialog.close();
-            $timeout(function() {
-                $location.path("/pixelart/"+resp.data.data.id);
-              }, 1500);
-                  
+            ngDialog.open({
+              templateUrl: 'partials/messages.html',
+              className: 'ngdialog-theme-plain card-message',
+              cache: false,
+              showClose: false,
+              data: {
+                class: 'card-inverse card-success',
+                text: 'PixelArt creado',
+                footertext: 'Sigue creando!',
+                time: 2
+              },
+              preCloseCallback: function(){
+                $state.go('home.pixelart', { 'pixelartId': resp.data.data.id }, { reload: true });
+              }
+            })
+
+
           }, function(err) {
             console.error('ERR', err);
             $scope.pixelarterror = err.data.msg;
@@ -191,8 +202,8 @@ app.controller('pixelartCtrl', function($scope, $state, $stateParams, $http, Ses
     // err.status will contain the status code
   });
 
-  $scope.imagen = {};
   // aprobar o eliminar pixelart
+  $scope.imagen = {};
   $scope.doApprobal = function() {
 
     $scope.imagen.Titulo = $scope.pixelart.Titulo;
@@ -200,8 +211,7 @@ app.controller('pixelartCtrl', function($scope, $state, $stateParams, $http, Ses
     $scope.imagen.Aprobada = 1;
 
     $http.put('http://pixelesp-api.herokuapp.com/imagenes/'+ $stateParams.pixelartId, $scope.imagen).then(function(resp) {
-      console.log(resp.data);  
-      //$location.path('/app/imagenes');
+      console.log(resp.data);
 
       ngDialog.close();
 

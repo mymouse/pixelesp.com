@@ -21,6 +21,11 @@ app.controller('auth', ['$scope', '$http', '$rootScope', '$location', '$window',
 			$('.tab-content #singup').removeClass('active in');
 
 			$scope.successRegister = 'Muy bien! ahora puedes ingresar.';
+			setTimeout(function () {
+				$scope.$apply(function() {
+					$scope.successRegister = false;
+				});
+			}, 5000);
 
 
 		}, function(err) {
@@ -40,15 +45,27 @@ app.controller('auth', ['$scope', '$http', '$rootScope', '$location', '$window',
 			$http.get('http://pixelesp-api.herokuapp.com/me', {headers: {'auth-token': $token}}).then(function(resp) {
 
 				$scope.user = resp.data.data;
-				$scope.setCurrentUser($scope.user, $scope.user.userlevel);
-				
+				$scope.setCurrentUser($scope.user);
+
 				ngDialog.close();
+
+				ngDialog.open({
+					templateUrl: 'partials/messages.html',
+					className: 'ngdialog-theme-plain card-message',
+					cache: false,
+					showClose: false,
+					data: {
+						class: 'card-inverse card-success',
+						text: 'Ingresaste correctamente',
+						footertext: 'Disfruta del arte.',
+						time: 2
+					}
+				});
 
 
 			}, function(err) {
 				//console.error('ERR', err);
 				$scope.thisloginerror = $scope.loginerror;
-				console.log( "$scope.loginerror "+$scope.thisloginerror);
 			});
 
 		}, function () {

@@ -6,12 +6,34 @@
 	transition: $porp $time $wave;
 }
 
+@mixin faBefore($content) {
+    content: $content;
+    font-family: 'FontAwesome';
+    font-style: normal;
+    font-size: 1em;
+    margin-right: 5px;
+}
+
 /* importar demas estilos*/
-@import 'https://fonts.googleapis.com/css?family=Roboto:400,700,900';
+@import 'https://fonts.googleapis.com/css?family=Roboto:100,400,700,900';
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css');
 @import url('./ngDialog.min.css');
 @import url('./ng-img-crop.css');
 @import './animate-scss/animate.scss';
+
+.alert-animated {
+	@include fadeIn($delay: .5s);
+}
+
+.alert-top {
+    position: relative;
+    top: 0px;
+    margin: 0;
+    padding: 0 1rem;
+    line-height: 50px;
+    height: 50px;
+    border-radius: 0;
+}
 
 /*
  * Reset CSS
@@ -35,6 +57,23 @@ $naranja: #ff9800;
 
 /* links*/
 a {color: $verdelink; }
+
+/* reset dropdown */
+.dropdown-toggle {
+	border: none;
+	padding: 5px;
+
+	&:after {
+	    content: '\f078';
+	    font-family: 'FontAwesome';
+	    font-style: normal;
+	    border: none;
+	    margin: 0;
+	    text-align: center;
+	    width: 17px;
+	    height: 17px;
+	}
+}
 
 /*
  * NavBar
@@ -161,6 +200,190 @@ a {color: $verdelink; }
 	background-color: #262626;
 }
 
+
+/*
+ * Formularios
+ */
+form {
+	position: relative;
+	z-index: 1;
+
+	&.fancy {
+		position: relative;
+		z-index: 0;
+
+		.form-group {
+			position: relative;
+			display: inline-block;
+			margin: 0 0 1em;
+			width: 100%;
+
+			label:not(.file-upload) {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				display: block;
+				overflow: hidden;
+			    margin-bottom: 0;
+				padding: 0;
+				width: 100%;
+				height: 100%;
+				color: #9d9eaa;
+				text-align: left;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				font-size: .7em;
+				cursor: pointer;
+				pointer-events: none;
+			}
+			.alert-warning {
+				position: relative;
+				top: -2px;
+				padding: 0 15px;
+	    		border-top: 1px solid #c8c9d0;
+				border-bottom: 2px solid #8D6E63;
+
+				&.ng-inactive {
+				    border-top: 2px solid #8BC34A!important;
+				    border-bottom: none!important;
+				}
+				p { 
+					margin:0; 
+				    font-size: 0.7em;
+				    text-transform: uppercase;
+					font-weight: 600;
+				}
+			}
+			&.textarea .alert-warning {top: -8px; }
+			&.preview .alert-warning {border: none!important; }
+			input[type="file"] {display: none; }
+			input {
+			outline: 0;
+			border: none;
+			background: 0 0;
+
+				&.comment {
+					float: left;
+					width: calc(100% - 95px)!important;
+					border-radius: 2px 0 0 2px;
+
+					&[disabled] {
+						border: none;
+						background: #F5F5F5;
+						box-shadow: none;
+					}
+				}
+
+			}
+			input[type=email], input[type=password], input[type=text], input[type=url], textarea {
+				margin-top: 1.1em;
+				padding: .4em;
+				padding-bottom: 0;
+				width: 100%;
+				border: none;
+				border-bottom: 1px solid #c8c9d0;
+				color: #4c4d57;
+				font-style: normal;
+				font-size-adjust: .52;
+				font-size: 16px;
+			}
+		}
+		.box-footer & input {
+		    float: left;
+			margin: 0;
+		    width: calc(100% - 95px) !important;
+			height: 30px;
+		    border-radius: 2px 0 0 2px;
+			box-shadow: none;
+			font-size: 14px;
+		}
+		a.forgot-pw span, a.cancelaction {
+			display: block;
+			color: #afafb9;
+			text-align: right;
+			font-size: .8em;
+		}
+		.alert-danger, .alert-success {
+    		margin: 5px 0;
+			padding: 0 15px;
+			border-radius: 3px;
+			text-align: center;
+
+			p { 
+				margin:0;
+			    font-size: 0.7em;
+			    text-transform: uppercase;
+    			font-weight: 600;
+			}
+		}
+		.alert-danger p:before { @include faBefore('\f057'); }
+		.alert-success p:before { @include faBefore('\f058'); }
+		.alert-warning p:before { @include faBefore('\f06a'); }
+		/* upload pixelart*/
+		.drop-box {
+			position: relative;
+			display: block;
+			height: 440px;
+			border: 3px dashed #ff9c42;
+			background-color: rgba(255, 156, 66, 0.2);
+			color: #9d9eaa;
+			text-align: center;
+			line-height: 150px;
+			transition: all .4s ease;
+
+			&.dragover {
+				border-style: solid!important;
+				font-size: 0.8em;
+			}
+			&.ng-dirty {
+			    border: none!important;
+			    background-color: white!important;
+			}
+			&:before {
+			    position: absolute;
+			    top: calc(50% - 25px);
+			    left: calc(50% - 75px);
+			    display: block;
+			    margin: 0 auto;
+			    width: 150px;
+			    height: 50px;
+			    content: "Suelta tu arte aqui";
+			    text-align: center;
+			    text-decoration: inherit;
+			    line-height: 50px;
+			}
+		}
+		/* botones*/
+		.btn-default {
+			position: relative;
+			min-width: 40px;
+			text-align: center;
+			text-transform: none;
+			font-size: 14px;
+		}
+		.btn-comment {
+			max-width: 95px;
+			width: 100%;
+			height: 30px;
+			border-radius: 0 2px 2px 0!important;
+		}
+		.btn-full {
+			margin: 15px auto 0;
+			width: 100%;
+		}
+		a.btn.btn-primary, button.btn-primary, input[type=submit].btn-primary {
+			border: none;
+			background: #ff9c42;
+			box-shadow: none;
+			color: #FFF;
+
+			&[disabled] {
+			    background: rgba(255,156,66,0.5);
+			}
+		}
+	}
+}
+
 /*
  * Card Reset
  */
@@ -172,7 +395,7 @@ a {color: $verdelink; }
 }
 
 .card {
-	@include fadeInUp();
+	@include transition();
 
 	.card-block {
 	    padding-bottom: .5rem;
@@ -197,7 +420,6 @@ a {color: $verdelink; }
 /*
  * Modal - ngDialog
  */
-
 .ngdialog {
 	/* reset*/
 	.ngdialog-content {
@@ -218,13 +440,14 @@ a {color: $verdelink; }
 		.tab-content {padding: 20px 20px 10px; }
 	}
 	/* post noticias*/
-	&.ngdialog-theme-tread {
+	&.ngdialog-theme-thread {
 		margin-bottom: 0;
 		padding: 50px 0 0 0;
 
 		.wrapper {
 			@include fadeInRight();
 		}
+
 		.ngdialog-close::before {
 			@include fadeInLeftBig();
 
@@ -258,14 +481,10 @@ a {color: $verdelink; }
 			background-color: #f5f5f5;
 
 			&-block {
-				@include fadeInUp($delay: .5s);
-
 				padding: 1.25rem 10%;
 				background-color: #fff;
 			}
 			&-footer {
-				@include fadeInUp($delay: .5s);
-
 				padding: 15px 15%;
 
 				.box-comment {
@@ -384,176 +603,36 @@ a {color: $verdelink; }
 			}
 		}
 	}
-}
 
+	&.card-message {
 
-/*
- * Formularios
- */
-form {
-	position: relative;
-	z-index: 1;
-
-	&.fancy {
-		position: relative;
-		z-index: 0;
-
-		.form-group {
-			position: relative;
-			display: inline-block;
-			margin: 0 0 1em;
-			width: 100%;
-
-			label:not(.file-upload) {
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				display: block;
-				overflow: hidden;
-			    margin-bottom: 0;
-				padding: 0;
-				width: 100%;
-				height: 100%;
-				color: #9d9eaa;
-				text-align: left;
-				text-transform: uppercase;
-				letter-spacing: 1px;
-				font-size: .7em;
-				cursor: pointer;
-				pointer-events: none;
-			}
-			.alert-warning {
-				position: relative;
-				top: -2px;
-				padding: 0 15px;
-	    		border-top: 1px solid #c8c9d0;
-				border-bottom: 2px solid #8D6E63;
-
-				&.ng-inactive {
-				    border-top: 2px solid #8BC34A!important;
-				    border-bottom: none!important;
-				}
-				p { margin:0; font-size: 0.9em; }
-			}
-			&.textarea .alert-warning {top: -8px; }
-			&.preview .alert-warning {border: none!important; }
-			input[type="file"] {display: none; }
-			input {
-			outline: 0;
-			border: none;
-			background: 0 0;
-
-				&.comment {
-					float: left;
-					width: calc(100% - 95px)!important;
-					border-radius: 2px 0 0 2px;
-
-					&[disabled] {
-						border: none;
-						background: #F5F5F5;
-						box-shadow: none;
-					}
-				}
-
-			}
-			input[type=email], input[type=password], input[type=text], input[type=url], textarea {
-				margin-top: 1.1em;
-				padding: .4em;
-				padding-bottom: 0;
-				width: 100%;
-				border: none;
-				border-bottom: 1px solid #c8c9d0;
-				color: #4c4d57;
-				font-style: normal;
-				font-size-adjust: .52;
-				font-size: 16px;
-			}
+		.card-block:before {
+		    font-family: 'FontAwesome';
+		    font-style: normal;
+		    font-size: 5em;
+		    margin-right: 5px;
+		    position: absolute;
+		    opacity: .2;
+		    color: white;
+		    left: 20px;
+		    top: 40px;
 		}
-		.box-footer & input {
-		    float: left;
-			margin: 0;
-		    width: calc(100% - 95px) !important;
-			height: 30px;
-		    border-radius: 2px 0 0 2px;
-			box-shadow: none;
-			font-size: 14px;
-		}
-		a.forgot-pw span, a.cancelaction {
-			display: block;
-			color: #afafb9;
-			text-align: right;
-			font-size: .8em;
-		}
-		.alert-danger, .alert-success {
-    		margin: 5px 0;
-			padding: 0 15px;
-			border-radius: 3px;
-			text-align: center;
 
-			p { margin:0; font-size: 0.9em; }
+		.card-blockquote p {
+		    text-transform: uppercase;
+		    font-weight: 100;
+		    font-size: 0.9em;
 		}
-		/* upload pixelart*/
-		.drop-box {
-			position: relative;
-			display: block;
-			height: 440px;
-			border: 3px dashed #ff9c42;
-			background-color: rgba(255, 156, 66, 0.2);
-			color: #9d9eaa;
-			text-align: center;
-			line-height: 150px;
-			transition: all .4s ease;
 
-			&.dragover {
-				border-style: solid!important;
-				font-size: 0.8em;
-			}
-			&.ng-dirty {
-			    border: none!important;
-			    background-color: white!important;
-			}
-			&:before {
-			    position: absolute;
-			    top: calc(50% - 25px);
-			    left: calc(50% - 75px);
-			    display: block;
-			    margin: 0 auto;
-			    width: 150px;
-			    height: 50px;
-			    content: "Suelta tu arte aqui";
-			    text-align: center;
-			    text-decoration: inherit;
-			    line-height: 50px;
-			}
+		footer {
+		    font-style: italic;
+		    text-align: right;
+		    font-size: 0.9em;
 		}
-		/* botones*/
-		.btn-default {
-			position: relative;
-			min-width: 40px;
-			text-align: center;
-			text-transform: none;
-			font-size: 14px;
-		}
-		.btn-comment {
-			max-width: 95px;
-			width: 100%;
-			height: 30px;
-			border-radius: 0 2px 2px 0!important;
-		}
-		.btn-full {
-			margin: 15px auto 0;
-			width: 100%;
-		}
-		a.btn.btn-primary, button.btn-primary, input[type=submit].btn-primary {
-			border: none;
-			background: #ff9c42;
-			box-shadow: none;
-			color: #FFF;
 
-			&[disabled] {
-			    background: rgba(255,156,66,0.5);
-			}
-		}
+		.card-danger .card-block:before { content: '\f057'; }
+		.card-success .card-block:before { content: '\f058'; }
+		.card-warning .card-block:before { content: '\f06a'; }
 	}
 }
 
@@ -610,5 +689,44 @@ article.post {
 	    bottom: 0px;
 	    z-index: 99;
 	    opacity: 1;
+	}
+}
+
+/*
+ * My Profile Page
+ */
+
+.nav-tabs:not(#modalTabs) {
+	border-bottom: none;
+
+	li.nav-item {
+	    width: calc(100% / 4);
+	    margin: 0 auto;
+	    text-align: center;
+
+	    .nav-link {
+	    	border: none;
+	    	border-bottom: 2px solid #aeaeae;
+	    	color: #9E9E9E;
+
+	    	&.active, &:hover {
+				border-bottom: 2px solid $verdelink !important;
+				position: relative;
+				color: $verdelink;
+
+				&:after {
+				    position: absolute;
+				    content: '';
+				    width: 0;
+				    height: 0;
+				    border-left: 5px solid transparent;
+				    border-right: 5px solid transparent;
+				    border-top: 5px solid $verdelink;
+				    left: 50%;
+				    bottom: -7px;
+				    margin-left: -2px;
+				}
+	    	}
+	    }
 	}
 }

@@ -28,8 +28,8 @@
 
       <ul class="sidebar-menu">
       <li class="header">MENU</li>
-        <li class="treeview" ng-repeat="item in items" ng-click="select($index)" ng-class="{active: $index == selected}">
-          <a  ui-sref="{{item.state}}">
+        <li class="treeview" ng-repeat="item in items" ui-sref-active="active"">
+          <a ui-sref="{{item.state}}">
             <i class="fa fa-{{item.icon}} fa-fw"></i> {{item.title}}
           </a>
         </li>

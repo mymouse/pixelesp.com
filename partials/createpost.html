@@ -30,7 +30,7 @@
 
         <div class="col-lg-4">
         
-          <div ng-show="thisloginerror" ng-hide="successRegister" class="alert-danger" role="alert">
+          <div ng-if="thisloginerror" ng-hide="successRegister" class="alert-danger" role="alert">
               <p> {{ pixelarterror }} </p>
           </div>
 

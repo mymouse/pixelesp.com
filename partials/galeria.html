@@ -1,9 +1,9 @@
 <div class="content-wrapper">
 
-    <section class="content">
+    <section class="content" ng-controller="getPosts">
         <div class="col-lg-12">
             <article class="post" ng-repeat="pixelart in imagenes">
-                <a ui-sref="encola.pixelart-to-approbal({ pixelartId: {{pixelart.id}} })"> 
+                <a ui-sref="galeria.pixelart({ pixelartId: {{pixelart.id}} })"> 
                 <h4 class="card-title">{{pixelart.Titulo}}</h4>
                 <img class="img-fluid" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.Previa}}" alt="{{pixelart.Titulo}}" >
                 <div class="card-footer">

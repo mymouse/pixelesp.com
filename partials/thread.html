@@ -2,11 +2,27 @@
     <div class="content-post">
 
         <article class="card">
-            <div class="card-block">
-                <h5 class="card-title"><a ui-sref="home.thread( NoticiaId: noticia.id )"> {{noticia.Titulo}} </a></h5>
-                <h6 class="card-subtitle text-muted"><img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{noticia.imagen}}" alt="{{noticia.username}}">
-                <span class="username text-muted"><a href="{{noticia.IdUsuario}}"> {{noticia.username}} </a></span> <time title="{{ noticia.created_at | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ noticia.created_at | amCalendar }}</time></h6>
-            </div>
+            <header class="card-block">
+                <div class="col-xs-10">
+                    <h5 class="card-title"><a ui-sref="home.thread( NoticiaId: noticia.id )"> {{noticia.Titulo}} </a></h5>
+                    <h6 class="card-subtitle text-muted"><img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{noticia.imagen}}" alt="{{noticia.username}}"> <span class="username text-muted"><a href="{{noticia.IdUsuario}}"> {{noticia.username}} </a></span> <time title="{{ noticia.created_at | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ noticia.created_at | amCalendar }}</time></h6>
+                </div>
+                <div class="col-xs-2">
+                    <div class="btn-group pull-xs-right">
+                        <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#"><i class="fa fa-flag" aria-hidden="true"></i> Reportar</a>
+                            <div ng-if="noticia.IdUsuario == currentUser.id || currentUser.userlevel == 1">
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>
+                                <a class="dropdown-item text-danger" href="" ng-click="doDelete()"><i class="fa fa-trash-o" aria-hidden="true"></i> Eliminar</a>
+                            </div>
+                        </div>
+                      </div>
+                </div>
+            </header>
             <!--  <img src="..." alt="Card image"> -->
             <div class="card-block">
                 <p class="card-text"> {{noticia.Descripcion}} </p>

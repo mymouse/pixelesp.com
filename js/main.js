@@ -75,7 +75,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				ngDialog.open({
 					controller: 'noticiaCtrl',
 					templateUrl: 'partials/thread.html',
-					className: 'ngdialog-theme-tread animated fadeIn'
+					className: 'ngdialog-theme-thread animated fadeIn'
 
 				}).closePromise.finally(function() {
 					$state.go('^');
@@ -83,7 +83,24 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			}]
 		})
 
-		// Pixelarts
+		// Pixelarts en galeria
+		.state("galeria.pixelart", {
+
+			url: '/pixelart/:pixelartId',
+			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
+
+				ngDialog.open({
+					controller: 'pixelartCtrl',
+					templateUrl: 'partials/pixelart.html',
+					className: 'ngdialog-theme-thread animated fadeIn'
+
+				}).closePromise.finally(function() {
+					$state.go('^');
+				});
+			}]
+		})
+
+		// Pixelarts en Home
 		.state("home.pixelart", {
 
 			url: 'pixelart/:pixelartId',
@@ -92,7 +109,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				ngDialog.open({
 					controller: 'pixelartCtrl',
 					templateUrl: 'partials/pixelart.html',
-					className: 'ngdialog-theme-tread animated fadeIn'
+					className: 'ngdialog-theme-thread animated fadeIn'
 
 				}).closePromise.finally(function() {
 					$state.go('^');
@@ -123,6 +140,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			url: 'crearpost',
 			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
 
+				ngDialog.close();
 				ngDialog.open({
 					template: 'partials/createpost.html',
 					controller: 'newPost',
@@ -142,6 +160,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			url: 'crear-noticia',
 			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
 
+				ngDialog.close();
 				ngDialog.open({
 					template: 'partials/createnews.html',
 					controller: 'noticiaNueva',
@@ -167,14 +186,25 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			controller: "" })
 });
 
-app.run( function($rootScope, $location, AuthService) {
+app.run( function($rootScope, $location, AuthService, Session) {
 	// register listener to watch route changes
 	$rootScope.$on( "$stateChangeStart", function(event, next, current) {
 
+		// si no esta logeado
 		if ( AuthService.isAuthenticated() == false ) {
+			// si quiere entrar a /mi-perfil
 			if ( next.templateUrl == "partials/profile.html" ) {
 				$location.path("/");
 			}
 		}
+
+		// si no esta logeado o si no es admin
+		if ( AuthService.isAuthenticated() == false || AuthService.isAuthorized() == false ) {
+			// si quiere entrar a /en-cola
+			if ( next.templateUrl == "partials/encola.html" ) {
+				$location.path("/");
+			}
+		}
+
 	});
 });

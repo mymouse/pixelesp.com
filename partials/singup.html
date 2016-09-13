@@ -23,12 +23,12 @@
         <div class="tab-pane fade in active" id="login" role="tabpanel">
             <form name="formLogin" class="form fancy" ng-submit="doLogin(usuario)" novalidate>
 
-                <div ng-show="thisloginerror" ng-hide="successRegister" class="alert-danger" role="alert">
-                    <p> {{ thisloginerror }} </p>
+                <div ng-if="thisloginerror" ng-hide="successRegister" class="alert-danger alert-animated" role="alert">
+                    <p>{{ thisloginerror }}</p>
                 </div>
 
-                <div ng-show="successRegister" ng-hide="thisloginerror" class="alert-success" role="alert">
-                    <p> {{ successRegister }} </p>
+                <div ng-if="successRegister" ng-hide="thisloginerror" class="alert-success alert-animated" role="alert">
+                    <p>{{ successRegister }}</p>
                 </div>                
                 
                 <div class="form-group">
@@ -63,8 +63,8 @@
                     </label>
                 </div> -->
                 
-                <div ng-show="error" class="alert-danger" role="alert">
-                    <p> {{ singuperror }} </p>
+                <div ng-show="error" class="alert-danger alert-animated" role="alert">
+                    <p>{{ singuperror }}</p>
                 </div>
 
                 <div class="form-group">
