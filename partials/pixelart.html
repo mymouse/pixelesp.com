@@ -33,7 +33,7 @@
             </div>
 
             <div class="card-footer">
-                <h4><i class="fa fa-comment" aria-hidden="true"></i> {{pixelart.comentarios.length}} Comentarios</h4>
+                <h4><i class="fa fa-comments" aria-hidden="true"></i> {{pixelart.comentarios.length}} Comentario<span ng-if="pixelart.comentarios.length != 1">s</span></h4>
 
                 <div class="box-footer">
                     <form class="fancy" ng-submit="guardarComentario(comment)">
@@ -44,17 +44,17 @@
                           <input id="commentinput" type="text" class="form-control input-sm comment" ng-model="comment.text" 
                           ng-attr-placeholder="{{ currentUser ? 'Comenta algo...' : 'Inicia sesión para comentar!' }}"
                           ng-disabled="!currentUser">
-                          <button class="btn-primary btn-comment" type="submit" ng-disabled="!currentUser">Enviar</button>
+                          <button class="btn-primary btn-comment" type="submit" ng-disabled="!currentUser || pixelart.Aprobada != 1">Enviar</button>
                         </div>
                     </form>
                 </div>
 
                 <div class="box-comments">
                     <div class="animate box-comment" ng-repeat="c in pixelart.comentarios | orderBy:'-created_at'" ng-init="initFirst()">
-                        <img class="img-circle avatar" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{c.imagen}}" alt="{{c.username}}">
+                        <img class="img-circle avatar" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{c.avatar}}" alt="{{c.username}}">
                         <div class="comment-text">
                             <span class="username">
-                                {{c.username}}
+                                <a ui-sref="perfil({id_usuario:c.idusuario})">{{c.username}}</a>
                                 <time title="{{ c.created_at | amDateFormat: 'LLLL' }}" class="text-muted pull-right">{{ c.created_at | amCalendar }}</time>
                             </span>
                             {{c.text}}

@@ -1,7 +1,26 @@
 <div class="content-wrapper">
 
-    <section class="content" ng-controller="getPosts">
+    <section class="content" ng-controller="getPosts">    
         <div class="col-lg-12">
+
+            <ul class="nav nav-pills">
+              <li class="nav-item">
+                <a ui-sref="galeria.createpost" class="nav-link btn btn-primary">Subir PixelArt</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">{{imagenes.length}} PixelArts</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">{{favs.length}} Favoritos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">{{users.length}} Pixelartistas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#"> ... </a>
+              </li>
+            </ul>
+
             <article class="post" ng-repeat="pixelart in imagenes">
                 <a ui-sref="galeria.pixelart({ pixelartId: {{pixelart.id}} })"> 
                 <h4 class="card-title">{{pixelart.Titulo}}</h4>

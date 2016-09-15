@@ -30,6 +30,12 @@ app.config(['CloudinaryProvider', configure]);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
+	userdata = JSON.parse(window.localStorage.getItem('userdata'));
+	if ( !userdata ) {
+		userdata = {};
+		userdata.id = 1;
+	}
+
 	$urlRouterProvider.when('', '/');
 	
 	$urlRouterProvider.otherwise('/404');
@@ -41,10 +47,19 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			controller: "" })
 
 		// Pages
-		.state("mi-perfil", {
-			url: '/mi-perfil',
+		.state("perfil", {
+			url: '/usuario/:id_usuario',
 			templateUrl: "partials/profile.html",
-			controller: "" })
+			controller: "perfilCtrl" })
+
+		.state("cuenta", {
+			url: '/cuenta/',
+			templateUrl: "partials/account.html",
+			controller: "perfilCtrl",
+			params: {
+				id_usuario: userdata.id
+			} })
+
 		.state("comunidad", {
 			url: '/comunidad',
 			templateUrl: "partials/comunidad.html",
@@ -66,7 +81,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		// Noticias
 		.state("home.thread", {
 
-			url: 'thread/:NoticiaId',
+			url: 'post/:NoticiaId',
 			/*templateUrl: 'partials/thread.html',
 			controller: 'noticiaCtrl'*/
 
@@ -75,23 +90,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				ngDialog.open({
 					controller: 'noticiaCtrl',
 					templateUrl: 'partials/thread.html',
-					className: 'ngdialog-theme-thread animated fadeIn'
-
-				}).closePromise.finally(function() {
-					$state.go('^');
-				});
-			}]
-		})
-
-		// Pixelarts en galeria
-		.state("galeria.pixelart", {
-
-			url: '/pixelart/:pixelartId',
-			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
-
-				ngDialog.open({
-					controller: 'pixelartCtrl',
-					templateUrl: 'partials/pixelart.html',
 					className: 'ngdialog-theme-thread animated fadeIn'
 
 				}).closePromise.finally(function() {
@@ -117,27 +115,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			}]
 		})
 
-		// Pixelarts en cola
-		.state("encola.pixelart-to-approbal", {
-
-			url: '/:pixelartId',
-			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
-
-				ngDialog.open({
-					controller: 'pixelartCtrl',
-					templateUrl: 'partials/pixelart-en-cola.html',
-					className: 'ngdialog-theme-plain width-noticia animated fadeIn'
-
-				}).closePromise.finally(function() {
-					$state.go('^');
-				});
-			}]
-		})
-
-		// Crear Post
+		// Crear pixelart
 		.state("home.createpost", {
 
-			url: 'crearpost',
+			url: 'subir-pixelart',
 			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
 
 				ngDialog.close();
@@ -146,7 +127,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 					controller: 'newPost',
 					className: 'ngdialog-theme-plain width-post',
 					cache: false,
-					closeByEscape: false
+					closeByEscape: false,
+					closeByDocument: false,
+					showClose: false
 
 				}).closePromise.finally(function() {
 					$state.go('^');
@@ -157,7 +140,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		// posts
 		.state("home.createnews", {
 
-			url: 'crear-noticia',
+			url: 'crear-post',
 			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
 
 				ngDialog.close();
@@ -166,7 +149,65 @@ app.config(function($stateProvider, $urlRouterProvider) {
 					controller: 'noticiaNueva',
 					className: 'ngdialog-theme-plain width-noticia',
 					cache: false,
-					closeByEscape: false
+					closeByEscape: false,
+					closeByDocument: false,
+					showClose: false
+
+				}).closePromise.finally(function() {
+					$state.go('^');
+				});
+			}]
+		})
+
+		// Pixelarts en galeria
+		.state("galeria.pixelart", {
+
+			url: '/pixelart/:pixelartId',
+			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
+
+				ngDialog.open({
+					controller: 'pixelartCtrl',
+					templateUrl: 'partials/pixelart.html',
+					className: 'ngdialog-theme-thread animated fadeIn'
+
+				}).closePromise.finally(function() {
+					$state.go('^');
+				});
+			}]
+		})
+
+		// Crear pixelart
+		.state("galeria.createpost", {
+
+			url: '/subir-pixelart',
+			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
+
+				ngDialog.close();
+				ngDialog.open({
+					template: 'partials/createpost.html',
+					controller: 'newPost',
+					className: 'ngdialog-theme-plain width-post',
+					cache: false,
+					closeByEscape: false,
+					closeByDocument: false,
+					showClose: false
+
+				}).closePromise.finally(function() {
+					$state.go('^');
+				});
+			}]
+		})
+
+		// Pixelarts en cola
+		.state("encola.pixelart-to-approbal", {
+
+			url: '/:pixelartId',
+			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
+
+				ngDialog.open({
+					controller: 'pixelartCtrl',
+					templateUrl: 'partials/pixelart-en-cola.html',
+					className: 'ngdialog-theme-plain width-noticia animated fadeIn'
 
 				}).closePromise.finally(function() {
 					$state.go('^');
@@ -186,14 +227,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			controller: "" })
 });
 
-app.run( function($rootScope, $location, AuthService, Session) {
+app.run( function($rootScope, $state, $location, AuthService, Session) {
 	// register listener to watch route changes
 	$rootScope.$on( "$stateChangeStart", function(event, next, current) {
+
+		//console.log('estoy en: '+$state.current.name);
 
 		// si no esta logeado
 		if ( AuthService.isAuthenticated() == false ) {
 			// si quiere entrar a /mi-perfil
-			if ( next.templateUrl == "partials/profile.html" ) {
+			if ( next.templateUrl == "partials/account.html" ) {
 				$location.path("/");
 			}
 		}

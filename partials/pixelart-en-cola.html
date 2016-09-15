@@ -5,7 +5,7 @@
             <div class="card-block text-xs-center">
                 <h5 class="card-title" > {{pixelart.Titulo}} </h5>
                 <h6 class="card-subtitle text-muted"><img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.imagen}}" alt="{{pixelart.username}}">
-                <span class="username text-muted"><a href="{{pixelart.IdUsuario}}"> {{pixelart.username}} </a></span> <time title="{{ pixelart.created_at | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ pixelart.created_at | amCalendar }}</time></h6>
+                <span class="username text-muted"><a ui-sref="perfil({id_usuario:pixelart.idUsuario})">{{pixelart.username}}</a></span> <time title="{{ pixelart.created_at | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ pixelart.created_at | amCalendar }}</time></h6>
             </div>
              <img src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.Imagen}}" alt="{{pixelart.Titulo}}" class="pixelart img-fluid" style="max-height:420px;margin:15px auto">
 

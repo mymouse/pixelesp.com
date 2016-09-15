@@ -1,0 +1,252 @@
+<div class="content-wrapper">
+
+	<div class="container-fluid profile-page">
+		<div class="row">
+
+			<section class="col-xs-3">
+				<div class="card profile">
+				  <img ng-show="!showme" class="img-circle d-block m-x-auto m-t-1" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{usuario.imagen}}" alt="{{usuario.username}}" width="100">
+				  <div ng-show="showme == 1">
+				  	<img class="img-circle d-block m-x-auto m-t-1" ng-src="{{croppedDataUrl}}" width="100">
+				  </div>
+				  <div ng-show="showme == 2">
+				  	<img ngf-src="gifFile" class="img-circle d-block m-x-auto m-t-1" width="100px">
+				  </div>
+
+				  <div class="card-block text-xs-center">
+				    <h5 ng-if="usuario.name" class="card-title">{{usuario.name}}</h5>
+				    <h6>@{{usuario.username}}</h6>
+				    <span ng-if="usuario.userlevel == 1" class="tag tag-warning" style="position: absolute;top: 5px;right: 5px;">Admin</span>
+				    <p ng-if="usuario.biografia" class="card-text">{{usuario.biografia}}</p>
+				    <div ng-if="usuario.city || usuario.country">
+				    	<p><i class="fa fa-map-marker" aria-hidden="true"></i> {{usuario.city}}<span ng-if="usuario.city">,</span> {{usuario.country}}</p>
+				    </div>
+
+				    <a ng-if="usuario.social_behance" href="http://behance.com/{{usuario.social_behance}}" target="_blank"><i class="fa fa-2x fa-behance-square" aria-hidden="true"></i></a>
+					<a ng-if="usuario.social_deviantart" href="http://{{usuario.social_deviantart}}.deviantart.com"><i class="fa fa-2x fa-deviantart" aria-hidden="true"></i></a>
+					<a ng-if="usuario.social_facebook" href="http://facebook.com/{{usuario.social_facebook}}" target="_blank"><i class="fa fa-2x fa-facebook-official" aria-hidden="true"></i></a>
+					<a ng-if="usuario.social_instagram" href="http://instagram.com/{{usuario.social_instagram}}" target="_blank"><i class="fa fa-2x fa-instagram" aria-hidden="true"></i></a>
+					<a ng-if="usuario.social_tumblr" href="http://{{usuario.social_tumblr}}.tumblr.com"><i class="fa fa-2x fa-tumblr-square" aria-hidden="true"></i></a>
+					<a ng-if="usuario.social_twitter" href="http://twitter.com/{{usuario.social_twitter}}" target="_blank"><i class="fa fa-2x fa-twitter-square" aria-hidden="true"></i></a>
+					<a ng-if="usuario.social_youtube" href="http://youtube.com/c/{{usuario.social_youtube}}" target="_blank"><i class="fa fa-2x fa-youtube-square" aria-hidden="true"></i></a>
+
+				  </div>
+
+				</div>		
+			</section>
+
+			<section class="col-xs-9">
+				
+				<ul id="profileTabs" class="nav nav-tabs card" role="tablist">
+				  <li class="nav-item">
+				    <a class="nav-link active" data-toggle="tab" href="#myPixelarts" role="tab">Cuenta</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" data-toggle="tab" href="#myFavorites" role="tab">&nbsp;</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" data-toggle="tab" href="#messages" role="tab">&nbsp;</a>
+				  </li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content m-y-1">
+					<div class="tab-pane fade in active" id="myPixelarts" role="tabpanel">
+
+						<article class="card card-outline-warning card-block" style="background-color:white!important">
+
+							<h2>Configura tu perfil</h2>
+
+							<form name="formProfile" class="form fancy" ng-submit="doSave(avatarFile, croppedDataUrl, gifFile)" novalidate>
+
+								<h5>Tus datos</h5>
+								<div class="row">
+
+									<div class="col-sm-12 col-lg-6">
+						                <div class="form-group">
+						                    <input type="text" tabindex="1" name="name" ng-model="usuario.name">
+						                    <label for="name">
+						                        <span class="label-content">Tu Nombre</span>
+						                    </label>
+						                </div>
+
+						            </div>
+						            <div class="col-sm-12 col-lg-6">
+						                <div class="form-group">
+						                    <input type="text" tabindex="2" name="country" ng-model="usuario.country">
+						                    <label for="country">
+						                        <span class="label-content">Ubicación</span>
+						                    </label>
+						                </div>
+
+						            </div>
+						            <div class="col-sm-12 col-lg-6">
+						                <div class="form-group">
+									        <textarea tabindex="3" name="textarea" ng-model="usuario.biografia" rows="4"></textarea>
+									        <label for="textarea">
+									          <span class="label-content">Algo sobre vos ...</span>
+									        </label>
+							      		</div>
+
+							      	</div>						      	
+						            <div class="col-sm-12 col-lg-6">
+
+						            	<div class="form-group text-xs-center" >
+								            <label for="file">
+								              <span class="label-content">Avatar</span>
+								            </label>
+
+								            <button class="btn btn-sm btn-secondary m-y-1" ngf-select ng-model="avatarFile" accept="image/*" ng-click="showme=1;gifFile = null"><i class="fa fa-crop" aria-hidden="true"></i> Recortar avatar</button>
+
+									        <label for="gifFile" class="btn btn-sm btn-secondary file-upload m-y-1" ng-click="showme=2"><i class="fa fa-file-image-o" aria-hidden="true"></i> Elegir avatar</label>
+
+									        <input type="file" ngf-select ng-model="gifFile" name="gifFile" id="gifFile" accept="image/*" ngf-max-size="2MB" >
+
+									        <div ng-show="showme == 1" ngf-drop ng-model="avatarFile" ngf-pattern="image/*" class="cropArea">
+									            <img-crop image="avatarFile  | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''" area-min-size="15" result-image-size="100"></img-crop>
+									        </div>
+								        </div>
+						            </div>
+
+						        </div>
+						        <hr>
+
+						        <h5>Redes Sociales</h5>
+						        <div class="row">
+						            <div class="col-sm-12 col-lg-6">
+						                <div class="form-group">
+						                    <input type="text" tabindex="6" name="social_behance" ng-model="usuario.social_behance">
+						                    <label for="behance">
+						                        <span class="label-content">behance</span>
+						                    </label>
+						                </div>
+						            </div>
+						            <div class="col-sm-12 col-lg-6">
+						                <div class="form-group">
+						                    <input type="text" tabindex="5" name="social_deviantart" ng-model="usuario.social_deviantart">
+						                    <label for="deviantart">
+						                        <span class="label-content">deviantart</span>
+						                    </label>
+						                </div>
+						            </div>
+						            <div class="col-sm-12 col-lg-6">
+						                <div class="form-group">
+						                    <input type="text" tabindex="6" name="social_facebook" ng-model="usuario.social_facebook">
+						                    <label for="facebook">
+						                        <span class="label-content">facebook</span>
+						                    </label>
+						                </div>
+						            </div>
+						            <div class="col-sm-12 col-lg-6">					                
+						                <div class="form-group">
+						                    <input type="text" tabindex="7" name="social_instagram" ng-model="usuario.social_instagram">
+						                    <label for="instagram">
+						                        <span class="label-content">instagram</span>
+						                    </label>
+						                </div>
+						            </div>
+						            <div class="col-sm-12 col-lg-6">
+						                <div class="form-group">
+						                    <input type="text" tabindex="8" name="social_tumblr" ng-model="usuario.social_tumblr">
+						                    <label for="tumblr">
+						                        <span class="label-content">tumblr</span>
+						                    </label>
+						                </div>
+						            </div>
+						            <div class="col-sm-12 col-lg-6">
+						                <div class="form-group">
+						                    <input type="text" tabindex="9" name="social_twitter" ng-model="usuario.social_twitter">
+						                    <label for="twitter">
+						                        <span class="label-content">twitter</span>
+						                    </label>
+						                </div>
+						            </div>
+						            <div class="col-sm-12 col-lg-6">
+						                <div class="form-group">
+						                    <input type="text" tabindex="10" name="social_youtube" ng-model="usuario.social_youtube">
+						                    <label for="youtube">
+						                        <span class="label-content">youtube</span>
+						                    </label>
+						                </div>
+						            </div>
+						        </div>
+
+						        <hr>
+
+						        <h5>Tu cuenta</h5>
+						        <div class="row">
+						            <div class="col-sm-12 col-lg-6">
+						                <div class="form-group">
+						                    <input type="text" tabindex="11" name="username" ng-model="usuario.username" disabled="disabled">
+						                    <label for="username">
+						                        <span class="label-content">Nick</span>
+						                    </label>
+						                </div>
+
+						                <div class="form-group">
+						                    <input class="comment" type="email" tabindex="12" name="email" ng-model="usuario.email" ng-disabled="button" required ng-init="button=true">
+						                    <button class="btn-primary btn-comment m-t-1" ng-click="button=!button">Editar</button>
+						                    <label for="email">
+						                        <span class="label-content">Email</span>
+						                    </label>
+						                    <div class="alert-warning" role="alert" ng-messages="formProfile.email.$error" ng-if="formProfile.email.$dirty" >
+						                        <p ng-message="required">Usa tu email.</p>
+						                        <p ng-message="email">Eso no tiene forma de email.</p>
+						                    </div>
+						                </div>
+									</div>
+						            <div class="col-sm-12 col-lg-6">
+						                <div class="form-group">
+						                    <input type="password" tabindex="13" name="password2" ng-minlength="8" ng-model="usuario.password2" ng-pattern="/^[a-zA-Z0-9]*$/">
+						                    <label for="password2">
+						                        <span class="label-content">Cambiar contraseña</span>
+						                    </label>
+						                    <div class="alert-warning" role="alert" ng-messages="formProfile.password2.$error" ng-if="formProfile.password2.$dirty" >
+						                        <p ng-message="minlength">Usa al menos 8 carácteres.</p>
+						                        <p ng-message="pattern">Usa letras y números.</p>
+						                    </div>
+						                </div>
+
+						                <div class="form-group">
+						                	<input type="password" tabindex="14" name="newpassword" ng-minlength="8" ng-model="usuario.newpassword" ng-pattern="{{usuario.password2}}" ng-required="usuario.password2">
+						                    <label for="newpassword">
+						                        <span class="label-content">Repite la contraseña</span>
+						                    </label>
+						                    <div class="alert-warning" role="alert" ng-messages="formProfile.newpassword.$error">
+											    <div ng-message="pattern">No coinciden.</div>
+											</div>
+						                </div>
+						            </div>
+
+						            <div class="col-sm-12">
+					                	<button tabindex="15" class="btn-block btn-primary" type="submit" ng-disabled="!formProfile.$valid">Guardar</button>
+					                </div>
+
+					            </div>
+				            </form>
+							
+						</article>
+
+					</div>
+
+					<div class="tab-pane fade" id="myFavorites" role="tabpanel">
+
+					</div>
+					
+					<div class="tab-pane fade" id="messages" role="tabpanel">
+
+					</div>
+				
+				</div>
+			</section>
+
+			<script type="text/javascript">
+				$('#profileTabs a').click(function (e) {
+				  e.preventDefault()
+				  $(this).tab('show')
+				})
+			</script>
+
+		</div>
+	</div>
+</div>

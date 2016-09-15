@@ -4,16 +4,36 @@
     &#9776;
   </button>
   <div class="collapse navbar-toggleable-xs" id="collapesenavbar">
-  	<ul ng-if="currentUser" class="nav navbar-nav pull-xs-left">
-		<li class="nav-item"><a href="" ui-sref="home.createpost"><i class="fa fa-pencil"></i> Subir PixelArt</a></li>
-		<li class="nav-item"><a href="" ui-sref="home.createnews""><i class="fa fa-newspaper-o"></i> Crear Post</a></li>
-		<li class="nav-item" ng-if="isAuthorized(userRoles.admin)"><a href="" ui-sref="encola""><i class="fa fa-list-ul" aria-hidden="true"></i> Post para aprobar</a></li>
+  	<ul ng-if="currentUser" class="nav navbar-nav pull-xs-left">		
 	</ul>
 
 	<ul class="nav navbar-nav pull-xs-right">
-		<li class="nav-item" ng-if="isAuthorized(userRoles.admin)"><a href="" >You're the real mdfk G.</a></li>
-		<li class="nav-item active"><a href="" ng-if="!currentUser" ng-click="openLogin()">Ingresar</a></li>
-		<li class="nav-item"><a href="" ng-if="currentUser" ng-click="doLogout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Salir</a></li>
+		<li class="nav-item active" ng-if="!currentUser"><a href="" ng-click="openLogin()">Ingresar</a></li>
+		
+		<li class="nav-item btn btn-sm dropdown p-y-0" ng-if="currentUser">
+			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+			<img src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{currentUser.imagen}}" class="img-circle" width="30px" alt="{{currentUser.username}}"></a>
+			<div class="dropdown-menu dropdown-menu-right">
+
+				<div class="user-panel" ng-if="currentUser">
+					<div class="avatar">
+						<img src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{currentUser.imagen}}" class="img-circle" alt="{{currentUser.username}}" width="48px">
+					</div>
+					<div class="info">
+						<p>{{ currentUser.username }}</p>
+						<small>{{ currentUser.email }}</small>
+					</div>
+				</div>
+
+				<div class="text-xs-right">
+					<a class="dropdown-item" ui-sref="perfil({id_usuario:currentUser.id})">Mi perfil <i class="fa fa-user" aria-hidden="true"></i></a>
+					<a class="dropdown-item" ui-sref="cuenta({id_usuario:currentUser.id})">Mi cuenta <i class="fa fa-cog" aria-hidden="true"></i></a>
+					<a class="dropdown-item" ng-if="isAuthorized(userRoles.admin)" ui-sref="encola">Post para aprobar <i class="fa fa-list-ul" aria-hidden="true"></i></a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="" ng-if="currentUser" ng-click="doLogout()">Salir <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+				</div>
+			</div>
+		</li>
 	</ul>
 
   </div>

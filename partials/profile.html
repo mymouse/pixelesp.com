@@ -5,71 +5,106 @@
 
 			<section class="col-xs-3">
 				<div class="card profile">
-				  <img class="img-circle d-block m-x-auto m-t-1" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{currentUser.imagen}}" alt="{{currentUser.username}}">
+				  <img class="img-circle d-block m-x-auto m-t-1" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{usuario.imagen}}" alt="{{usuario.username}}" width="100">
 				  <div class="card-block text-xs-center">
-				    <h5 ng-if="currentUser.name" class="card-title">{{currentUser.name}}</h5>
-				    <h6>@{{currentUser.username}}</h6>
-				    <span if="currentUser.userlevel == 1" class="tag tag-warning" style="position: absolute;top: 5px;right: 5px;">Admin</span>
-				    <p nf-if="currentUser.biografia" class="card-text">{{currentUser.biografia}}</p>
+				    <h5 ng-if="usuario.name" class="card-title">{{usuario.name}}</h5>
+				    <h6>@{{usuario.username}}</h6>
+				    <span ng-if="usuario.userlevel == 1" class="tag tag-warning" style="position: absolute;top: 5px;right: 5px;">Admin</span>
+				    <p ng-if="usuario.biografia" class="card-text">{{usuario.biografia}}</p>
+				    <div ng-if="usuario.city || usuario.country">
+				    	<p><i class="fa fa-map-marker" aria-hidden="true"></i> {{usuario.city}}<span ng-if="usuario.city">,</span> {{usuario.country}}</p>
+				    </div>
+
+					<a ng-if="usuario.social_behance" href="http://behance.com/{{usuario.social_behance}}" target="_blank"><i class="fa fa-2x fa-behance-square" aria-hidden="true"></i></a>
+					<a ng-if="usuario.social_deviantart" href="http://{{usuario.social_deviantart}}.deviantart.com"><i class="fa fa-2x fa-deviantart" aria-hidden="true"></i></a>
+					<a ng-if="usuario.social_facebook" href="http://facebook.com/{{usuario.social_facebook}}" target="_blank"><i class="fa fa-2x fa-facebook-official" aria-hidden="true"></i></a>
+					<a ng-if="usuario.social_instagram" href="http://instagram.com/{{usuario.social_instagram}}" target="_blank"><i class="fa fa-2x fa-instagram" aria-hidden="true"></i></a>
+					<a ng-if="usuario.social_tumblr" href="http://{{usuario.social_tumblr}}.tumblr.com"><i class="fa fa-2x fa-tumblr-square" aria-hidden="true"></i></a>
+					<a ng-if="usuario.social_twitter" href="http://twitter.com/{{usuario.social_twitter}}" target="_blank"><i class="fa fa-2x fa-twitter-square" aria-hidden="true"></i></a>
+					<a ng-if="usuario.social_youtube" href="http://youtube.com/c/{{usuario.social_youtube}}" target="_blank"><i class="fa fa-2x fa-youtube-square" aria-hidden="true"></i></a>
+
 				  </div>
-				  <ul class="list-group list-group-flush">
-				    <li class="list-group-item">Favoritos</li>
-				    <li class="list-group-item">PixelArts</li>
-				    <li class="list-group-item">Comentarios</li>
-				  </ul>
 				</div>		
 			</section>
 
 			<section class="col-xs-9">
 				
-					<ul id="profileTabs" class="nav nav-tabs card" role="tablist">
-					  <li class="nav-item">
-					    <a class="nav-link active" data-toggle="tab" href="#myPixelarts" role="tab">PixelArts</a>
-					  </li>
-					  <li class="nav-item">
-					    <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Favoritos</a>
-					  </li>
-					  <li class="nav-item">
-					    <a class="nav-link" data-toggle="tab" href="#messages" role="tab">Posts</a>
-					  </li>
-					  <li class="nav-item">
-					    <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Configuracion</a>
-					  </li>
-					</ul>
+				<ul id="profileTabs" class="nav nav-tabs card" role="tablist">
+				  <li class="nav-item">
+				    <a class="nav-link active" data-toggle="tab" href="#myPixelarts" role="tab">{{usuario.imagenes.length}} PixelArts</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" data-toggle="tab" href="#myFavorites" role="tab">{{usuario.favorites.length}} Favoritos</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" data-toggle="tab" href="#messages" role="tab">{{usuario.posts.length}} Posts</a>
+				  </li>
+				</ul>
 
-					<!-- Tab panes -->
-					<div class="tab-content m-y-1 p-a-1">
-						<div class="tab-pane fade in active" id="myPixelarts" role="tabpanel">
+				<!-- Tab panes -->
+				<div class="tab-content m-y-1">
+					<div class="tab-pane fade in active" id="myPixelarts" role="tabpanel">
 
-							<article class="post" ng-repeat="pixelart in currentUser.pixelarts">
-							    <a ui-sref="galeria.pixelart({ pixelartId: {{pixelart.id}} })" target="_blank">
-							    <h4 class="card-title">{{pixelart.Titulo}}</h4>
-							    <img class="img-fluid" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.Previa}}" alt="{{pixelart.Titulo}}" >
-							    <!-- <div class="card-footer">
-							        <img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.imagen}}" alt="{{pixelart.username}}">
-							        <span class="username text-muted"><a href="{{pixelart.IdUsuario}}"> {{pixelart.username}} </a></span>
-							    </div> -->
-							    </a>
-							</article>
+						<article class="post" ng-repeat="pixelart in usuario.imagenes" ng-hide="pixelart.Aprobada != 1 && currentUser.id != usuario.id">
+						    <a ui-sref="galeria.pixelart({ pixelartId: {{pixelart.id}} })" target="_blank">
+						    <h4 class="card-title">{{pixelart.Titulo}}</h4>
+						    <img class="img-fluid v-x-center" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.Previa}}" alt="{{pixelart.Titulo}}" >
+						    <!-- <div class="card-footer">
+						        <img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.imagen}}" alt="{{pixelart.username}}">
+						        <span class="username text-muted"><a href="{{pixelart.IdUsuario}}"> {{pixelart.username}} </a></span>
+						    </div> -->
+						    </a>
+						</article>
 
-						</div>
-						<div class="tab-pane fade" id="profile" role="tabpanel">
+						<div ng-if="usuario.id == currentUser.id && !usuario.imagenes.length" class="d-block text-xs-center m-t-3">
+			                <h2>¿Todavia no subes tus PixelArts? </h2>
+			                <button class="btn btn-outline-primary" ui-sref="home.createpost">Empieza ahora!</button>
+			            </div>
 
-							<article class="post" ng-repeat="favorito in currentUser.favorites">
-							    <a ui-sref="galeria.pixelart({ pixelartId: {{favorito.id}} })" target="_blank">
-							    <h4 class="card-title">{{favorito.Titulo}}</h4>
-							    <img class="img-fluid" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{favorito.Previa}}" alt="{{favorito.Titulo}}" >
-							    <!-- <div class="card-footer">
-							        <img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{favorito.imagen}}" alt="{{favorito.username}}">
-							        <span class="username text-muted"><a href="{{favorito.IdUsuario}}"> {{favorito.username}} </a></span>
-							    </div> -->
-							    </a>
-							</article>
-						</div>
-						<div class="tab-pane fade" id="messages" role="tabpanel">...</div>
-						<div class="tab-pane fade" id="settings" role="tabpanel">...</div>
 					</div>
 
+					<div class="tab-pane fade" id="myFavorites" role="tabpanel">
+
+						<article class="post" ng-repeat="favorito in usuario.favorites" ng-hide="!favorito.Previa">
+						    <a ui-sref="galeria.pixelart({ pixelartId: {{favorito.idimagen}} })" target="_blank">
+						    <h4 class="card-title">{{favorito.Titulo}}</h4>
+						    <img class="img-fluid v-x-center" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{favorito.Previa}}" alt="{{favorito.Titulo}}" >
+						    <!-- <div class="card-footer">
+						        <img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{favorito.imagen}}" alt="{{favorito.username}}">
+						        <span class="username text-muted"><a href="{{favorito.IdUsuario}}"> {{favorito.username}} </a></span>
+						    </div> -->
+						    </a>
+						</article>
+
+						<div ng-if="usuario.id == currentUser.id && !usuario.favorites.length" class="d-block text-xs-center m-t-3">
+			                <h2>¿No te ha gustado ningun PixelArt del sitio? </h2>
+			                <button class="btn btn-outline-primary" ui-sref="galeria">Revisa la galería!</button>
+			            </div>
+
+					</div>
+					
+					<div class="tab-pane fade" id="messages" role="tabpanel">
+
+						<article class="card" ng-repeat="post in usuario.posts">
+							<div class="card-block">
+								<h5 class="card-title"><a ui-sref="home.thread({NoticiaId:post.id})" target="_blank"> {{post.Titulo}} </a></h5>
+								<h6 class="card-subtitle text-muted"><img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{usuario.imagen}}" alt="{{usuario.username}}">
+								<span class="username text-muted">{{usuario.username}}</span> <time title="{{ post.created_at | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ post.created_at | amCalendar }}</time></h6>
+							</div>
+							<!--  <img src="..." alt="Card image"> -->
+							<div class="card-block">
+								<p class="card-text"> {{post.Descripcion}} </p>
+							</div>
+						</article>
+
+						<div ng-if="usuario.id == currentUser.id && !usuario.posts.length" class="d-block text-xs-center m-t-3">
+			                <h2>No tienes ningun post aún</h2>
+			                <button class="btn btn-outline-primary" ui-sref="home.createnews">Presentate en la comunidad!</button>
+			            </div>
+
+					</div>
+				
+				</div>
 			</section>
 
 			<script type="text/javascript">
