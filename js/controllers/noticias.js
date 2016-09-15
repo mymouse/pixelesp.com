@@ -1,7 +1,7 @@
 /**
  * Get All Noticias
  */
-app.controller('getNoticias', function($scope, $http, ngDialog) {
+app.controller('getNoticias', function($scope, $http) {
 
 	$scope.noticias = [];
 	$http.get('http://pixelesp-api.herokuapp.com/noticias').then(function(resp) {
@@ -77,12 +77,9 @@ app.controller('noticiaCtrl', function($scope, $state, $stateParams, $http, ngDi
 		});
 	};
 
-  $scope.doDelete = function() {
-
+  	$scope.doDelete = function() {
 	  	$http.delete('http://pixelesp-api.herokuapp.com/noticias/'+ $stateParams.NoticiaId, $scope.noticia).then(function(resp) {
-	      console.log(resp.data);
-
-	     
+	      console.log(resp.data);	     
 
 	      ngDialog.close();
 				ngDialog.open({
@@ -96,15 +93,13 @@ app.controller('noticiaCtrl', function($scope, $state, $stateParams, $http, ngDi
 						time: 3
 					},
 					preCloseCallback: function(){  $state.go('home', {}, { reload: true }); } 
-
 				});
 
 	    }, function(err) {
 	      console.error('ERR', err);
 	      // err.status will contain the status code
 	    });
-
-  };
+  	}
   
 })
 
@@ -113,10 +108,10 @@ app.controller('noticiaCtrl', function($scope, $state, $stateParams, $http, ngDi
  */
 app.controller('noticiaNueva', function($scope, $http, Session, ngDialog, $state) {
 
-	$scope.noticia={};
-	$scope.noticia.Titulo='';
-	$scope.noticia.Descripcion='';
-	$scope.noticia.id ='';
+	$scope.noticia = {};
+	$scope.noticia.Titulo = '';
+	$scope.noticia.Descripcion = '';
+	$scope.noticia.id = '';
 
 	if (Session.id != null) {
 
@@ -134,21 +129,20 @@ app.controller('noticiaNueva', function($scope, $http, Session, ngDialog, $state
 				ngDialog.closeAll();
 
 				ngDialog.open({
-          templateUrl: 'partials/messages.html',
-          className: 'ngdialog-theme-plain card-message',
-          cache: false,
-          showClose: false,
-          data: {
-            class: 'card-inverse card-success',
-            text: 'Noticia creada',
-            footertext: 'Muchas gracias!',
-            time: 2
-          },
+					templateUrl: 'partials/messages.html',
+					className: 'ngdialog-theme-plain card-message',
+					cache: false,
+					showClose: false,
+					data: {
+						class: 'card-inverse card-success',
+						text: 'Noticia creada',
+						footertext: 'Muchas gracias!',
+						time: 2
+					},
 					preCloseCallback: function(){
 						$state.go('home.thread', { 'NoticiaId': resp.data.data.id }, { reload: true });
 					}
-
-        })
+       			})
 
 			}, function(err) {
 				console.error('ERR', err);

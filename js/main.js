@@ -72,6 +72,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			url: '/contacto',
 			templateUrl: "partials/contacto.html",
 			controller: "" })
+		.state("trabajo", {
+			url: '/empleo',
+			templateUrl: "partials/empleos.html",
+			controller: "" })
 
 		.state("encola", {
 			url: '/en-cola',
@@ -208,6 +212,41 @@ app.config(function($stateProvider, $urlRouterProvider) {
 					controller: 'pixelartCtrl',
 					templateUrl: 'partials/pixelart-en-cola.html',
 					className: 'ngdialog-theme-plain width-noticia animated fadeIn'
+
+				}).closePromise.finally(function() {
+					$state.go('^');
+				});
+			}]
+		})
+		
+		.state("trabajo.empleo", {
+
+			url: '/:TrabajoId',
+			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
+
+				ngDialog.open({
+					controller: 'trabajoCtrl',
+					templateUrl: 'partials/thread.html',
+					className: 'ngdialog-theme-thread animated fadeIn'
+
+				}).closePromise.finally(function() {
+					$state.go('^');
+				});
+			}]
+		})
+
+		.state("trabajo.createjobs", {
+
+			url: '/crear-empleo',
+			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
+
+				ngDialog.close();
+				ngDialog.open({
+					template: 'partials/createjobs.html',
+					controller: 'TrabajoNuevoCtrl',
+					className: 'ngdialog-theme-plain width-noticia',
+					cache: false,
+					closeByEscape: false
 
 				}).closePromise.finally(function() {
 					$state.go('^');

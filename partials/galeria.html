@@ -5,7 +5,7 @@
 
             <ul class="nav nav-pills">
               <li class="nav-item">
-                <a ui-sref="galeria.createpost" class="nav-link btn btn-primary">Subir PixelArt</a>
+                <a ui-sref="galeria.createpost" class="nav-link btn btn-primary" ng-hide="!currentUser">Subir PixelArt</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link disabled" href="#">{{imagenes.length}} PixelArts</a>
@@ -27,7 +27,7 @@
                 <img class="img-fluid" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.Previa}}" alt="{{pixelart.Titulo}}" >
                 <div class="card-footer">
                     <img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.imagen}}" alt="{{pixelart.username}}">
-                    <span class="username text-muted"><a href="{{pixelart.IdUsuario}}"> {{pixelart.username}} </a></span>
+                    <span class="username text-muted"><a ui-sref="perfil({id_usuario:pixelart.IdUsuario})"> {{pixelart.username}} </a></span>
                 </div>
                 </a>
             </article>

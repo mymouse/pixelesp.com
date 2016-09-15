@@ -4,6 +4,7 @@
     &#9776;
   </button>
   <div class="collapse navbar-toggleable-xs" id="collapesenavbar">
+
   	<ul ng-if="currentUser" class="nav navbar-nav pull-xs-left">		
 	</ul>
 
@@ -28,13 +29,12 @@
 				<div class="text-xs-right">
 					<a class="dropdown-item" ui-sref="perfil({id_usuario:currentUser.id})">Mi perfil <i class="fa fa-user" aria-hidden="true"></i></a>
 					<a class="dropdown-item" ui-sref="cuenta({id_usuario:currentUser.id})">Mi cuenta <i class="fa fa-cog" aria-hidden="true"></i></a>
-					<a class="dropdown-item" ng-if="isAuthorized(userRoles.admin)" ui-sref="encola">Post para aprobar <i class="fa fa-list-ul" aria-hidden="true"></i></a>
+					<a class="dropdown-item" ng-if="isAuthorized(userRoles.admin)" ui-sref="encola">Moderar <i class="fa fa-list-ul" aria-hidden="true"></i></a>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="" ng-if="currentUser" ng-click="doLogout()">Salir <i class="fa fa-sign-out" aria-hidden="true"></i></a>
 				</div>
 			</div>
 		</li>
-	</ul>
 
   </div>
 </nav>

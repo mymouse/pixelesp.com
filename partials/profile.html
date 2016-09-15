@@ -45,8 +45,8 @@
 				<div class="tab-content m-y-1">
 					<div class="tab-pane fade in active" id="myPixelarts" role="tabpanel">
 
-						<article class="post" ng-repeat="pixelart in usuario.imagenes" ng-hide="pixelart.Aprobada != 1 && currentUser.id != usuario.id">
-						    <a ui-sref="galeria.pixelart({ pixelartId: {{pixelart.id}} })" target="_blank">
+						<article class="post" ng-repeat="pixelart in usuario.imagenes">
+						    <a ui-sref="galeria.pixelart({ pixelartId:pixelart.id})" target="_blank">
 						    <h4 class="card-title">{{pixelart.Titulo}}</h4>
 						    <img class="img-fluid v-x-center" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.Previa}}" alt="{{pixelart.Titulo}}" >
 						    <!-- <div class="card-footer">

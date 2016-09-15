@@ -3,7 +3,7 @@
 	<section class="col-lg-5 content" ng-controller="getNoticias">
 		<div class="d-block">
 			<h3 class="d-inline-block">Ultimos Posts</h3>
-			<button ui-sref="home.createnews" class="btn btn-primary btn-sm pull-right d-inline-block">Crear Post</button>
+			<button ui-sref="home.createnews" class="btn btn-primary btn-sm pull-right d-inline-block" ng-hide="!currentUser">Crear Post</button>
 		</div>
 		<article class="card" ng-repeat="noticia in noticias">
 			<div class="card-block">
@@ -25,7 +25,7 @@
 	<section class="col-lg-7 content" ng-controller="getPosts">
 		<div class="d-block">
 			<h3 class="d-inline-block">Ultimos PixelArts</h3>
-			<button ui-sref="home.createpost" class="btn btn-primary btn-sm pull-right d-inline-block">Subir PixelArt</button>
+			<button ui-sref="home.createpost" class="btn btn-primary btn-sm pull-right d-inline-block" ng-hide="!currentUser">Subir PixelArt</button>
 		</div>
 		<article class="post" ng-repeat="pixelart in imagenes">
 			<a ui-sref="home.pixelart({ pixelartId: {{pixelart.id}} })">
