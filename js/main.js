@@ -30,7 +30,7 @@ app.config(['CloudinaryProvider', configure]);
 
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
-	$locationProvider.html5Mode(true).hashPrefix('!');
+	//$locationProvider.html5Mode(true);
 
 	userdata = JSON.parse(window.localStorage.getItem('userdata'));
 	if ( !userdata ) {
