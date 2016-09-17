@@ -89,7 +89,7 @@
 							<div class="card-block">
 								<h5 class="card-title"><a ui-sref="home.thread({NoticiaId:post.id})" target="_blank"> {{post.Titulo}} </a></h5>
 								<h6 class="card-subtitle text-muted"><img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{usuario.imagen}}" alt="{{usuario.username}}">
-								<span class="username text-muted">{{usuario.username}}</span> <time title="{{ post.created_at | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ post.created_at | amCalendar }}</time></h6>
+								<span class="username text-muted">{{usuario.username}}</span> <time title="{{ post.created_at | amUtc | amLocal | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ post.created_at | amUtc | amLocal | amCalendar }}</time></h6>
 							</div>
 							<!--  <img src="..." alt="Card image"> -->
 							<div class="card-block">

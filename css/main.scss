@@ -164,6 +164,14 @@ a {
 	transform: translate(-50%,-50%);
 }
 
+.shareTitle {
+    position: relative;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: .7em;
+}
+
 /*
  * NavBar
  */
@@ -656,7 +664,7 @@ form {
 			}
 			.preview {
 				display: block;
-				height: 135px;
+				height: 145px;
 
 				img {
 					display: block;

@@ -6,9 +6,9 @@
         <article class="card">
             <div class="card-block">
                 <div class="col-xs-10">
-                    <h5 class="card-title"><a ui-sref="home.thread( pixelartId: pixelart.id )"> {{pixelart.Titulo}} </a></h5>
+                    <h5 class="card-title">{{pixelart.Titulo}}</h5>
                     <h6 class="card-subtitle text-muted"><img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.imagen}}" alt="{{pixelart.username}}">
-                    <span class="username text-muted"><a ui-sref="perfil({id_usuario:pixelart.IdUsuario})"> {{pixelart.username}} </a></span> <time title="{{ pixelart.created_at | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ pixelart.created_at | amCalendar }}</time></h6>
+                    <span class="username text-muted"><a ui-sref="perfil({id_usuario:pixelart.IdUsuario})"> {{pixelart.username}} </a></span> <time title="{{ pixelart.created_at | amUtc | amLocal | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ pixelart.created_at | amUtc | amLocal | amCalendar }}</time></h6>
                 </div>
                 <div class="col-xs-2">
                     <div class="btn-group pull-xs-right">
@@ -32,13 +32,101 @@
                 <!-- <a href="#" class="card-link">Card link</a> -->
             </div>
 
+            <div class="card-block ">
+                <i role="button"" ng-click="markAs(!isFavorite)" ng-class="{'text-danger' : isFavorite == 0}" class="fa fa-heart fa-2x" aria-hidden="true"></i>
+
+                <div class="addthis_inline_share_toolbox pull-right">
+
+                    <p class="d-block shareTitle">Comparte</p>
+
+                    <a href="#"
+                        socialshare
+                        socialshare-type="feed"
+                        socialshare-provider="facebook"
+                        socialshare-text="{{pixelart.Titulo}}"
+                        socialshare-description="{{pixelart.Descripcion}}"
+                        socialshare-url="http://localhost/pixelesp.com/#/pixelart/{{pixelart.id}}"
+                        socialshare-media="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.Imagen}}"
+                        socialshare-via="1091024470952406"
+                        class="btn btn-secondary btn-sm"
+                        >
+                        <i class="fa fa-facebook"></i>                    
+                    </a>
+
+                    <a href="#"
+                        socialshare
+                        socialshare-provider="twitter"
+                        socialshare-text="{{pixelart.Titulo}}"
+                        socialshare-url="http://localhost/pixelesp.com/#/pixelart/{{pixelart.id}}"
+                        socialshare-media="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.Imagen}}"
+                        socialshare-via="pixelesp"
+                        socialshare-hashtags="pixelart"
+                        class="btn btn-secondary btn-sm"
+                        >
+                        <i class="fa fa-twitter"></i>                    
+                    </a>
+
+                    <a href="#"
+                        socialshare
+                        socialshare-provider="pinterest"
+                        socialshare-text="{{pixelart.Titulo}}"
+                        socialshare-url="http://localhost/pixelesp.com/#/pixelart/{{pixelart.id}}"
+                        socialshare-media="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.Imagen}}"
+                        class="btn btn-secondary btn-sm"
+                        >
+                        <i class="fa fa-pinterest"></i>                    
+                    </a>
+
+                    <a href="#"
+                        socialshare
+                        socialshare-provider="tumblr"
+                        socialshare-text="{{pixelart.Titulo}}"
+                        socialshare-url="http://localhost/pixelesp.com/#/pixelart/{{pixelart.id}}"
+                        socialshare-media="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.Imagen}}"
+                        class="btn btn-secondary btn-sm"
+                        >
+                        <i class="fa fa-tumblr"></i>                    
+                    </a>
+
+                    <a href="#"
+                        socialshare
+                        socialshare-provider="reddit"
+                        socialshare-text="{{pixelart.Titulo}}"
+                        socialshare-url="http://localhost/pixelesp.com/#/pixelart/{{pixelart.id}}"
+                        socialshare-media="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.Imagen}}"
+                        ssocialshare-subreddit="pixelart"
+                        class="btn btn-secondary btn-sm"
+                        >
+                        <i class="fa fa-reddit-alien"></i>                    
+                    </a>
+
+                    <a href="#"
+                        socialshare
+                        socialshare-provider="whatsapp"
+                        socialshare-text="{{pixelart.Titulo}}"
+                        socialshare-url="http://localhost/pixelesp.com/#/pixelart/{{pixelart.id}}"
+                        class="btn btn-secondary btn-sm"
+                        >
+                        <i class="fa fa-whatsapp"></i>                    
+                    </a>
+
+
+                </div>
+
+                <div class="clearfix d-block m-t-1 userfavs">
+                    <span ng-repeat="f in pixelart.favoritos | orderBy:'-created_at'">
+                        <img src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{f.imagen}}" alt="{{f.username}}" class="img-circle" style="margin:0 2.5px" width="25" title="{{f.username}}">
+                    </span>
+                </div>
+            </div>
+
             <div class="card-footer">
                 <h4><i class="fa fa-comments" aria-hidden="true"></i> {{pixelart.comentarios.length}} Comentario<span ng-if="pixelart.comentarios.length != 1">s</span></h4>
 
                 <div class="box-footer">
                     <form class="fancy" ng-submit="guardarComentario(comment)">
-                        <img ng-if="currentUser" class="img-responsive img-circle avatar" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{ currentUser.imagen }}" alt="Alt Text">
-                        <img ng-if="!currentUser" class="img-responsive img-circle avatar" src="./uploads/img/avatar/paintprogram.png" alt="Alt Text">
+                        <img ng-if="currentUser" class="img-responsive img-circle avatar" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{ currentUser.imagen }}" alt="{{currentUser.username}}">
+                        <img ng-if="!currentUser" class="img-responsive img-circle avatar" src="./img/paintprogram.png" alt="Alt Text">
                         <!-- .img-push is used to add margin to elements next to floating images -->
                         <div class="img-push form-group">
                           <input id="commentinput" type="text" class="form-control input-sm comment" ng-model="comment.text" 
@@ -55,7 +143,7 @@
                         <div class="comment-text">
                             <span class="username">
                                 <a ui-sref="perfil({id_usuario:c.idusuario})">{{c.username}}</a>
-                                <time title="{{ c.created_at | amDateFormat: 'LLLL' }}" class="text-muted pull-right">{{ c.created_at | amCalendar }}</time>
+                                <time title="{{ c.created_at | amUtc | amLocal | amDateFormat: 'LLLL' }}" class="text-muted pull-right">{{ c.created_at | amUtc | amLocal | amCalendar }}</time>
                             </span>
                             {{c.text}}
                         </div>

@@ -2,7 +2,7 @@
  * Main AngularJS Web Application
  */
 
-var app = angular.module('pixelespWebApp', ['ui.router', 'ngDialog', 'ngMessages', 'angularMoment', 'cloudinary', 'ngFileUpload', 'ngImgCrop']);
+var app = angular.module('pixelespWebApp', ['ui.router', 'ngDialog', 'ngMessages', 'angularMoment', 'cloudinary', 'ngFileUpload', 'ngImgCrop', '720kb.socialshare']);
 
 app.constant('AUTH_EVENTS', {
 	loginSuccess: 'auth-login-success',
@@ -28,7 +28,9 @@ function configure(CloudinaryProvider) {
 }
 app.config(['CloudinaryProvider', configure]);
 
-app.config(function($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+
+	$locationProvider.html5Mode(true).hashPrefix('!');
 
 	userdata = JSON.parse(window.localStorage.getItem('userdata'));
 	if ( !userdata ) {
@@ -255,9 +257,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		})
 
 		// Blog
-		.state("foro", {
-			url: '/foro',
-			templateUrl: "partials/foro.html",
+		.state("app", {
+			url: '/app',
+			templateUrl: "partials/app.html",
 			controller: "" })
 		// 404
 		.state("404", {
@@ -266,7 +268,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			controller: "" })
 });
 
-app.run( function($rootScope, $state, $location, AuthService, Session) {
+app.run( function($rootScope, $state, $location, AuthService) {
+
 	// register listener to watch route changes
 	$rootScope.$on( "$stateChangeStart", function(event, next, current) {
 

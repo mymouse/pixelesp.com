@@ -42,7 +42,7 @@ app.controller('getPosts', function($scope, $http, ngDialog) {
 
   //get length usuarios
   $scope.users = [];
-  $http.get('http://pixelesp-api.herokuapp.com/favimg').then(function(resp) {
+  $http.get('http://pixelesp-api.herokuapp.com/usuarios').then(function(resp) {
     $scope.users = resp.data.data;
     //console.log('Succes', resp.data.data);
   }, function(err) {
@@ -187,6 +187,25 @@ app.controller('pixelartCtrl', function($scope, $state, $stateParams, $http, Ses
   $http.get('http://pixelesp-api.herokuapp.com/imagenes/'+ $stateParams.pixelartId).then(function(resp) {
     $scope.pixelart = resp.data.data;
 
+    pixelfavs = $scope.pixelart.favoritos;
+    $scope.isFavorite = pixelfavs.map((el) => el.username).indexOf(userdata.username);
+
+    console.log('$scope.isFavorite '+$scope.isFavorite);
+
+    // marcar como favorito
+    $scope.markAs = function(type) {
+
+      switch(type) {
+        case false :
+          $scope.addFav();
+          break;
+        case true : 
+          $scope.removeFav();
+          break;
+      }
+      $scope.isFavorite = type;
+    }
+
   /* ===== 
     ===== 
       ===== */
@@ -228,6 +247,43 @@ app.controller('pixelartCtrl', function($scope, $state, $stateParams, $http, Ses
     console.error('ERR', err);
     // err.status will contain the status code
   });
+
+  // añadir a favoritos  
+  $token = Session.id;
+  $scope.addFav = function() {
+
+    // your code
+    $scope.imgfavoritos = {};
+    $scope.imgfavoritos.idimagen = $scope.pixelart.id;
+    $scope.imgfavoritos.imagen = userdata.imagen;
+    $scope.imgfavoritos.username = userdata.username;
+    $http.post('http://pixelesp-api.herokuapp.com/imgfavoritos', $scope.imgfavoritos, {headers: {'auth-token': $token}}).then(function(resp) {
+      
+      $scope.pixelart.favoritos.push(resp.data.data);      
+
+    }, function(err) {
+      console.error('ERR', err);
+      // err.status will contain the status code
+    });
+
+  }
+
+  $scope.removeFav = function() {
+
+    // your code
+    $scope.imgfavoritos = {};
+    $http.delete('http://pixelesp-api.herokuapp.com/imgfavoritos/' + $stateParams.pixelartId, {headers: {'auth-token': $token}}).then(function (resp) {
+
+      // remove avatar from list
+      $('.userfavs img[title='+userdata.username+']').hide();
+
+    }, function(err) {
+     console.error('ERR', err);
+     // err.status will contain the status code+
+
+    });
+
+  }
 
   // aprobar o eliminar pixelart
   if (Session.id != null) {
