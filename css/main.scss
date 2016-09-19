@@ -46,8 +46,8 @@ a {
 	color: $verde;
 
 	&:focus, &:hover, &:active {
-	    color: $verde_hover;
-	    text-decoration: none;
+		color: $verde_hover;
+		text-decoration: none;
 	}
 }
 
@@ -74,12 +74,12 @@ a {
 		display: inline-flex;
 
 		.avatar {
-		    display: inline-block;
-		    margin: 10px;
+			display: inline-block;
+			margin: 10px;
 		}
 		.info {
-   			margin-right: 10px;
-   			padding-top: 20px;
+			margin-right: 10px;
+			padding-top: 20px;
 
 			p {
 				margin: 0
@@ -100,18 +100,18 @@ a {
 }
 
 .btn-primary {
-    border: none;
-    border-radius: 2px;
-    background-color: $verde;
+	border: none;
+	border-radius: 2px;
+	background-color: $verde;
 	box-shadow: none;
-    color: #fff;
+	color: #fff;
 	text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
+	letter-spacing: 1px;
+	font-weight: 600;
 
-    &:hover, &:focus, &:active, &:active:hover, &:active:focus, &.disabled:hover, &:disabled:hover {
-	    border: none;
-	    background-color: $verde_hover;
+	&:hover, &:focus, &:active, &:active:hover, &:active:focus, &.disabled:hover, &:disabled:hover {
+		border: none;
+		background-color: $verde_hover;
 	}
 	&[disabled] {
 		opacity: .5;
@@ -119,13 +119,13 @@ a {
 }
 
 .btn-outline-primary {
-    border-color: $verde;
-    color: $verde;
+	border-color: $verde;
+	color: $verde;
 	text-transform: uppercase;
 
-    &:hover, &:focus {
-	    border-color: $verde;
-	    background-color: $verde;
+	&:hover, &:focus {
+		border-color: $verde;
+		background-color: $verde;
 	}
 }
 
@@ -136,8 +136,8 @@ a {
 	border-radius: 0 2px 2px 0!important;
 }
 
-.btn-block {	
-    letter-spacing: 1px;
+.btn-block {    
+	letter-spacing: 1px;
 }
 
 /*
@@ -165,11 +165,11 @@ a {
 }
 
 .shareTitle {
-    position: relative;
-    margin-bottom: 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: .7em;
+	position: relative;
+	margin-bottom: 0;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: .7em;
 }
 
 /*
@@ -451,8 +451,8 @@ form {
 			}
 		}
 		.cropArea:not(.drop-box) {
-		    width: 100%;
-		    height: 180px;
+			width: 100%;
+			height: 180px;
 		}
 		
 	}
@@ -488,10 +488,20 @@ form {
 				height: 20px;
 			}
 		}
+		.card-text { white-space: pre-line;}
+		
+		.read-more{
+	    text-align: center;
+	    display: block;
+	    border: 1px solid #E0E0E0;
+	    border-right: 0;
+	    border-left: 0;
+	    padding: 0.5em;
+	    margin-bottom: .5em;
+	  }
 	}
-
 	&.jobs .card-block {
-	    padding: 10px 1.25rem;
+		padding: 10px 1.25rem;
 	}
 }
 
@@ -509,9 +519,9 @@ form {
 			ul.nav {
 				display: inline-block;
 
-				li {			
+				li {            
 					margin-bottom: -2px;
-					font-size: .9em;			
+					font-size: .9em;            
 				}
 			}
 		}
@@ -628,7 +638,7 @@ form {
 		}
 		/* vista pixelart*/
 		img.pixelart {
-			display: block;			
+			display: block;         
 			margin: 15px auto;
 			max-height: 500px;
 		}
@@ -773,8 +783,8 @@ article.post {
 
 .card.profile{
 	.fa.fa-2x {
-	    padding: 0 2.5px;
-	    font-size: 1.5em;
+		padding: 0 2.5px;
+		font-size: 1.5em;
 	}
 }
 

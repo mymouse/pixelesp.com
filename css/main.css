@@ -8318,6 +8318,16 @@ form {
         margin-right: 5px;
         width: 20px;
         height: 20px; }
+    .card .card-block .card-text {
+      white-space: pre-line; }
+    .card .card-block .read-more {
+      text-align: center;
+      display: block;
+      border: 1px solid #E0E0E0;
+      border-right: 0;
+      border-left: 0;
+      padding: 0.5em;
+      margin-bottom: .5em; }
   .card.jobs .card-block {
     padding: 10px 1.25rem; }
 

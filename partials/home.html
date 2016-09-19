@@ -13,7 +13,10 @@
 			</div>
 			<!--  <img src="..." alt="Card image"> -->
 			<div class="card-block">
-				<p class="card-text"> {{noticia.Descripcion}} </p>
+				<p class="card-text"> {{noticia.Descripcion | limitTo: 250}} {{noticia.Descripcion.length < 250 ? '' : '...'}} </p>
+				<div ng-if="noticia.Descripcion.length > 250">
+					<a class="read-more" ui-sref="home.thread({NoticiaId:noticia.id})">Ver post completo</a>
+				</div>
 				<!-- <a href="#" class="card-link">Card link</a> -->
 				<a class="btn btn-secondary btn-sm pull-right" ui-sref="home.thread({NoticiaId:noticia.id})">
 					<i class="fa fa-comments" aria-hidden="true"></i> {{noticia.comentarios.length}} Comentario<span ng-if="noticia.comentarios.length != 1">s</span>
