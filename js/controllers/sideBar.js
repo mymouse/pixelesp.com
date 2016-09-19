@@ -12,17 +12,17 @@ app.controller('sideBar', function($scope) {
 			icon: 'picture-o',
 			state: 'galeria'
 		}, { 
+			title: 'Comunidad',
+			icon: 'users',
+			state: 'comunidad'
+		}, { 
 			title: 'Trabajo',
 			icon: 'briefcase',
 			state: 'trabajo'
 		}, { 
-			title: 'Foro',
-			icon: 'comments-o',
-			state: 'foro'
-		}, { 
-			title: 'Comunidad',
-			icon: 'users',
-			state: 'comunidad'
+			title: 'App',
+			icon: 'android',
+			state: 'app'
 		}, { 
 			title: 'Contacto',
 			icon: 'envelope-o',

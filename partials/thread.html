@@ -5,7 +5,7 @@
             <header class="card-block">
                 <div class="col-xs-10">
                     <h5 class="card-title"><a ui-sref="home.thread( NoticiaId: noticia.id )"> {{noticia.Titulo}} </a></h5>
-                    <h6 class="card-subtitle text-muted"><img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{noticia.imagen}}" alt="{{noticia.username}}"> <span class="username text-muted"><a href="{{noticia.IdUsuario}}"> {{noticia.username}} </a></span> <time title="{{ noticia.created_at | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ noticia.created_at | amCalendar }}</time></h6>
+                    <h6 class="card-subtitle text-muted"><img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{noticia.imagen}}" alt="{{noticia.username}}"> <span class="username text-muted"><a ui-sref="perfil({id_usuario:noticia.IdUsuario})"> {{noticia.username}} </a></span> <time title="{{ noticia.created_at | amUtc | amLocal | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ noticia.created_at | amUtc | amLocal | amCalendar }}</time></h6>
                 </div>
                 <div class="col-xs-2">
                     <div class="btn-group pull-xs-right">
@@ -30,12 +30,12 @@
             </div>
 
             <div class="card-footer">
-                <h4><i class="fa fa-comment" aria-hidden="true"></i> {{noticia.comentarios.length}} Comentarios</h4>
+                <h4><i class="fa fa-comments" aria-hidden="true"></i> {{noticia.comentarios.length}} Comentario<span ng-if="noticia.comentarios.length != 1">s</span></h4>
 
                 <div class="box-footer">
                     <form class="fancy" ng-submit="guardarComentario(comment)">
                         <img ng-if="currentUser" class="img-responsive img-circle avatar" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{ currentUser.imagen }}" alt="Alt Text">
-                        <img ng-if="!currentUser" class="img-responsive img-circle avatar" src="./uploads/img/avatar/paintprogram.png" alt="Alt Text">
+                        <img ng-if="!currentUser" class="img-responsive img-circle avatar" src="./img/paintprogram.png" alt="Alt Text">
                         <!-- .img-push is used to add margin to elements next to floating images -->
                         <div class="img-push form-group">
                           <input id="commentinput" type="text" class="form-control input-sm comment" ng-model="comment.text" 
@@ -51,8 +51,8 @@
                         <img class="img-circle avatar" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{c.imagen}}" alt="{{c.username}}">
                         <div class="comment-text">
                             <span class="username">
-                                {{c.username}}
-                                <time title="{{ c.created_at | amDateFormat: 'LLLL' }}" class="text-muted pull-right">{{ c.created_at | amCalendar }}</time>
+                                <a ui-sref="perfil({id_usuario:c.idusuario})">{{c.username}}</a>
+                                <time title="{{ c.created_at | amUtc | amLocal | amDateFormat: 'LLLL' }}" class="text-muted pull-right">{{ c.created_at | amUtc | amLocal | amCalendar }}</time>
                             </span>
                             {{c.text}}
                         </div>

@@ -28,6 +28,28 @@ app.controller('getPosts', function($scope, $http, ngDialog) {
     console.error('ERR', err);
     // err.status will contain the status code
   });
+
+
+  //get length favortios
+  $scope.favs = [];
+  $http.get('http://pixelesp-api.herokuapp.com/favimg').then(function(resp) {
+    $scope.favs = resp.data.data;
+    //console.log('Succes', resp.data.data);
+  }, function(err) {
+    console.error('ERR', err);
+    // err.status will contain the status code
+  });
+
+  //get length usuarios
+  $scope.users = [];
+  $http.get('http://pixelesp-api.herokuapp.com/usuarios').then(function(resp) {
+    $scope.users = resp.data.data;
+    //console.log('Succes', resp.data.data);
+  }, function(err) {
+    console.error('ERR', err);
+    // err.status will contain the status code
+  });
+
 })
 
 /*
@@ -62,13 +84,13 @@ app.controller('newPost', function ($scope, $http, $state, Upload, Session, $tim
             file: previaFromPC
           },
         }).then(function (resp) {
-            console.log('Success previaFromPC ' + resp.config.data.file.name + 'uploaded. Response: ' + JSON.stringify(resp.data));
+            //console.log('Success previaFromPC ' + resp.config.data.file.name + 'uploaded. Response: ' + JSON.stringify(resp.data));
             var urlPreviaPC = resp.data.url;
             $scope.imagen.Previa = '';
             $scope.imagen.Previa = urlPreviaPC.substr(urlPreviaPC.lastIndexOf('d/') + 2);
 
         }, function (resp) {
-            console.log('Error status: ' + resp.status);
+            //console.log('Error status: ' + resp.status);
         }, function (evt) {
             //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
@@ -86,12 +108,12 @@ app.controller('newPost', function ($scope, $http, $state, Upload, Session, $tim
             origFile: file
           },
         }).then(function (resp) {
-            console.log('Success previaCrop ' + resp.config.data.file.name + 'uploaded. Response: ' + JSON.stringify(resp.data));
+            //console.log('Success previaCrop ' + resp.config.data.file.name + 'uploaded. Response: ' + JSON.stringify(resp.data));
             var urlPrevia = resp.data.url;
             $scope.imagen.Previa = urlPrevia.substr(urlPrevia.lastIndexOf('d/') + 2);
 
         }, function (resp) {
-            console.log('Error status: ' + resp.status);
+            //console.log('Error status: ' + resp.status);
         }, function (evt) {
             //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
@@ -129,7 +151,11 @@ app.controller('newPost', function ($scope, $http, $state, Upload, Session, $tim
                 time: 2
               },
               preCloseCallback: function(){
-                $state.go('home.pixelart', { 'pixelartId': resp.data.data.id }, { reload: true });
+                if ($state.current.name == 'home') {              
+                  $state.go('home.pixelart', {'pixelartId': resp.data.data.id}, { reload: true });
+                } else if ($state.current.name == 'galeria') {
+                  $state.go('galeria.pixelart', {'pixelartId': resp.data.data.id}, { reload: true });
+                }
               }
             })
 
@@ -137,7 +163,7 @@ app.controller('newPost', function ($scope, $http, $state, Upload, Session, $tim
           }, function(err) {
             console.error('ERR', err);
             $scope.pixelarterror = err.data.msg;
-
+            //console.log('ke lo ke: '+$scope.pixelarterror);
           }); //end http post
 
         });
@@ -161,12 +187,27 @@ app.controller('pixelartCtrl', function($scope, $state, $stateParams, $http, Ses
   $http.get('http://pixelesp-api.herokuapp.com/imagenes/'+ $stateParams.pixelartId).then(function(resp) {
     $scope.pixelart = resp.data.data;
 
+    pixelfavs = $scope.pixelart.favoritos;
+    $scope.isFavorite = pixelfavs.map((el) => el.username).indexOf(userdata.username);
+
+    //console.log('$scope.isFavorite '+$scope.isFavorite);
+
+    // marcar como favorito
+    $scope.markAs = function(type) {
+
+      if (type >= 0) {
+        $scope.removeFav();
+      } else {
+        $scope.addFav();
+      }
+    }
+
   /* ===== 
     ===== 
       ===== */
 
-  userdata = JSON.parse(window.localStorage.getItem('userdata'));
-  $scope.currentUser = userdata;
+    userdata = JSON.parse(window.localStorage.getItem('userdata'));
+    $scope.currentUser = userdata;
 
     $scope.guardarComentario = function(comment, ngDialogProvider) {
 
@@ -175,14 +216,15 @@ app.controller('pixelartCtrl', function($scope, $state, $stateParams, $http, Ses
       $scope.comment = {};
       $scope.comment.text = comment.text;
       $scope.comment.idusuario = userdata.id;
-      $scope.comment.id_noticia = $scope.pixelart.id;
+      $scope.comment.id_imagen = $scope.pixelart.id;
       $scope.comment.username = userdata.username;
-      $scope.comment.imagen = userdata.imagen;
+      $scope.comment.avatar = userdata.imagen;
 
-      $http.post('http://pixelesp-api.herokuapp.com/newscomments', $scope.comment).then(function(resp) {
-        console.log(resp);
+      $http.post('http://pixelesp-api.herokuapp.com/imgcomments', $scope.comment).then(function(resp) {
+        //console.log(resp);
 
         $('#commentinput').val('');
+        //$scope.comment.text = '';
         $scope.pixelart.comentarios.push(resp.data.data);
 
 
@@ -202,41 +244,114 @@ app.controller('pixelartCtrl', function($scope, $state, $stateParams, $http, Ses
     // err.status will contain the status code
   });
 
+  // añadir a favoritos  
+  $token = Session.id;
+  $scope.addFav = function() {
+
+    // your code
+    $scope.imgfavoritos = {};
+    $scope.imgfavoritos.idimagen = $scope.pixelart.id;
+    $scope.imgfavoritos.imagen = userdata.imagen;
+    $scope.imgfavoritos.username = userdata.username;
+    $http.post('http://pixelesp-api.herokuapp.com/imgfavoritos', $scope.imgfavoritos, {headers: {'auth-token': $token}}).then(function(resp) {
+      
+      $scope.pixelart.favoritos.push(resp.data.data);
+      $scope.isFavorite = 1;
+
+    }, function(err) {
+      console.error('ERR', err);
+      // err.status will contain the status code
+    });
+
+  }
+
+  $scope.removeFav = function() {
+
+    // your code
+    $scope.imgfavoritos = {};
+    $http.delete('http://pixelesp-api.herokuapp.com/imgfavoritos/' + $stateParams.pixelartId, {headers: {'auth-token': $token}}).then(function (resp) {
+
+      // remove avatar from list
+      $('.userfavs img[title='+userdata.username+']').hide();
+      $scope.isFavorite = -1;
+
+    }, function(err) {
+     console.error('ERR', err);
+     // err.status will contain the status code+
+
+    });
+
+  }
+
   // aprobar o eliminar pixelart
-  $scope.imagen = {};
-  $scope.doApprobal = function() {
+  if (Session.id != null) {
 
-    $scope.imagen.Titulo = $scope.pixelart.Titulo;
-    $scope.imagen.Descripcion = $scope.pixelart.Descripcion;
-    $scope.imagen.Aprobada = 1;
+    $scope.imagen = {};
+    $scope.doApprobal = function() {
 
-    $http.put('http://pixelesp-api.herokuapp.com/imagenes/'+ $stateParams.pixelartId, $scope.imagen).then(function(resp) {
-      console.log(resp.data);
+      $scope.imagen.Titulo = $scope.pixelart.Titulo;
+      $scope.imagen.Descripcion = $scope.pixelart.Descripcion;
+      $scope.imagen.Aprobada = 1;
 
-      ngDialog.close();
+      $http.put('http://pixelesp-api.herokuapp.com/imagenes/'+ $stateParams.pixelartId, $scope.imagen).then(function(resp) {
+        //console.log(resp.data);
 
-    }, function(err) {
-      console.error('ERR', err);
-      // err.status will contain the status code
-    });
-  };
+        ngDialog.close();
+        ngDialog.open({
+          templateUrl: 'partials/messages.html',
+          className: 'ngdialog-theme-plain card-message',
+          cache: false,
+          showClose: false,
+          data: {
+            class: 'card-inverse card-success',
+            text: 'PixelArt aprobado!',
+            footertext: 'Es un gran PixelArt!',
+            time: 2
+          },
+          preCloseCallback: function(){            
+            $state.go('encola', {}, { reload: true });
+          }
+        });
 
-  $scope.doDelete = function() {
-    $http.delete('http://pixelesp-api.herokuapp.com/imagenes/'+ $stateParams.pixelartId, $scope.imagen).then(function(resp) {
-      console.log(resp.data);
-      //$location.path('/app/imagenes');
+      }, function(err) {
+        console.error('ERR', err);
+        // err.status will contain the status code
+      });
+    }
 
-      ngDialog.close();
-      /*ngDialog.open({
-        templateUrl: 'partials/messages.html',
-        className: 'ngdialog-theme-plain width-noticia animated fadeIn'
-      });*/
+    $scope.doDelete = function() {
+      $http.delete('http://pixelesp-api.herokuapp.com/imagenes/'+ $stateParams.pixelartId, $scope.imagen).then(function(resp) {
+        //console.log(resp.data);
+        //$location.path('/app/imagenes');
 
-    }, function(err) {
-      console.error('ERR', err);
-      // err.status will contain the status code
-    });
-  };
+        ngDialog.close();
+        ngDialog.open({
+          templateUrl: 'partials/messages.html',
+          className: 'ngdialog-theme-plain card-message',
+          cache: false,
+          showClose: false,
+          data: {
+            class: 'card-inverse card-danger',
+            text: 'PixelArt eliminado',
+            footertext: 'No es PixelArt!',
+            time: 2
+          },
+          preCloseCallback: function(){
+            if ($state.current.name == 'encola') {              
+              $state.go('encola', {}, { reload: true });
+            } else if ($state.current.name == 'home') {
+              $state.go('home', {}, { reload: true });
+            } else if ($state.current.name == 'galeria') {
+              $state.go('galeria', {}, { reload: true });
+            }
+          }
+        })
 
+      }, function(err) {
+        console.error('ERR', err);
+        // err.status will contain the status code
+      });
+    }
+  } // end if Session
 
 })

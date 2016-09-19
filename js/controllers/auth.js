@@ -8,8 +8,6 @@ app.controller('auth', ['$scope', '$http', '$rootScope', '$location', '$window',
 	
 	$scope.doRegister = function() {
 
-
-
 		$http.post('http://pixelesp-api.herokuapp.com/usuarios', $scope.usuario).then(function(resp) {
 			//console.log(resp.data);
 			//console.log('registrado wachin');

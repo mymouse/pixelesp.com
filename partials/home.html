@@ -1,31 +1,42 @@
 <div class="content-wrapper">
 
 	<section class="col-lg-5 content" ng-controller="getNoticias">
-		<h3>Ultimas Noticias</h3>
+		<div class="d-block">
+			<h3 class="d-inline-block">Ultimos Posts</h3>
+			<button ui-sref="home.createnews" class="btn btn-primary btn-sm pull-right d-inline-block" ng-hide="!currentUser">Crear Post</button>
+		</div>
 		<article class="card" ng-repeat="noticia in noticias">
 			<div class="card-block">
-				<h5 class="card-title"><a ui-sref="home.thread({ NoticiaId: {{noticia.id}} })"> {{noticia.Titulo}} </a></h5>
+				<h5 class="card-title"><a ui-sref="home.thread({NoticiaId:noticia.id})"> {{noticia.Titulo}} </a></h5>
 				<h6 class="card-subtitle text-muted"><img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{noticia.imagen}}" alt="{{noticia.username}}">
-				<span class="username text-muted"><a href="{{noticia.IdUsuario}}"> {{noticia.username}} </a></span> <time title="{{ noticia.created_at | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ noticia.created_at | amCalendar }}</time></h6>
+				<span class="username text-muted"><a ui-sref="perfil({id_usuario:noticia.IdUsuario})"> {{noticia.username}} </a></span> <time title="{{ noticia.created_at | amUtc | amLocal | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ noticia.created_at | amUtc | amLocal | amCalendar }}</time></h6>
 			</div>
 			<!--  <img src="..." alt="Card image"> -->
 			<div class="card-block">
-				<p class="card-text"> {{noticia.Descripcion}} </p>
+				<p class="card-text"> {{noticia.Descripcion | limitTo: 250}} {{noticia.Descripcion.length < 250 ? '' : '...'}} </p>
+				<div ng-if="noticia.Descripcion.length > 250">
+					<a class="read-more" ui-sref="home.thread({NoticiaId:noticia.id})">Ver post completo</a>
+				</div>
 				<!-- <a href="#" class="card-link">Card link</a> -->
-				<a href="#" class="card-link text-xs-right" ui-sref="home.thread({ NoticiaId: {{noticia.id}} })"><i class="fa fa-comment" aria-hidden="true"></i> {{noticia.comentarios.length}} Comentarios</a>
+				<a class="btn btn-secondary btn-sm pull-right" ui-sref="home.thread({NoticiaId:noticia.id})">
+					<i class="fa fa-comments" aria-hidden="true"></i> {{noticia.comentarios.length}} Comentario<span ng-if="noticia.comentarios.length != 1">s</span>
+				</a>
 			</div>
 		</article>
 	</section>
 
 	<section class="col-lg-7 content" ng-controller="getPosts">
-		<h3>Ultimos PixelArts</h3>
+		<div class="d-block">
+			<h3 class="d-inline-block">Ultimos PixelArts</h3>
+			<button ui-sref="home.createpost" class="btn btn-primary btn-sm pull-right d-inline-block" ng-hide="!currentUser">Subir PixelArt</button>
+		</div>
 		<article class="post" ng-repeat="pixelart in imagenes">
 			<a ui-sref="home.pixelart({ pixelartId: {{pixelart.id}} })">
             <h4 class="card-title"> {{pixelart.Titulo}} </h4>
             <img class="img-fluid" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.Previa}}" alt="{{pixelart.Titulo}}" >
             <div class="card-footer">
                 <img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.imagen}}" alt="{{pixelart.username}}">
-                <span class="username text-muted"><a href="{{pixelart.IdUsuario}}"> {{pixelart.username}} </a></span>
+                <span class="username text-muted"><a ui-sref="perfil({id_usuario:pixelart.IdUsuario})"> {{pixelart.username}} </a></span>
             </div>
            	</a>
         </article>

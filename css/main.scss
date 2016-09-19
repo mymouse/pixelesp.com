@@ -7,11 +7,11 @@
 }
 
 @mixin faBefore($content) {
-    content: $content;
-    font-family: 'FontAwesome';
-    font-style: normal;
-    font-size: 1em;
-    margin-right: 5px;
+	margin-right: 5px;
+	content: $content;
+	font-style: normal;
+	font-size: 1em;
+	font-family: 'FontAwesome';
 }
 
 /* importar demas estilos*/
@@ -20,20 +20,6 @@
 @import url('./ngDialog.min.css');
 @import url('./ng-img-crop.css');
 @import './animate-scss/animate.scss';
-
-.alert-animated {
-	@include fadeIn($delay: .5s);
-}
-
-.alert-top {
-    position: relative;
-    top: 0px;
-    margin: 0;
-    padding: 0 1rem;
-    line-height: 50px;
-    height: 50px;
-    border-radius: 0;
-}
 
 /*
  * Reset CSS
@@ -48,7 +34,7 @@ body {
 /* colores*/
 $gris: #222;
 $verde: #AFD702;
-$verdelink: #97b125;
+$verde_hover: #AEEA00;
 $naranja: #ff9800;
 
 /* estados*/
@@ -56,23 +42,134 @@ $naranja: #ff9800;
 .disabled {cursor: default!important; }
 
 /* links*/
-a {color: $verdelink; }
+a {
+	color: $verde;
+
+	&:focus, &:hover, &:active {
+		color: $verde_hover;
+		text-decoration: none;
+	}
+}
 
 /* reset dropdown */
 .dropdown-toggle {
-	border: none;
 	padding: 5px;
+	border: none;
 
 	&:after {
-	    content: '\f078';
-	    font-family: 'FontAwesome';
-	    font-style: normal;
-	    border: none;
-	    margin: 0;
-	    text-align: center;
-	    width: 17px;
-	    height: 17px;
+		margin: 0;
+		width: 17px;
+		height: 17px;
+		border: none;
+		content: '\f078';
+		text-align: center;
+		font-style: normal;
+		font-family: 'FontAwesome';
 	}
+}
+
+.dropdown-menu {
+	.user-panel {
+		display: -ms-inline-flexbox;
+		display: inline-flex;
+
+		.avatar {
+			display: inline-block;
+			margin: 10px;
+		}
+		.info {
+			margin-right: 10px;
+			padding-top: 20px;
+
+			p {
+				margin: 0
+			}
+		}
+	}
+}
+
+/*
+ * Botones
+ */
+.btn-default {
+	position: relative;
+	min-width: 40px;
+	text-align: center;
+	text-transform: none;
+	font-size: 14px;
+}
+
+.btn-primary {
+	border: none;
+	border-radius: 2px;
+	background-color: $verde;
+	box-shadow: none;
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 600;
+
+	&:hover, &:focus, &:active, &:active:hover, &:active:focus, &.disabled:hover, &:disabled:hover {
+		border: none;
+		background-color: $verde_hover;
+	}
+	&[disabled] {
+		opacity: .5;
+	}
+}
+
+.btn-outline-primary {
+	border-color: $verde;
+	color: $verde;
+	text-transform: uppercase;
+
+	&:hover, &:focus {
+		border-color: $verde;
+		background-color: $verde;
+	}
+}
+
+.btn-comment {
+	max-width: 95px;
+	width: 100%;
+	height: 30px;
+	border-radius: 0 2px 2px 0!important;
+}
+
+.btn-block {    
+	letter-spacing: 1px;
+}
+
+/*
+ * Alerts
+ */
+.alert-animated {
+	@include fadeIn($delay: .5s);
+}
+
+.alert-top {
+	position: relative;
+	top: 0px;
+	margin: 0;
+	padding: 0 1rem;
+	height: 50px;
+	border-radius: 0;
+	line-height: 50px;
+}
+
+.v-x-center {
+	position: absolute;
+	top: 50%;
+	left:50%;
+	transform: translate(-50%,-50%);
+}
+
+.shareTitle {
+	position: relative;
+	margin-bottom: 0;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: .7em;
 }
 
 /*
@@ -90,11 +187,11 @@ a {color: $verdelink; }
 		width: 205px;
 	}
 	ul.nav {
-    	margin: 0 15px;
-	    line-height: 50px;
+		margin: 0 15px;
+		line-height: 50px;
 
-	    &:last-child {
-		    margin-right: 0;
+		&:last-child {
+			margin-right: 0;
 		}
 	}
 	.navbar-nav li {
@@ -106,6 +203,7 @@ a {color: $verdelink; }
 			color: $verde; 
 		}
 	}
+	.nav-link.dropdown-toggle:after { display: none; }
 }
 
 /*
@@ -224,7 +322,7 @@ form {
 				left: 0;
 				display: block;
 				overflow: hidden;
-			    margin-bottom: 0;
+				margin-bottom: 0;
 				padding: 0;
 				width: 100%;
 				height: 100%;
@@ -239,19 +337,18 @@ form {
 			.alert-warning {
 				position: relative;
 				top: -2px;
-				padding: 0 15px;
-	    		border-top: 1px solid #c8c9d0;
+				padding: 2.5px 15px;
+				border-top: 1px solid #c8c9d0;
 				border-bottom: 2px solid #8D6E63;
 
 				&.ng-inactive {
-				    border-top: 2px solid #8BC34A!important;
-				    border-bottom: none!important;
+					border-top: 2px solid #8BC34A!important;
+					border-bottom: none!important;
 				}
 				p { 
-					margin:0; 
-				    font-size: 0.7em;
-				    text-transform: uppercase;
-					font-weight: 600;
+					margin:0;
+					text-transform: uppercase;
+					font-size: 0.7em;
 				}
 			}
 			&.textarea .alert-warning {top: -8px; }
@@ -265,7 +362,7 @@ form {
 				&.comment {
 					float: left;
 					width: calc(100% - 95px)!important;
-					border-radius: 2px 0 0 2px;
+					border-radius: 0px;
 
 					&[disabled] {
 						border: none;
@@ -276,7 +373,7 @@ form {
 
 			}
 			input[type=email], input[type=password], input[type=text], input[type=url], textarea {
-				margin-top: 1.1em;
+				margin-top: 1em;
 				padding: .4em;
 				padding-bottom: 0;
 				width: 100%;
@@ -289,11 +386,11 @@ form {
 			}
 		}
 		.box-footer & input {
-		    float: left;
+			float: left;
 			margin: 0;
-		    width: calc(100% - 95px) !important;
+			width: calc(100% - 95px) !important;
 			height: 30px;
-		    border-radius: 2px 0 0 2px;
+			border-radius: 2px 0 0 2px;
 			box-shadow: none;
 			font-size: 14px;
 		}
@@ -304,16 +401,16 @@ form {
 			font-size: .8em;
 		}
 		.alert-danger, .alert-success {
-    		margin: 5px 0;
+			margin: 5px 0;
 			padding: 0 15px;
 			border-radius: 3px;
 			text-align: center;
 
 			p { 
 				margin:0;
-			    font-size: 0.7em;
-			    text-transform: uppercase;
-    			font-weight: 600;
+				text-transform: uppercase;
+				font-weight: 600;
+				font-size: 0.7em;
 			}
 		}
 		.alert-danger p:before { @include faBefore('\f057'); }
@@ -324,7 +421,7 @@ form {
 			position: relative;
 			display: block;
 			height: 440px;
-			border: 3px dashed #ff9c42;
+			border: 3px dashed $naranja;
 			background-color: rgba(255, 156, 66, 0.2);
 			color: #9d9eaa;
 			text-align: center;
@@ -336,51 +433,28 @@ form {
 				font-size: 0.8em;
 			}
 			&.ng-dirty {
-			    border: none!important;
-			    background-color: white!important;
+				border: none!important;
+				background-color: white!important;
 			}
 			&:before {
-			    position: absolute;
-			    top: calc(50% - 25px);
-			    left: calc(50% - 75px);
-			    display: block;
-			    margin: 0 auto;
-			    width: 150px;
-			    height: 50px;
-			    content: "Suelta tu arte aqui";
-			    text-align: center;
-			    text-decoration: inherit;
-			    line-height: 50px;
+				position: absolute;
+				top: calc(50% - 25px);
+				left: calc(50% - 75px);
+				display: block;
+				margin: 0 auto;
+				width: 150px;
+				height: 50px;
+				content: "Suelta tu arte aqui";
+				text-align: center;
+				text-decoration: inherit;
+				line-height: 50px;
 			}
 		}
-		/* botones*/
-		.btn-default {
-			position: relative;
-			min-width: 40px;
-			text-align: center;
-			text-transform: none;
-			font-size: 14px;
-		}
-		.btn-comment {
-			max-width: 95px;
+		.cropArea:not(.drop-box) {
 			width: 100%;
-			height: 30px;
-			border-radius: 0 2px 2px 0!important;
+			height: 180px;
 		}
-		.btn-full {
-			margin: 15px auto 0;
-			width: 100%;
-		}
-		a.btn.btn-primary, button.btn-primary, input[type=submit].btn-primary {
-			border: none;
-			background: #ff9c42;
-			box-shadow: none;
-			color: #FFF;
-
-			&[disabled] {
-			    background: rgba(255,156,66,0.5);
-			}
-		}
+		
 	}
 }
 
@@ -388,32 +462,46 @@ form {
  * Card Reset
  */
 @media (min-width: 34em) {
-    .card-columns {
-        -moz-column-count: 2;
-        column-count: 2;
-    }
+	.card-columns {
+		-moz-column-count: 2;
+		column-count: 2;
+	}
 }
 
 .card {
 	@include transition();
 
 	.card-block {
-	    padding-bottom: .5rem;
-	    border-bottom: 1px solid #F4F4F6;
+		padding-bottom: .5rem;
+		border-bottom: 1px solid #F4F4F6;
 
-	    .card-title {
-		    text-transform: uppercase;
-		    font-weight: 600;
+		.card-title {
+			text-transform: uppercase;
+			font-weight: 600;
 		}
 		.card-subtitle {
-		    font-size: .9rem;
+			font-size: .9rem;
 
-		    img {
-			    margin-right: 5px;
-			    width: 20px;
-			    height: 20px;
+			img {
+				margin-right: 5px;
+				width: 20px;
+				height: 20px;
 			}
 		}
+		.card-text { white-space: pre-line;}
+		
+		.read-more{
+	    text-align: center;
+	    display: block;
+	    border: 1px solid #E0E0E0;
+	    border-right: 0;
+	    border-left: 0;
+	    padding: 0.5em;
+	    margin-bottom: .5em;
+	  }
+	}
+	&.jobs .card-block {
+		padding: 10px 1.25rem;
 	}
 }
 
@@ -431,9 +519,9 @@ form {
 			ul.nav {
 				display: inline-block;
 
-				li {			
+				li {            
 					margin-bottom: -2px;
-					font-size: .9em;			
+					font-size: .9em;            
 				}
 			}
 		}
@@ -447,11 +535,10 @@ form {
 		.wrapper {
 			@include fadeInRight();
 		}
-
 		.ngdialog-close::before {
 			@include fadeInLeftBig();
 
-			position: absolute;
+			position: fixed;
 			top: 50px;
 			display: block;
 			margin-left: -50px;
@@ -529,11 +616,11 @@ form {
 					font-size: 16px;
 
 					.avatar+.img-push {
-					    display: block;
-					    margin: 0 0 0 40px;
-					    width: 95%;
+						display: block;
+						margin: 0 0 0 40px;
+						width: 95%;
 
-					    input { margin: 0; }
+						input { margin: 0; }
 					}
 				}
 				img.avatar {
@@ -549,12 +636,11 @@ form {
 				}
 			}
 		}
-
-		// vista pixelart
-		img.pixelart {			
-		    margin: 15px auto;
-		    display: block;
-		    max-height: 500px;
+		/* vista pixelart*/
+		img.pixelart {
+			display: block;         
+			margin: 15px auto;
+			max-height: 500px;
 		}
 	}
 	/* crear post pixelart*/
@@ -567,69 +653,68 @@ form {
 			width: 900px;
 
 			.postFileThumb {
-			    position: absolute;
-			    top: 0px;
-			    width: 95%;
-			    height: 440px;
-			    background: white;
-			    text-align: center;
-			    white-space: nowrap;
+				position: absolute;
+				top: 0px;
+				width: 95%;
+				height: 440px;
+				background: white;
+				text-align: center;
+				white-space: nowrap;
 
-			    .vericalhelper {
-				    display: inline-block;
-				    height: 100%;
-				    vertical-align: middle;
+				.vericalhelper {
+					display: inline-block;
+					height: 100%;
+					vertical-align: middle;
 				}
-				img {max-width: 100%; vertical-align: middle }
+				img {
+					max-width: 100%; 
+					max-height: 440px; 
+					vertical-align: middle;
+				}
 			}
 			.preview {
 				display: block;
-				height: 135px;
+				height: 145px;
 
-			    img {
-				    display: block;
-				    margin: 0 auto;
+				img {
+					display: block;
+					margin: 0 auto;
 				}
 				button.closePrevia {
-				    position: absolute;
-				    top: 20px;
-				    left: calc(100% / 2 + 35px);
-				    width: 30px;
-				    border: none;
-		    	    background: none;
-				    color: #D32F2F;
-				    text-shadow: 1px 1px 2px #BDBDBD;
+					position: absolute;
+					top: 20px;
+					left: calc(100% / 2 + 35px);
+					width: 30px;
+					border: none;
+					background: none;
+					color: #D32F2F;
+					text-shadow: 1px 1px 2px #BDBDBD;
 				}
 			}
 		}
 	}
-
 	&.card-message {
-
 		.card-block:before {
-		    font-family: 'FontAwesome';
-		    font-style: normal;
-		    font-size: 5em;
-		    margin-right: 5px;
-		    position: absolute;
-		    opacity: .2;
-		    color: white;
-		    left: 20px;
-		    top: 40px;
+			position: absolute;
+			top: 40px;
+			left: 20px;
+			margin-right: 5px;
+			color: white;
+			font-style: normal;
+			font-size: 5em;
+			font-family: 'FontAwesome';
+			opacity: .2;
 		}
-
 		.card-blockquote p {
-		    text-transform: uppercase;
-		    font-weight: 100;
-		    font-size: 0.9em;
+			text-transform: uppercase;
+			font-weight: 100;
+			font-size: 0.9em;
 		}
-
 		footer {
-		    font-style: italic;
-		    text-align: right;
-		    font-size: 0.9em;
+			text-align: right;
+			font-style: italic;
+			font-size: 0.9em;
 		}
-
 		.card-danger .card-block:before { content: '\f057'; }
 		.card-success .card-block:before { content: '\f058'; }
 		.card-warning .card-block:before { content: '\f06a'; }
@@ -640,55 +725,55 @@ form {
  * Galeria preview
  */
 article.post {
-    position: relative;
-    float: left;
-    margin: 15px;
-    width: 100px;
-    height: 100px;
+	position: relative;
+	float: left;
+	margin: 15px;
+	width: 100px;
+	height: 100px;
 	transition: all .5s ease center;
 
-    &:hover {
-	    outline: 10px solid white;
+	&:hover {
+		outline: 10px solid white;
 	}
 	.card-title {
-	    position: absolute;
-	    top: 20px;
-	    left: -10px;
-	    z-index: 2;
-	    margin: 0;
-	    padding: 5px;
-	    width: 120px;
-	    border-radius: 3px 3px 0 0;
-	    text-align: center;
-	    font-size: 1em;
-	    opacity: 0;
-	    transition: all .5s ease;
+		position: absolute;
+		top: 20px;
+		left: -10px;
+		z-index: 2;
+		margin: 0;
+		padding: 5px;
+		width: 120px;
+		border-radius: 3px 3px 0 0;
+		text-align: center;
+		font-size: 1em;
+		opacity: 0;
+		transition: all .5s ease;
 	}
-    &:hover .card-title {
-	    top: -27px;
-	    background: white;
-	    opacity: 1;
+	&:hover .card-title {
+		top: -27px;
+		background: white;
+		opacity: 1;
 	}
 	.card-footer {
-	    position: relative;
-	    bottom: 25px;
-	    left: -10px;
-	    padding: 2.5px;
-	    width: 120px;
-	    border: none;
-	    text-align: center;
-	    opacity: 0;
-	    transition: all .5s ease;
+		position: relative;
+		bottom: 25px;
+		left: -10px;
+		padding: 2.5px;
+		width: 120px;
+		border: none;
+		text-align: center;
+		opacity: 0;
+		transition: all .5s ease;
 
-	    img {
-	    	width: 20px;
-	    	height: 20px;
-	    }
+		img {
+			width: 20px;
+			height: 20px;
+		}
 	}
 	&:hover .card-footer {
-	    bottom: 0px;
-	    z-index: 99;
-	    opacity: 1;
+		bottom: 0px;
+		z-index: 99;
+		opacity: 1;
 	}
 }
 
@@ -696,37 +781,44 @@ article.post {
  * My Profile Page
  */
 
+.card.profile{
+	.fa.fa-2x {
+		padding: 0 2.5px;
+		font-size: 1.5em;
+	}
+}
+
 .nav-tabs:not(#modalTabs) {
 	border-bottom: none;
 
 	li.nav-item {
-	    width: calc(100% / 4);
-	    margin: 0 auto;
-	    text-align: center;
+		margin: 0 auto;
+		width: calc(100% / 3);
+		text-align: center;
 
-	    .nav-link {
-	    	border: none;
-	    	border-bottom: 2px solid #aeaeae;
-	    	color: #9E9E9E;
+		.nav-link {
+			border: none;
+			border-bottom: 2px solid #aeaeae;
+			color: #9E9E9E;
 
-	    	&.active, &:hover {
-				border-bottom: 2px solid $verdelink !important;
+			&.active, &:hover {
 				position: relative;
-				color: $verdelink;
+				border-bottom: 2px solid $verde !important;
+				color: $verde;
 
 				&:after {
-				    position: absolute;
-				    content: '';
-				    width: 0;
-				    height: 0;
-				    border-left: 5px solid transparent;
-				    border-right: 5px solid transparent;
-				    border-top: 5px solid $verdelink;
-				    left: 50%;
-				    bottom: -7px;
-				    margin-left: -2px;
+					position: absolute;
+					bottom: -7px;
+					left: 50%;
+					margin-left: -2px;
+					width: 0;
+					height: 0;
+					border-top: 5px solid $verde;
+					border-right: 5px solid transparent;
+					border-left: 5px solid transparent;
+					content: '';
 				}
-	    	}
-	    }
+			}
+		}
 	}
 }

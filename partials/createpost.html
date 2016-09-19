@@ -16,7 +16,7 @@
           </label> -->
 
            <div ngf-drop ng-model="postFile" name="file" class="drop-box cropArea" ngf-drag-over-class="'dragover'" ngf-pattern="image/*" ngf-max-size="2MB" >
-            <img-crop image="postFile | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''" area-type="square" area-min-size="100" result-image-size="100"></img-crop>            
+            <img-crop image="postFile | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''" area-type="square" area-min-size="15" result-image-size="100"></img-crop>
           </div>
           
           <div class="postFileThumb" ng-hide="!postFile || showme == 1">
@@ -30,8 +30,8 @@
 
         <div class="col-lg-4">
         
-          <div ng-if="thisloginerror" ng-hide="successRegister" class="alert-danger" role="alert">
-              <p> {{ pixelarterror }} </p>
+          <div ng-if="pixelarterror" class="alert-danger" role="alert">
+              <p>{{ pixelarterror }}</p>
           </div>
 
           <div class="form-group">
@@ -81,19 +81,19 @@
 
             <div ng-show="showme == 1" style="padding-top: 2em;">
               <img ng-src="{{croppedDataUrl}}" />
-              <a href=""ng-click="showme=2" class="cancelaction">mejor subir desde mi PC</a>
+              <a href="" ng-click="showme=2" class="cancelaction">mejor subir desde mi PC</a>
             </div>
 
             <div ng-show="showme == 2" style="padding-top: 2em;">
               <label for="filePrevia" class="btn btn-secondary btn-sm file-upload" ng-show="!postPrevia">
                   <i class="fa fa-cloud-upload"></i> Subir previa
               </label>
-              <input type="file" ngf-select ng-model="postPrevia" name="filePrevia" id="filePrevia" accept="image/*" ngf-max-size="1MB" ngf-dimensions="$width === 100 || $height === 100" ng-required="showme == 2">
+              <input type="file" ngf-select ng-model="postPrevia" name="filePrevia" id="filePrevia" accept="image/*" ngf-max-size="2MB" ngf-dimensions="$width <= 100 || $height <= 100" ng-required="showme == 2">
               <button ng-click="postPrevia = null" ng-show="postPrevia" class="closePrevia"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
               <img ng-show="newPostForm.filePrevia.$valid" ngf-thumbnail="postPrevia" class="thumb">              
               <div class="alert-warning" role="alert" ng-messages="newPostForm.filePrevia.$error" ng-if="newPostForm.filePrevia.$dirty" >
-                <div ng-message="dimensions"><p>La previa debe ser de 100x100px.</p></div>
-                <div ng-message="maxSize"><p>La imagen no debe pesar más de 1mb</p></div>
+                <div ng-message="dimensions"><p>Máximo 100x100px.</p></div>
+                <div ng-message="maxSize"><p>La imagen no debe pesar más de 2mb</p></div>
               </div>
               <a href="" ng-click="showme=1;postPrevia = null" class="cancelaction">mejor quiero recortar la original</a>
             </div>
@@ -106,7 +106,7 @@
           <span ng-show="result">Upload Successful</span>
           <span class="err" ng-show="errorMsg">{{errorMsg}}</span> -->
 
-          <button type="submit" class="btn-primary btn-full" ng-disabled="!newPostForm.$valid" >Subir PixelArt</button>
+          <button type="submit" class="btn-primary btn-block" ng-disabled="!newPostForm.$valid" >Subir PixelArt</button>
           <a href="" class="cancelaction" ng-click="closeThisDialog()"> <i class="fa fa-trash"></i> Cancelar </a>
 
         </div>

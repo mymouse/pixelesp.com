@@ -6,6 +6,8 @@ app.controller('webApp', function ($scope, USER_ROLES, AuthService, $location) {
 		$scope.currentUser = {};
 		$scope.currentUser = userdata;
 
+		console.log('$scope.currentUser '+!!JSON.stringify($scope.currentUser));
+
 		$scope.userRoles = USER_ROLES;
 		$scope.isAuthorized = AuthService.isAuthorized;
 	}
