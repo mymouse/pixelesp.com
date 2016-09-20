@@ -1,0 +1,62 @@
+<div class="content">
+
+	<header>
+		<h4 class="text-center">Enviar mensaje</h4>
+		<div class="btn-group pull-right">
+            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </button>
+            <ul class="dropdown-menu slidedown">
+                <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-refresh">
+                </span>Refresh</a></li>
+                <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-ok-sign">
+                </span>Available</a></li>
+                <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-remove">
+                </span>Busy</a></li>
+                <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-time"></span>
+                    Away</a></li>
+                <li class="divider"></li>
+                <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-off"></span>
+                    Sign Out</a></li>
+            </ul>
+        </div>
+	</header>
+
+	<section class="tab-content">
+
+
+            <div class="panel-body">
+                <ul class="chat">
+                    <li class="clearfix {{currentUser.id == m.from ? 'right' : 'left' }}" ng-if="currentUser.id == m.from || currentUser.id == m.to" ng-repeat="m in mensajes">
+	                    <span class="chat-img {{currentUser.id == m.from ? 'pull-xs-right' : 'pull-xs-left' }}">
+	                        <img src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{m.imagen}}" class="img-circle" alt="User Avatar" width="48" />
+	                    </span>
+                        <div class="chat-body clearfix">
+                         m.from {{ m.from }} =  m.to  {{m.to}}
+                            <div class="header">
+                                <span class="{{currentUser.id == m.from ? 'pull-xs-right' : '' }}"><strong>{{m.username}}</strong> | <small>({{m.asunto}})</small></span>
+                                <small class="text-muted {{currentUser.id == m.from ? '' : 'pull-xs-right' }}"> <time title="{{ m.created_at | amUtc | amLocal | amDateFormat: 'LLLL' }}" class="date text-muted">{{ m.created_at | amUtc | amLocal | amCalendar }}</time></small>
+                            </div>
+                            <p class="clearfix">
+                                {{m.msj}}
+                            </p>
+                        </div>
+                    </li>
+                    
+
+
+                </ul>
+            </div>
+            <div class="panel-footer">
+                <div class="input-group">
+                    <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-sm" id="btn-chat">
+                            Send</button>
+                    </span>
+                </div>
+            </div>
+
+
+    </section>
+</div>

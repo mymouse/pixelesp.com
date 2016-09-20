@@ -1,3 +1,46 @@
 <div class="content-wrapper">
-<i class="fa fa-code fa-5x" aria-hidden="true" style="text-align: center; display: block; margin-top: 75px; "></i>
+
+	<section class="col-lg-12 content" ng-controller="getUsiarios">
+		
+		<div class="row">
+			<div class="bg-parallax" ng-parallax pattern="fundo" speed="10" reverse="true">
+
+				<h1 class="display-1">BIENVENIDOS</h1>
+
+				<div class="col-md-6 offset-md-3">
+					<p class="h5">Aquí estamos TODOS los pixelartistas, tanto profesionales como los principiantes. Puedes visitar los perfiles de los demás usuarios de la comunidad, ver sus obras y las que les hayan gustado, visitar sus perfiles sociales o enviarle un mensaje privado!<br>Diviertete haciendo amigos!</p>
+					<input type="text" class="form-control" placeholder="Busca por nombre de usuario" ng-model="searchUser">
+				</div>
+
+			</div>
+		</div>
+
+		<div class="content-usuarios" angular-grid="usuarios">
+			<article class="card profile" data-ng-repeat="usuario in usuarios | filter:searchUser">
+				<img class="img-circle d-block m-x-auto m-t-1" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{usuario.imagen}}" alt="{{usuario.username}}" width="100">
+				<div class="card-block text-xs-center">
+					<h5 ng-if="usuario.name" class="card-title">{{usuario.name}}</h5>
+					<a ui-sref="perfil({ id_usuario: usuario.id})" rel="button"><h6>@{{usuario.username}}</h6></a>
+					<span ng-if="usuario.userlevel == 1" class="tag tag-warning" style="position: absolute;top: 5px;right: 5px;">Admin</span>
+					<p ng-if="usuario.biografia" class="card-text">{{usuario.biografia}}</p>
+					<div ng-if="usuario.city || usuario.country">
+						<p><i class="fa fa-map-marker" aria-hidden="true"></i> {{usuario.city}}<span ng-if="usuario.city">,</span> {{usuario.country}}</p>
+					</div>
+
+					<a ng-if="usuario.social_behance" href="http://behance.com/{{usuario.social_behance}}" target="_blank"><i class="fa fa-2x fa-behance-square" aria-hidden="true"></i></a>
+					<a ng-if="usuario.social_deviantart" href="http://{{usuario.social_deviantart}}.deviantart.com" target="_blank"><i class="fa fa-2x fa-deviantart" aria-hidden="true"></i></a>
+					<a ng-if="usuario.social_facebook" href="http://facebook.com/{{usuario.social_facebook}}" target="_blank"><i class="fa fa-2x fa-facebook-official" aria-hidden="true"></i></a>
+					<a ng-if="usuario.social_instagram" href="http://instagram.com/{{usuario.social_instagram}}" target="_blank"><i class="fa fa-2x fa-instagram" aria-hidden="true"></i></a>
+					<a ng-if="usuario.social_tumblr" href="http://{{usuario.social_tumblr}}.tumblr.com"><i class="fa fa-2x fa-tumblr-square" aria-hidden="true"></i></a>
+					<a ng-if="usuario.social_twitter" href="http://twitter.com/{{usuario.social_twitter}}" target="_blank"><i class="fa fa-2x fa-twitter-square" aria-hidden="true"></i></a>
+					<a ng-if="usuario.social_youtube" href="http://youtube.com/c/{{usuario.social_youtube}}" target="_blank"><i class="fa fa-2x fa-youtube-square" aria-hidden="true"></i></a>
+
+					<button rel="button" class="btn btn-secondary btn-sm m-x-auto m-t-1 d-block"><i class="fa fa-paper-plane" aria-hidden="true"></i> Enviar MP</button>
+
+				</div>
+			</article>
+		</div>
+
+	</section>
+
 </div>

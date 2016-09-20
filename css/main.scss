@@ -16,6 +16,8 @@
 
 /* importar demas estilos*/
 @import 'https://fonts.googleapis.com/css?family=Roboto:100,400,700,900';
+@import 'https://fonts.googleapis.com/css?family=Inconsolata:400,700';
+
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css');
 @import url('./ngDialog.min.css');
 @import url('./ng-img-crop.css');
@@ -463,8 +465,8 @@ form {
  */
 @media (min-width: 34em) {
 	.card-columns {
-		-moz-column-count: 2;
-		column-count: 2;
+		-moz-column-count: 4;
+		column-count: 4;
 	}
 }
 
@@ -489,15 +491,14 @@ form {
 			}
 		}
 		.card-text { white-space: pre-line;}
-		
 		.read-more{
-	    text-align: center;
 	    display: block;
+	    margin-bottom: .5em;
+	    padding: 0.5em;
 	    border: 1px solid #E0E0E0;
 	    border-right: 0;
 	    border-left: 0;
-	    padding: 0.5em;
-	    margin-bottom: .5em;
+	    text-align: center;
 	  }
 	}
 	&.jobs .card-block {
@@ -692,6 +693,38 @@ form {
 				}
 			}
 		}
+
+		/*
+			Experimental 
+
+		&.chat .ngdialog-content{
+			width: 800px;
+
+			.chat {
+		    margin: 0;
+		    padding: 0;
+		    list-style: none;
+
+				li {
+			    margin-bottom: 10px;
+			    padding: 5px;
+			    border-bottom: 1px dotted #B3A9A9;
+
+					&.left .chat-body { margin-left: 60px; }
+
+					&.right .chat-body {margin-right: 60px; }
+
+					.chat-body p {
+				    margin: 0;
+				    color: #8c949a;
+				    font-size: .9em;
+					}		 
+				}
+			}
+		}
+		
+		*/
+
 	}
 	&.card-message {
 		.card-block:before {
@@ -821,4 +854,32 @@ article.post {
 			}
 		}
 	}
+}
+
+/*
+ * Comunidad
+ */
+
+.bg-parallax {
+	display: block;
+  margin-top: -10px;
+	padding: 50px 0 600px 0;
+	color: #000!important;
+	text-align: center;
+	font-family: 'Inconsolata', monospace!important;
+	
+	&:after {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to bottom, rgba(76,76,76,0) 0%,rgba(38,38,38,1) 100%);
+    content: '';
+	}
+}
+
+.content-usuarios {
+    position: relative;
+    top: -350px;
 }

@@ -4,6 +4,7 @@
  */
 /* importar demas estilos*/
 @import "https://fonts.googleapis.com/css?family=Roboto:100,400,700,900";
+@import "https://fonts.googleapis.com/css?family=Inconsolata:400,700";
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css");
 @import url("./ngDialog.min.css");
 @import url("./ng-img-crop.css");
@@ -8302,8 +8303,8 @@ form {
  */
 @media (min-width: 34em) {
   .card-columns {
-    -moz-column-count: 2;
-    column-count: 2; } }
+    -moz-column-count: 4;
+    column-count: 4; } }
 .card {
   transition: all 0.5s ease-in-out; }
   .card .card-block {
@@ -8321,13 +8322,13 @@ form {
     .card .card-block .card-text {
       white-space: pre-line; }
     .card .card-block .read-more {
-      text-align: center;
       display: block;
+      margin-bottom: .5em;
+      padding: 0.5em;
       border: 1px solid #E0E0E0;
       border-right: 0;
       border-left: 0;
-      padding: 0.5em;
-      margin-bottom: .5em; }
+      text-align: center; }
   .card.jobs .card-block {
     padding: 10px 1.25rem; }
 
@@ -8542,42 +8543,73 @@ form {
       display: block;
       margin: 15px auto;
       max-height: 500px; }
-  .ngdialog.ngdialog-theme-plain.width-noticia .ngdialog-content {
-    width: 500px; }
-  .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content {
-    max-width: 60%;
-    width: 900px; }
-    .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .postFileThumb {
-      position: absolute;
-      top: 0px;
-      width: 95%;
-      height: 440px;
-      background: white;
-      text-align: center;
-      white-space: nowrap; }
-      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .postFileThumb .vericalhelper {
-        display: inline-block;
-        height: 100%;
-        vertical-align: middle; }
-      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .postFileThumb img {
-        max-width: 100%;
-        max-height: 440px;
-        vertical-align: middle; }
-    .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .preview {
-      display: block;
-      height: 145px; }
-      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .preview img {
-        display: block;
-        margin: 0 auto; }
-      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .preview button.closePrevia {
+  .ngdialog.ngdialog-theme-plain {
+    		/*
+    			Experimental 
+    
+    		&.chat .ngdialog-content{
+    			width: 800px;
+    
+    			.chat {
+    		    margin: 0;
+    		    padding: 0;
+    		    list-style: none;
+    
+    				li {
+    			    margin-bottom: 10px;
+    			    padding: 5px;
+    			    border-bottom: 1px dotted #B3A9A9;
+    
+    					&.left .chat-body { margin-left: 60px; }
+    
+    					&.right .chat-body {margin-right: 60px; }
+    
+    					.chat-body p {
+    				    margin: 0;
+    				    color: #8c949a;
+    				    font-size: .9em;
+    					}		 
+    				}
+    			}
+    		}
+    		
+    		*/ }
+    .ngdialog.ngdialog-theme-plain.width-noticia .ngdialog-content {
+      width: 500px; }
+    .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content {
+      max-width: 60%;
+      width: 900px; }
+      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .postFileThumb {
         position: absolute;
-        top: 20px;
-        left: calc(100% / 2 + 35px);
-        width: 30px;
-        border: none;
-        background: none;
-        color: #D32F2F;
-        text-shadow: 1px 1px 2px #BDBDBD; }
+        top: 0px;
+        width: 95%;
+        height: 440px;
+        background: white;
+        text-align: center;
+        white-space: nowrap; }
+        .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .postFileThumb .vericalhelper {
+          display: inline-block;
+          height: 100%;
+          vertical-align: middle; }
+        .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .postFileThumb img {
+          max-width: 100%;
+          max-height: 440px;
+          vertical-align: middle; }
+      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .preview {
+        display: block;
+        height: 145px; }
+        .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .preview img {
+          display: block;
+          margin: 0 auto; }
+        .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .preview button.closePrevia {
+          position: absolute;
+          top: 20px;
+          left: calc(100% / 2 + 35px);
+          width: 30px;
+          border: none;
+          background: none;
+          color: #D32F2F;
+          text-shadow: 1px 1px 2px #BDBDBD; }
   .ngdialog.card-message .card-block:before {
     position: absolute;
     top: 40px;
@@ -8682,5 +8714,28 @@ article.post {
           border-right: 5px solid transparent;
           border-left: 5px solid transparent;
           content: ''; }
+
+/*
+ * Comunidad
+ */
+.bg-parallax {
+  display: block;
+  margin-top: -10px;
+  padding: 50px 0 600px 0;
+  color: #000 !important;
+  text-align: center;
+  font-family: "Inconsolata", monospace !important; }
+  .bg-parallax:after {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to bottom, rgba(76, 76, 76, 0) 0%, #262626 100%);
+    content: ''; }
+
+.content-usuarios {
+  position: relative;
+  top: -350px; }
 
 /*# sourceMappingURL=main.css.map */

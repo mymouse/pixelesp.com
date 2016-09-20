@@ -2,7 +2,7 @@
  * Main AngularJS Web Application
  */
 
-var app = angular.module('pixelespWebApp', ['ui.router', 'ngDialog', 'ngMessages', 'angularMoment', 'cloudinary', 'ngFileUpload', 'ngImgCrop', '720kb.socialshare']);
+var app = angular.module('pixelespWebApp', ['ui.router', 'ngDialog', 'ngMessages', 'angularMoment', 'cloudinary', 'ngFileUpload', 'ngImgCrop', '720kb.socialshare', 'ngParallax', 'angularGrid']);
 
 app.constant('AUTH_EVENTS', {
 	loginSuccess: 'auth-login-success',

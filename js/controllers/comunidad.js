@@ -1,4 +1,35 @@
 /**
+ * Get All Usuarios
+ */
+app.controller('getUsiarios', function($scope, $http) {
+
+	$scope.fundo = "http://localhost/pixelesp.com/img/fundo4.jpg";
+
+	$scope.usuarios = [];
+	$http.get('http://pixelesp-api.herokuapp.com/usuarios').then(function(resp) {
+		$scope.usuarios = resp.data.data;
+
+        //apply search and sort method
+		var usuarios = $scope.usuarios
+		$scope.usuarios = usuarios.concat([]);
+        $scope.searchUser = "";
+
+        $scope.$watch('searchUser', function (val) {
+
+            val = val.toLowerCase();
+            $scope.usuarios = usuarios.filter(function (obj) {
+                return obj.username.toLowerCase().indexOf(val) != -1;
+            });
+        });
+
+	}, function(err) {
+		console.error('ERR', err);
+		// err.status will contain the status code
+	});
+})
+
+
+/**
  * Get/Show individual Usuario and content
  */
 app.controller('perfilCtrl', function($scope, $state, $stateParams, $http, ngDialog, Session, Upload, Cloudinary) {
@@ -15,7 +46,18 @@ app.controller('perfilCtrl', function($scope, $state, $stateParams, $http, ngDia
 		//console.error('ERR', err);
 	});
 
-  	// editar o eliminar post en /cuenta
+	$scope.SendMP = function() {
+
+		ngDialog.open({
+			templateUrl: 'partials/chat.html',
+			controller: 'sendMP',
+			className: 'ngdialog-theme-plain chat',
+			cache: false,
+			showClose: false
+		})
+	}
+
+  	// Actualizar perfil
   	if (Session.id != null) {
 
 	  	userdata = JSON.parse(window.localStorage.getItem('userdata'));
@@ -128,3 +170,130 @@ app.controller('perfilCtrl', function($scope, $state, $stateParams, $http, ngDia
 	    }
 	}
 })
+
+/*
+ * Send MP
+ */
+app.controller('sendMP', function ($scope, $stateParams, $http, Session, ngDialog) {
+
+	$scope.mensaje = {};
+	$scope.mensaje.asunto = '';
+	$scope.mensaje.mensaje = '';
+
+	$scope.usuario = {};
+
+	userdata = JSON.parse(window.localStorage.getItem('userdata'));
+	$scope.currentUser = userdata;
+	$scope.mensaje.id_origen = userdata.id;
+
+	// Get
+
+	$http.get('http://pixelesp-api.herokuapp.com/listarmensajes/' + $stateParams.id_usuario).then(function (resp) {
+         
+		$scope.mensajes = resp.data.data;
+		console.log($scope.mensajes);
+
+	}, function (err) {
+		console.error('ERR', err);
+	});
+
+	// Enviar
+	if (Session.id != null) {
+
+		$scope.doSend = function () {
+
+			$http.post('http://pixelesp-api.herokuapp.com/crearmensaje/' + $stateParams.id_usuario, $scope.mensaje).then(function (resp) {
+
+				console.log('Creado');
+
+				ngDialog.close();
+				ngDialog.open({
+					templateUrl: 'partials/messages.html',
+					className: 'ngdialog-theme-plain card-message',
+					cache: false,
+					showClose: false,
+					data: {
+						class: 'card-inverse card-success',
+						text: 'Mensaje Enviado!',
+						footertext: 'Sigue haciendo amigos!',
+						time: 3
+					},
+					preCloseCallback: function(){
+						$state.go('perfil', { id_usuario: resp.data.id }, { reload: true });
+					}
+				})
+
+			}, function (err) {
+				console.error('ERR', err);
+			});
+		}
+
+	}
+
+})
+
+
+.controller('MensajesCtrl', function ($scope, $http, $stateParams, $rootScope) {
+
+    
+  
+$scope.mensajes = [];
+  $scope.$on('$ionicView.beforeEnter', function () {
+        
+   
+ });
+
+   
+
+})
+.controller('MensajeCtrl', function ($scope, $state, $stateParams, $http, $location, $ionicPopup, $ionicLoading, $ionicHistory) {
+
+    $scope.mensaje = {};
+
+    $scope.$on('$ionicView.beforeEnter', function () {
+        $http.get('http://pixelesp-api.herokuapp.com/mensaje/' + $stateParams.IdMensaje).then(function (resp) {
+
+            //Saco el icono de Cargando.
+            $ionicLoading.hide();
+
+            $scope.mensaje = resp.data.data[0];
+
+            console.log($scope.mensaje);
+
+        }, function (err) {
+
+            //Saco el icono de Cargando.
+            $ionicLoading.hide();
+
+            console.error('ERR', err);
+            // err.status will contain the status code
+        });
+    });
+
+    $scope.doBorrar = function () {
+
+        console.log('Borrado!');
+
+        $http.delete('http://pixelesp-api.herokuapp.com/borrarmensaje/' + $stateParams.IdMensaje).then(function (resp) {
+
+           
+          
+                $ionicHistory.goBack();
+                
+           
+
+        }, function (err) {
+
+            console.error('ERR', err);
+            // err.status will contain the status code
+
+            var alertPopup = $ionicPopup.alert({
+                title: 'Error',
+                template: err.data.msg
+            });
+
+            alertPopup.then(function (res) { });
+
+        });
+    };
+});
