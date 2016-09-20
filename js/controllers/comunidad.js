@@ -3,7 +3,7 @@
  */
 app.controller('getUsiarios', function($scope, $http) {
 
-	$scope.fundo = "http://localhost/pixelesp.com/img/fundo4.jpg";
+	$scope.fundo = "./img/fundo4.jpg";
 
 	$scope.usuarios = [];
 	$http.get('http://pixelesp-api.herokuapp.com/usuarios').then(function(resp) {
