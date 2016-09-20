@@ -8543,73 +8543,60 @@ form {
       display: block;
       margin: 15px auto;
       max-height: 500px; }
-  .ngdialog.ngdialog-theme-plain {
-    		/*
-    			Experimental 
-    
-    		&.chat .ngdialog-content{
-    			width: 800px;
-    
-    			.chat {
-    		    margin: 0;
-    		    padding: 0;
-    		    list-style: none;
-    
-    				li {
-    			    margin-bottom: 10px;
-    			    padding: 5px;
-    			    border-bottom: 1px dotted #B3A9A9;
-    
-    					&.left .chat-body { margin-left: 60px; }
-    
-    					&.right .chat-body {margin-right: 60px; }
-    
-    					.chat-body p {
-    				    margin: 0;
-    				    color: #8c949a;
-    				    font-size: .9em;
-    					}		 
-    				}
-    			}
-    		}
-    		
-    		*/ }
-    .ngdialog.ngdialog-theme-plain.width-noticia .ngdialog-content {
-      width: 500px; }
-    .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content {
-      max-width: 60%;
-      width: 900px; }
-      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .postFileThumb {
-        position: absolute;
-        top: 0px;
-        width: 95%;
-        height: 440px;
-        background: white;
-        text-align: center;
-        white-space: nowrap; }
-        .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .postFileThumb .vericalhelper {
-          display: inline-block;
-          height: 100%;
-          vertical-align: middle; }
-        .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .postFileThumb img {
-          max-width: 100%;
-          max-height: 440px;
-          vertical-align: middle; }
-      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .preview {
+  .ngdialog.ngdialog-theme-plain.width-noticia .ngdialog-content {
+    width: 500px; }
+  .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content {
+    max-width: 60%;
+    width: 900px; }
+    .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .postFileThumb {
+      position: absolute;
+      top: 0px;
+      width: 95%;
+      height: 440px;
+      background: white;
+      text-align: center;
+      white-space: nowrap; }
+      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .postFileThumb .vericalhelper {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle; }
+      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .postFileThumb img {
+        max-width: 100%;
+        max-height: 440px;
+        vertical-align: middle; }
+    .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .preview {
+      display: block;
+      height: 145px; }
+      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .preview img {
         display: block;
-        height: 145px; }
-        .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .preview img {
-          display: block;
-          margin: 0 auto; }
-        .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .preview button.closePrevia {
-          position: absolute;
-          top: 20px;
-          left: calc(100% / 2 + 35px);
-          width: 30px;
-          border: none;
-          background: none;
-          color: #D32F2F;
-          text-shadow: 1px 1px 2px #BDBDBD; }
+        margin: 0 auto; }
+      .ngdialog.ngdialog-theme-plain.width-post .ngdialog-content .preview button.closePrevia {
+        position: absolute;
+        top: 20px;
+        left: calc(100% / 2 + 35px);
+        width: 30px;
+        border: none;
+        background: none;
+        color: #D32F2F;
+        text-shadow: 1px 1px 2px #BDBDBD; }
+  .ngdialog.ngdialog-theme-plain.chat .ngdialog-content {
+    width: 800px; }
+    .ngdialog.ngdialog-theme-plain.chat .ngdialog-content .chat {
+      margin: 0;
+      padding: 0;
+      list-style: none; }
+      .ngdialog.ngdialog-theme-plain.chat .ngdialog-content .chat li {
+        margin-bottom: 10px;
+        padding: 5px;
+        border-bottom: 1px dotted #B3A9A9; }
+        .ngdialog.ngdialog-theme-plain.chat .ngdialog-content .chat li.left .chat-body {
+          margin-left: 60px; }
+        .ngdialog.ngdialog-theme-plain.chat .ngdialog-content .chat li.right .chat-body {
+          margin-right: 60px; }
+        .ngdialog.ngdialog-theme-plain.chat .ngdialog-content .chat li .chat-body p {
+          margin: 0;
+          color: #8c949a;
+          font-size: .9em; }
   .ngdialog.card-message .card-block:before {
     position: absolute;
     top: 40px;
