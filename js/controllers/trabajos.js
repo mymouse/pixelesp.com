@@ -66,9 +66,10 @@ app.controller('TrabajoNuevoCtrl', function($scope, $http, Session, ngDialog, $s
  */
 app.controller('trabajoCtrl', function($scope, $state, $stateParams, $http, ngDialog, Session) {
 
-  $scope.noticia = {};
+  $scope.empleo = {};
   $http.get('http://pixelesp-api.herokuapp.com/trabajos/'+ $stateParams.TrabajoId).then(function(resp) {
-    $scope.noticia = resp.data.data;
+    $scope.empleo = resp.data.data;
+    console.log($scope.empleo);
 
 	/* ===== 
 		===== 
@@ -93,7 +94,7 @@ app.controller('trabajoCtrl', function($scope, $state, $stateParams, $http, ngDi
 
 				$('#commentinput').val('');
 				$scope.comment.text = '' ;
-				$scope.noticia.comentarios.push(resp.data.data);
+				$scope.empleo.comentarios.push(resp.data.data);
 
 
 			}, function(err) {

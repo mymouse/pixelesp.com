@@ -8,17 +8,45 @@
     <form id="subirtrabajo" class="form fancy" ng-submit="doRegister()">
 
       <div class="form-group">
-        <input type="text" tabindex="1" name="newstitle" ng-model="trabajo.Titulo">
+        <input type="text" tabindex="1" name="newstitle" ng-model="trabajo.Titulo" placeholder="Necesito pixelartista">
         <label for="newstitle">
-            <span class="label-content">Título</span>
+            <span class="label-content">Título *</span>
         </label>
       </div>
 
       <div class="form-group">
         <textarea tabindex="2" name="textarea" ng-model="trabajo.Descripcion"></textarea>
         <label for="textarea">
-          <span class="label-content">Escribe aquí</span>
+          <span class="label-content">Explica aqui lo que necesitas... *</span>
         </label>
+      </div>
+
+      <div class="form-group">
+        <input type="text" tabindex="3" name="newstitle" ng-model="trabajo.skills" placeholder="Diseñador, Photoshop, Animación">
+        <label for="newstitle">
+            <span class="label-content">Habilidades requeridas</span>
+        </label>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+
+          <div class="form-group">
+            <input type="text" tabindex="4" name="newstitle" ng-model="trabajo.time" placeholder="1 Semana, 3 meses">
+            <label for="newstitle">
+                <span class="label-content">Duración del proyecto</span>
+            </label>
+          </div>
+
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <input type="text" tabindex="5" name="newstitle" ng-model="trabajo.paymethod" placeholder="PayPal, Transferencia">
+            <label for="newstitle">
+                <span class="label-content">Método de pago</span>
+            </label>
+          </div>
+        </div>
       </div>
 
       <button tabindex="3" class="btn-block btn-primary" type="submit">Publicar</button>

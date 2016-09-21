@@ -75,7 +75,9 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 		.state("contacto", {
 			url: '/contacto',
 			templateUrl: "partials/contacto.html",
-			controller: "" })
+			controller: function($scope){
+			    $scope.imguri = './img/fundo7.png';
+			} })
 
 		.state("trabajo", {
 			url: '/empleo',
@@ -236,28 +238,11 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 				});
 			}]
 		})
-		
-		.state("trabajo.empleo", {
-
-			url: '/:TrabajoId',
-			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
-
-				ngDialog.open({
-					controller: 'trabajoCtrl',
-					templateUrl: 'partials/thread.html',
-					className: 'ngdialog-theme-thread animated fadeIn',
-					closeByNavigation: true
-
-				}).closePromise.finally(function() {
-					$state.go('^');
-				});
-			}]
-		})
 
 		.state("trabajo.createjobs", {
 
-			url: '/crear-empleo',
-			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
+			url: '/publicar-empleo',
+			onEnter: ['ngDialog', '$state', function(ngDialog, $state) {
 
 				ngDialog.close();
 				ngDialog.open({
@@ -266,15 +251,34 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 					className: 'ngdialog-theme-plain width-noticia',
 					cache: false,
 					closeByEscape: false,
-					closeByNavigation: true
+					closeByDocument: false,
+					closeByNavigation: true,
+					showClose: false
 
 				}).closePromise.finally(function() {
 					$state.go('^');
 				});
 			}]
 		})
+		
+		.state("trabajo.empleo", {
 
-		// Blog
+			url: '/:TrabajoId',
+			onEnter: ['ngDialog', '$state', 'Session', function(ngDialog, $state, Session) {
+
+				ngDialog.open({
+					controller: 'trabajoCtrl',
+					templateUrl: 'partials/empleo.html',
+					className: 'ngdialog-theme-thread animated fadeIn',
+					closeByNavigation: true
+
+				}).closePromise.finally(function() {
+					$state.go('^');
+				});
+			}]
+		})		
+
+		// App
 		.state("app", {
 			url: '/app',
 			templateUrl: "partials/app.html",

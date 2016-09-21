@@ -8734,6 +8734,17 @@ article.post {
   font-family: "Inconsolata", monospace !important; }
 
 /*
+ * App
+ */
+.bg-contact {
+  display: block;
+  margin-top: -10px !important;
+  padding: 50px 0  0;
+  background-repeat: no-repeat !important;
+  color: #FFF;
+  font-family: "Inconsolata", monospace !important; }
+
+/*
  * Messenger
  */
 .chat.panel-body, .chat .ngdialog-content.panel-body {

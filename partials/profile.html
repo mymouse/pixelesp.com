@@ -1,6 +1,11 @@
 <div class="content-wrapper">
 
 	<div class="container-fluid profile-page">
+
+		<div ng-if="currentUser.id == usuario.id && !usuario.name" class="alert alert-warning" role="alert">
+		  <strong>Hey!</strong> Tu perfil no esta completo, por favor completalo <a ui-sref="cuenta({id_usaurio: usuario.id})">aquí</a>
+		</div>
+
 		<div class="row">
 
 			<section class="col-xs-3">
@@ -23,7 +28,7 @@
 					<a ng-if="usuario.social_twitter" href="http://twitter.com/{{usuario.social_twitter}}" target="_blank"><i class="fa fa-2x fa-twitter-square" aria-hidden="true"></i></a>
 					<a ng-if="usuario.social_youtube" href="http://youtube.com/c/{{usuario.social_youtube}}" target="_blank"><i class="fa fa-2x fa-youtube-square" aria-hidden="true"></i></a>
 
-					<button rel="button" class="btn btn-secondary btn-sm m-x-auto m-t-1 d-block" ng-click="modalMP(usuario.id)"><i class="fa fa-paper-plane" aria-hidden="true"></i> Enviar MP</button>
+					<button ng-if="currentUser" rel="button" class="btn btn-secondary btn-sm m-x-auto m-t-1 d-block" ng-click="modalMP(usuario.id)"><i class="fa fa-paper-plane" aria-hidden="true"></i> Enviar MP</button>
 
 				  </div>
 				</div>		
@@ -95,7 +100,10 @@
 							</div>
 							<!--  <img src="..." alt="Card image"> -->
 							<div class="card-block">
-								<p class="card-text"> {{post.Descripcion}} </p>
+								<p class="card-text"> {{post.Descripcion | limitTo: 250}} {{noticia.Descripcion.length < 250 ? '' : '...'}} </p>
+								<div ng-if="post.Descripcion.length > 250">
+									<a class="read-more" ui-sref="home.thread({NoticiaId:post.id})"  target="_blank">Ver post completo</a>
+								</div>
 							</div>
 						</article>
 

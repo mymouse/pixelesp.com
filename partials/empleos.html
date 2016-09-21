@@ -22,7 +22,10 @@
 			</div>
 			<!--  <img src="..." alt="Card image"> -->
 			<div class="card-block">
-				<p class="card-text"> {{trabajo.Descripcion}} </p>
+				<p class="card-text"> {{trabajo.Descripcion  | limitTo: 175}} {{trabajo.Descripcion.length < 175 ? '' : '...'}} </p>
+				<div ng-if="noticia.Descripcion.length > 250">
+					<a class="read-more" ui-sref="trabajo.empleo({TrabajoId:trabajo.id})">Ver propuesta completa</a>
+				</div>
 				<!-- <a href="#" class="card-link">Card link</a> -->
 				<a class="btn btn-secondary btn-sm" ui-sref="trabajo.empleo({TrabajoId:trabajo.id})"><i class="fa fa-comments" aria-hidden="true"></i> {{trabajo.comentarios.length}} Comentario<span ng-if="trabajo.comentarios.length != 1">s</span></a>
 			</div>
