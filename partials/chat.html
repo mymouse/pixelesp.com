@@ -1,8 +1,8 @@
 <div class="content">
 
 	<header>
-		<h4 class="text-center">Enviar mensaje</h4>
-		<div class="btn-group pull-right">
+		<h4 class="text-center">Enviar mensaje privado</h4>
+		<!-- <div class="btn-group pull-right">
             <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
                 <span class="glyphicon glyphicon-chevron-down"></span>
             </button>
@@ -19,44 +19,58 @@
                 <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-off"></span>
                     Sign Out</a></li>
             </ul>
-        </div>
+        </div> -->
 	</header>
 
 	<section class="tab-content">
 
-
             <div class="panel-body">
-                <ul class="chat">
-                    <li class="clearfix {{currentUser.id == m.from ? 'right' : 'left' }}" ng-if="currentUser.id == m.from || currentUser.id == m.to" ng-repeat="m in mensajes">
-	                    <span class="chat-img {{currentUser.id == m.from ? 'pull-xs-right' : 'pull-xs-left' }}">
-	                        <img src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{m.imagen}}" class="img-circle" alt="User Avatar" width="48" />
-	                    </span>
-                        <div class="chat-body clearfix">
-                         m.from {{ m.from }} =  m.to  {{m.to}}
-                            <div class="header">
-                                <span class="{{currentUser.id == m.from ? 'pull-xs-right' : '' }}"><strong>{{m.username}}</strong> | <small>({{m.asunto}})</small></span>
-                                <small class="text-muted {{currentUser.id == m.from ? '' : 'pull-xs-right' }}"> <time title="{{ m.created_at | amUtc | amLocal | amDateFormat: 'LLLL' }}" class="date text-muted">{{ m.created_at | amUtc | amLocal | amCalendar }}</time></small>
-                            </div>
-                            <p class="clearfix">
-                                {{m.msj}}
-                            </p>
-                        </div>
-                    </li>
-                    
+                <ul id="chatbox" class="chat">
 
+                	<span ng-if="msgwith_id == m.to" ng-repeat="m in mensajes" style="max-height: 270px;">
 
-                </ul>
-            </div>
-            <div class="panel-footer">
-                <div class="input-group">
-                    <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
-                    <span class="input-group-btn">
-                        <button class="btn btn-warning btn-sm" id="btn-chat">
-                            Send</button>
+		                <li class="clearfix {{currentUser.id == c.from ? 'right' : 'left' }}" ng-repeat="c in m.chat | orderBy:'created_at'" >               	
+
+		                    <span class="chat-img {{currentUser.id == c.from ? 'pull-xs-right' : 'pull-xs-left' }}">
+		                        <img src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{c.imagen}}" class="img-circle" alt="{{c.username}}" width="48" />
+		                    </span>
+		                    <div class="chat-body clearfix">
+
+		                        <div class="header">
+		                            <span class="{{currentUser.id == c.from ? 'pull-xs-right' : '' }}"><strong>{{c.username}}</strong></span>
+		                            <small class="text-muted {{currentUser.id == c.from ? '' : 'pull-xs-right' }}"> <time title="{{ c.created_at | amUtc | amLocal | amDateFormat: 'LLLL' }}" class="date text-muted">{{ c.created_at | amUtc | amLocal | amCalendar }}</time></small>
+		                        </div>
+		                        <p class="clearfix">
+		                            {{c.msj}}
+		                        </p>
+		                    </div>
+		                </li>
+		                 <div ng-if="m.chat.length" class="alert alert-info" role="alert">
+							<small><strong>Hola!</strong> Aqui se muestran los anteriores mensajes como referencia.</small>
+						</div>
                     </span>
-                </div>
+                </ul>
+               
             </div>
 
+            <div class="panel-footer box-footer">
+
+	            <form class="fancy" ng-submit="doSend(mensaje)">
+
+	                <div class="img-push form-group">
+	                  <input id="mpinput" type="text" class="form-control input-sm comment" ng-model="mensaje.mensaje" 
+	                  placeholder="Escribe aquí ..."
+	                  ng-disabled="!currentUser">
+	                  <button class="btn-primary btn-comment m-t-1" type="submit" ng-disabled="!currentUser">Enviar</button>
+	                </div>
+	            </form>
+            </div>
+
+            <script type="text/javascript">
+  				$('#chatbox').stop().animate({
+				  scrollTop: $('#chatbox')[0].scrollHeight + 50
+				}, 2000);
+            </script>
 
     </section>
 </div>

@@ -8351,7 +8351,7 @@ form {
           margin-bottom: -2px;
           font-size: .9em; }
     .ngdialog .ngdialog-content .tab-content {
-      padding: 20px 20px 10px; }
+      padding: 0px 20px 10px; }
   .ngdialog.ngdialog-theme-thread {
     margin-bottom: 0;
     padding: 50px 0 0 0;
@@ -8581,6 +8581,10 @@ form {
         text-shadow: 1px 1px 2px #BDBDBD; }
   .ngdialog.ngdialog-theme-plain.chat .ngdialog-content {
     width: 800px; }
+    .ngdialog.ngdialog-theme-plain.chat .ngdialog-content #chatbox {
+      display: block;
+      overflow-y: scroll;
+      height: 270px; }
     .ngdialog.ngdialog-theme-plain.chat .ngdialog-content .chat {
       margin: 0;
       padding: 0;
@@ -8707,7 +8711,7 @@ article.post {
  */
 .bg-parallax {
   display: block;
-  margin-top: -10px;
+  margin-top: -10px !important;
   padding: 50px 0 600px 0;
   color: #000 !important;
   text-align: center;
@@ -8724,5 +8728,16 @@ article.post {
 .content-usuarios {
   position: relative;
   top: -350px; }
+
+/*
+ * App
+ */
+.bg-app {
+  display: block;
+  margin-top: -10px !important;
+  padding: 50px 0  0;
+  background-repeat: no-repeat !important;
+  color: #FFF;
+  font-family: "Inconsolata", monospace !important; }
 
 /*# sourceMappingURL=main.css.map */

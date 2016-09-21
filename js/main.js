@@ -96,7 +96,8 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 				ngDialog.open({
 					controller: 'noticiaCtrl',
 					templateUrl: 'partials/thread.html',
-					className: 'ngdialog-theme-thread animated fadeIn'
+					className: 'ngdialog-theme-thread animated fadeIn',
+					closeByNavigation: true
 
 				}).closePromise.finally(function() {
 					$state.go('^');
@@ -113,7 +114,8 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 				ngDialog.open({
 					controller: 'pixelartCtrl',
 					templateUrl: 'partials/pixelart.html',
-					className: 'ngdialog-theme-thread animated fadeIn'
+					className: 'ngdialog-theme-thread animated fadeIn',
+					closeByNavigation: true
 
 				}).closePromise.finally(function() {
 					$state.go('^');
@@ -135,6 +137,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 					cache: false,
 					closeByEscape: false,
 					closeByDocument: false,
+					closeByNavigation: true,
 					showClose: false
 
 				}).closePromise.finally(function() {
@@ -157,6 +160,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 					cache: false,
 					closeByEscape: false,
 					closeByDocument: false,
+					closeByNavigation: true,
 					showClose: false
 
 				}).closePromise.finally(function() {
@@ -174,7 +178,8 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 				ngDialog.open({
 					controller: 'pixelartCtrl',
 					templateUrl: 'partials/pixelart.html',
-					className: 'ngdialog-theme-thread animated fadeIn'
+					className: 'ngdialog-theme-thread animated fadeIn',
+					closeByNavigation: true
 
 				}).closePromise.finally(function() {
 					$state.go('^');
@@ -196,6 +201,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 					cache: false,
 					closeByEscape: false,
 					closeByDocument: false,
+					closeByNavigation: true,
 					showClose: false
 
 				}).closePromise.finally(function() {
@@ -213,7 +219,8 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 				ngDialog.open({
 					controller: 'pixelartCtrl',
 					templateUrl: 'partials/pixelart-en-cola.html',
-					className: 'ngdialog-theme-plain width-noticia animated fadeIn'
+					className: 'ngdialog-theme-plain width-noticia animated fadeIn',
+					closeByNavigation: true
 
 				}).closePromise.finally(function() {
 					$state.go('^');
@@ -229,7 +236,8 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 				ngDialog.open({
 					controller: 'trabajoCtrl',
 					templateUrl: 'partials/thread.html',
-					className: 'ngdialog-theme-thread animated fadeIn'
+					className: 'ngdialog-theme-thread animated fadeIn',
+					closeByNavigation: true
 
 				}).closePromise.finally(function() {
 					$state.go('^');
@@ -248,7 +256,8 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 					controller: 'TrabajoNuevoCtrl',
 					className: 'ngdialog-theme-plain width-noticia',
 					cache: false,
-					closeByEscape: false
+					closeByEscape: false,
+					closeByNavigation: true
 
 				}).closePromise.finally(function() {
 					$state.go('^');
@@ -260,7 +269,9 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 		.state("app", {
 			url: '/app',
 			templateUrl: "partials/app.html",
-			controller: "" })
+			controller: function($scope){
+			    $scope.imguri = './img/fundo6.png';
+			  } })
 		// 404
 		.state("404", {
 			url: '/404',

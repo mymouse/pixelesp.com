@@ -1,7 +1,7 @@
 /**
  * Get All Usuarios
  */
-app.controller('getUsiarios', function($scope, $http) {
+app.controller('getUsiarios', function($scope, $http, ngDialog) {
 
 	$scope.fundo = "./img/fundo4.jpg";
 
@@ -22,10 +22,30 @@ app.controller('getUsiarios', function($scope, $http) {
             });
         });
 
+        
+
 	}, function(err) {
 		console.error('ERR', err);
 		// err.status will contain the status code
 	});
+
+	//send MP
+        $scope.SendMP = function($id_to) {
+        	console.log('button sendmp '+$id_to);
+			ngDialog.open({
+				templateUrl: 'partials/chat.html',
+				controller: 'sendMP',
+				className: 'ngdialog-theme-plain chat',
+				cache: false,
+				closeByDocument: false,
+				closeByNavigation: true,
+				data: {
+					id_usuario: $id_to
+				}
+			})
+
+        	console.log('button sendmp after');
+		}
 })
 
 
@@ -53,7 +73,8 @@ app.controller('perfilCtrl', function($scope, $state, $stateParams, $http, ngDia
 			controller: 'sendMP',
 			className: 'ngdialog-theme-plain chat',
 			cache: false,
-			showClose: false
+			closeByDocument: false,
+			closeByNavigation: true
 		})
 	}
 
@@ -174,7 +195,14 @@ app.controller('perfilCtrl', function($scope, $state, $stateParams, $http, ngDia
 /*
  * Send MP
  */
-app.controller('sendMP', function ($scope, $stateParams, $http, Session, ngDialog) {
+app.controller('sendMP', function ($scope, $state, $stateParams, $http, Session, ngDialog) {
+
+	if (!$stateParams.id_usuario) {
+		$scope.msgwith_id = $scope.ngDialogData.id_usuario;
+
+	} else {
+		$scope.msgwith_id = $stateParams.id_usuario;
+	}
 
 	$scope.mensaje = {};
 	$scope.mensaje.asunto = '';
@@ -187,8 +215,7 @@ app.controller('sendMP', function ($scope, $stateParams, $http, Session, ngDialo
 	$scope.mensaje.id_origen = userdata.id;
 
 	// Get
-
-	$http.get('http://pixelesp-api.herokuapp.com/listarmensajes/' + $stateParams.id_usuario).then(function (resp) {
+	$http.get('http://pixelesp-api.herokuapp.com/messenger/' + userdata.id).then(function (resp) {
          
 		$scope.mensajes = resp.data.data;
 		console.log($scope.mensajes);
@@ -204,7 +231,11 @@ app.controller('sendMP', function ($scope, $stateParams, $http, Session, ngDialo
 
 			$http.post('http://pixelesp-api.herokuapp.com/crearmensaje/' + $stateParams.id_usuario, $scope.mensaje).then(function (resp) {
 
-				console.log('Creado');
+				console.log('Enviado '+JSON.stringify(resp));
+
+
+				$('#mpinput').val('');
+				$scope.mensaje.mensaje = '' ;
 
 				ngDialog.close();
 				ngDialog.open({
@@ -219,7 +250,7 @@ app.controller('sendMP', function ($scope, $stateParams, $http, Session, ngDialo
 						time: 3
 					},
 					preCloseCallback: function(){
-						$state.go('perfil', { id_usuario: resp.data.id }, { reload: true });
+						$state.go('perfil', { id_usuario: $scope.msgwith_id }, { reload: true });
 					}
 				})
 

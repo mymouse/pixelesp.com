@@ -526,7 +526,7 @@ form {
 				}
 			}
 		}
-		.tab-content {padding: 20px 20px 10px; }
+		.tab-content {padding: 0px 20px 10px; }
 	}
 	/* post noticias*/
 	&.ngdialog-theme-thread {
@@ -693,13 +693,15 @@ form {
 				}
 			}
 		}
-
-		
 			//Experimental 
-
 		&.chat .ngdialog-content{
 			width: 800px;
 
+			#chatbox {
+    		display: block;
+		    overflow-y: scroll;
+		    height: 270px;
+			}
 			.chat {
 		    margin: 0;
 		    padding: 0;
@@ -711,9 +713,7 @@ form {
 			    border-bottom: 1px dotted #B3A9A9;
 
 					&.left .chat-body { margin-left: 60px; }
-
 					&.right .chat-body {margin-right: 60px; }
-
 					.chat-body p {
 				    margin: 0;
 				    color: #8c949a;
@@ -859,15 +859,14 @@ article.post {
 /*
  * Comunidad
  */
-
 .bg-parallax {
 	display: block;
-  margin-top: -10px;
+  margin-top: -10px!important;
 	padding: 50px 0 600px 0;
 	color: #000!important;
 	text-align: center;
 	font-family: 'Inconsolata', monospace!important;
-	
+
 	&:after {
     position: absolute;
     bottom: 0;
@@ -882,4 +881,17 @@ article.post {
 .content-usuarios {
     position: relative;
     top: -350px;
+}
+
+/*
+ * App
+ */
+.bg-app {
+	display: block;
+  margin-top: -10px!important;
+	padding: 50px 0  0;
+	background-repeat: no-repeat!important;
+	color: #FFF;
+	font-family: 'Inconsolata', monospace!important;
+
 }
