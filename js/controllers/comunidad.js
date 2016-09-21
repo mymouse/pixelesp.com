@@ -1,10 +1,11 @@
 /**
  * Get All Usuarios
  */
-app.controller('getUsiarios', function($scope, $http, ngDialog) {
+app.controller('getUsuarios', function($scope, $http, ngDialog) {
 
 	$scope.fundo = "./img/fundo4.jpg";
-
+	
+	$scope.loading = true;
 	$scope.usuarios = [];
 	$http.get('http://pixelesp-api.herokuapp.com/usuarios').then(function(resp) {
 		$scope.usuarios = resp.data.data;
@@ -27,25 +28,31 @@ app.controller('getUsiarios', function($scope, $http, ngDialog) {
 	}, function(err) {
 		console.error('ERR', err);
 		// err.status will contain the status code
+
+	})['finally'](function() {
+    	$scope.loading = false;
 	});
 
 	//send MP
-        $scope.SendMP = function($id_to) {
-        	console.log('button sendmp '+$id_to);
-			ngDialog.open({
-				templateUrl: 'partials/chat.html',
-				controller: 'sendMP',
-				className: 'ngdialog-theme-plain chat',
-				cache: false,
-				closeByDocument: false,
-				closeByNavigation: true,
-				data: {
-					id_usuario: $id_to
-				}
-			})
+    $scope.modalMP = function($id_to) {
 
-        	console.log('button sendmp after');
-		}
+    	$scope.loading_modal = true;
+    	//console.log('button sendmp '+$id_to);
+		ngDialog.open({
+			templateUrl: 'partials/chat.html',
+			controller: 'sendMP',
+			className: 'ngdialog-theme-plain chat',
+			cache: false,
+			closeByDocument: false,
+			closeByNavigation: true,
+			data: {
+				id_usuario: $id_to
+			}
+		})
+
+    	//console.log('button sendmp after');
+	}
+
 })
 
 
@@ -66,15 +73,19 @@ app.controller('perfilCtrl', function($scope, $state, $stateParams, $http, ngDia
 		//console.error('ERR', err);
 	});
 
-	$scope.SendMP = function() {
+	$scope.modalMP = function($id_to) {
 
+		$scope.loading_modal = true;
 		ngDialog.open({
 			templateUrl: 'partials/chat.html',
 			controller: 'sendMP',
 			className: 'ngdialog-theme-plain chat',
 			cache: false,
 			closeByDocument: false,
-			closeByNavigation: true
+			closeByNavigation: true,
+			data: {
+				id_usuario: $id_to
+			}
 		})
 	}
 
@@ -102,7 +113,7 @@ app.controller('perfilCtrl', function($scope, $state, $stateParams, $http, ngDia
 
 		    	} else {	    		
 		            $scope.usuario.imagen = $scope.usuario.imagen;
-		            console.log('NO hay avatar: '+$scope.usuario.imagen)
+		            //console.log('NO hay avatar: '+$scope.usuario.imagen)
 		    	}
 
 		    	if ($scope.usuario.newpassword) {	    		
@@ -157,7 +168,7 @@ app.controller('perfilCtrl', function($scope, $state, $stateParams, $http, ngDia
 					$scope.doSaveData(avatar);
 
 		        }, function (resp) {
-		            console.log('Error status: ' + resp.status);
+		            //console.log('Error status: ' + resp.status);
 		        }, function (evt) {
 		            //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
 		            //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
@@ -174,13 +185,13 @@ app.controller('perfilCtrl', function($scope, $state, $stateParams, $http, ngDia
 		            origFile: file
 		          },
 		        }).then(function (resp) {
-		            console.log('Success avatarCrop ' + resp.config.data.file.name + 'uploaded. Response: ' + JSON.stringify(resp.data));
+		            //console.log('Success avatarCrop ' + resp.config.data.file.name + 'uploaded. Response: ' + JSON.stringify(resp.data));
 		            var urlAvatar = resp.data.url;
 		            avatar = urlAvatar.substr(urlAvatar.lastIndexOf('d/') + 2);
 					$scope.doSaveData(avatar);
 
 		        }, function (resp) {
-		            console.log('Error status: ' + resp.status);
+		            //console.log('Error status: ' + resp.status);
 		        }, function (evt) {
 		            //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
 		            //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
@@ -197,31 +208,82 @@ app.controller('perfilCtrl', function($scope, $state, $stateParams, $http, ngDia
  */
 app.controller('sendMP', function ($scope, $state, $stateParams, $http, Session, ngDialog) {
 
-	if (!$stateParams.id_usuario) {
+	$scope.usuarios = [];
+	$http.get('http://pixelesp-api.herokuapp.com/usuarios').then(function(resp) {
+		$scope.usuarios = resp.data.data;
+        
+
+	}, function(err) {
+		console.error('ERR', err);
+		// err.status will contain the status code
+	})
+
+	$scope.selectedItem = $scope.usuarios[0];
+
+	// Lisar mensajes (provisorio)
+	$scope.lstmensaje = {};
+	$scope.loading = true;
+	$http.get('http://pixelesp-api.herokuapp.com/listarmensajes/' + userdata.id).then(function (resp) {
+         
+		$scope.lstmensajes = resp.data.data;
+		//console.log($scope.lstmensajes);
+
+	}, function (err) {
+		//console.error('ERR', err);
+
+	})['finally'](function() {
+    	$scope.loading = false;
+	});
+
+
+	$scope.msgwith_id = '';
+
+	if ($state.current.name == 'comunidad') {
 		$scope.msgwith_id = $scope.ngDialogData.id_usuario;
 
-	} else {
+	} else if ($state.current.name == 'perfil') {
 		$scope.msgwith_id = $stateParams.id_usuario;
 	}
 
-	$scope.mensaje = {};
-	$scope.mensaje.asunto = '';
-	$scope.mensaje.mensaje = '';
+	//send MP
+    $scope.modalMP = function($id_to) {
 
-	$scope.usuario = {};
+    	$scope.loading_modal = true;
+		ngDialog.open({
+			templateUrl: 'partials/chat.html',
+			controller: 'sendMP',
+			className: 'ngdialog-theme-plain chat',
+			cache: false,
+			closeByDocument: false,
+			closeByNavigation: true,
+			data: {
+				id_usuario: $id_to
+			}
+		})
+	}
 
+	// prepare to send
 	userdata = JSON.parse(window.localStorage.getItem('userdata'));
 	$scope.currentUser = userdata;
+
+	$scope.mensaje = {};
+	$scope.mensaje.asunto = '';
 	$scope.mensaje.id_origen = userdata.id;
 
 	// Get
+	$scope.loading = true;
+	$scope.loading_modal = true;
 	$http.get('http://pixelesp-api.herokuapp.com/messenger/' + userdata.id).then(function (resp) {
          
 		$scope.mensajes = resp.data.data;
-		console.log($scope.mensajes);
+		//console.log($scope.mensajes);
 
 	}, function (err) {
-		console.error('ERR', err);
+		//console.error('ERR', err);
+
+	})['finally'](function() {
+    	$scope.loading = false;
+    	$scope.loading_modal = false;
 	});
 
 	// Enviar
@@ -229,9 +291,14 @@ app.controller('sendMP', function ($scope, $state, $stateParams, $http, Session,
 
 		$scope.doSend = function () {
 
+			//console.log('$scope.mensaje.id_destino; '+ $scope.mensaje.id_destino)
+			if (!$stateParams.id_usuario) {
+				$stateParams.id_usuario = $scope.mensaje.id_destino;
+			}
+
 			$http.post('http://pixelesp-api.herokuapp.com/crearmensaje/' + $stateParams.id_usuario, $scope.mensaje).then(function (resp) {
 
-				console.log('Enviado '+JSON.stringify(resp));
+				//console.log('Enviado '+JSON.stringify(resp));
 
 
 				$('#mpinput').val('');
@@ -249,8 +316,14 @@ app.controller('sendMP', function ($scope, $state, $stateParams, $http, Session,
 						footertext: 'Sigue haciendo amigos!',
 						time: 3
 					},
-					preCloseCallback: function(){
-						$state.go('perfil', { id_usuario: $scope.msgwith_id }, { reload: true });
+					preCloseCallback: function() {
+						if ($state.current.name == 'perfil') {
+							$state.go('perfil', { id_usuario: $scope.msgwith_id }, { reload: true });
+						} else if ($state.current.name == 'comunidad') {
+							$state.go('comunidad', {}, { reload: true });
+						} else if ($state.current.name == 'messenger') {
+							$state.go('messenger', {}, { reload: true });
+						}
 					}
 				})
 
@@ -289,7 +362,7 @@ $scope.mensajes = [];
 
             $scope.mensaje = resp.data.data[0];
 
-            console.log($scope.mensaje);
+            //console.log($scope.mensaje);
 
         }, function (err) {
 
@@ -303,7 +376,7 @@ $scope.mensajes = [];
 
     $scope.doBorrar = function () {
 
-        console.log('Borrado!');
+        //console.log('Borrado!');
 
         $http.delete('http://pixelesp-api.herokuapp.com/borrarmensaje/' + $stateParams.IdMensaje).then(function (resp) {
 

@@ -24,53 +24,72 @@
 
 	<section class="tab-content">
 
-            <div class="panel-body">
-                <ul id="chatbox" class="chat">
+        <div class="panel-body">
+            <ul id="chatbox" >
 
-                	<span ng-if="msgwith_id == m.to" ng-repeat="m in mensajes" style="max-height: 270px;">
+            	<span ng-if="ngDialogData.id_usuario == m.to" ng-repeat="m in mensajes" style="max-height: 270px;">
 
-		                <li class="clearfix {{currentUser.id == c.from ? 'right' : 'left' }}" ng-repeat="c in m.chat | orderBy:'created_at'" >               	
+	                <li class="clearfix {{currentUser.id == c.from ? 'right' : 'left' }}" ng-repeat="c in m.chat | orderBy:'created_at'" >
 
-		                    <span class="chat-img {{currentUser.id == c.from ? 'pull-xs-right' : 'pull-xs-left' }}">
-		                        <img src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{c.imagen}}" class="img-circle" alt="{{c.username}}" width="48" />
-		                    </span>
-		                    <div class="chat-body clearfix">
+	                    <span class="chat-img {{currentUser.id == c.from ? 'pull-xs-right' : 'pull-xs-left' }}">
+	                        <img src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{c.imagen}}" class="img-circle" alt="{{c.username}}" width="48" />
+	                    </span>
+	                    <div class="chat-body clearfix">
 
-		                        <div class="header">
-		                            <span class="{{currentUser.id == c.from ? 'pull-xs-right' : '' }}"><strong>{{c.username}}</strong></span>
-		                            <small class="text-muted {{currentUser.id == c.from ? '' : 'pull-xs-right' }}"> <time title="{{ c.created_at | amUtc | amLocal | amDateFormat: 'LLLL' }}" class="date text-muted">{{ c.created_at | amUtc | amLocal | amCalendar }}</time></small>
-		                        </div>
-		                        <p class="clearfix">
-		                            {{c.msj}}
-		                        </p>
-		                    </div>
-		                </li>
-		                 <div ng-if="m.chat.length" class="alert alert-info" role="alert">
-							<small><strong>Hola!</strong> Aqui se muestran los anteriores mensajes como referencia.</small>
-						</div>
-                    </span>
-                </ul>
-               
-            </div>
+	                        <div class="header">
+	                            <span class="{{currentUser.id == c.from ? 'pull-xs-right' : '' }}"><strong>{{c.username}}</strong></span>
+	                            <small class="text-muted {{currentUser.id == c.from ? '' : 'pull-xs-right' }}"> <time title="{{ c.created_at | amUtc | amLocal | amDateFormat: 'LLLL' }}" class="date text-muted">{{ c.created_at | amUtc | amLocal | amCalendar }}</time></small>
+	                        </div>
+	                        <p class="clearfix">
+	                            {{c.msj}}
+	                        </p>
+	                    </div>
+	                </li>
+	                 <div ng-if="m.chat.length" class="alert alert-info" role="alert">
+						<small><strong>Hola!</strong> Aqui se muestran los anteriores mensajes como referencia.</small>
+					</div>
+                </span>
 
-            <div class="panel-footer box-footer">
+                <loader
+				    working="loading"
+				    template="5">
+				</loader>
 
-	            <form class="fancy" ng-submit="doSend(mensaje)">
+            </ul>
+           
+        </div>
 
-	                <div class="img-push form-group">
-	                  <input id="mpinput" type="text" class="form-control input-sm comment" ng-model="mensaje.mensaje" 
-	                  placeholder="Escribe aquí ..."
-	                  ng-disabled="!currentUser">
-	                  <button class="btn-primary btn-comment m-t-1" type="submit" ng-disabled="!currentUser">Enviar</button>
-	                </div>
-	            </form>
-            </div>
+        <div class="panel-footer box-footer">
 
-            <script type="text/javascript">
-  				$('#chatbox').stop().animate({
-				  scrollTop: $('#chatbox')[0].scrollHeight + 50
-				}, 2000);
-            </script>
+            <form class="fancy" ng-submit="doSend(mensaje)">
+
+            	<div ng-if="ngDialogData.id_usuario == 420" class="form-group m-b-0">
+            		<label for="selectto">Enviar a:</label>
+            		<select name="selectto" class="custom-select m-t-2" ng-model="mensaje.id_destino">
+					    <option ng-selected="{{operator.id == mensaje.id_destino}}"
+					            ng-repeat="operator in usuarios"
+					            value="{{operator.id}}">
+					      {{operator.username}}
+					    </option>
+					</select>
+            	</div>
+
+                <div class="img-push form-group">
+                  <input id="mpinput" type="text" class="form-control input-sm comment" ng-model="mensaje.mensaje" 
+                  placeholder="Escribe aquí ..."
+                  ng-disabled="!currentUser">
+                  <button class="btn-primary btn-comment m-t-1" type="submit" ng-disabled="!currentUser">Enviar</button>
+                </div>
+            </form>
+        </div>
+
+        <script type="text/javascript">
+				$('#chatbox').stop().animate({
+			  scrollTop: $('#chatbox')[0].scrollHeight + 150
+			}, 2500);
+
+			console.log('chau');
+        </script>
 
     </section>
 </div>

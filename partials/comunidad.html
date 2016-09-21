@@ -1,6 +1,6 @@
 <div class="content-wrapper">
 
-	<section class="col-lg-12 content" ng-controller="getUsiarios">
+	<section class="col-lg-12 content" ng-controller="getUsuarios">
 		
 		<div class="row">
 			<div class="bg-parallax" ng-parallax pattern="fundo" speed="10" reverse="true">
@@ -16,6 +16,14 @@
 		</div>
 
 		<div class="content-usuarios" angular-grid="usuarios">
+
+			<loader
+			    working="loading"
+			    disable-background="true"
+			    message="Cargando"
+			    template="5">
+			</loader>
+
 			<article class="card profile" data-ng-repeat="usuario in usuarios | filter:searchUser">
 				<img class="img-circle d-block m-x-auto m-t-1" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{usuario.imagen}}" alt="{{usuario.username}}" width="100">
 				<div class="card-block text-xs-center">
@@ -35,7 +43,7 @@
 					<a ng-if="usuario.social_twitter" href="http://twitter.com/{{usuario.social_twitter}}" target="_blank"><i class="fa fa-2x fa-twitter-square" aria-hidden="true"></i></a>
 					<a ng-if="usuario.social_youtube" href="http://youtube.com/c/{{usuario.social_youtube}}" target="_blank"><i class="fa fa-2x fa-youtube-square" aria-hidden="true"></i></a>
 
-					<button rel="button" class="btn btn-secondary btn-sm m-x-auto m-t-1 d-block" ng-click="SendMP(usuario.id)"><i class="fa fa-paper-plane" aria-hidden="true"></i> Enviar MP</button>
+					<button rel="button" class="btn btn-secondary btn-sm m-x-auto m-t-1 d-block" ng-click="modalMP(usuario.id)"><i class="fa fa-paper-plane" aria-hidden="true"></i> Enviar MP</button>
 
 				</div>
 			</article>

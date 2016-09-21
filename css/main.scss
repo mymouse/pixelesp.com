@@ -21,6 +21,8 @@
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css');
 @import url('./ngDialog.min.css');
 @import url('./ng-img-crop.css');
+@import url('./ngLoader.min.css');
+@import url('./select.min.css');
 @import './animate-scss/animate.scss';
 
 /*
@@ -50,6 +52,19 @@ a {
 	&:focus, &:hover, &:active {
 		color: $verde_hover;
 		text-decoration: none;
+	}
+}
+
+.loader {
+	margin: 0 auto;
+	background: none!important;
+
+	.loader-content {
+	    background: transparent!important;
+	}
+
+	svg path, svg rect {
+	    fill: #afd702;
 	}
 }
 
@@ -374,7 +389,7 @@ form {
 				}
 
 			}
-			input[type=email], input[type=password], input[type=text], input[type=url], textarea {
+			input[type=email], input[type=password], input[type=text], input[type=search], input[type=url], textarea {
 				margin-top: 1em;
 				padding: .4em;
 				padding-bottom: 0;
@@ -693,38 +708,14 @@ form {
 				}
 			}
 		}
-			//Experimental 
-		&.chat .ngdialog-content{
+		&.chat .ngdialog-content {
 			width: 800px;
 
 			#chatbox {
-    		display: block;
-		    overflow-y: scroll;
-		    height: 270px;
-			}
-			.chat {
-		    margin: 0;
-		    padding: 0;
-		    list-style: none;
-
-				li {
-			    margin-bottom: 10px;
-			    padding: 5px;
-			    border-bottom: 1px dotted #B3A9A9;
-
-					&.left .chat-body { margin-left: 60px; }
-					&.right .chat-body {margin-right: 60px; }
-					.chat-body p {
-				    margin: 0;
-				    color: #8c949a;
-				    font-size: .9em;
-					}		 
-				}
+				max-height: 250px;
+				overflow-y: auto;
 			}
 		}
-
-		
-
 	}
 	&.card-message {
 		.card-block:before {
@@ -893,5 +884,38 @@ article.post {
 	background-repeat: no-repeat!important;
 	color: #FFF;
 	font-family: 'Inconsolata', monospace!important;
+}
 
+/*
+ * Messenger
+ */
+
+.chat, .chat .ngdialog-content {
+
+	&.panel-body {
+		background: #FFF;
+		min-height: 150px;
+	}
+
+	#chatbox {
+		display: block;
+	    margin: 0;
+	    padding: 0;
+	    list-style: none;
+
+		li {
+	    margin-bottom: 10px;
+	    padding: 5px;
+	    border-bottom: 1px dotted #B3A9A9;
+
+			&.left .chat-body { margin-left: 60px; }
+			&.right .chat-body {margin-right: 60px; }
+
+			.chat-body p {
+			    margin: 0;
+			    color: #8c949a;
+			    font-size: .9em;
+			}		 
+		}
+	}
 }

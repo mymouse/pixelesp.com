@@ -64,6 +64,11 @@ app.controller('auth', ['$scope', '$http', '$rootScope', '$location', '$window',
 			}, function(err) {
 				//console.error('ERR', err);
 				$scope.thisloginerror = $scope.loginerror;
+				setTimeout(function () {
+					$scope.$apply(function() {
+						$scope.thisloginerror = false;
+					});
+				}, 3000);
 			});
 
 		}, function () {

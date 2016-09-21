@@ -2,7 +2,7 @@
  * Main AngularJS Web Application
  */
 
-var app = angular.module('pixelespWebApp', ['ui.router', 'ngDialog', 'ngMessages', 'angularMoment', 'cloudinary', 'ngFileUpload', 'ngImgCrop', '720kb.socialshare', 'ngParallax', 'angularGrid']);
+var app = angular.module('pixelespWebApp', ['ui.router', 'ngDialog', 'ngMessages', 'angularMoment', 'cloudinary', 'ngFileUpload', 'ngImgCrop', '720kb.socialshare', 'ngParallax', 'angularGrid', 'ngLoader', 'ui.select']);
 
 app.constant('AUTH_EVENTS', {
 	loginSuccess: 'auth-login-success',
@@ -66,14 +66,17 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 			url: '/comunidad',
 			templateUrl: "partials/comunidad.html",
 			controller: "" })
+
 		.state("galeria", {
 			url: '/galeria',
 			templateUrl: "partials/galeria.html",
 			controller: "" })
+
 		.state("contacto", {
 			url: '/contacto',
 			templateUrl: "partials/contacto.html",
 			controller: "" })
+
 		.state("trabajo", {
 			url: '/empleo',
 			templateUrl: "partials/empleos.html",
@@ -83,6 +86,12 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 			url: '/en-cola',
 			templateUrl: "partials/encola.html",
 			controller: "getPostsToApprobal" })
+
+		.state("messenger", {
+			url: '/mensajes',
+			templateUrl: "partials/messenger.html",
+			controller: "sendMP" 
+		})
 
 		// Noticias
 		.state("home.thread", {

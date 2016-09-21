@@ -1,0 +1,111 @@
+<div class="content-wrapper">
+
+	<section class="col-lg-12 content">
+
+		<div class="col-md-6 offset-md-3">
+
+            <div class="panel-body chat">
+
+            	<style type="text/css">
+            		.chat li.nav-item {
+						width: calc(100% / 2)!important;
+					}
+            	</style>
+
+            	<ul id="msnTabs" class="nav nav-tabs card" role="tablist">
+				  <li class="nav-item">
+				    <a class="nav-link active" data-toggle="tab" href="#recibidos" role="tab">Mensajes recibidos</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" data-toggle="tab" href="#enviarmensaje" role="tab">Enviar mensaje</a>
+				  </li>
+				</ul>
+
+				<div class="tab-content">
+
+					<div class="tab-pane p-a-1 fade in active" id="recibidos" role="tabpanel">
+
+
+						<ul id="chatbox" style="height:auto;">
+
+				                <li class="clearfix left" ng-repeat="c in lstmensajes | orderBy:'-created_at'" >
+
+				                    <span class="chat-img pull-xs-left">
+				                        <img src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{c.imagen}}" class="img-circle" alt="{{c.username}}" width="48" />
+				                    </span>
+				                    <div class="chat-body clearfix">
+
+				                        <div class="header">
+				                            <strong>{{c.username}}</strong>
+				                            <small class="text-muted pull-xs-right"> <time title="{{ c.created_at | amUtc | amLocal | amDateFormat: 'LLLL' }}" class="date text-muted">{{ c.created_at | amUtc | amLocal | amCalendar }}</time></small>
+				                        </div>
+				                        <p class="clearfix">
+				                            {{c.msj}}
+				                        </p>
+				                        <p class="clearfix pull-xs-right" ng-click="modalMP(c.from)" role="button">
+				                            <i class="fa fa-reply" aria-hidden="true"></i> Responder
+				                        </p>
+				                    </div>
+				                </li>
+
+		                    <loader
+							    working="loading"
+							    template="5">
+							</loader>
+
+		                </ul>
+
+					</div>
+
+					<div class="tab-pane fade in" id="enviarmensaje" role="tabpanel">
+
+						<div class="table-responsive">
+			            	<button class="btn btn-secondary btn-block" ng-click="modalMP(420)">
+			            		<i class="fa fa-plus" aria-hidden="true"></i> ENVIAR UN NUEVO MENSAJE
+			            	</button>
+
+			            	<table class="table table-hover">
+							  <thead>
+							    <tr>
+							      <th colspan="4">Contactos recientes</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							    <tr ng-click="modalMP(m.to)" role="button" ng-repeat="m in mensajes" ng-hide="m.to == currentUser.id" >
+
+									<th style="width:50px;"">
+										<img src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{m.imagen}}" class="img-circle" alt="{{m.username}}" width="48" />
+									</th>
+
+									<td><strong>{{m.username}}</strong></td>
+									
+									<!-- <td ng-repeat="c in m.chat | limitTo: 1 | orderBy:'-created_at'"> 
+										<time title="{{ c.created_at | amUtc | amLocal | amDateFormat: 'LLLL' }}" class="date text-muted">{{ c.created_at | amUtc | amLocal | amCalendar }}</time>
+									</td> -->
+							    </tr>
+
+							  </tbody>
+							</table>
+						</div>
+
+					</div>
+
+				</div>	            
+
+				<loader
+				    working="loading"
+				    template="5">
+				</loader>
+
+            </div>
+
+           </div>
+    </section>
+
+    <script type="text/javascript">
+		$('#msnTabs a').click(function (e) {
+		  e.preventDefault()
+		  $(this).tab('show')
+		})
+	</script>
+</div>
