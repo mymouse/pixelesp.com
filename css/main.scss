@@ -950,7 +950,7 @@ article.post {
  * Media Querys
  */
 
-.tab-content>#myPixelarts.tab-pane { 
+.home .tab-content>#myPixelarts.tab-pane { 
 	display: block;
     opacity: 1;}
 
@@ -974,11 +974,11 @@ article.post {
 		margin-left: 0;
 		max-width: 100%;
 
-		.tab-content>#myPixelarts.tab-pane { 
+		&.home .tab-content>#myPixelarts.tab-pane { 
 		display: none;
 	    opacity: 0;}
 
-		.tab-content>#myPixelarts.tab-pane.in.active { 
+		&.home .tab-content>#myPixelarts.tab-pane.in.active { 
 		display: block!important;
 	    opacity: 1!important;}
 
