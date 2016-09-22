@@ -2,6 +2,8 @@
  * Get All Usuarios
  */
 app.controller('getUsuarios', function($scope, $http, ngDialog) {
+	
+	$('.main-sidebar').removeClass('opened');
 
 	$scope.fundo = "./img/fundo4.jpg";
 	

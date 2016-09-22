@@ -76,6 +76,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 			url: '/contacto',
 			templateUrl: "partials/contacto.html",
 			controller: function($scope){
+				$('.main-sidebar').removeClass('opened');
 			    $scope.imguri = './img/fundo7.png';
 			} })
 
@@ -283,6 +284,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 			url: '/app',
 			templateUrl: "partials/app.html",
 			controller: function($scope){
+				$('.main-sidebar').removeClass('opened');
 			    $scope.imguri = './img/fundo6.png';
 			  } })
 		// 404

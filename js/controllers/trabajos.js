@@ -3,6 +3,8 @@
  */
 app.controller('getTrabajos', function($scope, $http) {
 
+	$('.main-sidebar').removeClass('opened');
+	
     $scope.loading = true;
 	$scope.trabajos = [];
 	$http.get('http://pixelesp-api.herokuapp.com/trabajos').then(function(resp) {

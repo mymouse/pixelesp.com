@@ -3,6 +3,8 @@
  */
 app.controller('getNoticias', function($scope, $http) {
 
+	$('.main-sidebar').removeClass('opened');
+
 	$scope.loading = true;
 	$scope.noticias = [];
 	$http.get('http://pixelesp-api.herokuapp.com/noticias').then(function(resp) {

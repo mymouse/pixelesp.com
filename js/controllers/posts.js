@@ -19,6 +19,8 @@ app.controller('getPostsToApprobal', function($scope, $http, ngDialog) {
  */
 app.controller('getPosts', function($scope, $http, ngDialog) {
 
+  $('.main-sidebar').removeClass('opened');
+
   $scope.loading_pixelarts = true;
   $scope.imagenes = [];
   $http.get('http://pixelesp-api.herokuapp.com/imagenes').then(function(resp) {
