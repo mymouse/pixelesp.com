@@ -3,6 +3,7 @@
  */
 app.controller('getTrabajos', function($scope, $http) {
 
+    $scope.loading = true;
 	$scope.trabajos = [];
 	$http.get('http://pixelesp-api.herokuapp.com/trabajos').then(function(resp) {
 		$scope.trabajos = resp.data.data;
@@ -10,6 +11,8 @@ app.controller('getTrabajos', function($scope, $http) {
 	}, function(err) {
 		console.error('ERR', err);
 		// err.status will contain the status code
+	})['finally'](function() {
+    	$scope.loading = false;
 	});
 })
 	

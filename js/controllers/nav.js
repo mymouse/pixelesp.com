@@ -19,4 +19,10 @@ app.controller('NavCtrl', function ($scope, Session, $window, ngDialog) {
 		Session.destroy();
 		$window.location.reload();
 	};
+
+	$scope.openMenu = function() {
+
+		$('.main-sidebar').toggleClass('opened');
+	}
+
 })

@@ -11,22 +11,31 @@
                     <span class="username text-muted"><a ui-sref="perfil({id_usuario:pixelart.IdUsuario})"> {{pixelart.username}} </a></span> <time title="{{ pixelart.created_at | amUtc | amLocal | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ pixelart.created_at | amUtc | amLocal | amCalendar }}</time></h6>
                 </div>
                 <div class="col-xs-2">
-                    <div class="btn-group pull-xs-right">
+                    <div ng-if="pixelart.IdUsuario == currentUser.id || currentUser.userlevel == 1" class="btn-group pull-xs-right">
                         <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#"><i class="fa fa-flag" aria-hidden="true"></i> Reportar</a>
+                            <!-- <a class="dropdown-item" href="#"><i class="fa fa-flag" aria-hidden="true"></i> Reportar</a> -->
                             <div ng-if="pixelart.IdUsuario == currentUser.id || currentUser.userlevel == 1">
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>
+                                <!-- <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a> -->
                                 <a class="dropdown-item text-danger" href="" ng-click="doDelete()"><i class="fa fa-trash-o" aria-hidden="true"></i> Eliminar</a>
                             </div>
                         </div>
-                      </div>
+                    </div>
                 </div>
             </div>
-             <img src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.Imagen}}" alt="{{pixelart.Titulo}}" class="pixelart">
+
+            <loader
+                working="loading_pixelart"
+                template="5">
+            </loader>
+
+            <div style="overflow: auto;max-height: 500px;">
+                <img src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{pixelart.Imagen}}" alt="{{pixelart.Titulo}}" class="pixelart">
+            </div>
+
             <div class="card-block">
                 <p class="card-text"> {{pixelart.Descripcion}} </p>
                 <!-- <a href="#" class="card-link">Card link</a> -->
@@ -138,15 +147,28 @@
                 </div>
 
                 <div class="box-comments">
-                    <div class="animate box-comment" ng-repeat="c in pixelart.comentarios | orderBy:'-created_at'" ng-init="initFirst()">
+                    <div id="{{c.id}}" class="animate box-comment" ng-repeat="c in pixelart.comentarios | orderBy:'-created_at'" ng-init="initFirst()">
                         <img class="img-circle avatar" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{c.avatar}}" alt="{{c.username}}">
                         <div class="comment-text">
+                            <div ng-if="c.idusuario == currentUser.id || currentUser.userlevel == 1" class="btn-group pull-xs-right">
+                                <button type="button" class="btn btn-sm btn-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-top: -8px;">
+                                  <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <!-- <a class="dropdown-item" href="#"><i class="fa fa-flag" aria-hidden="true"></i> Reportar</a> -->
+                                    <div ng-if="c.idusuario == currentUser.id || currentUser.userlevel == 1">
+                                        <!-- <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a> -->
+                                        <a class="dropdown-item text-danger" href="" ng-click="doDeleteComment(c.id)"><i class="fa fa-trash-o" aria-hidden="true"></i> Eliminar</a>
+                                    </div>
+                                </div>
+                            </div>
                             <span class="username">
                                 <a ui-sref="perfil({id_usuario:c.idusuario})">{{c.username}}</a>
                                 <time title="{{ c.created_at | amUtc | amLocal | amDateFormat: 'LLLL' }}" class="text-muted pull-right">{{ c.created_at | amUtc | amLocal | amCalendar }}</time>
                             </span>
                             {{c.text}}
-                        </div>
+                        </div>                        
                     </div>
                 </div>
 

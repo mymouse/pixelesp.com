@@ -15,7 +15,7 @@
             <span class="label-content">Subir pixelart</span>
           </label> -->
 
-           <div ngf-drop ng-model="postFile" name="file" class="drop-box cropArea" ngf-drag-over-class="'dragover'" ngf-pattern="image/*" ngf-max-size="2MB" >
+           <div ngf-select ngf-drop ng-model="postFile" name="file" class="drop-box cropArea m-b-1" ngf-drag-over-class="'dragover'" ngf-pattern="image/*" ngf-max-size="2MB" >
             <img-crop image="postFile | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''" area-type="square" area-min-size="15" result-image-size="100"></img-crop>
           </div>
           

@@ -3,6 +3,7 @@
  */
 app.controller('getNoticias', function($scope, $http) {
 
+	$scope.loading = true;
 	$scope.noticias = [];
 	$http.get('http://pixelesp-api.herokuapp.com/noticias').then(function(resp) {
 		$scope.noticias = resp.data.data;
@@ -11,6 +12,8 @@ app.controller('getNoticias', function($scope, $http) {
 	}, function(err) {
 		console.error('ERR', err);
 		// err.status will contain the status code
+	})['finally'](function() {
+    	$scope.loading = false;
 	});
 })
 
@@ -55,6 +58,18 @@ app.controller('noticiaCtrl', function($scope, $state, $stateParams, $http, ngDi
 			});
 		}
 	}
+
+	$scope.doDeleteComment = function($id) {
+
+		$http.delete('http://pixelesp-api.herokuapp.com/newscomments/'+ $id).then(function(resp) {
+			console.log(resp.data);
+
+			$('#'+$id).fadeOut();
+
+		}, function(err) {
+			console.error('ERR', err);
+		});
+    }
 	
 	/*	  ===== 
 		===== 

@@ -19,6 +19,7 @@ app.controller('getPostsToApprobal', function($scope, $http, ngDialog) {
  */
 app.controller('getPosts', function($scope, $http, ngDialog) {
 
+  $scope.loading_pixelarts = true;
   $scope.imagenes = [];
   $http.get('http://pixelesp-api.herokuapp.com/imagenes').then(function(resp) {
     $scope.imagenes = resp.data.data;
@@ -27,8 +28,9 @@ app.controller('getPosts', function($scope, $http, ngDialog) {
   }, function(err) {
     console.error('ERR', err);
     // err.status will contain the status code
+  })['finally'](function() {
+      $scope.loading_pixelarts = false;
   });
-
 
   //get length favortios
   $scope.favs = [];
@@ -183,6 +185,7 @@ app.controller('newPost', function ($scope, $http, $state, Upload, Session, $tim
  */
 app.controller('pixelartCtrl', function($scope, $state, $stateParams, $http, Session, ngDialog) {
 
+  $scope.loading_pixelart = true;
   $scope.pixelart = {};
   $http.get('http://pixelesp-api.herokuapp.com/imagenes/'+ $stateParams.pixelartId).then(function(resp) {
     $scope.pixelart = resp.data.data;
@@ -203,37 +206,49 @@ app.controller('pixelartCtrl', function($scope, $state, $stateParams, $http, Ses
     }
 
   /* ===== 
-    ===== 
-      ===== */
+    Comentarios
+          ===== */
 
     userdata = JSON.parse(window.localStorage.getItem('userdata'));
     $scope.currentUser = userdata;
 
     $scope.guardarComentario = function(comment, ngDialogProvider) {
 
-    if (Session.id != null) {
+      if (Session.id != null) {
 
-      $scope.comment = {};
-      $scope.comment.text = comment.text;
-      $scope.comment.idusuario = userdata.id;
-      $scope.comment.id_imagen = $scope.pixelart.id;
-      $scope.comment.username = userdata.username;
-      $scope.comment.avatar = userdata.imagen;
+        $scope.comment = {};
+        $scope.comment.text = comment.text;
+        $scope.comment.idusuario = userdata.id;
+        $scope.comment.id_imagen = $scope.pixelart.id;
+        $scope.comment.username = userdata.username;
+        $scope.comment.avatar = userdata.imagen;
 
-      $http.post('http://pixelesp-api.herokuapp.com/imgcomments', $scope.comment).then(function(resp) {
-        //console.log(resp);
+        $http.post('http://pixelesp-api.herokuapp.com/imgcomments', $scope.comment).then(function(resp) {
+          //console.log(resp);
 
-        $('#commentinput').val('');
-        //$scope.comment.text = '';
-        $scope.pixelart.comentarios.push(resp.data.data);
+          $('#commentinput').val('');
+          $scope.comment.text = '';
+          $scope.pixelart.comentarios.push(resp.data.data);
 
+
+        }, function(err) {
+          console.error('ERR', err);
+          // err.status will contain the status code
+        });
+      }
+    }
+
+    $scope.doDeleteComment = function($id) {
+
+      $http.delete('http://pixelesp-api.herokuapp.com/imgcomments/'+ $id).then(function(resp) {
+        console.log(resp.data);
+
+        $('#'+$id).fadeOut();
 
       }, function(err) {
         console.error('ERR', err);
-        // err.status will contain the status code
       });
     }
-  }
   
   /*    ===== 
     ===== 
@@ -242,6 +257,8 @@ app.controller('pixelartCtrl', function($scope, $state, $stateParams, $http, Ses
   }, function(err) {
     console.error('ERR', err);
     // err.status will contain the status code
+  })['finally'](function() {
+      $scope.loading_pixelart = false;
   });
 
   // añadir a favoritos  

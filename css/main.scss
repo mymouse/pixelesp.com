@@ -68,6 +68,12 @@ a {
 	}
 }
 
+.home .loader, .galeria .loader {
+	.loader-content {
+	    top: 150px!important;
+	}
+}
+
 /* reset dropdown */
 .dropdown-toggle {
 	padding: 5px;
@@ -616,7 +622,15 @@ form {
 					.comment-text {
 						margin-left: 40px;
 						color: #555;
+						word-wrap: break-word;
 					}
+
+					.btn-link {
+    					color: #818a91;
+    					&:focus, &:hover {
+    						color: #000;
+    					}
+    				}
 				}
 				.box-footer {
 					position: relative;
@@ -656,7 +670,7 @@ form {
 		img.pixelart {
 			display: block;         
 			margin: 15px auto;
-			max-height: 500px;
+			/* max-height: 500px; */
 		}
 	}
 	/* crear post pixelart*/
@@ -931,3 +945,70 @@ article.post {
 		}
 	}
 }
+
+/*
+ * Media Querys
+ */
+
+.tab-content>#myPixelarts.tab-pane { 
+	display: block;
+    opacity: 1;}
+
+@media (max-width: 543px) {
+
+	.navbar a.navbar-brand {
+	    width: calc(100% - 100px);
+	    position: absolute;
+	}
+
+	.main-sidebar {
+		left: -230px;
+		transition: left .5s ease-in-out;
+
+		&.opened {
+			left: 0;
+		}
+	}
+
+	.content-wrapper {
+		margin-left: 0;
+		max-width: 100%;
+
+		.tab-content>#myPixelarts.tab-pane { 
+		display: none;
+	    opacity: 0;}
+
+		.tab-content>#myPixelarts.tab-pane.in.active { 
+		display: block!important;
+	    opacity: 1!important;}
+
+	    #myPosts > div > button {
+	    	float: left!important;
+	    }
+
+	    article.post {
+	    	margin-left: 10px;
+	    	margin-right: 10px;
+	    }
+	}
+
+	*.ngdialog-content {
+    	max-width: 100%!important;
+    }
+
+    .card-footer {
+    	padding: .75rem 1.25rem!important;
+    }
+
+    form.fancy .form-group input.comment {
+    	width: calc(80% - 45px)!important;
+    }
+
+    .content-usuarios {
+    	top: -500px;
+    }
+}
+
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767px) {  }

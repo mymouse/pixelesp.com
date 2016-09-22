@@ -15,6 +15,12 @@
         </ul>
 
 		<article class="card jobs" ng-repeat="trabajo in trabajos">
+
+			<loader
+			    working="loading"
+			    template="5">
+			</loader>
+				
 			<div class="card-block">
 				<h5 class="card-title"><a ui-sref="trabajo.empleo({TrabajoId:trabajo.id})"> {{trabajo.Titulo}} </a></h5>
 				<h6 class="card-subtitle text-muted"><img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{trabajo.imagen}}" alt="{{trabajo.username}}">

@@ -294,6 +294,8 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
 app.run( function($rootScope, $state, $location, AuthService) {
 
+	$('.main-sidebar').toggleClass('opened');
+
 	// register listener to watch route changes
 	$rootScope.$on( "$stateChangeStart", function(event, next, current) {
 

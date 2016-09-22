@@ -4,19 +4,19 @@
         <article class="card">
             <header class="card-block">
                 <div class="col-xs-10">
-                    <h5 class="card-title"><a ui-sref="home.thread( NoticiaId: noticia.id )"> {{noticia.Titulo}} </a></h5>
+                    <h5 class="card-title"><a ui-sref="home.thread({NoticiaId:noticia.id})"> {{noticia.Titulo}} </a></h5>
                     <h6 class="card-subtitle text-muted"><img class="img-circle" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{noticia.imagen}}" alt="{{noticia.username}}"> <span class="username text-muted"><a ui-sref="perfil({id_usuario:noticia.IdUsuario})"> {{noticia.username}} </a></span> <time title="{{ noticia.created_at | amUtc | amLocal | amDateFormat: 'LLLL' }}" class="date text-muted">@ {{ noticia.created_at | amUtc | amLocal | amCalendar }}</time></h6>
                 </div>
                 <div class="col-xs-2">
-                    <div class="btn-group pull-xs-right">
+                    <div ng-if="noticia.IdUsuario == currentUser.id || currentUser.userlevel == 1" class="btn-group pull-xs-right">
                         <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#"><i class="fa fa-flag" aria-hidden="true"></i> Reportar</a>
+                            <!-- <a class="dropdown-item" href="#"><i class="fa fa-flag" aria-hidden="true"></i> Reportar</a> -->
                             <div ng-if="noticia.IdUsuario == currentUser.id || currentUser.userlevel == 1">
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>
+                                <!-- <div class="dropdown-divider"></div> -->
+                                <!-- <a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a> -->
                                 <a class="dropdown-item text-danger" href="" ng-click="doDelete()"><i class="fa fa-trash-o" aria-hidden="true"></i> Eliminar</a>
                             </div>
                         </div>
@@ -124,9 +124,22 @@
                 </div>
 
                 <div class="box-comments">
-                    <div class="animate box-comment" ng-repeat="c in noticia.comentarios | orderBy:'-created_at'" ng-init="initFirst()">
+                    <div id="{{c.id}}" class="animate box-comment" ng-repeat="c in noticia.comentarios | orderBy:'-created_at'" ng-init="initFirst()">
                         <img class="img-circle avatar" src="http://res.cloudinary.com/hyktxhgfc/image/upload/{{c.imagen}}" alt="{{c.username}}">
                         <div class="comment-text">
+                            <div class="btn-group pull-xs-right">
+                                <button type="button" class="btn btn-sm btn-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-top: -8px;">
+                                  <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div ng-if="c.idusuario == currentUser.id || currentUser.userlevel == 1" class="dropdown-menu dropdown-menu-right">
+                                    <!-- <a class="dropdown-item" href="#"><i class="fa fa-flag" aria-hidden="true"></i> Reportar</a> -->
+                                    <div ng-if="c.idusuario == currentUser.id || currentUser.userlevel == 1">
+                                        <!-- <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a> -->
+                                        <a class="dropdown-item text-danger" href="" ng-click="doDeleteComment(c.id)"><i class="fa fa-trash-o" aria-hidden="true"></i> Eliminar</a>
+                                    </div>
+                                </div>
+                            </div>
                             <span class="username">
                                 <a ui-sref="perfil({id_usuario:c.idusuario})">{{c.username}}</a>
                                 <time title="{{ c.created_at | amUtc | amLocal | amDateFormat: 'LLLL' }}" class="text-muted pull-right">{{ c.created_at | amUtc | amLocal | amCalendar }}</time>

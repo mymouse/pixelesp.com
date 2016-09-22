@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+<div class="content-wrapper galeria">
 
     <section class="content" ng-controller="getPosts">    
         <div class="col-lg-12">
@@ -20,6 +20,11 @@
                 <a class="nav-link disabled" href="#"> ... </a>
               </li>
             </ul>
+
+            <loader
+                working="loading_pixelarts"
+                template="5">
+            </loader>
 
             <article class="post" ng-repeat="pixelart in imagenes">
                 <a ui-sref="galeria.pixelart({ pixelartId: {{pixelart.id}} })"> 
